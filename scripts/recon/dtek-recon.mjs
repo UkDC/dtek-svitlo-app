@@ -129,4 +129,30 @@ if (csrf && cityName && Array.isArray(cityStreets) && cityStreets.length) {
 } else {
   console.log('[recon] skipped ajax (no csrf or no city list found); page-structure discovery only');
 }
+
+// --- Round 2 (protocol details, NOT a block count): house key formats on neutral streets. ---
+if (csrf && cityName && Array.isArray(cityStreets)) {
+  const klass = (k) => String(k).replace(/[0-9]+/g, '9').replace(/[А-ЩЬЮЯЄІЇҐа-щьюяєіїґ]+/g, 'a').replace(/[A-Za-z]+/g, 'L');
+  const patterns = new Map();
+  let empties = 0, multi = 0, total = 0;
+  const kinds = new Set();
+  const samples = [];
+  for (const street of cityStreets.slice(0, 6)) {
+    const name = typeof street === 'string' ? street : street?.name;
+    if (!name) continue;
+    const res = await ajax('getHomeNum', [['city', cityName], ['street', name]]);
+    for (const [k, v] of Object.entries(res?.data ?? {})) {
+      total++;
+      patterns.set(klass(k), (patterns.get(klass(k)) ?? 0) + 1);
+      const r = v?.sub_type_reason;
+      if (!Array.isArray(r) || r.length === 0) empties++;
+      else if (r.length > 1) multi++;
+      kinds.add(`${v?.sub_type ?? ''}|${v?.type ?? ''}|${v?.voluntarily ?? ''}`);
+      if (samples.length < 8 && /[^0-9]/.test(k)) samples.push(k);
+    }
+  }
+  console.log(`[recon2] houses=${total} emptyReason=${empties} multiReason=${multi} kinds=${JSON.stringify([...kinds].slice(0, 6))}`);
+  console.log(`[recon2] keyPatterns=${JSON.stringify([...patterns.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15))}`);
+  console.log(`[recon2] nonNumericKeySamples=${JSON.stringify(samples)}`);
+}
 console.log('[recon] DONE');
