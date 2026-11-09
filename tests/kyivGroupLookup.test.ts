@@ -78,17 +78,17 @@ describe('Kyiv house -> group via YASNO proxy', () => {
 });
 
 describe('house number tolerance and failure reasons', () => {
-  it('finds "39/2" via the base-number query when the exact query returns nothing', async () => {
+  it('finds "17/3" via the base-number query when the exact query returns nothing', async () => {
     stubProxy({
       '/streets?query=%D0%A1%D0%BB%D0%B5%D1%88%D0%BE%D0%B2%D0%B0': [{ id: 21, value: 'вул. Слешова' }],
-      '/houses?streetId=21&query=39%2F2': [],
-      '/houses?streetId=21&query=39': [
-        { id: 901, value: '39' },
-        { id: 902, value: '39 / 2' },
+      '/houses?streetId=21&query=17%2F3': [],
+      '/houses?streetId=21&query=17': [
+        { id: 901, value: '17' },
+        { id: 902, value: '17 / 3' },
       ],
       '/group?streetId=21&houseId=902': { group: 21, subgroup: 2 },
     });
-    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Слешова', undefined, '39/2');
+    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Слешова', undefined, '17/3');
     expect(r.detectedGroup).toBe('21.2');
     expect(r.failure).toBeUndefined();
   });
