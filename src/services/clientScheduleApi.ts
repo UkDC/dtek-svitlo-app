@@ -278,6 +278,78 @@ export interface StreetSearchItem {
 export interface HouseLookupResult {
   house: string;
   group?: string;
+  /** YASNO house id (Kyiv only); lets us resolve the group for exactly this house */
+  id?: number;
+}
+
+/**
+ * Read-only proxy to the YASNO address API (Kyiv city only). YASNO sends no CORS headers, so the
+ * browser cannot call it directly (IMPLEMENTATION_PLAN.md 2.1). Source: cloudflare/address/.
+ */
+export const ADDRESS_API_URL: string =
+  (import.meta as any).env?.VITE_ADDRESS_API_URL ||
+  'https://svitlo-address.svitlo-b79d27.workers.dev';
+
+const proxyCache = new Map<string, Promise<any>>();
+function proxyGet<T = any>(pathAndQuery: string): Promise<T | null> {
+  let p = proxyCache.get(pathAndQuery);
+  if (!p) {
+    p = fetch(`${ADDRESS_API_URL}${pathAndQuery}`, { signal: AbortSignal.timeout(6000) })
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
+    proxyCache.set(pathAndQuery, p);
+    // never cache failures: a flaky network must not stick for the whole session
+    p.then((v) => {
+      if (v === null) proxyCache.delete(pathAndQuery);
+    });
+  }
+  return p;
+}
+
+const stripStreetPrefix = (name: string) =>
+  name.replace(/^(вул\.|просп\.|пров\.|бул\.|пл\.|узв\.|шосе|наб\.|пр-т)\s*/i, '').trim();
+
+/** Find the YASNO street id for a street name that may come from OSM (different word order). */
+async function resolveYasnoStreetId(street: string): Promise<number | undefined> {
+  const clean = stripStreetPrefix(street);
+  const tokens = normalizeSearchTokens(clean).filter((t) => t.length >= 2);
+  if (tokens.length === 0) return undefined;
+  const probe = [...tokens].sort((a, b) => b.length - a.length)[0];
+  const list: Array<{ id: number; value: string }> | null = await proxyGet(
+    `/streets?query=${encodeURIComponent(probe)}`
+  );
+  if (!list) return undefined;
+  const candidates = list.filter((c) => matchesTokens(c.value, street));
+  if (candidates.length === 1) return candidates[0].id;
+  const exact = candidates.filter(
+    (c) => stripStreetPrefix(c.value).toLowerCase() === clean.toLowerCase()
+  );
+  if (exact.length === 1) return exact[0].id;
+  return undefined; // ambiguous -> do NOT guess
+}
+
+/** Real group for a Kyiv house via YASNO. Never invents a group. */
+async function lookupKyivHouseViaProxy(
+  street: string,
+  streetId: number | undefined,
+  houseQuery: string
+): Promise<{ houses: HouseLookupResult[]; detectedGroup?: string } | null> {
+  const sid = streetId ?? (await resolveYasnoStreetId(street));
+  if (!sid) return null;
+  const list: Array<{ id: number; value: string }> | null = await proxyGet(
+    `/houses?streetId=${sid}&query=${encodeURIComponent(houseQuery || '1')}`
+  );
+  if (!list) return null;
+  const houses: HouseLookupResult[] = list.map((h) => ({ house: h.value, id: h.id }));
+  let detectedGroup: string | undefined;
+  const exact = list.find((h) => h.value.toLowerCase() === houseQuery.toLowerCase());
+  if (exact) {
+    const g: { group?: number; subgroup?: number } | null = await proxyGet(
+      `/group?streetId=${sid}&houseId=${exact.id}`
+    );
+    if (g?.group) detectedGroup = `${g.group}.${g.subgroup || 1}`;
+  }
+  return { houses, detectedGroup };
 }
 
 // In-memory caches of full Kyiv streets (~3,406) & Kyiv Oblast settlements (~1,038+)
@@ -740,7 +812,13 @@ export async function lookupHouseGroup(
     }
   }
 
-  // 2. Build full, sequential house list (1..80) for any street in Kyiv or Kyiv Oblast
+  // 2. Kyiv city: real lookup through the YASNO proxy (house list + group of the exact house)
+  if (region === 'kem' && street.trim()) {
+    const real = await lookupKyivHouseViaProxy(street, streetId, hClean);
+    if (real && real.houses.length > 0) return real;
+  }
+
+  // 3. Fallback: plain sequential house numbers (1..80), NO group (we never guess groups)
   const baseNumbers: string[] = [];
   for (let i = 1; i <= 80; i++) {
     baseNumbers.push(String(i));
