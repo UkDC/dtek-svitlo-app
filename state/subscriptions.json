@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ios_1794244395708",
+    "subscription": {
+      "endpoint": "https://web.push.apple.com/QBcmemn4n-VOKt7igzipOuNhgHozqlX1418v_YkfSjhTyHTWkVbI3ONBn6Eaaaud-V9v6KPgcgT0SkN8Kx7nyW73hB0iDH3KWK7OIu6cQzfsAnadYTDAn-dKst5qkXuaz8Xcosl72DQ-5BIvOIC_OfcfzZ09tuDO_HF3TcPqQHw",
+      "keys": {
+        "p256dh": "BBlt0RbTcLfDrElQHsxeQjUQbR7uWURYL2DnhsUgfCcw9yXzBG8gpdyLJ9uOnzPjRJzStQ0Qwj1AczIbnuDv2fA",
+        "auth": "1FYQVfU-Xbh11-jm6O_YqQ"
+      }
+    },
+    "addresses": [
+      {
+        "id": "addr_default_kyiv",
+        "label": "",
+        "icon": "",
+        "region": "kem",
+        "city": "",
+        "street": "",
+        "house": "",
+        "group": "21.1",
+        "notifyBeforeOff": true,
+        "notifyBeforeOn": true,
+        "notifyOnChange": true,
+        "createdAt": "2026-11-09T17:13:07.580Z",
+        "shortTitle": "Київ"
+      },
+      {
+        "id": "addr_default_oblast",
+        "label": "",
+        "icon": "",
+        "region": "krem",
+        "city": "",
+        "street": "",
+        "house": "",
+        "group": "2.2",
+        "notifyBeforeOff": true,
+        "notifyBeforeOn": true,
+        "notifyOnChange": true,
+        "createdAt": "2026-11-09T17:13:07.580Z",
+        "shortTitle": "с. Дмитрівка"
+      }
+    ],
+    "quietHours": {
+      "enabled": true,
+      "start": "23:00",
+      "end": "07:00"
+    },
+    "updatedAt": "2026-11-09T17:13:15.708Z"
+  }
+]

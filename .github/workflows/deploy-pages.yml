@@ -1,0 +1,72 @@
+name: Deploy iPhone PWA to GitHub Pages
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: 'pages-deploy'
+  cancel-in-progress: true
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check and run tests (do not ship a broken build)
+        run: |
+          npm run typecheck
+          npm test
+
+      # Deploys must NOT run the push worker: it would send real notifications and
+      # change the dedup ledger without ever committing it (=> duplicates on the next cron run).
+      - name: Sync latest DTEK & YASNO schedules snapshot (no push)
+        run: npm run sync:schedules || true
+
+      - name: Build production PWA bundle
+        run: npm run build
+
+      - name: Copy public state into dist/state
+        run: |
+          mkdir -p dist/state
+          cp state/combined-schedules.json dist/state/ || true
+          cp state/kyiv-streets.json dist/state/ || true
+          cp state/oblast-settlements.json dist/state/ || true
+
+      # The public VAPID key comes from the repository secret, never from a committed file.
+      - name: Publish VAPID public key for the client
+        env:
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+        run: |
+          if [ -z "$VAPID_PUBLIC_KEY" ]; then
+            echo "::error::VAPID_PUBLIC_KEY secret is not set"
+            exit 1
+          fi
+          mkdir -p dist/state
+          printf '{"publicKey":"%s"}\n' "$VAPID_PUBLIC_KEY" > dist/state/vapid-public.json
+
+      - name: Publish dist/ to gh-pages branch
+        run: |
+          cd dist
+          git init
+          git config user.name "svitlo-bot"
+          git config user.email "svitlo-bot@users.noreply.github.com"
+          git branch -M gh-pages
+          git add .
+          git commit -m "deploy: update Світло PWA build"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages
