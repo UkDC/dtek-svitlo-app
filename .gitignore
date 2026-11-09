@@ -5,3 +5,7 @@ dist/
 *.log
 state/vapid-public.json
 public/state/vapid-public.json
+
+# push subscriptions (device endpoints + keys) must never be committed: they live in cloudflare/subs
+state/subscriptions.json
+public/state/subscriptions.json

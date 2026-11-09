@@ -58,8 +58,13 @@
 
 ## 3. Active User Configuration & Subscriber State
 
-- **Subscriber state** lives in `state/subscriptions.json` (push endpoint + keys + saved addresses + quiet hours).
-  Its contents are intentionally NOT reproduced here: this repo is public. Quiet hours default to 23:00–07:00.
+- **Subscriber state** (push endpoint + keys + group numbers + quiet hours) lives in a PRIVATE Cloudflare KV namespace
+  behind the Worker `cloudflare/subs` (`svitlo-subs`), NOT in git. The app registers a device with an invitation code
+  (`INVITE_CODES` Worker secret; link form `…/dtek-svitlo-app/#invite=CODE`) and receives a per-device write token.
+  `push-check.yml` reads the list via `GET /internal/subscribers` with `SUBS_SECRET` (same value as the Worker secret
+  and the GitHub repo secret). One KV key per device (`sub:<id>`, `ep:<sha256(endpoint)>` index). Street/house never
+  leave the phone. Local development uses a git-ignored `state/subscriptions.json`. Quiet hours default to 23:00–07:00.
+  Rotate: change `INVITE_CODES` (blocks new/updated registrations), or `SUBS_SECRET` in both places.
 - **Delivery Verified**: Successfully delivered sample pushes to Apple APNs (`HTTP 201 Created`).
 
 ---
@@ -70,7 +75,7 @@
 | :--- | :--- |
 | `src/services/scheduleNormalizer.ts` | Multi-source parsing (DTEK/YASNO), `getCurrentAddressStatus`, deterministic `evaluateUpcomingAlerts` with interval duration calculation. |
 | `server/services/notificationScheduler.ts` | Apple APNs push sender (`sendPushPayload`), `[10..32]m` sliding window checker (server; the in-app local check keeps 10..42), deduplication via `notifiedEvents`, schedule change calculation. |
-| `src/services/pushSyncService.ts` | Client VAPID subscriber, sync engine (Backend + GitHub Contents API), `triggerTestNotification`. |
+| `src/services/pushSyncService.ts` | Client VAPID subscriber, sync engine (dev Backend + private Cloudflare store), `triggerTestNotification`. |
 | `src/components/NotificationSettingsModal.tsx` | UI for push activation, test push dispatch, and iPhone subscription token management. |
 | `public/sw.js` | Service Worker push listener with dynamic icon routing (`icon-off.svg`, `icon-on.svg`, `icon-change.svg`). |
 | `scripts/send-sample-push.ts` | CLI script to test live push delivery directly to all registered subscribers. |
@@ -114,8 +119,12 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
    VAPID private key is recoverable from `server/services/notificationScheduler.ts` (`DEFAULT_VAPID_KEYS`)**.
    Plan: generate a new VAPID pair → set `VAPID_PUBLIC_KEY`/`VAPID_PRIVATE_KEY` repo secrets → update
    `state/vapid-public.json` → remove the hard-coded fallback → re-subscribe the phone (the app renews on key mismatch).
-   Move subscriptions out of the public repo (private state repo, or encrypt client-side).
+   Subscriptions were moved to the private store (see §3); the old `state/subscriptions.json` remains in git HISTORY,
+   so the owner's phone must re-subscribe once («Пересоздать подписку» in the app) to invalidate the old endpoint.
 2. **GitHub Actions cron is not a reliable 10-minute scheduler**: `push-check.yml` has run once since creation.
    For «30 min before» alerts use an external trigger (e.g. Cloudflare Workers Cron / cron-job.org → `workflow_dispatch`).
-3. Client-side fine-grained PAT in `localStorage` has write access to the repo (and therefore to the deployed code).
+3. ~~Client-side fine-grained PAT in `localStorage`~~: the PAT path was removed; the app deletes a leftover token and the
+   owner should revoke it in GitHub. Residual: `notifiedEvents` in the public `state/schedule-snapshot.json` still lists
+   subscriber ids and address ids (no endpoints/keys). The legacy owner id `ios_<timestamp>` is guessable, so an invitee
+   could overwrite that one record; new devices get random ids. The "test push" button is local-only now.
 

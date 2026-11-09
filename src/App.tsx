@@ -29,6 +29,8 @@ import {
 } from './services/clientScheduleApi';
 import {
   QuietHoursSettings,
+  loadInviteCode,
+  purgeLegacyGitHubToken,
   syncSubscriberState,
 } from './services/pushSyncService';
 import { AddressSwitcher } from './components/AddressSwitcher';
@@ -112,6 +114,12 @@ export const App: React.FC = () => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY_THEME, theme);
   }, [theme]);
+
+  // Older builds kept a repo-write GitHub token on the phone; it is unused now, so drop it
+  useEffect(() => {
+    purgeLegacyGitHubToken();
+    loadInviteCode(); // also picks up a #invite=… link
+  }, []);
 
   // Persist addresses
   useEffect(() => {

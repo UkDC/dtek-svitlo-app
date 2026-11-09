@@ -6,77 +6,75 @@ export interface QuietHoursSettings {
   end: string;
 }
 
-export interface GitHubCloudConfig {
-  repoFullName: string; // e.g., "username/dtek-svitlo-app"
-  token: string; // Fine-grained PAT stored ONLY in iPhone localStorage
-}
+/**
+ * Private subscription store (Cloudflare Worker + KV, see cloudflare/subs). Push endpoints and keys
+ * identify a physical device, so they are never written to the public repository.
+ */
+export const SUBS_API_URL: string =
+  (import.meta as any).env?.VITE_SUBS_API_URL ||
+  'https://svitlo-subs.svitlo-b79d27.workers.dev';
 
 const DEVICE_ID_KEY = 'svitlo_device_subscriber_id';
-const GH_CONFIG_KEY = 'svitlo_gh_cloud_config_v1';
+const DEVICE_TOKEN_KEY = 'svitlo_device_write_token';
+const INVITE_KEY = 'svitlo_invite_code';
+const LEGACY_GH_CONFIG_KEY = 'svitlo_gh_cloud_config_v1';
+
+function storageGet(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+function storageSet(key: string, value: string | null): void {
+  try {
+    if (value === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, value);
+  } catch {
+    // storage may be unavailable (private mode)
+  }
+}
 
 export function getDeviceSubscriberId(): string {
-  let id = localStorage.getItem(DEVICE_ID_KEY);
+  let id = storageGet(DEVICE_ID_KEY);
   if (!id) {
-    id = `ios_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-    localStorage.setItem(DEVICE_ID_KEY, id);
+    id = `ios_${crypto.randomUUID().replace(/-/g, '')}`; // unguessable, unlike the old timestamp ids
+    storageSet(DEVICE_ID_KEY, id);
   }
   return id;
 }
 
-export function loadGitHubCloudConfig(): GitHubCloudConfig {
+/**
+ * Invitation code of the person who may register devices. Can be provisioned by a link such as
+ * https://…/dtek-svitlo-app/#invite=XXXX-XXXX-XXXX-XXXX (the hash never reaches any server).
+ */
+export function loadInviteCode(): string {
   try {
-    // Support one-time URL hash provisioning: #gh_repo=owner/repo&gh_token=github_pat_...
-    if (window.location.hash.includes('gh_token=')) {
-      const params = new URLSearchParams(window.location.hash.slice(1));
-      const hashToken = params.get('gh_token');
-      const hashRepo = params.get('gh_repo');
-      if (hashToken) {
-        const existing = JSON.parse(localStorage.getItem(GH_CONFIG_KEY) || '{}');
-        const nextConfig: GitHubCloudConfig = {
-          repoFullName: hashRepo || existing.repoFullName || detectRepoFromLocation(),
-          token: hashToken,
-        };
-        localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(nextConfig));
-        window.history.replaceState(
-          null,
-          '',
-          window.location.pathname + window.location.search
-        );
-        return nextConfig;
+    if (window.location.hash.includes('invite=')) {
+      const code = new URLSearchParams(window.location.hash.slice(1)).get('invite');
+      if (code) {
+        storageSet(INVITE_KEY, code.trim());
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
       }
-    }
-
-    const raw = localStorage.getItem(GH_CONFIG_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      return {
-        repoFullName: parsed.repoFullName || detectRepoFromLocation(),
-        token: parsed.token || '',
-      };
     }
   } catch {
     // ignore
   }
-  return {
-    repoFullName: detectRepoFromLocation(),
-    token: '',
-  };
+  return storageGet(INVITE_KEY) || '';
 }
 
-export function saveGitHubCloudConfig(cfg: GitHubCloudConfig): void {
-  localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(cfg));
+export function saveInviteCode(code: string): void {
+  storageSet(INVITE_KEY, code.trim() || null);
 }
 
-function detectRepoFromLocation(): string {
-  const host = window.location.hostname;
-  if (host.endsWith('.github.io')) {
-    const owner = host.replace('.github.io', '');
-    const pathSeg = window.location.pathname.split('/').filter(Boolean)[0];
-    if (owner && pathSeg) {
-      return `${owner}/${pathSeg}`;
-    }
-  }
-  return '';
+/**
+ * Older builds kept a GitHub token with write access to the repository on the phone. It is no
+ * longer used for anything, so it is removed on sight.
+ */
+export function purgeLegacyGitHubToken(): boolean {
+  const had = storageGet(LEGACY_GH_CONFIG_KEY) !== null;
+  storageSet(LEGACY_GH_CONFIG_KEY, null);
+  return had;
 }
 
 function urlBase64ToUint8Array(base64String: string): Uint8Array {
@@ -192,15 +190,17 @@ export async function registerAndSubscribePush(): Promise<{
   };
 }
 
+export type CloudSyncError = 'no-invite' | 'invite' | 'invalid' | 'network';
+
 /**
- * Syncs saved addresses & notification settings to Backend API and/or GitHub repository state
+ * Syncs saved addresses & notification settings to the Backend API (dev server) and/or the private
+ * Cloudflare subscription store. Street / house / city never leave the device.
  */
 export async function syncSubscriberState(
   addresses: SavedAddress[],
   quietHours: QuietHoursSettings,
   subscription?: PushSubscription | null
-): Promise<{ syncedBackend: boolean; syncedGitHub: boolean }> {
-  const id = getDeviceSubscriberId();
+): Promise<{ syncedBackend: boolean; syncedCloud: boolean; cloudError?: CloudSyncError }> {
   let subJson: any = subscription ? subscription.toJSON() : null;
 
   if (!subJson && 'serviceWorker' in navigator) {
@@ -213,95 +213,89 @@ export async function syncSubscriberState(
     }
   }
 
-  const profilePayload = {
-    id,
+  const buildPayload = () => ({
+    id: getDeviceSubscriberId(),
     subscription: subJson,
-    // street / house / city never leave the device: the target repo is public
     addresses: addresses.map(toSyncAddress),
     quietHours,
     updatedAt: new Date().toISOString(),
-  };
+  });
 
   let syncedBackend = false;
-  let syncedGitHub = false;
-
-  // 1. Try syncing with Backend Server API
+  // 1. Local Express dev server (absent on GitHub Pages)
   try {
     const res = await fetch('./api/push/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(profilePayload),
+      body: JSON.stringify(buildPayload()),
       signal: AbortSignal.timeout(4000),
     });
-    if (res.ok) {
-      syncedBackend = true;
-    }
+    if (res.ok) syncedBackend = true;
   } catch {
     // Backend not active (e.g. pure GitHub Pages)
   }
 
-  // 2. If GitHub Cloud Sync token is configured on iPhone, sync directly to repo state/subscriptions.json
-  const ghCfg = loadGitHubCloudConfig();
-  if (ghCfg.repoFullName && ghCfg.token) {
+  // 2. Private subscription store
+  if (!subJson?.endpoint) return { syncedBackend, syncedCloud: false };
+  const invite = loadInviteCode();
+  if (!invite) return { syncedBackend, syncedCloud: false, cloudError: 'no-invite' };
+
+  const send = async (): Promise<Response | null> => {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'X-Invite': invite,
+    };
+    const token = storageGet(DEVICE_TOKEN_KEY);
+    if (token) headers['X-Device-Token'] = token;
     try {
-      const apiUrl = `https://api.github.com/repos/${ghCfg.repoFullName}/contents/state/subscriptions.json`;
-      const headers: Record<string, string> = {
-        Authorization: `Bearer ${ghCfg.token}`,
-        Accept: 'application/vnd.github+json',
-        'Content-Type': 'application/json',
-      };
-
-      let existingSha: string | undefined;
-      let existingList: any[] = [];
-
-      const getRes = await fetch(apiUrl, { headers });
-      if (getRes.ok) {
-        const fileData = await getRes.json();
-        existingSha = fileData.sha;
-        if (fileData.content) {
-          const decoded = new TextDecoder().decode(
-            Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), (c) =>
-              c.charCodeAt(0)
-            )
-          );
-          const parsed = JSON.parse(decoded);
-          if (Array.isArray(parsed)) existingList = parsed;
-        }
-      }
-
-      const idx = existingList.findIndex((item) => item.id === id);
-      if (idx >= 0) {
-        existingList[idx] = profilePayload;
-      } else {
-        existingList.push(profilePayload);
-      }
-
-      const jsonStr = JSON.stringify(existingList, null, 2);
-      const base64Content = btoa(
-        Array.from(new TextEncoder().encode(jsonStr), (b) =>
-          String.fromCharCode(b)
-        ).join('')
-      );
-
-      const putRes = await fetch(apiUrl, {
-        method: 'PUT',
+      return await fetch(`${SUBS_API_URL}/subscribe`, {
+        method: 'POST',
         headers,
-        body: JSON.stringify({
-          message: `chore(sync): update iPhone subscriber ${id}`,
-          content: base64Content,
-          ...(existingSha ? { sha: existingSha } : {}),
-        }),
+        body: JSON.stringify(buildPayload()),
+        signal: AbortSignal.timeout(8000),
       });
-
-      if (putRes.ok) {
-        syncedGitHub = true;
-      }
     } catch {
-      // ignore
+      return null;
     }
-  }
+  };
 
-  return { syncedBackend, syncedGitHub };
+  let res = await send();
+  if (res && res.status === 403) {
+    // the write token for this id was lost or is stale: start over with a fresh device id
+    // (the store keeps a single record per push endpoint, so the old record is replaced)
+    storageSet(DEVICE_ID_KEY, null);
+    storageSet(DEVICE_TOKEN_KEY, null);
+    res = await send();
+  }
+  if (!res) return { syncedBackend, syncedCloud: false, cloudError: 'network' };
+  if (res.status === 401) return { syncedBackend, syncedCloud: false, cloudError: 'invite' };
+  if (!res.ok) return { syncedBackend, syncedCloud: false, cloudError: 'invalid' };
+  try {
+    const body = await res.json();
+    if (typeof body?.token === 'string') storageSet(DEVICE_TOKEN_KEY, body.token);
+  } catch {
+    // ignore
+  }
+  return { syncedBackend, syncedCloud: true };
+}
+
+/**
+ * Throws away this device's push subscription and creates a fresh one. The previous endpoint stops
+ * working, which is the way to retire an endpoint that was ever exposed.
+ */
+export async function renewPushSubscription(): Promise<{
+  ok: boolean;
+  subscription: PushSubscription | null;
+  error?: string;
+}> {
+  try {
+    const reg = await navigator.serviceWorker.getRegistration();
+    const old = await reg?.pushManager?.getSubscription();
+    if (old) await old.unsubscribe();
+  } catch {
+    // continue: a new subscription is created below anyway
+  }
+  return registerAndSubscribePush();
 }
 
 /**
@@ -356,41 +350,14 @@ export async function triggerTestNotification(
       };
     }
   } catch {
-    // Try triggering GitHub Actions workflow_dispatch if configured
-  }
-
-  const ghCfg = loadGitHubCloudConfig();
-  if (ghCfg.repoFullName && ghCfg.token) {
-    try {
-      const dispatchUrl = `https://api.github.com/repos/${ghCfg.repoFullName}/actions/workflows/push-check.yml/dispatches`;
-      const dispRes = await fetch(dispatchUrl, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${ghCfg.token}`,
-          Accept: 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ref: 'main',
-          inputs: { test_push: 'true' },
-        }),
-      });
-      if (dispRes.ok) {
-        return {
-          ok: true,
-          message:
-            'Локальный пуш показан + запущена отправка облачного Apple Web Push через GitHub Actions!',
-        };
-      }
-    } catch {
-      // ignore
-    }
+    // no dev backend: the local notification above is the only test
   }
 
   if (localShown) {
     return {
       ok: true,
-      message: 'Тестовое уведомление отображено на устройстве!',
+      message:
+        'Локальное уведомление показано. Доставку через облако отсюда проверить нельзя: реальные пуши приходят по расписанию.',
     };
   }
 
