@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+*vapid-keys.json
+*.log
+state/vapid-public.json
+public/state/vapid-public.json

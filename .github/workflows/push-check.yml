@@ -1,0 +1,63 @@
+name: DTEK Schedule Sync & iOS Web Push Worker
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      test_push:
+        description: 'Send a test Push notification to subscribed iPhones'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: 'svitlo-push-check'
+  cancel-in-progress: false
+
+jobs:
+  check_and_notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Multi-Source DTEK/YASNO check & send iOS Web Push alerts
+        env:
+          SEND_TEST_PUSH: ${{ github.event.inputs.test_push || 'false' }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+        run: npm run push:check
+
+      - name: Commit updated schedule snapshot & deduplication ledger
+        run: |
+          git config user.name "svitlo-bot"
+          git config user.email "svitlo-bot@users.noreply.github.com"
+          git add state/*.json public/state/ || true
+          if git diff --staged --quiet; then
+            echo "No state changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(schedules): sync DTEK/YASNO snapshot [skip ci]"
+          # The dedup ledger lives in git: if this push is lost, the next run re-sends alerts.
+          # Retry on races (e.g. the app committing subscriptions.json) and FAIL LOUDLY if it never lands.
+          for attempt in 1 2 3 4; do
+            if git pull --rebase origin main && git push origin main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 3))
+          done
+          echo "::error::Could not push state to main after 4 attempts (dedup ledger NOT persisted)"
+          exit 1

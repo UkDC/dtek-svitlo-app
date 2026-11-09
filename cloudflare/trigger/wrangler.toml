@@ -1,0 +1,17 @@
+name = "svitlo-trigger"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+# cron-only Worker: no public URL (and no workers.dev subdomain needed)
+workers_dev = false
+
+[triggers]
+# every 5 minutes (workflow concurrency queues at most one pending run, so overlaps are harmless)
+crons = ["*/5 * * * *"]
+
+[vars]
+# "owner/repo" of the repository that contains .github/workflows/push-check.yml
+REPO = "UkDC/dtek-svitlo-app"
+WORKFLOW = "push-check.yml"
+REF = "main"
+
+# Secret (NOT stored here):  npx wrangler secret put GITHUB_TOKEN
