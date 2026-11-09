@@ -33,6 +33,13 @@ interface AddressModalProps {
   onClose: () => void;
 }
 
+const KYIV_FAILURE_TEXT: Record<'service' | 'street' | 'house' | 'group', string> = {
+  service: 'Сервіс визначення групи зараз не відповідає — спробуйте пізніше.',
+  street: 'Не вдалося однозначно знайти цю вулицю в базі адрес.',
+  house: 'Такого номера будинку немає в базі адрес для цієї вулиці.',
+  group: 'Для цього будинку база адрес не дала однозначної групи.',
+};
+
 export const AddressModal: React.FC<AddressModalProps> = ({
   initialAddress,
   kemGroups,
@@ -129,7 +136,7 @@ export const AddressModal: React.FC<AddressModalProps> = ({
           setAutoDetectedNote(
             region === 'krem'
               ? 'Для Київської області групу автоматично визначити поки неможливо. Подивіться свою чергу на dtek-krem.com.ua/ua/shutdowns за своєю адресою та оберіть її нижче.'
-              : 'Групу для цього будинку автоматично визначити не вдалося — оберіть її нижче (перевірте на сайті ДТЕК: dtek-kem.com.ua).'
+              : `${KYIV_FAILURE_TEXT[res.failure ?? 'service']} Оберіть групу нижче (перевірте на сайті ДТЕК: dtek-kem.com.ua).`
           );
         }
       });

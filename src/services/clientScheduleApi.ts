@@ -317,7 +317,7 @@ const stripStreetPrefix = (name: string) =>
 async function resolveYasnoStreetId(
   street: string,
   hintId?: number
-): Promise<number | undefined> {
+): Promise<number | 'service' | undefined> {
   const clean = stripStreetPrefix(street);
   const tokens = normalizeSearchTokens(clean).filter((t) => t.length >= 2);
   if (tokens.length === 0) return undefined;
@@ -327,7 +327,7 @@ async function resolveYasnoStreetId(
   const list: Array<{ id: number; value: string }> | null = await proxyGet(
     `/streets?query=${encodeURIComponent(probe)}`
   );
-  if (!list) return undefined;
+  if (!list) return 'service';
   const candidates = list.filter((c) => matchesTokens(c.value, street));
   if (hintId !== undefined && candidates.some((c) => c.id === hintId)) return hintId;
   if (candidates.length === 1) return candidates[0].id;
@@ -338,28 +338,69 @@ async function resolveYasnoStreetId(
   return undefined; // ambiguous -> do NOT guess
 }
 
+export type LookupFailure = 'service' | 'street' | 'house' | 'group';
+
+const LATIN_TO_CYR: Record<string, string> = {
+  a: 'а', b: 'в', c: 'с', e: 'е', h: 'н', i: 'і', k: 'к', m: 'м', o: 'о', p: 'р', t: 'т', x: 'х',
+};
+
+/** Compare house numbers tolerantly: case, spaces, backslash vs "/", Latin lookalike letters. */
+export function normalizeHouseNumber(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/^(буд\.?|б\.)\s*/, '')
+    .replace(/[\\|]/g, '/')
+    .replace(/\s+/g, '')
+    .replace(/[abcehikmoptx]/g, (ch) => LATIN_TO_CYR[ch] ?? ch);
+}
+
 /** Real group for a Kyiv house via YASNO. Never invents a group. */
 async function lookupKyivHouseViaProxy(
   street: string,
   streetId: number | undefined,
   houseQuery: string
-): Promise<{ houses: HouseLookupResult[]; detectedGroup?: string } | null> {
+): Promise<{
+  houses: HouseLookupResult[];
+  detectedGroup?: string;
+  failure?: LookupFailure;
+} | null> {
   const sid = await resolveYasnoStreetId(street, streetId);
-  if (!sid) return null;
-  const list: Array<{ id: number; value: string }> | null = await proxyGet(
-    `/houses?streetId=${sid}&query=${encodeURIComponent(houseQuery || '1')}`
-  );
-  if (!list) return null;
-  const houses: HouseLookupResult[] = list.map((h) => ({ house: h.value, id: h.id }));
-  let detectedGroup: string | undefined;
-  const exact = list.find((h) => h.value.toLowerCase() === houseQuery.toLowerCase());
-  if (exact) {
-    const g: { group?: number; subgroup?: number } | null = await proxyGet(
-      `/group?streetId=${sid}&houseId=${exact.id}`
+  if (sid === 'service') return null;
+  if (!sid) return { houses: [], failure: 'street' };
+  const fetchHouses = (q: string) =>
+    proxyGet<Array<{ id: number; value: string }>>(
+      `/houses?streetId=${sid}&query=${encodeURIComponent(q || '1')}`
     );
-    if (g?.group) detectedGroup = `${g.group}.${g.subgroup || 1}`;
+  let list = await fetchHouses(houseQuery);
+  if (!list) return null;
+
+  const wanted = normalizeHouseNumber(houseQuery);
+  const findExact = (l: Array<{ id: number; value: string }>) =>
+    l.filter((h) => normalizeHouseNumber(h.value) === wanted);
+  let exact = wanted ? findExact(list) : [];
+
+  // "39/2" may be stored differently by YASNO: also ask for the base number and match tolerantly.
+  const base = houseQuery.trim().match(/^\d+/)?.[0];
+  if (wanted && exact.length === 0 && base && base !== houseQuery.trim()) {
+    const extra = await fetchHouses(base);
+    if (extra) {
+      const seen = new Set(list.map((h) => h.id));
+      list = [...extra.filter((h) => !seen.has(h.id)), ...list];
+      exact = findExact(list);
+    }
   }
-  return { houses, detectedGroup };
+
+  const houses: HouseLookupResult[] = list.map((h) => ({ house: h.value, id: h.id }));
+  if (!wanted) return { houses };
+  // several different YASNO entries for one input -> ambiguous, do NOT guess
+  if (exact.length !== 1) {
+    return { houses, failure: exact.length === 0 ? 'house' : 'group' };
+  }
+  const g: { group?: number; subgroup?: number } | null = await proxyGet(
+    `/group?streetId=${sid}&houseId=${exact[0].id}`
+  );
+  if (g?.group) return { houses, detectedGroup: `${g.group}.${g.subgroup || 1}` };
+  return { houses, failure: 'group' };
 }
 
 // In-memory caches of full Kyiv streets (~3,406) & Kyiv Oblast settlements (~1,038+)
@@ -759,8 +800,13 @@ export async function lookupHouseGroup(
   street: string,
   streetId: number | undefined,
   houseQuery: string
-): Promise<{ houses: HouseLookupResult[]; detectedGroup?: string }> {
+): Promise<{
+  houses: HouseLookupResult[];
+  detectedGroup?: string;
+  failure?: LookupFailure;
+}> {
   const hClean = houseQuery.trim();
+  let failure: LookupFailure | undefined;
 
   // 1. Check known YASNO street catalog first (instant, 0ms latency)
   if (region === 'kem' && street.trim()) {
@@ -826,6 +872,8 @@ export async function lookupHouseGroup(
   if (region === 'kem' && street.trim()) {
     const real = await lookupKyivHouseViaProxy(street, streetId, hClean);
     if (real && real.houses.length > 0) return real;
+    // null: the service did not answer or the street could not be pinned down unambiguously
+    failure = real?.failure ?? 'service';
   }
 
   // 3. Fallback: plain sequential house numbers (1..80), NO group (we never guess groups)
@@ -856,6 +904,6 @@ export async function lookupHouseGroup(
     house: h,
   }));
 
-  return { houses, detectedGroup: undefined };
+  return { houses, detectedGroup: undefined, failure };
 }
 
