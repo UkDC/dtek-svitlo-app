@@ -1844,6 +1844,12 @@ select {
   color: var(--status-on);
 }
 
+.status-toast.status-toast-warn {
+  background: var(--status-maybe-bg);
+  border-color: var(--status-maybe-border);
+  color: var(--status-maybe);
+}
+
 /* Autocomplete Dropdown Menus for Settlement, Street, and House */
 .autocomplete-wrapper {
   position: relative;
