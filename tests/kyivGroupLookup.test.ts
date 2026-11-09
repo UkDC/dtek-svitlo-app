@@ -76,3 +76,52 @@ describe('Kyiv house -> group via YASNO proxy', () => {
     expect(calls).toHaveLength(0);
   });
 });
+
+describe('house number tolerance and failure reasons', () => {
+  it('finds "39/2" via the base-number query when the exact query returns nothing', async () => {
+    stubProxy({
+      '/streets?query=%D0%A1%D0%BB%D0%B5%D1%88%D0%BE%D0%B2%D0%B0': [{ id: 21, value: 'вул. Слешова' }],
+      '/houses?streetId=21&query=39%2F2': [],
+      '/houses?streetId=21&query=39': [
+        { id: 901, value: '39' },
+        { id: 902, value: '39 / 2' },
+      ],
+      '/group?streetId=21&houseId=902': { group: 21, subgroup: 2 },
+    });
+    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Слешова', undefined, '39/2');
+    expect(r.detectedGroup).toBe('21.2');
+    expect(r.failure).toBeUndefined();
+  });
+
+  it('matches Latin lookalike letters and case ("12a" == "12А")', async () => {
+    stubProxy({
+      '/streets?query=%D0%9B%D1%96%D1%82%D0%B5%D1%80%D0%BD%D0%B0': [{ id: 22, value: 'вул. Літерна' }],
+      '/houses?streetId=22&query=12a': [{ id: 911, value: '12А' }],
+      '/group?streetId=22&houseId=911': { group: 5, subgroup: 1 },
+    });
+    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Літерна', undefined, '12a');
+    expect(r.detectedGroup).toBe('5.1');
+  });
+
+  it('reports "house" when the street is known but the number is not, and never guesses', async () => {
+    stubProxy({
+      '/streets?query=%D0%91%D0%B5%D0%B7%D0%B1%D1%83%D0%B4%D0%B8%D0%BD%D0%BA%D0%BE%D0%B2%D0%B0': [{ id: 23, value: 'вул. Безбудинкова' }],
+      '/houses?streetId=23&query=7': [{ id: 921, value: '70' }],
+    });
+    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Безбудинкова', undefined, '7');
+    expect(r.detectedGroup).toBeUndefined();
+    expect(r.failure).toBe('house');
+  });
+
+  it('reports "street" when YASNO has no matching street', async () => {
+    stubProxy({ '/streets?query=%D0%9D%D0%B5%D1%96%D1%81%D0%BD%D1%83%D1%8E%D1%87%D0%B0': [] });
+    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Неіснуюча', undefined, '1');
+    expect(r.failure).toBe('street');
+  });
+
+  it('reports "service" when the address service does not answer', async () => {
+    stubProxy({});
+    const r = await lookupHouseGroup('kem', 'м. Київ', 'вул. Недоступна', undefined, '1');
+    expect(r.failure).toBe('service');
+  });
+});
