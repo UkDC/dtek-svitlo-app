@@ -75,10 +75,13 @@ for (const a of assigns) {
   }
 }
 
-// AJAX protocol probe on a NEUTRAL address taken from DTEK's own city list.
-const cities = Array.isArray(data.cities) ? data.cities : data.cities ? Object.values(data.cities) : [];
-const cityName = typeof cities[0] === 'string' ? cities[0] : cities[0]?.name ?? cities[0]?.title;
-console.log(`[recon] cities available=${cities.length} firstCityKnown=${Boolean(cityName)}`);
+// AJAX protocol probe on a NEUTRAL address taken from DTEK's own embedded list.
+const streetsMap = data.streets && typeof data.streets === 'object' ? data.streets : {};
+const cityNames = Object.keys(streetsMap);
+const cityName = cityNames.find((c) => c === 'м. Бориспіль') ?? cityNames[0];
+const cityStreets = cityName ? streetsMap[cityName] : undefined;
+console.log(`[recon] cities=${cityNames.length} cityValueShape=${shape(cityStreets)}`);
+const cities = cityNames;
 
 async function ajax(method, fields) {
   const body = new URLSearchParams();
@@ -108,22 +111,21 @@ async function ajax(method, fields) {
   return parsed;
 }
 
-if (csrf && cityName) {
-  const streets = await ajax('getStreets', [['city', cityName]]);
-  const streetList = streets?.data ?? streets;
-  const street = Array.isArray(streetList) ? streetList[0] : streetList && typeof streetList === 'object' ? Object.values(streetList)[0] : undefined;
-  const streetName = typeof street === 'string' ? street : street?.name;
-  console.log(`[recon] streets sample available=${Boolean(streetName)}`);
-  if (streetName) {
-    const homes = await ajax('getHomeNum', [['city', cityName], ['street', streetName]]);
-    const dataObj = homes?.data;
-    if (dataObj && typeof dataObj === 'object') {
-      const first = Object.entries(dataObj)[0];
-      if (first) console.log(`[recon] getHomeNum entry shape: key=<house> value=${shape(first[1])} sub_type_reason=${JSON.stringify(first[1]?.sub_type_reason ?? null)}`);
-    }
-    for (const k of ['result', 'updateTimestamp', 'showCurOutageParam', 'showCurSchedule', 'showTableSchedule'])
-      if (homes && k in homes) console.log(`[recon] getHomeNum top.${k}: ${shape(homes[k])}`);
+if (csrf && cityName && Array.isArray(cityStreets) && cityStreets.length) {
+  const first = cityStreets[0];
+  const streetName = typeof first === 'string' ? first : first?.name;
+  console.log(`[recon] using neutral sample: city=<${cityName}> streetKnown=${Boolean(streetName)} streets=${cityStreets.length}`);
+  const homes = await ajax('getHomeNum', [['city', cityName], ['street', streetName]]);
+  const dataObj = homes?.data;
+  if (dataObj && typeof dataObj === 'object') {
+    const entries = Object.entries(dataObj);
+    console.log(`[recon] getHomeNum houses=${entries.length}`);
+    if (entries[0]) console.log(`[recon] getHomeNum entry shape=${shape(entries[0][1])} sub_type_reason=${JSON.stringify(entries[0][1]?.sub_type_reason ?? null)}`);
+    const distinct = new Set(entries.map(([, v]) => JSON.stringify(v?.sub_type_reason ?? null)));
+    console.log(`[recon] distinct sub_type_reason values=${distinct.size}`);
   }
+  if (homes && typeof homes === 'object')
+    for (const k of Object.keys(homes)) if (k !== 'data') console.log(`[recon] getHomeNum top.${k}: ${shape(homes[k])}`);
 } else {
   console.log('[recon] skipped ajax (no csrf or no city list found); page-structure discovery only');
 }
