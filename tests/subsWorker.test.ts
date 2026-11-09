@@ -47,7 +47,7 @@ function profile(over: Record<string, unknown> = {}) {
         createdAt: '2026-01-01T00:00:00Z',
         shortTitle: 'Київ',
         street: 'ПРИВАТНА ВУЛИЦЯ',
-        house: '39/2',
+        house: '17/3',
       },
     ],
     quietHours: { enabled: true, start: '23:00', end: '07:00' },
@@ -100,7 +100,7 @@ describe('subscription store Worker', () => {
     expect(body.token).toMatch(/^[0-9a-f]{32}$/);
     const stored = kv.data.get('sub:ios_test_device_1')!;
     expect(stored).not.toContain('ПРИВАТНА');
-    expect(stored).not.toContain('39/2');
+    expect(stored).not.toContain('17/3');
     expect(stored).not.toContain(body.token); // only the hash is kept
     expect(JSON.parse(stored).addresses[0].group).toBe('13.1');
   });

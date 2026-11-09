@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0B111E" />
-      <stop offset="100%" stop-color="#111C33" />
-    </linearGradient>
-    <linearGradient id="bolt" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#34D399" />
-      <stop offset="100%" stop-color="#10B981" />
-    </linearGradient>
-  </defs>
-  <rect width="192" height="192" rx="44" fill="url(#bg)" />
-  <circle cx="96" cy="96" r="64" fill="none" stroke="#1E293B" stroke-width="4" />
-  <path d="M106 34L54 104h38l-10 54 56-72H100l6-52z" fill="url(#bolt)" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 120 120"><rect width="120" height="120" fill="#12161D"/><g transform="translate(60 60) scale(1.0) translate(-60 -60)"><circle cx="33" cy="33" r="6.5" fill="#2E3544"/><circle cx="51" cy="33" r="6.5" fill="#2E3544"/><circle cx="69" cy="33" r="6.5" fill="#2E3544"/><circle cx="87" cy="33" r="6.5" fill="#2E3544"/><circle cx="33" cy="51" r="6.5" fill="#2E3544"/><circle cx="33" cy="69" r="6.5" fill="#2E3544"/><circle cx="51" cy="69" r="6.5" fill="#2E3544"/><circle cx="69" cy="69" r="6.5" fill="#2E3544"/><circle cx="87" cy="69" r="6.5" fill="#2E3544"/><circle cx="33" cy="87" r="6.5" fill="#2E3544"/><circle cx="51" cy="87" r="6.5" fill="#2E3544"/><circle cx="69" cy="87" r="6.5" fill="#2E3544"/><circle cx="87" cy="87" r="6.5" fill="#2E3544"/><circle cx="87" cy="105" r="6.5" fill="#2E3544"/><circle cx="33" cy="15" r="6.5" fill="#FFC21A"/><circle cx="51" cy="15" r="6.5" fill="#FFC21A"/><circle cx="69" cy="15" r="6.5" fill="#FFC21A"/><circle cx="87" cy="15" r="6.5" fill="#FFC21A"/><circle cx="51" cy="51" r="6.5" fill="#FFC21A"/><circle cx="69" cy="51" r="6.5" fill="#FFC21A"/><circle cx="87" cy="51" r="6.5" fill="#FFC21A"/><circle cx="33" cy="105" r="6.5" fill="#FFC21A"/><circle cx="51" cy="105" r="6.5" fill="#FFC21A"/><circle cx="69" cy="105" r="6.5" fill="#2E3544" stroke="#FFFFFF" stroke-width="2.6"/></g></svg>

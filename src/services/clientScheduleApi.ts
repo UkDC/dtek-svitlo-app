@@ -379,7 +379,7 @@ async function lookupKyivHouseViaProxy(
     l.filter((h) => normalizeHouseNumber(h.value) === wanted);
   let exact = wanted ? findExact(list) : [];
 
-  // "39/2" may be stored differently by YASNO: also ask for the base number and match tolerantly.
+  // "17/3" may be stored differently by YASNO: also ask for the base number and match tolerantly.
   const base = houseQuery.trim().match(/^\d+/)?.[0];
   if (wanted && exact.length === 0 && base && base !== houseQuery.trim()) {
     const extra = await fetchHouses(base);
@@ -823,7 +823,7 @@ export async function lookupHouseGroup(
         foundStreet.houses[hClean.toUpperCase()] ||
         foundStreet.houses[hClean.toLowerCase()];
 
-      // Also check composite house keys, e.g. "39" in "39/41"
+      // Also check composite house keys, e.g. "17" in "17/19"
       if (!exactGroup && hClean) {
         for (const [h, grp] of Object.entries(foundStreet.houses)) {
           const parts = h.split(/[\s/]+/);

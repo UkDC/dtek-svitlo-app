@@ -1,0 +1,38 @@
+# Determines the outage group of a Kyiv-oblast address on the DTEK site.
+# Started ONLY by the svitlo-lookup Worker (workflow_dispatch). The repository is public, so the
+# address is never an input: the only input is an opaque job id, the address is fetched from the
+# Worker over HTTPS. Nothing here prints the address or any DTEK content.
+name: DTEK lookup
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: 'Opaque job id (32 hex chars)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# one group per job: a shared group would silently cancel all but one pending run
+concurrency:
+  group: dtek-lookup-${{ inputs.job_id }}
+  cancel-in-progress: false
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Look the address up
+        env:
+          JOB_ID: ${{ inputs.job_id }}
+          # the URL is public (it is in the app's code); a repo variable overrides the default
+          LOOKUP_API_URL: ${{ vars.LOOKUP_API_URL || 'https://svitlo-lookup.svitlo-b79d27.workers.dev' }}
+          LOOKUP_SECRET: ${{ secrets.LOOKUP_SECRET }}
+        run: node scripts/dtek-lookup.ts

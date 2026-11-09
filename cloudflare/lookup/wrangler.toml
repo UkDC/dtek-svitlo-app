@@ -1,0 +1,22 @@
+name = "svitlo-lookup"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+# Public entry point (the app calls /start and /result) that also holds a GitHub token able to start
+# ONE fixed workflow. Kept separate from `svitlo-address` (no secrets) and `svitlo-subs` (device data).
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "LOOKUPS"
+id = "7ce213dba6ea493b8a159e41dc2d7dca"
+
+[vars]
+# "owner/repo" that contains .github/workflows/dtek-lookup.yml (the workflow file name and the ref
+# `main` are fixed in the code on purpose)
+REPO = "UkDC/dtek-svitlo-app"
+# global cap of lookups per UTC day (every lookup costs one Actions run and one DTEK visit)
+DAILY_LIMIT = "40"
+
+# Secrets (NOT stored here):
+#   GITHUB_TOKEN  fine-grained PAT, ONLY this repository, ONLY "Actions: Read and write"
+#   LOOKUP_SECRET shared with the dtek-lookup workflow (also stored as a GitHub Actions secret)
+#   INVITE_CODES  comma-separated invitation codes (may be the same value as for svitlo-subs)
