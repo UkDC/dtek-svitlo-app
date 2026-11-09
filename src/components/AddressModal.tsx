@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Building2,
   Check,
   ChevronDown,
   ExternalLink,
   Home,
+  Loader2,
   MapPin,
   Search,
   Sparkles,
@@ -23,6 +24,12 @@ import {
   searchSettlements,
   searchStreets,
 } from '../services/clientScheduleApi';
+import {
+  OblastFailureReason,
+  lookupOblastGroup,
+  oblastFailureText,
+} from '../services/oblastLookup';
+import { loadInviteCode, saveInviteCode } from '../services/pushSyncService';
 
 interface AddressModalProps {
   initialAddress?: SavedAddress | null;
@@ -77,6 +84,16 @@ export const AddressModal: React.FC<AddressModalProps> = ({
   const [houseSuggestions, setHouseSuggestions] = useState<HouseLookupResult[]>([]);
   const [autoDetectedNote, setAutoDetectedNote] = useState<string>('');
 
+  // Kyiv oblast: the group comes from a DTEK lookup that takes up to ~90 s, started by a button
+  const [oblastStatus, setOblastStatus] = useState<'idle' | 'running'>('idle');
+  const [oblastFailure, setOblastFailure] = useState<{
+    reason: OblastFailureReason;
+    candidates?: string[];
+  } | null>(null);
+  const [invite, setInvite] = useState(() => loadInviteCode());
+  const [needInvite, setNeedInvite] = useState(() => !loadInviteCode());
+  const lookupAbort = useRef<AbortController | null>(null);
+
   const [showCityDropdown, setShowCityDropdown] = useState(false);
   const [showStreetDropdown, setShowStreetDropdown] = useState(false);
   const [showHouseDropdown, setShowHouseDropdown] = useState(false);
@@ -120,6 +137,11 @@ export const AddressModal: React.FC<AddressModalProps> = ({
 
   // House suggestions + automatic group, ONE debounced lookup (not one per keystroke).
   useEffect(() => {
+    if (region === 'krem') {
+      // oblast addresses are resolved by the explicit "determine group" button instead
+      setHouseSuggestions([]);
+      return;
+    }
     let active = true;
     const houseQuery = house.trim();
     const timer = setTimeout(() => {
@@ -134,9 +156,7 @@ export const AddressModal: React.FC<AddressModalProps> = ({
           );
         } else {
           setAutoDetectedNote(
-            region === 'krem'
-              ? 'Для Київської області групу автоматично визначити поки неможливо. Подивіться свою чергу на dtek-krem.com.ua/ua/shutdowns за своєю адресою та оберіть її нижче.'
-              : `${KYIV_FAILURE_TEXT[res.failure ?? 'service']} Оберіть групу нижче (перевірте на сайті ДТЕК: dtek-kem.com.ua).`
+            `${KYIV_FAILURE_TEXT[res.failure ?? 'service']} Оберіть групу нижче (перевірте на сайті ДТЕК: dtek-kem.com.ua).`
           );
         }
       });
@@ -146,6 +166,62 @@ export const AddressModal: React.FC<AddressModalProps> = ({
       clearTimeout(timer);
     };
   }, [region, city, street, streetId, house]);
+
+  const cancelOblastLookup = () => {
+    lookupAbort.current?.abort();
+    lookupAbort.current = null;
+    setOblastStatus('idle');
+  };
+
+  // an answer for an address that has since been edited must never be applied
+  useEffect(() => {
+    cancelOblastLookup();
+    setOblastFailure(null);
+  }, [region, city, street, house]);
+  useEffect(() => () => lookupAbort.current?.abort(), []);
+
+  const canLookupOblast =
+    region === 'krem' && !!city.trim() && !!street.trim() && !!house.trim();
+
+  const runOblastLookup = async () => {
+    if (!canLookupOblast || oblastStatus === 'running') return;
+    if (!invite.trim()) {
+      setNeedInvite(true);
+      setOblastFailure({ reason: 'invite' });
+      return;
+    }
+    const ctl = new AbortController();
+    lookupAbort.current = ctl;
+    setOblastFailure(null);
+    setAutoDetectedNote('');
+    setOblastStatus('running');
+    const result = await lookupOblastGroup(
+      { city, street, house },
+      { invite, signal: ctl.signal }
+    );
+    if (ctl.signal.aborted) return;
+    lookupAbort.current = null;
+    setOblastStatus('idle');
+    if (result.ok) {
+      saveInviteCode(invite);
+      setNeedInvite(false);
+      setGroup(result.group);
+      setAutoDetectedNote(
+        `Автоматично визначено Групу ${result.group} для «${street.trim()}, ${house.trim()}»`
+      );
+    } else {
+      if (result.reason === 'invite') setNeedInvite(true);
+      setOblastFailure({ reason: result.reason, candidates: result.candidates });
+    }
+  };
+
+  const pickOblastCandidate = (value: string) => {
+    if (oblastFailure?.reason === 'city_ambiguous') setCity(value);
+    else if (oblastFailure?.reason === 'street_ambiguous') {
+      setStreet(value);
+      setStreetId(undefined);
+    }
+  };
 
   const selectCityOption = (selectedCity: string) => {
     setCity(selectedCity);
@@ -613,6 +689,65 @@ export const AddressModal: React.FC<AddressModalProps> = ({
               </div>
             )}
           </div>
+
+          {region === 'krem' && (
+            <div className="form-group">
+              {needInvite && (
+                <input
+                  type="text"
+                  className="text-input"
+                  placeholder="Код-запрошення (XXXX-XXXX-XXXX-XXXX)"
+                  autoCapitalize="characters"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  value={invite}
+                  onChange={(e) => setInvite(e.target.value)}
+                  style={{ marginBottom: '8px' }}
+                />
+              )}
+              <button
+                type="button"
+                className="secondary-btn"
+                disabled={!canLookupOblast || oblastStatus === 'running'}
+                onClick={runOblastLookup}
+              >
+                {oblastStatus === 'running' ? (
+                  <Loader2 size={15} className="spin" />
+                ) : (
+                  <Sparkles size={15} />
+                )}
+                <span>
+                  {oblastStatus === 'running'
+                    ? 'Перевіряю на сайті ДТЕК… до 2 хвилин'
+                    : 'Визначити групу за адресою'}
+                </span>
+              </button>
+              {!canLookupOblast && oblastStatus === 'idle' && (
+                <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)', marginTop: '6px' }}>
+                  Вкажіть населений пункт, вулицю і номер будинку.
+                </div>
+              )}
+              {oblastFailure && (
+                <div className="status-toast status-toast-warn" role="alert" style={{ marginTop: '8px' }}>
+                  {oblastFailureText(oblastFailure.reason)}
+                  {oblastFailure.candidates && oblastFailure.candidates.length > 0 && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
+                      {oblastFailure.candidates.map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          className="group-option-btn"
+                          onClick={() => pickOblastCandidate(c)}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           {autoDetectedNote && (
             <div className="status-toast">
