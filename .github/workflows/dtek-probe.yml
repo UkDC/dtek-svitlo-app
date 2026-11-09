@@ -1,0 +1,45 @@
+name: dtek-probe (temporary diagnostic)
+# Temporary: checks whether DTEK pages are readable from a GitHub Actions runner. Only flags are printed.
+on:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/dtek-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Plain HTTP request
+        run: |
+          for u in https://www.dtek-kem.com.ua/ua/shutdowns https://www.dtek-krem.com.ua/ua/shutdowns; do
+            body=$(curl -sS -L --max-time 30 -w '\n%{http_code}' "$u" || true)
+            code=$(printf '%s' "$body" | tail -n1)
+            html=$(printf '%s' "$body" | sed '$d')
+            bytes=$(printf '%s' "$html" | wc -c)
+            echo "PLAIN $u status=$code bytes=$bytes csrf=$(printf '%s' "$html" | grep -ci 'csrf-token') schedule=$(printf '%s' "$html" | grep -c 'DisconSchedule') incapsula=$(printf '%s' "$html" | grep -ci 'incapsula')"
+          done
+      - name: Real browser (Playwright)
+        continue-on-error: true
+        run: |
+          mkdir probe && cd probe && npm init -y >/dev/null && npm i playwright@1.49.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+          cat > run.js <<'JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            for (const [name, url] of [['kem','https://www.dtek-kem.com.ua/ua/shutdowns'],['krem','https://www.dtek-krem.com.ua/ua/shutdowns']]) {
+              const b = await chromium.launch(); const p = await b.newPage();
+              try {
+                const r = await p.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+                await p.waitForTimeout(10000);
+                const html = await p.content();
+                console.log('BROWSER', name, JSON.stringify({ status: r && r.status(), bytes: html.length,
+                  csrf: /csrf-token/i.test(html), schedule: /DisconSchedule/.test(html),
+                  streetField: /name="street"|id="street"/.test(html), incapsula: /incapsula/i.test(html) }));
+              } catch (e) { console.log('BROWSER', name, 'error', String(e.message).slice(0, 120)); }
+              await b.close();
+            }
+          })();
+          JS
+          node run.js
