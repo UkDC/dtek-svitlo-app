@@ -13,14 +13,23 @@ import {
 } from 'lucide-react';
 import { SavedAddress, toSyncAddress } from '../services/scheduleNormalizer';
 import {
-  GitHubCloudConfig,
+  CloudSyncError,
   QuietHoursSettings,
-  loadGitHubCloudConfig,
+  loadInviteCode,
+  purgeLegacyGitHubToken,
   registerAndSubscribePush,
-  saveGitHubCloudConfig,
+  renewPushSubscription,
+  saveInviteCode,
   syncSubscriberState,
   triggerTestNotification,
 } from '../services/pushSyncService';
+
+const CLOUD_ERROR_TEXT: Record<CloudSyncError, string> = {
+  'no-invite': 'Введите код-приглашение (раздел «Облачные Push» ниже), иначе уведомления не придут.',
+  invite: 'Код-приглашение не подошёл. Проверьте его у того, кто вас пригласил.',
+  invalid: 'Сервер отклонил данные устройства. Попробуйте «Пересоздать подписку».',
+  network: 'Нет связи с облачным хранилищем. Повторите позже.',
+};
 
 interface NotificationSettingsModalProps {
   addresses: SavedAddress[];
@@ -47,9 +56,7 @@ export const NotificationSettingsModal: React.FC<
   const [copied, setCopied] = useState<boolean>(false);
   const tokenTextareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const initialGh = loadGitHubCloudConfig();
-  const [ghRepo, setGhRepo] = useState(initialGh.repoFullName);
-  const [ghToken, setGhToken] = useState(initialGh.token);
+  const [invite, setInvite] = useState(loadInviteCode());
   const [showCloudSetup, setShowCloudSetup] = useState(false);
 
   // Auto-detect existing push subscription and populate token box immediately
@@ -88,9 +95,13 @@ export const NotificationSettingsModal: React.FC<
       }
 
       onPushStatusChange(true);
-      await syncSubscriberState(addresses, quietHours, res.subscription);
+      const sync = await syncSubscriberState(addresses, quietHours, res.subscription);
       setStatusMessage(
-        'Push-уведомления успешно активированы и синхронизированы!'
+        sync.syncedCloud || sync.syncedBackend
+          ? 'Push-уведомления успешно активированы и синхронизированы!'
+          : `Уведомления iOS включены, но облако не подключено. ${
+              CLOUD_ERROR_TEXT[sync.cloudError ?? 'network']
+            }`
       );
     } finally {
       setIsBusy(false);
@@ -191,18 +202,34 @@ export const NotificationSettingsModal: React.FC<
   };
 
   const handleSaveCloudSync = async () => {
-    const cfg: GitHubCloudConfig = {
-      repoFullName: ghRepo.trim(),
-      token: ghToken.trim(),
-    };
-    saveGitHubCloudConfig(cfg);
+    saveInviteCode(invite);
     setIsBusy(true);
     const res = await syncSubscriberState(addresses, quietHours);
     setIsBusy(false);
-    if (res.syncedGitHub || res.syncedBackend) {
-      setStatusMessage('Настройки успешно синхронизированы с облаком GitHub!');
+    if (res.syncedCloud || res.syncedBackend) {
+      setStatusMessage('Готово: устройство зарегистрировано в облаке, пуши будут приходить.');
     } else {
-      setStatusMessage('Параметры GitHub сохранены в памяти iPhone.');
+      setStatusMessage(CLOUD_ERROR_TEXT[res.cloudError ?? 'network']);
+    }
+  };
+
+  const handleRenewSubscription = async () => {
+    setIsBusy(true);
+    setStatusMessage('Пересоздаём подписку этого iPhone…');
+    try {
+      const res = await renewPushSubscription();
+      if (!res.ok || !res.subscription) {
+        setStatusMessage(res.error || 'Не удалось пересоздать подписку.');
+        return;
+      }
+      const sync = await syncSubscriberState(addresses, quietHours, res.subscription);
+      setStatusMessage(
+        sync.syncedCloud
+          ? 'Подписка пересоздана: прежний адрес доставки больше не работает.'
+          : CLOUD_ERROR_TEXT[sync.cloudError ?? 'network']
+      );
+    } finally {
+      setIsBusy(false);
     }
   };
 
@@ -507,8 +534,8 @@ export const NotificationSettingsModal: React.FC<
             <Cloud size={15} />
             <span>
               {showCloudSetup
-                ? 'Скрыть настройки GitHub Cloud Sync'
-                : 'Синхронизация с GitHub Actions (Облачный Push)'}
+                ? 'Скрыть настройки облачных Push'
+                : 'Облачные Push: код-приглашение'}
             </span>
           </button>
 
@@ -526,23 +553,18 @@ export const NotificationSettingsModal: React.FC<
               }}
             >
               <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>
-                При работе со статического GitHub Pages укажите репозиторий и
-                Fine-Grained PAT (хранится исключительно в памяти вашего iPhone),
-                чтобы воркер GitHub Actions знал ваши адреса и присылал Web Push:
+                Чтобы пуши приходили, когда приложение закрыто, устройство регистрируется
+                в закрытом облачном хранилище. Нужен код-приглашение. Хранится только
+                способ доставки уведомлений и номер вашей очереди — адрес остаётся на телефоне.
               </div>
               <input
                 type="text"
                 className="text-input"
-                placeholder="owner/dtek-svitlo-app"
-                value={ghRepo}
-                onChange={(e) => setGhRepo(e.target.value)}
-              />
-              <input
-                type="password"
-                className="text-input"
-                placeholder="github_pat_... (только локально на iPhone)"
-                value={ghToken}
-                onChange={(e) => setGhToken(e.target.value)}
+                placeholder="XXXX-XXXX-XXXX-XXXX"
+                autoCapitalize="characters"
+                autoCorrect="off"
+                value={invite}
+                onChange={(e) => setInvite(e.target.value)}
               />
               <button
                 type="button"
@@ -550,7 +572,15 @@ export const NotificationSettingsModal: React.FC<
                 onClick={handleSaveCloudSync}
                 disabled={isBusy}
               >
-                Сохранить и синхронизировать с GitHub
+                Сохранить код и зарегистрировать устройство
+              </button>
+              <button
+                type="button"
+                className="secondary-btn"
+                onClick={handleRenewSubscription}
+                disabled={isBusy}
+              >
+                Пересоздать подписку этого iPhone
               </button>
             </div>
           )}

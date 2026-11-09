@@ -110,11 +110,60 @@ export function initWebPush(): string {
   return keys.publicKey;
 }
 
-export function loadSubscribers(): SubscriberProfile[] {
-  ensureStateDir();
-  if (!fs.existsSync(SUBSCRIPTIONS_FILE)) {
-    return [];
+/**
+ * Subscriptions hold push endpoints and keys, so on GitHub Actions they are read from the private
+ * Cloudflare store (cloudflare/subs), never from the public repository. Locally (no SUBS_API_URL)
+ * a git-ignored state/subscriptions.json is used for development.
+ */
+function remoteStore(): { url: string; secret: string } | null {
+  const url = process.env.SUBS_API_URL;
+  const secret = process.env.SUBS_SECRET;
+  return url && secret ? { url: url.replace(/\/+$/, ''), secret } : null;
+}
+
+export async function loadSubscribers(): Promise<SubscriberProfile[]> {
+  const remote = remoteStore();
+  if (remote) {
+    // Fail loudly: silently treating an outage as "no subscribers" would stop all alerts unnoticed.
+    const res = await fetch(`${remote.url}/internal/subscribers`, {
+      headers: { Authorization: `Bearer ${remote.secret}` },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!res.ok) throw new Error(`Subscription store answered HTTP ${res.status}`);
+    const data = (await res.json()) as { subscribers?: unknown };
+    if (!Array.isArray(data.subscribers)) throw new Error('Subscription store: bad response');
+    return data.subscribers as SubscriberProfile[];
   }
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    throw new Error(
+      'SUBS_API_URL / SUBS_SECRET are not configured: refusing to run without the subscription store'
+    );
+  }
+  return loadLocalSubscribers();
+}
+
+/** Drop a dead (expired) endpoint from whichever store is in use. */
+export async function removeSubscriberByEndpoint(endpoint: string): Promise<void> {
+  const remote = remoteStore();
+  if (remote) {
+    try {
+      await fetch(`${remote.url}/internal/remove`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${remote.secret}` },
+        body: JSON.stringify({ endpoint }),
+        signal: AbortSignal.timeout(15000),
+      });
+    } catch {
+      // best effort: the next run retries after the next 404/410
+    }
+    return;
+  }
+  saveSubscribers(loadLocalSubscribers().filter((s) => s.subscription?.endpoint !== endpoint));
+}
+
+function loadLocalSubscribers(): SubscriberProfile[] {
+  ensureStateDir();
+  if (!fs.existsSync(SUBSCRIPTIONS_FILE)) return [];
   try {
     const raw = JSON.parse(fs.readFileSync(SUBSCRIPTIONS_FILE, 'utf-8'));
     return Array.isArray(raw) ? raw : [];
@@ -128,8 +177,9 @@ export function saveSubscribers(list: SubscriberProfile[]): void {
   fs.writeFileSync(SUBSCRIPTIONS_FILE, JSON.stringify(list, null, 2));
 }
 
+/** Local development only (Express dev server); production subscribes through cloudflare/subs. */
 export function upsertSubscriber(profile: SubscriberProfile): SubscriberProfile {
-  const list = loadSubscribers();
+  const list = loadLocalSubscribers();
   const idx = list.findIndex(
     (s) =>
       s.id === profile.id ||
@@ -269,10 +319,7 @@ export async function sendPushPayload(
     );
     // 410 Gone or 404 Not Found means subscription expired on iOS
     if (err?.statusCode === 410 || err?.statusCode === 404) {
-      const subs = loadSubscribers().filter(
-        (s) => s.subscription?.endpoint !== subscription.endpoint
-      );
-      saveSubscribers(subs);
+      await removeSubscriberByEndpoint(subscription.endpoint);
     }
     return false;
   }
@@ -296,7 +343,8 @@ export async function runScheduleAndNotificationCheck(options?: {
   initWebPush();
   const bundle = await fetchMultiSourceSchedules(options?.forceRefresh ?? true);
   const snapshot = loadSnapshot();
-  const subscribers = loadSubscribers();
+  const subscribers = await loadSubscribers();
+  console.log(`[Push] ${subscribers.length} subscriber(s) loaded`);
   const { nowMinutes } = getKyivTimeContext();
 
   let alertsSent = 0;

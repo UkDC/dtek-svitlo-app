@@ -38,6 +38,9 @@ jobs:
           SEND_TEST_PUSH: ${{ github.event.inputs.test_push || 'false' }}
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          # private subscription store (Cloudflare KV behind cloudflare/subs); no subscriptions in git
+          SUBS_API_URL: https://svitlo-subs.svitlo-b79d27.workers.dev
+          SUBS_SECRET: ${{ secrets.SUBS_SECRET }}
         run: npm run push:check
 
       - name: Commit updated schedule snapshot & deduplication ledger

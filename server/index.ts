@@ -38,9 +38,9 @@ try {
   // ignore
 }
 
-app.get('/api/health', (_req, res) => {
+app.get('/api/health', async (_req, res) => {
   const snap = loadSnapshot();
-  const subs = loadSubscribers();
+  const subs = await loadSubscribers().catch(() => []);
   res.json({
     ok: true,
     updatedAt: snap.updatedAt,

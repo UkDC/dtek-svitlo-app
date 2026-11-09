@@ -1,0 +1,14 @@
+name = "svitlo-subs"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+# Holds push subscriptions (device endpoints + keys): the most sensitive data of the app.
+# Kept separate from `svitlo-address` (public read-only proxy, no secrets).
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "SUBS"
+id = "f6e9fdce2eeb45468b2b95799228ddc7"
+
+# Secrets (NOT stored here):
+#   INVITE_CODES  comma-separated invitation codes (who may register a device)
+#   SUBS_SECRET   shared with the push-check GitHub Action (reads the list, removes dead endpoints)
