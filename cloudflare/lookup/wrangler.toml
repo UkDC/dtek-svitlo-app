@@ -7,8 +7,7 @@ workers_dev = true
 
 [[kv_namespaces]]
 binding = "LOOKUPS"
-# create with:  npx wrangler kv namespace create LOOKUPS   and paste the id here
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "7ce213dba6ea493b8a159e41dc2d7dca"
 
 [vars]
 # "owner/repo" that contains .github/workflows/dtek-lookup.yml (the workflow file name and the ref
