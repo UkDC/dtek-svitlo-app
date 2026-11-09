@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   cleanSettlementNameForSort,
   cleanStreetNameForSort,
@@ -8,6 +8,8 @@ import {
 } from '../src/services/clientScheduleApi';
 
 describe('Address search and alphabetical sorting', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
   it('correctly strips prefixes for clean Ukrainian alphabetical sorting', () => {
     expect(cleanSettlementNameForSort('с. Гатне (Києво-Святошинський район)')).toBe('гатне києво-святошинський район');
     expect(cleanSettlementNameForSort('смт Баришівка')).toBe('баришівка');
@@ -48,6 +50,10 @@ describe('Address search and alphabetical sorting', () => {
   });
 
   it('never invents a DTEK group for a house it has no verified data for', async () => {
+    // Hermetic: with the address service unreachable there is no verified data at all.
+    vi.stubGlobal('fetch', async () => {
+      throw new Error('offline');
+    });
     for (const [region, city, street] of [
       ['kem', 'м. Київ', 'вул. Хрещатик'],
       ['krem', 'с. Гатне', 'вул. Центральна'],
