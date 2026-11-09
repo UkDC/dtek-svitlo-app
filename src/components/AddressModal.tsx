@@ -111,38 +111,32 @@ export const AddressModal: React.FC<AddressModalProps> = ({
     };
   }, [region, city, street]);
 
+  // House suggestions + automatic group, ONE debounced lookup (not one per keystroke).
   useEffect(() => {
     let active = true;
-    lookupHouseGroup(region, city, street || 'вул. Центральна', streetId, house.trim()).then(
-      (res) => {
+    const houseQuery = house.trim();
+    const timer = setTimeout(() => {
+      lookupHouseGroup(region, city, street, streetId, houseQuery).then((res) => {
         if (!active) return;
         setHouseSuggestions(res.houses || []);
-      }
-    );
+        if (!street.trim() || !houseQuery) return;
+        if (res.detectedGroup) {
+          setGroup(res.detectedGroup);
+          setAutoDetectedNote(
+            `Автоматично обрано Групу ${res.detectedGroup} для «${street.trim()}, ${houseQuery}»`
+          );
+        } else {
+          setAutoDetectedNote(
+            region === 'krem'
+              ? 'Для Київської області групу автоматично визначити поки неможливо. Подивіться свою чергу на dtek-krem.com.ua/ua/shutdowns за своєю адресою та оберіть її нижче.'
+              : 'Групу для цього будинку автоматично визначити не вдалося — оберіть її нижче (перевірте на сайті ДТЕК: dtek-kem.com.ua).'
+          );
+        }
+      });
+    }, 350);
     return () => {
       active = false;
-    };
-  }, [region, city, street, streetId, house]);
-
-  // Auto-resolve group whenever street and house are both non-empty
-  useEffect(() => {
-    if (!street.trim() || !house.trim()) return;
-    let active = true;
-    lookupHouseGroup(region, city, street, streetId, house.trim()).then((res) => {
-      if (!active) return;
-      if (res.detectedGroup) {
-        setGroup(res.detectedGroup);
-        setAutoDetectedNote(
-          `Автоматически выбрана Група ${res.detectedGroup} для «${street.trim()}, ${house.trim()}»`
-        );
-      } else {
-        setAutoDetectedNote(
-          'Групу для цього будинку автоматично визначити не вдалося — оберіть її нижче (перевірте на сайті ДТЕК: dtek-kem.com.ua або dtek-krem.com.ua).'
-        );
-      }
-    });
-    return () => {
-      active = false;
+      clearTimeout(timer);
     };
   }, [region, city, street, streetId, house]);
 

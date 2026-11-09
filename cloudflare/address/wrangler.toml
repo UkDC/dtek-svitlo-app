@@ -1,0 +1,6 @@
+name = "svitlo-address"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+# Public read-only proxy (no secrets in this Worker). Kept separate from `svitlo-trigger`,
+# which holds the GitHub token and must never be reachable from the internet.
+workers_dev = true
