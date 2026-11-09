@@ -282,7 +282,7 @@ export async function sendPushPayload(
  * Executes a full check cycle:
  * 1. Fetches fresh multi-source schedules (Outage-Data-UA + YASNO API v2 + DTEK)
  * 2. Detects intraday schedule changes for any group and notifies subscribed addresses
- * 3. Checks [10..42] minute sliding window before outage start & restoration for each address
+ * 3. Checks [10..32] minute sliding window before outage start & restoration for each address
  * 4. Saves updated snapshot & notifiedEvents ledger
  */
 export async function runScheduleAndNotificationCheck(options?: {
@@ -306,8 +306,8 @@ export async function runScheduleAndNotificationCheck(options?: {
     for (const sub of subscribers) {
       if (sub.subscription) {
         const ok = await sendPushPayload(sub.subscription, {
-          title: '⚡ Світло: Тестовое уведомление',
-          body: 'Push-уведомления на вашем iPhone работают отлично! Вы будете получать предупреждения за 30 мин до отключения и включения.',
+          title: '⚡ Світло: тестове сповіщення',
+          body: 'Push-сповіщення на вашому iPhone працюють! Ви отримуватимете попередження приблизно за 30 хв до відключення та увімкнення світла.',
           tag: 'test-push',
         });
         if (ok) alertsSent++;
@@ -464,14 +464,16 @@ export async function runScheduleAndNotificationCheck(options?: {
         }
       }
 
-      // B) Sliding window [10..42]m notifications (~30m before outage start or restoration)
+      // B) Sliding window [10..32]m notifications (~30m before outage start or restoration).
+      // The trigger (Cloudflare Worker) fires every 5 min, so a 22 min window is enough; the wider
+      // 10..42 window was only needed to survive the unreliable GitHub cron.
       const triggers = evaluateUpcomingAlerts(
         addr,
         groupSched.today,
         nowMinutes,
         ledgerViewFor(snapshot.notifiedEvents, sub.id),
         10,
-        42,
+        32,
         groupSched.tomorrow
       );
 
