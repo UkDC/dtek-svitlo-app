@@ -69,7 +69,7 @@
 | File Path | Role & Responsibilities |
 | :--- | :--- |
 | `src/services/scheduleNormalizer.ts` | Multi-source parsing (DTEK/YASNO), `getCurrentAddressStatus`, deterministic `evaluateUpcomingAlerts` with interval duration calculation. |
-| `server/services/notificationScheduler.ts` | Apple APNs push sender (`sendPushPayload`), `[10..42]m` sliding window checker, deduplication via `notifiedEvents`, schedule change calculation. |
+| `server/services/notificationScheduler.ts` | Apple APNs push sender (`sendPushPayload`), `[10..32]m` sliding window checker (server; the in-app local check keeps 10..42), deduplication via `notifiedEvents`, schedule change calculation. |
 | `src/services/pushSyncService.ts` | Client VAPID subscriber, sync engine (Backend + GitHub Contents API), `triggerTestNotification`. |
 | `src/components/NotificationSettingsModal.tsx` | UI for push activation, test push dispatch, and iPhone subscription token management. |
 | `public/sw.js` | Service Worker push listener with dynamic icon routing (`icon-off.svg`, `icon-on.svg`, `icon-change.svg`). |
