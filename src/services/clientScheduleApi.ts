@@ -309,17 +309,27 @@ function proxyGet<T = any>(pathAndQuery: string): Promise<T | null> {
 const stripStreetPrefix = (name: string) =>
   name.replace(/^(вул\.|просп\.|пров\.|бул\.|пл\.|узв\.|шосе|наб\.|пр-т)\s*/i, '').trim();
 
-/** Find the YASNO street id for a street name that may come from OSM (different word order). */
-async function resolveYasnoStreetId(street: string): Promise<number | undefined> {
+/**
+ * Resolve the CURRENT YASNO street id by name. YASNO renumbers its internal ids from time to time,
+ * so the id stored in kyiv-streets.json is only a hint: it is used only if YASNO still returns it
+ * for this street name. A stale id would silently point to a different street.
+ */
+async function resolveYasnoStreetId(
+  street: string,
+  hintId?: number
+): Promise<number | undefined> {
   const clean = stripStreetPrefix(street);
   const tokens = normalizeSearchTokens(clean).filter((t) => t.length >= 2);
   if (tokens.length === 0) return undefined;
-  const probe = [...tokens].sort((a, b) => b.length - a.length)[0];
+  const longest = [...tokens].sort((a, b) => b.length - a.length)[0];
+  // YASNO lists names capitalised ("Хрещатик"); do not rely on its search being case-insensitive.
+  const probe = longest.charAt(0).toUpperCase() + longest.slice(1);
   const list: Array<{ id: number; value: string }> | null = await proxyGet(
     `/streets?query=${encodeURIComponent(probe)}`
   );
   if (!list) return undefined;
   const candidates = list.filter((c) => matchesTokens(c.value, street));
+  if (hintId !== undefined && candidates.some((c) => c.id === hintId)) return hintId;
   if (candidates.length === 1) return candidates[0].id;
   const exact = candidates.filter(
     (c) => stripStreetPrefix(c.value).toLowerCase() === clean.toLowerCase()
@@ -334,7 +344,7 @@ async function lookupKyivHouseViaProxy(
   streetId: number | undefined,
   houseQuery: string
 ): Promise<{ houses: HouseLookupResult[]; detectedGroup?: string } | null> {
-  const sid = streetId ?? (await resolveYasnoStreetId(street));
+  const sid = await resolveYasnoStreetId(street, streetId);
   if (!sid) return null;
   const list: Array<{ id: number; value: string }> | null = await proxyGet(
     `/houses?streetId=${sid}&query=${encodeURIComponent(houseQuery || '1')}`

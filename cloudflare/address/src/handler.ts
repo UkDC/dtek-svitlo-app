@@ -112,6 +112,9 @@ export async function handleRequest(
     const out: Record<string, unknown> = {};
     const s = await upstream(fetchImpl, `/streets?${KYIV}&query=${encodeURIComponent('Хрещ')}`);
     out.streets = { status: s.status, count: Array.isArray(s.data) ? s.data.length : null };
+    // Is the YASNO street search case-insensitive? (the client sends a capitalised probe either way)
+    const lower = await upstream(fetchImpl, `/streets?${KYIV}&query=${encodeURIComponent('хрещ')}`);
+    out.streetsLowercase = { status: lower.status, count: Array.isArray(lower.data) ? lower.data.length : null };
     const first = Array.isArray(s.data) ? (s.data[0] as any) : null;
     if (first?.id) {
       const h = await upstream(fetchImpl, `/houses?${KYIV}&streetId=${first.id}&query=1`);
