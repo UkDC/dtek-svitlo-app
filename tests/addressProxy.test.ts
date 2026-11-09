@@ -73,5 +73,8 @@ describe('address proxy (YASNO, Kyiv only)', () => {
     const body: any = await res.json();
     expect(body.streets).toEqual({ status: 200, count: 1 });
     expect(body.group.sample).toEqual({ group: 36, subgroup: 1 });
+    // DTEK pages are not in the mock -> reported as status 404 flags, never an exception
+    expect(body.dtekKem.status).toBe(404);
+    expect(body.dtekKrem.hasSchedule).toBe(false);
   });
 });

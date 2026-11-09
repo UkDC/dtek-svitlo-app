@@ -122,8 +122,33 @@ export async function handleRequest(
         out.group = { status: g.status, sample: g.data };
       }
     }
+    out.dtekKem = await probeDtekPage(fetchImpl, 'https://www.dtek-kem.com.ua/ua/shutdowns');
+    out.dtekKrem = await probeDtekPage(fetchImpl, 'https://www.dtek-krem.com.ua/ua/shutdowns');
     return json(out, 200, origin);
   }
 
   return json({ error: 'not_found' }, 404, origin);
+}
+
+/** Does DTEK let a Cloudflare datacenter IP read its shutdowns page? (only flags are reported) */
+export async function probeDtekPage(
+  fetchImpl: FetchLike,
+  pageUrl: string
+): Promise<Record<string, unknown>> {
+  try {
+    const res = await fetchImpl(pageUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; svitlo-diag/1.0)', Accept: 'text/html' },
+      signal: AbortSignal.timeout(8000),
+    });
+    const text = await res.text();
+    return {
+      status: res.status,
+      bytes: text.length,
+      hasSchedule: text.includes('DisconSchedule'),
+      hasCsrf: /csrf-token/i.test(text),
+      looksBlocked: /incapsula|imperva|hcaptcha|_Incapsula_Resource/i.test(text),
+    };
+  } catch (e) {
+    return { status: 0, error: 'fetch_failed' };
+  }
 }
