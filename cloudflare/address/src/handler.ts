@@ -125,6 +125,14 @@ export async function handleRequest(
         out.group = { status: g.status, sample: g.data };
       }
     }
+    // Sweep neighbouring operator codes in region 25: does any answer street search for oblast streets?
+    const sweep: Record<string, unknown> = {};
+    for (let dso = 900; dso <= 910; dso++) {
+      const r = await upstream(fetchImpl, `/streets?regionId=25&dsoId=${dso}&query=${encodeURIComponent('Центральна')}`);
+      const sample = Array.isArray(r.data) && r.data[0] ? String((r.data[0] as any).value ?? '') : null;
+      sweep[String(dso)] = { status: r.status, count: Array.isArray(r.data) ? r.data.length : null, sample };
+    }
+    out.dsoSweep = sweep;
     // Does YASNO also cover Kyiv oblast? List the regions/operators it knows (public reference data only).
     try {
       const rr = await (fetchImpl as FetchLike)(
