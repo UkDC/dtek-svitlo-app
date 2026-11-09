@@ -1,4 +1,4 @@
-const CACHE_NAME = 'svitlo-pwa-v17-2';
+const CACHE_NAME = 'svitlo-pwa-v18-0';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
