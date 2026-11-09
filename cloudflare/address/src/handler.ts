@@ -125,6 +125,23 @@ export async function handleRequest(
         out.group = { status: g.status, sample: g.data };
       }
     }
+    // Does YASNO also cover Kyiv oblast? List the regions/operators it knows (public reference data only).
+    try {
+      const rr = await (fetchImpl as FetchLike)(
+        'https://app.yasno.ua/api/blackout-service/public/shutdowns/regions',
+        { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(6000) }
+      );
+      const rd: any = rr.ok ? await rr.json() : null;
+      out.yasnoRegions = Array.isArray(rd)
+        ? rd.map((r: any) => ({
+            id: r?.id,
+            name: r?.value,
+            dsos: Array.isArray(r?.dsos) ? r.dsos.map((d: any) => ({ id: d?.id, name: d?.name })) : [],
+          }))
+        : { status: rr.status };
+    } catch {
+      out.yasnoRegions = { status: 0 };
+    }
     out.dtekKem = await probeDtekPage(fetchImpl, 'https://www.dtek-kem.com.ua/ua/shutdowns');
     out.dtekKrem = await probeDtekPage(fetchImpl, 'https://www.dtek-krem.com.ua/ua/shutdowns');
     return json(out, 200, origin);
