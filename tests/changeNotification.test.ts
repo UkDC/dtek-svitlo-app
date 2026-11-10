@@ -28,13 +28,13 @@ const change = (dayLabel: 'Сьогодні' | 'Завтра', prev: DaySchedule
 describe('buildChangeNotification', () => {
   it('today: new outages and what they were', () => {
     const r = buildChangeNotification('Дім', [change('Сьогодні', day(D, [[840, 1080]]), day(D, [[960, 1200]]))]);
-    expect(r.title).toBe('🔄 Графік на сьогодні змінено • Дім');
+    expect(r.title).toBe('🗓️ Графік на сьогодні змінено • Дім');
     expect(r.body).toBe('Відключення 16:00–20:00 (було 14:00–18:00)');
   });
 
   it('tomorrow gets its own wording', () => {
     const r = buildChangeNotification('Дім', [change('Завтра', day(T, [[0, 240]]), day(T, [[360, 600]]))]);
-    expect(r.title).toBe('🔄 Графік на завтра змінено • Дім');
+    expect(r.title).toBe('🗓️ Графік на завтра змінено • Дім');
     expect(r.body).toBe('Відключення 06:00–10:00 (було 00:00–04:00)');
   });
 
@@ -54,7 +54,7 @@ describe('buildChangeNotification', () => {
 
   it('a tomorrow schedule published for the first time is «опубліковано», not «змінено»', () => {
     const r = buildChangeNotification('Дім', [change('Завтра', makeWaitingDay(T), day(T, [[840, 1080]]))]);
-    expect(r.title).toBe('🔄 Опубліковано графік на завтра • Дім');
+    expect(r.title).toBe('🗓️ Опубліковано графік на завтра • Дім');
     expect(r.body).toBe('Відключення 14:00–18:00');
   });
 
@@ -73,7 +73,7 @@ describe('buildChangeNotification', () => {
       change('Сьогодні', day(D, [[840, 1080]]), day(D, [[960, 1200]])),
       change('Завтра', day(T, []), day(T, [[360, 600]])),
     ]);
-    expect(r.title).toBe('🔄 Графік змінено • Дім');
+    expect(r.title).toBe('🗓️ Графік змінено • Дім');
     expect(r.body.split('\n')).toEqual([
       'Сьогодні: відключення 16:00–20:00 (було 14:00–18:00)',
       'Завтра: відключення 06:00–10:00 (було без відключень)',

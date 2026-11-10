@@ -134,7 +134,7 @@ describe('scheduleNormalizer core engine', () => {
     expect(triggersAt1530).toHaveLength(1);
     expect(triggersAt1530[0].type).toBe('before_off');
     expect(triggersAt1530[0].minutesRemaining).toBe(30);
-    expect(triggersAt1530[0].title).toBe('🔴 Відключення о 16:00 • Моя квартира');
+    expect(triggersAt1530[0].title).toBe('🪫 Відключення о 16:00 • Моя квартира');
     expect(triggersAt1530[0].body).toBe('до 20:00 · 4 год без світла');
 
     // Record sent event -> next check at 15:38 (938m, 22m before outage) must NOT duplicate
@@ -157,7 +157,7 @@ describe('scheduleNormalizer core engine', () => {
     expect(triggersAt1930).toHaveLength(1);
     expect(triggersAt1930[0].type).toBe('before_on');
     expect(triggersAt1930[0].minutesRemaining).toBe(30);
-    expect(triggersAt1930[0].title).toBe('🟢 Світло буде о 20:00 • Моя квартира');
+    expect(triggersAt1930[0].title).toBe('🔋 Світло буде о 20:00 • Моя квартира');
     expect(triggersAt1930[0].body).toBe('до 24:00 · 4 год зі світлом');
   });
 

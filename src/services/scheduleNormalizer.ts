@@ -812,7 +812,7 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: startStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToStart,
-          title: `🔴 Відключення о ${startStr} • ${shortAddr}`,
+          title: `🪫 Відключення о ${startStr} • ${shortAddr}`,
           body: `${untilText(ep.startAbs, ep.endAbs)} · ${formatHoursUk(
             (ep.endAbs - ep.startAbs) / 60
           )} без світла`,
@@ -849,7 +849,7 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: endStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToEnd,
-          title: `🟢 Світло буде о ${endStr} • ${shortAddr}`,
+          title: `🔋 Світло буде о ${endStr} • ${shortAddr}`,
           body: bodyText,
           icon: './icon-on.svg',
         });
@@ -919,14 +919,14 @@ export function buildChangeNotification(
     const published =
       c.prev.status === 'WaitingForSchedule' && c.next.status === 'ScheduleApplies';
     return {
-      title: `🔄 ${published ? `Опубліковано графік на ${dayWord}` : `Графік на ${dayWord} змінено`} • ${shortAddr}`,
+      title: `🗓️ ${published ? `Опубліковано графік на ${dayWord}` : `Графік на ${dayWord} змінено`} • ${shortAddr}`,
       body: truncateText(line(c, null), CHANGE_BODY_MAX),
     };
   }
 
   const perLine = Math.floor(CHANGE_BODY_MAX / Math.max(1, changes.length)) - 1;
   return {
-    title: `🔄 Графік змінено • ${shortAddr}`,
+    title: `🗓️ Графік змінено • ${shortAddr}`,
     body: changes.map((c) => truncateText(line(c, c.dayLabel), perLine)).join('\n'),
   };
 }
