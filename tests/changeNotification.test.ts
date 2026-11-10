@@ -68,6 +68,15 @@ describe('buildChangeNotification', () => {
     );
   });
 
+  it('emergency lifted → «замість екстрених відключень», not «було екстрені…»', () => {
+    const emergency = { ...day(D, []), status: 'EmergencyShutdowns' as const };
+    const r = buildChangeNotification('Дім', [change('Сьогодні', emergency, day(D, [[0, 210], [450, 930], [1020, 1440]]))]);
+    expect(r.body).toBe(
+      'Дім · сьогодні: відключення 00:00–03:30, 07:30–15:30, 17:00–24:00 (замість екстрених відключень)'
+    );
+    expect(r.body).not.toContain('було');
+  });
+
   it('both days changed → one line per day, short title', () => {
     const r = buildChangeNotification('Дім', [
       change('Сьогодні', day(D, [[840, 1080]]), day(D, [[960, 1200]])),

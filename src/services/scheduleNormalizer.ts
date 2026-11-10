@@ -908,7 +908,11 @@ export function buildChangeNotification(
   const line = (c: ScheduleChange, prefix: string | null): string => {
     const was = wasText(c.prev);
     const now = nowText(c.next);
-    const text = was && was !== now ? `${now} (було ${was})` : now;
+    // «було екстрені відключення» is ungrammatical and, after a line wrap, reads as if the last
+    // interval itself was the emergency one — so that case gets its own wording.
+    const wasPhrase =
+      c.prev.status === 'EmergencyShutdowns' ? 'замість екстрених відключень' : `було ${was}`;
+    const text = was && was !== now ? `${now} (${wasPhrase})` : now;
     return prefix ? `${prefix}: ${text}` : text;
   };
 

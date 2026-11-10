@@ -19,7 +19,31 @@ const OUTAGE_DATA_KYIV_URL =
 const OUTAGE_DATA_REGION_URL =
   'https://raw.githubusercontent.com/Baskerville42/outage-data-ua/main/data/kyiv-region.json';
 
+/**
+ * The bot refreshes `state/combined-schedules.json` on `main` every few minutes, but the copy that ships
+ * with the Pages build is frozen at the last deploy (sync commits are `[skip ci]`). Only the `main` copy
+ * is fresh enough to be trusted for the «emergency» flag.
+ */
+const SNAPSHOT_MAIN_URL =
+  'https://raw.githubusercontent.com/UkDC/dtek-svitlo-app/main/state/combined-schedules.json';
+
 const CACHE_KEY_SCHEDULES = 'svitlo_cached_schedules_v1';
+
+/**
+ * YASNO's emergency flag lives only in the server snapshot (the live mirror does not carry it), so it is
+ * copied from the snapshot onto the freshly parsed schedule — but ONLY from a fresh snapshot: a stale one
+ * would keep «Екстрені відключення» on screen long after they were lifted.
+ */
+export function carryEmergencyFlag(
+  snapshotGroup: GroupSchedule | undefined,
+  fresh: GroupSchedule,
+  snapshotIsFresh: boolean
+): GroupSchedule {
+  if (snapshotIsFresh && snapshotGroup?.today?.status === 'EmergencyShutdowns') {
+    fresh.today.status = 'EmergencyShutdowns';
+  }
+  return fresh;
+}
 
 export interface RegionSchedulesBundle {
   kem: Record<string, GroupSchedule>;
@@ -176,32 +200,46 @@ export async function fetchAllSchedules(
   // (the app then falls back to the stale repo snapshot). `cache: 'no-store'` + the `?t=` query is enough.
   const fetchOpts: RequestInit = forceRefresh ? { cache: 'no-store' } : { cache: 'default' };
 
-  const [kyivRes, regionRes, repoSnapshotRes] = await Promise.allSettled([
+  const [kyivRes, regionRes, mainSnapshotRes] = await Promise.allSettled([
     fetch(`${OUTAGE_DATA_KYIV_URL}${cacheBust}`, fetchOpts),
     fetch(`${OUTAGE_DATA_REGION_URL}${cacheBust}`, fetchOpts),
-    fetch(`./state/combined-schedules.json${cacheBust}`, fetchOpts),
+    fetch(`${SNAPSHOT_MAIN_URL}${cacheBust}`, fetchOpts),
   ]);
 
   let kem: Record<string, GroupSchedule> = {};
   let krem: Record<string, GroupSchedule> = {};
   const sourceParts: string[] = [];
 
-  if (repoSnapshotRes.status === 'fulfilled' && repoSnapshotRes.value.ok) {
+  // Prefer the fresh snapshot from `main`; the copy baked into the Pages build is only a fallback.
+  const readSnapshot = async (
+    res: PromiseSettledResult<Response>
+  ): Promise<RegionSchedulesBundle | null> => {
+    if (res.status !== 'fulfilled' || !res.value.ok) return null;
     try {
-      const snap = (await repoSnapshotRes.value.json()) as RegionSchedulesBundle;
-      if (snap?.kem || snap?.krem) {
-        const rolled = rolloverBundle({
-          ...snap,
-          kem: snap.kem || {},
-          krem: snap.krem || {},
-        });
-        kem = { ...rolled.kem };
-        krem = { ...rolled.krem };
-      }
-      if (snap?.sourceLabel) sourceParts.push(snap.sourceLabel);
+      const snap = (await res.value.json()) as RegionSchedulesBundle;
+      return snap?.kem || snap?.krem ? snap : null;
     } catch {
-      // ignore
+      return null;
     }
+  };
+  const mainSnap = await readSnapshot(mainSnapshotRes);
+  const snapshotIsFresh = mainSnap !== null;
+  // The Pages copy is requested only when `main` is unreachable (saves a few hundred KB per refresh).
+  const repoSnap =
+    mainSnap ??
+    (await readSnapshot(
+      await Promise.allSettled([fetch(`./state/combined-schedules.json${cacheBust}`, fetchOpts)]).then((r) => r[0])
+    ));
+
+  if (repoSnap) {
+    const rolled = rolloverBundle({
+      ...repoSnap,
+      kem: repoSnap.kem || {},
+      krem: repoSnap.krem || {},
+    });
+    kem = { ...rolled.kem };
+    krem = { ...rolled.krem };
+    if (repoSnap.sourceLabel) sourceParts.push(repoSnap.sourceLabel);
   }
 
   if (kyivRes.status === 'fulfilled' && kyivRes.value.ok) {
@@ -213,11 +251,7 @@ export async function fetchAllSchedules(
     );
     if (Object.keys(parsedKem).length > 0) {
       for (const [grp, sched] of Object.entries(parsedKem)) {
-        const existing = kem[grp];
-        if (existing?.today?.status === 'EmergencyShutdowns') {
-          sched.today.status = 'EmergencyShutdowns';
-        }
-        kem[grp] = sched;
+        kem[grp] = carryEmergencyFlag(kem[grp], sched, snapshotIsFresh);
       }
       sourceParts.push('ДТЭК Киев (Live)');
     }
