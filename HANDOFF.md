@@ -89,7 +89,7 @@
 | `src/services/oblastLookup.ts` | Client of the `svitlo-lookup` Worker: `/start` + polling `/result` (patient, 150 s). Needs the invite code. |
 | `cloudflare/{address,lookup,subs,trigger}` | Workers: Kyiv address→group proxy; oblast lookup (dispatches `dtek-lookup.yml`, a runner polls dtek-krem.com.ua because DTEK blocks Cloudflare); private subscriber KV; cron trigger. |
 | `public/sw.js` | Service Worker push listener with dynamic icon routing (`icon-off.svg`, `icon-on.svg`, `icon-change.svg`). |
-| `scripts/send-sample-push.ts` | CLI script to test live push delivery directly to all registered subscribers. |
+| `scripts/send-sample-push.ts` | Sends one sample of each push type (🪫/🔋/🗓️) to all subscribers. Run from GitHub Actions: `push-check.yml` → Run workflow → `sample_push=true` (secrets live there); locally needs `SUBS_API_URL`/`SUBS_SECRET`/`VAPID_*`. |
 | `scripts/chrome-e2e.ts` | **STALE** (pre-design-B selectors); do not rely on it. |
 | `src/index.css` | Single stylesheet. Design B tokens (`--bg-*`, `--text-*`, `--ring-*`, `--cta-*`, `--switch-*`…) defined three times: `:root` (light), `prefers-color-scheme: dark`, `:root[data-theme='dark']`. Theme preference lives in `localStorage` `svitlo_theme_v2` ('system' = no key). |
 
@@ -105,7 +105,7 @@
   - `npm test`: Runs Vitest suite (135 tests, services/server only; no component tests).
   - `npm run sync:schedules`: refreshes `state/combined-schedules.json` only (no push, no ledger changes; used by the deploy workflow).
   - `npm run test:e2e`: stale (see above).
-  - `npx tsx scripts/send-sample-push.ts`: Sends live test pushes to user's device via APNs.
+  - `npx tsx scripts/send-sample-push.ts`: Sends the three sample pushes to ALL subscribers via APNs (prefer the `sample_push` workflow input).
   - `npm run build && mkdir -p dist/state && cp state/*.json dist/state/ && cp public/version.json dist/ && rm -f dist/state/*vapid-keys.json dist/state/subscriptions.json`: Builds production bundle.
 
 ---
