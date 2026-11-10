@@ -2,7 +2,7 @@
  * Read-only CORS proxy for the YASNO address API (Kyiv city only: regionId=25, dsoId=902).
  *
  * Why: app.yasno.ua sends no Access-Control-Allow-Origin, so the PWA on GitHub Pages cannot call it
- * from the browser (see IMPLEMENTATION_PLAN.md §2.1). This Worker forwards exactly three fixed
+ * from the browser (see docs/ARCHITECTURE.md §2). This Worker forwards exactly three fixed
  * endpoints and nothing else:
  *   GET /streets?query=<2..40 chars>
  *   GET /houses?streetId=<n>&query=<1..20 chars>
