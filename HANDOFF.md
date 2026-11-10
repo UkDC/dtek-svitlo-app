@@ -3,7 +3,7 @@
 > **App Name**: «Світло»  
 > **Repository**: [UkDC/dtek-svitlo-app](https://github.com/UkDC/dtek-svitlo-app) (branches: `main`, `gh-pages`)  
 > **Production URL**: [https://ukdc.github.io/dtek-svitlo-app/](https://ukdc.github.io/dtek-svitlo-app/)  
-> **Current Version**: `18.5.1` (sw cache `svitlo-pwa-v18-5-1`, build `2026-11-10T10:00:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
+> **Current Version**: `18.5.2` (sw cache `svitlo-pwa-v18-5-2`, build `2026-11-10T11:00:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
 > **Platform**: iPhone PWA (iOS 18.7+ Web Push over Apple APNs) + Desktop / Android responsive web app.
 
 ---
@@ -35,13 +35,13 @@
 ### Push Formats:
 
 #### 1. 🪫 Outage Warning (10–32 min before)
-- **Title**: `🪫 Відключення о 16:00` — names the clock time, NOT a lead time (the window is 10–32 min). No address name in titles: on iPhone the title is cut at ~25 chars (seen on a device), the name would be lost.
+- **Title**: `🪫 16:00 вимкнення` — the event time FIRST (NOT a lead time; window is 10–32 min), then a short event word. On iPhone the title shares the line with «N мин назад» and is cut at ~14–15 chars after the emoji (seen on a device), so the time must come first; no address name in titles.
 - **Body**: `Дім · до 20:00 · 4 год без світла`
   *(`Дім` = `shortAddr`: the user's short alias, else the settlement — never street/house, see `getShortAddress`)* (`до завтра 04:00` when it ends the next day; decimal comma: `4,5 год`)
 - Builder: `evaluateUpcomingAlerts` in `src/services/scheduleNormalizer.ts`.
 
 #### 2. 🔋 Restoration Warning (10–32 min before)
-- **Title**: `🔋 Світло буде о 20:00`
+- **Title**: `🔋 20:00 увімкнення`
 - **Body**: `Дім · до 24:00 · 4 год зі світлом` (light period merged across midnight; `Дім · далі можливі відключення` when a «maybe» period follows)
 
 #### 3. 🗓️ Schedule changed (`buildChangeNotification`)
@@ -152,7 +152,7 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
   daily cap, 20–90 s). Manual group grid is an emergency fallback shown only after a failed lookup.
   Kyiv house suggestions carry no group (the group is fetched on selection).
 - **Not verified on a real device**: the oblast lookup flow end-to-end in the installed PWA; the changed iOS status-bar
-  style (`default`). After the SW bump (`v18-5-1`) the installed PWA must be fully closed and reopened.
+  style (`default`). After the SW bump (`v18-5-2`) the installed PWA must be fully closed and reopened.
 - **Owner housekeeping**: revoke the temporary Cloudflare API token; the invite code appeared in a chat transcript
   (rotate `INVITE_CODES` in `svitlo-subs` and `svitlo-lookup` if concerned); the `svitlo-trigger`/`svitlo-lookup` GitHub PATs
   expire after one year; old `refs/pull/*/head` content needs a GitHub Support purge if it must disappear.

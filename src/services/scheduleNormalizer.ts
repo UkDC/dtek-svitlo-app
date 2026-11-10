@@ -812,7 +812,7 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: startStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToStart,
-          title: `🪫 Відключення о ${startStr}`,
+          title: `🪫 ${startStr} вимкнення`,
           body: `${shortAddr} · ${untilText(ep.startAbs, ep.endAbs)} · ${formatHoursUk(
             (ep.endAbs - ep.startAbs) / 60
           )} без світла`,
@@ -849,7 +849,7 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: endStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToEnd,
-          title: `🔋 Світло буде о ${endStr}`,
+          title: `🔋 ${endStr} увімкнення`,
           body: bodyText,
           icon: './icon-on.svg',
         });
