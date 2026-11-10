@@ -260,6 +260,39 @@ async function handleUnsubscribe(request: Request, env: SubsEnv, origin: string 
   return json({ ok: true }, 200, origin);
 }
 
+/** A subscription not refreshed for this long is treated as an abandoned install (e.g. a reinstalled PWA). */
+export const STALE_AFTER_DAYS = 30;
+
+/**
+ * Deletes subscriptions whose `updatedAt` is older than the TTL (and their `ep:` keys).
+ * Records without a parsable `updatedAt` are kept: never delete what we cannot judge.
+ */
+export async function purgeStale(
+  env: SubsEnv,
+  now: Date = new Date(),
+  maxAgeDays = STALE_AFTER_DAYS
+): Promise<number> {
+  const cutoff = now.getTime() - maxAgeDays * 86_400_000;
+  const stale: string[] = [];
+  let cursor: string | undefined;
+  do {
+    const page = await env.SUBS.list({ prefix: 'sub:', cursor });
+    for (const k of page.keys) {
+      const raw = await env.SUBS.get(k.name);
+      if (!raw) continue;
+      try {
+        const t = Date.parse((JSON.parse(raw) as StoredProfile).updatedAt);
+        if (Number.isFinite(t) && t < cutoff) stale.push(k.name.slice('sub:'.length));
+      } catch {
+        // corrupt record: keep
+      }
+    }
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+  for (const id of stale) await removeById(env, id);
+  return stale.length;
+}
+
 async function listAll(env: SubsEnv): Promise<StoredProfile[]> {
   const out: StoredProfile[] = [];
   let cursor: string | undefined;

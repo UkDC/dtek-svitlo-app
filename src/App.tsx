@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Bell, CheckCircle2, ChevronDown, Sparkles, X, ZapOff } from 'lucide-react';
 import {
   GroupSchedule,
@@ -33,7 +33,8 @@ const STORAGE_KEY_SELECTED = 'svitlo_selected_address_id_v1';
 const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-10T16:00:00Z';
+const SUBS_REFRESH_KEY = 'svitlo_subs_refreshed_at';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-10T18:00:00Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
@@ -138,6 +139,11 @@ export const App: React.FC = () => {
     purgeLegacyGitHubToken();
     loadInviteCode(); // also picks up a #invite=… link
   }, []);
+
+  const addressesRef = useRef(addresses);
+  const quietHoursRef = useRef(quietHours);
+  addressesRef.current = addresses;
+  quietHoursRef.current = quietHours;
 
   // Persist addresses
   useEffect(() => {
@@ -303,6 +309,18 @@ export const App: React.FC = () => {
       setKyivClock(getKyivTimeContext());
       refreshSchedules(true);
       checkUpcomingAlerts();
+
+      // Keep the server-side subscription fresh (it is purged after 30 days without updates);
+      // at most once per 12 h, so a long-lived PWA that is never cold-started is not dropped.
+      try {
+        const last = Number(localStorage.getItem(SUBS_REFRESH_KEY) || 0);
+        if (Date.now() - last > 12 * 3600_000) {
+          localStorage.setItem(SUBS_REFRESH_KEY, String(Date.now()));
+          syncSubscriberState(addressesRef.current, quietHoursRef.current).catch(() => {});
+        }
+      } catch {
+        // storage unavailable: skip
+      }
 
       // Check Service Worker registration for app update
       if ('serviceWorker' in navigator) {
