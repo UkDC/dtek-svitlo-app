@@ -8,7 +8,6 @@ import {
   RING_SIZE,
   RING_STROKE_MAIN,
   RING_STROKE_TRACK,
-  buildHourLabels,
   buildRingArcs,
   buildRingAriaLabel,
   planDial,
@@ -41,7 +40,6 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
   const plan = slots ? planDial({ slots, nowMinutes, nextDaySlots }) : null;
   const hasMaybe = !!plan && (plan.main.some((a) => a.status === 'maybe') || !!plan.track?.some((a) => a.status === 'maybe'));
   const label = ariaLabel ?? buildRingAriaLabel(slots ? buildRingArcs(slots) : []);
-  const hourLabels = plan ? plan.hourLabels : buildHourLabels(0);
 
   const renderArcs = (arcs: DialArc[], radius: number, strokeWidth: number, className: string) => (
     <g transform={`rotate(-90 ${RING_CENTER} ${RING_CENTER})`} fill="none" strokeWidth={strokeWidth}>
@@ -60,15 +58,21 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
     </g>
   );
 
-  const dashedRing = (radius: number, strokeWidth: number, dash: string) => (
+  // «No data» placeholders: a plain faint ring (main) and a thin dotted line (track),
+  // deliberately unlike the thick coloured arcs and unlike clock ticks.
+  const emptyMain = (
+    <circle cx={RING_CENTER} cy={RING_CENTER} r={RING_RADIUS_MAIN} fill="none" className="ring-empty ring-empty-main" strokeWidth={RING_STROKE_MAIN} />
+  );
+  const emptyTrack = (
     <circle
       cx={RING_CENTER}
       cy={RING_CENTER}
-      r={radius}
+      r={RING_RADIUS_TRACK}
       fill="none"
       className="ring-empty"
-      strokeWidth={strokeWidth}
-      strokeDasharray={dash}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeDasharray="0.1 7"
     />
   );
 
@@ -94,13 +98,13 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
           <>
             {plan.track
               ? renderArcs(plan.track, RING_RADIUS_TRACK, RING_STROKE_TRACK, 'ring-arc ring-track')
-              : dashedRing(RING_RADIUS_TRACK, RING_STROKE_TRACK, '3 6')}
+              : emptyTrack}
             {renderArcs(plan.main, RING_RADIUS_MAIN, RING_STROKE_MAIN, 'ring-arc')}
           </>
         ) : (
           <>
-            {dashedRing(RING_RADIUS_TRACK, RING_STROKE_TRACK, '3 6')}
-            {dashedRing(RING_RADIUS_MAIN, RING_STROKE_MAIN, '3 9')}
+            {emptyTrack}
+            {emptyMain}
           </>
         )}
 
@@ -120,7 +124,7 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
               />
             );
           })}
-          {hourLabels.map((l) => {
+          {(plan ? plan.hourLabels : []).map((l) => {
             const p = polar(DIGIT_RADIUS, l.fraction);
             return (
               <text

@@ -352,6 +352,10 @@ button {
   stroke: var(--ring-empty);
 }
 
+.ring-empty-main {
+  opacity: 0.55;
+}
+
 .ring-marker {
   fill: var(--ring-marker-fill);
   stroke: var(--ring-marker-stroke);
