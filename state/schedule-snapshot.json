@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T13:05:50.245Z",
+  "updatedAt": "2026-11-10T14:30:53.528Z",
   "groups": {
     "kem:1.1": {
       "today": {
@@ -12550,7 +12550,10 @@
     "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794262398169:2026-11-10:before_off:780": "2026-11-10T10:30:44.716Z",
     "ios_57139a8c90424dca9f54336c643cdc98|addr_1794303153297:change:2026-11-10:offoffoffoffoffoffoffononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffonononoffoffoffoffoffoffoffoffoffoffoffoffoffoff:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T13:05:50.223Z",
     "ios_57139a8c90424dca9f54336c643cdc98|addr_1794303153297:2026-11-10:before_on:930": "2026-11-10T13:05:50.234Z",
-    "ios_8919081054764878abec8f4ba446fcf1|addr_1794291861202:2026-11-10:before_on:930": "2026-11-10T13:05:50.245Z"
+    "ios_8919081054764878abec8f4ba446fcf1|addr_1794291861202:2026-11-10:before_on:930": "2026-11-10T13:05:50.245Z",
+    "ios_57139a8c90424dca9f54336c643cdc98|addr_1794303153297:2026-11-10:before_off:1020": "2026-11-10T14:30:53.467Z",
+    "ios_8919081054764878abec8f4ba446fcf1|addr_1794291861202:2026-11-10:before_off:1020": "2026-11-10T14:30:53.497Z",
+    "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794255383991:2026-11-10:before_on:1020": "2026-11-10T14:30:53.528Z"
   },
   "recentChanges": [
     {
