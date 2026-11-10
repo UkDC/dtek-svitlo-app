@@ -383,24 +383,14 @@ button {
   opacity: var(--ring-past-opacity);
 }
 
-/* Thin outer track = what comes next */
-.ring-track {
-  opacity: 0.75;
-}
-
 .ring-hour-label {
   fill: var(--text-secondary);
   font-family: var(--font-sans);
 }
 
-.ring-track-label {
-  fill: var(--text-secondary);
-  font-family: var(--font-sans);
-}
-
-.ring-track-label-tag {
-  fill: var(--text-secondary);
-  letter-spacing: 0.02em;
+/* Digits of the half that is not «now» */
+.ring-hour-label-dim {
+  opacity: 0.55;
 }
 
 .day-ring-center {
@@ -446,43 +436,24 @@ button {
   color: var(--text-secondary);
 }
 
-.ring-legend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 20px;
-  margin-top: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-body);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 6px;
-}
-
-.legend-dot-on {
-  background: var(--ring-on);
-}
-
-.legend-dot-off {
-  background: var(--ring-off);
-}
-
-.legend-dot-maybe {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--ring-on) 0 3px,
-    var(--ring-off) 3px 6px
-  );
+/* Narrow phones: the 00/06 digits sit closer to the centre, so the centre text shrinks a little */
+@media (max-width: 360px) {
+  .ring-center-time {
+    font-size: 12px;
+  }
+  .ring-center-title {
+    font-size: 19px;
+  }
+  .ring-center-title-small {
+    font-size: 17px;
+  }
+  .ring-center-target {
+    margin-top: 4px;
+    font-size: 14px;
+  }
+  .ring-center-note {
+    font-size: 13px;
+  }
 }
 
 /* ───────── Банери ───────── */

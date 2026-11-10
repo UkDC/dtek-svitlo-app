@@ -59,8 +59,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
 
   const hasData = day?.status === 'ScheduleApplies';
   const onHours = hasData ? sumHours(day, 'on') : 0;
-  const offHours = hasData ? sumHours(day, 'off') : 0;
-  const maybeHours = hasData ? sumHours(day, 'maybe') : 0;
 
   // Reminder shown only while light is on and the reminder moment is still ahead
   let reminderTime: string | null = null;
@@ -137,9 +135,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
     <section className="day-overview">
       <DayRing
         slots={hasData ? day.slots : undefined}
-        nextDaySlots={
-          isToday && schedule?.tomorrow.status === 'ScheduleApplies' ? schedule.tomorrow.slots : undefined
-        }
         nowMinutes={hasData && isToday ? nowMinutes : null}
         ariaLabel={
           !schedule
@@ -153,25 +148,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
       >
         {renderCenter()}
       </DayRing>
-
-      {hasData && (
-        <div className="ring-legend">
-          <span className="legend-item">
-            <span className="legend-dot legend-dot-on" />
-            зі світлом {hoursText(onHours)}
-          </span>
-          <span className="legend-item">
-            <span className="legend-dot legend-dot-off" />
-            без світла {hoursText(offHours)}
-          </span>
-          {maybeHours > 0 && (
-            <span className="legend-item">
-              <span className="legend-dot legend-dot-maybe" />
-              можливо {hoursText(maybeHours)}
-            </span>
-          )}
-        </div>
-      )}
 
       {intradayChangeNote && (
         <div className="note-banner" role="status">

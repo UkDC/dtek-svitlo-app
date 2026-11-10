@@ -1,15 +1,16 @@
 import React, { useId } from 'react';
 import { HalfHourSlotStatus } from '../services/scheduleNormalizer';
 import {
-  DialArc,
+  DialRing,
   RING_CENTER,
   RING_PAD,
-  RING_RADIUS_MAIN,
-  RING_RADIUS_TRACK,
-  RING_RADIUS_TRACK_LABEL,
+  RING_RADIUS_INNER,
+  RING_RADIUS_INNER_LABEL,
+  RING_RADIUS_OUTER,
+  RING_RADIUS_OUTER_LABEL,
   RING_SIZE,
-  RING_STROKE_MAIN,
-  RING_STROKE_TRACK,
+  RING_STROKE_EVEN,
+  RING_STROKE_IDLE,
   buildRingArcs,
   buildRingAriaLabel,
   planDial,
@@ -19,8 +20,6 @@ import {
 interface DayRingProps {
   /** 48 half-hour slots of the shown day; omit for the placeholder (dashed) rings */
   slots?: HalfHourSlotStatus[];
-  /** 48 slots of the following day: feeds the thin outer track after 12:00. Omit → dashed track */
-  nextDaySlots?: HalfHourSlotStatus[];
   /** Minutes since midnight for the «now» hand; null hides it (e.g. tomorrow) */
   nowMinutes: number | null;
   /** Override for the screen-reader label (placeholder ring) */
@@ -29,29 +28,37 @@ interface DayRingProps {
   children?: React.ReactNode;
 }
 
-const TICK_START = 87; // ticks sit just inside the main ring (inner edge = 91)
-const TICK_END = 84;
-const TICK_END_MAJOR = 80;
-const DIGIT_RADIUS = 68;
-const HAND_FROM = 82;
-const HAND_TO = 126;
+const TICK_START = 80; // ticks sit just inside the inner ring (its inner edge is ≥ 85)
+const TICK_END = 77;
+const TICK_END_MAJOR = 73;
+// The hand starts inside the inner ring for the morning, between the rings for the evening
+const HAND_FROM_INNER = 72;
+const HAND_FROM_OUTER = 108;
+const HAND_PAST_RING = 18;
 
-export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinutes, ariaLabel, children }) => {
+export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, children }) => {
   const rawId = useId();
   const hatchId = `maybe-${rawId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
-  const plan = slots ? planDial({ slots, nowMinutes, nextDaySlots }) : null;
-  const hasMaybe = !!plan && (plan.main.some((a) => a.status === 'maybe') || !!plan.track?.some((a) => a.status === 'maybe'));
+  const plan = slots ? planDial({ slots, nowMinutes }) : null;
+  const hasMaybe = !!plan && [...plan.inner.arcs, ...plan.outer.arcs].some((a) => a.status === 'maybe');
   const label = ariaLabel ?? buildRingAriaLabel(slots ? buildRingArcs(slots) : []);
+  // A ring is «quiet» when another half is active: thin arcs and dimmed digits
+  const quiet = (ring: DialRing) => plan?.activeHalf != null && !ring.active;
 
-  const renderArcs = (arcs: DialArc[], radius: number, strokeWidth: number, className: string) => (
-    <g transform={`rotate(-90 ${RING_CENTER} ${RING_CENTER})`} fill="none" strokeWidth={strokeWidth}>
-      {arcs.map((arc) => (
+  const renderRing = (ring: DialRing) => (
+    <g
+      transform={`rotate(-90 ${RING_CENTER} ${RING_CENTER})`}
+      fill="none"
+      strokeWidth={ring.strokeWidth}
+      className={ring.active ? 'ring-active' : 'ring-idle'}
+    >
+      {ring.arcs.map((arc) => (
         <circle
           key={`${arc.startMinutes}-${arc.status}-${arc.past ? 'p' : 'f'}`}
           cx={RING_CENTER}
           cy={RING_CENTER}
-          r={radius}
-          className={`${className} ring-arc-${arc.status}${arc.past ? ' ring-arc-past' : ''}`}
+          r={ring.radius}
+          className={`ring-arc ring-arc-${arc.status}${arc.past ? ' ring-arc-past' : ''}`}
           style={arc.status === 'maybe' ? { stroke: `url(#${hatchId})` } : undefined}
           strokeDasharray={`${arc.length} ${arc.circumference.toFixed(1)}`}
           strokeDashoffset={arc.offset}
@@ -60,23 +67,44 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
     </g>
   );
 
-  // «No data» placeholders: a plain faint ring (main) and a thin dotted line (track),
-  // deliberately unlike the thick coloured arcs and unlike clock ticks.
-  const emptyMain = (
-    <circle cx={RING_CENTER} cy={RING_CENTER} r={RING_RADIUS_MAIN} fill="none" className="ring-empty ring-empty-main" strokeWidth={RING_STROKE_MAIN} />
+  // «No data» placeholders: two plain faint rings, deliberately unlike the coloured arcs
+  const emptyRings = (
+    <>
+      <circle cx={RING_CENTER} cy={RING_CENTER} r={RING_RADIUS_INNER} fill="none" className="ring-empty ring-empty-main" strokeWidth={RING_STROKE_EVEN} />
+      <circle
+        cx={RING_CENTER}
+        cy={RING_CENTER}
+        r={RING_RADIUS_OUTER}
+        fill="none"
+        className="ring-empty"
+        strokeWidth={RING_STROKE_IDLE / 4}
+        strokeLinecap="round"
+        strokeDasharray="0.1 7"
+      />
+    </>
   );
-  const emptyTrack = (
-    <circle
-      cx={RING_CENTER}
-      cy={RING_CENTER}
-      r={RING_RADIUS_TRACK}
-      fill="none"
-      className="ring-empty"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeDasharray="0.1 7"
-    />
-  );
+
+  const renderDigits = (labels: { text: string; fraction: number }[], radius: number, dim: boolean, keyPrefix: string) =>
+    labels.map((l) => {
+      const p = polar(radius, l.fraction);
+      return (
+        <text
+          key={`${keyPrefix}-${l.text}`}
+          x={p.x}
+          y={p.y}
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontSize={13}
+          fontWeight={dim ? 600 : 700}
+          className={dim ? 'ring-hour-label ring-hour-label-dim' : 'ring-hour-label'}
+        >
+          {l.text}
+        </text>
+      );
+    });
+
+  const activeRadius = plan?.activeHalf === 1 ? RING_RADIUS_OUTER : RING_RADIUS_INNER;
+  const handFrom = plan?.activeHalf === 1 ? HAND_FROM_OUTER : HAND_FROM_INNER;
 
   return (
     <div className="day-ring">
@@ -102,16 +130,11 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
 
         {plan ? (
           <>
-            {plan.track
-              ? renderArcs(plan.track, RING_RADIUS_TRACK, RING_STROKE_TRACK, 'ring-arc ring-track')
-              : emptyTrack}
-            {renderArcs(plan.main, RING_RADIUS_MAIN, RING_STROKE_MAIN, 'ring-arc')}
+            {renderRing(plan.inner)}
+            {renderRing(plan.outer)}
           </>
         ) : (
-          <>
-            {emptyTrack}
-            {emptyMain}
-          </>
+          emptyRings
         )}
 
         <g aria-hidden="true">
@@ -130,64 +153,19 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
               />
             );
           })}
-          {(plan ? plan.hourLabels : []).map((l) => {
-            const p = polar(DIGIT_RADIUS, l.fraction);
-            return (
-              <text
-                key={l.text}
-                x={p.x}
-                y={p.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={13}
-                fontWeight={600}
-                className="ring-hour-label"
-              >
-                {l.text}
-              </text>
-            );
-          })}
-
-          {plan && (
-            <g className="ring-track-labels">
-              {plan.trackHourLabels.map((l) => {
-                const p = polar(RING_RADIUS_TRACK_LABEL, l.fraction);
-                const tag = l.fraction === 0 && plan.trackIsNextDay;
-                return (
-                  <text
-                    key={`t-${l.text}`}
-                    x={p.x}
-                    y={p.y}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fontSize={13}
-                    fontWeight={700}
-                    className={tag ? 'ring-track-label ring-track-label-tag' : 'ring-track-label'}
-                  >
-                    {tag ? `завтра · ${l.text}` : l.text}
-                  </text>
-                );
-              })}
-              {plan.track === null && plan.trackIsNextDay && (() => {
-                const p = polar(RING_RADIUS_TRACK_LABEL, 0);
-                return (
-                  <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central" fontSize={13} fontWeight={700} className="ring-track-label ring-track-label-tag">
-                    завтра
-                  </text>
-                );
-              })()}
-            </g>
-          )}
+          {/* Digits are fixed: 00–09 always inside, 12–21 always outside */}
+          {plan && renderDigits(plan.inner.hourLabels, RING_RADIUS_INNER_LABEL, quiet(plan.inner), 'in')}
+          {plan && renderDigits(plan.outer.hourLabels, RING_RADIUS_OUTER_LABEL, quiet(plan.outer), 'out')}
 
           {plan && plan.nowFraction !== null && (
             <>
               {(() => {
-                const a = polar(HAND_FROM, plan.nowFraction);
-                const b = polar(HAND_TO, plan.nowFraction);
+                const a = polar(handFrom, plan.nowFraction);
+                const b = polar(activeRadius + HAND_PAST_RING, plan.nowFraction);
                 return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} className="ring-hand" />;
               })()}
               {(() => {
-                const m = polar(RING_RADIUS_MAIN, plan.nowFraction);
+                const m = polar(activeRadius, plan.nowFraction);
                 return <circle cx={m.x} cy={m.y} r={8} className="ring-marker" strokeWidth={3} />;
               })()}
             </>

@@ -1,24 +1,28 @@
 import { HalfHourSlotStatus } from './scheduleNormalizer';
 
 /**
- * Geometry of the «Кільце доби» (variant G+): a 12-hour clock dial.
- *  - Main ring = the current half of the day (00–12 or 12–24): the past part is dimmed,
- *    the remainder up to the end of the half is bright; 12 at the top, clockwise.
- *  - Thin outer track = what comes next: before noon → today's 12–24, after noon → tomorrow's 00–12
- *    (or a placeholder when tomorrow's schedule is not published).
+ * Geometry of the «Кільце доби» (variant B): a 12-hour clock dial with two FIXED rings.
+ *  - Inner ring = always 00–12, outer ring = always 12–24 of the shown day; 12 at the top, clockwise.
+ *  - The half that contains «now» is drawn thick (active), the other one thin; the past is dimmed.
+ *  - Without «now» (tomorrow tab) both rings have the same medium width and nothing is dimmed.
+ * The rings never change meaning during the day — only the emphasis moves (H11).
  */
 export const RING_SIZE = 320;
 export const RING_CENTER = RING_SIZE / 2;
-export const RING_RADIUS_MAIN = 108;
-export const RING_STROKE_MAIN = 34;
-export const RING_RADIUS_TRACK = 139;
-export const RING_STROKE_TRACK = 8;
+export const RING_RADIUS_INNER = 100;
+export const RING_RADIUS_OUTER = 134;
+export const RING_STROKE_ACTIVE = 30;
+export const RING_STROKE_IDLE = 10;
+/** Width of both rings when there is no «now» (tomorrow tab) */
+export const RING_STROKE_EVEN = 20;
 export const MINUTES_PER_DAY = 1440;
 export const MINUTES_PER_HALF = 720;
-/** Visible break of the thin track at 12 o'clock (total, split evenly between its start and end) */
-export const TRACK_GAP_MINUTES = 12;
-/** Radius of the digits written outside the thin track */
-export const RING_RADIUS_TRACK_LABEL = 158;
+/** Visible break of the outer ring at 12 o'clock (total, split evenly between its start and end) */
+export const OUTER_GAP_MINUTES = 12;
+/** Radius of the 00/03/06/09 digits (inside the inner ring) */
+export const RING_RADIUS_INNER_LABEL = 61;
+/** Radius of the 12/15/18/21 digits (outside the outer ring) */
+export const RING_RADIUS_OUTER_LABEL = 160;
 /** Extra room around the dial (viewBox units) so the outer digits are never clipped */
 export const RING_PAD = 12;
 
@@ -33,10 +37,10 @@ export interface RingArc {
   endMinutes: number;
 }
 
-/** A drawable arc on the main ring or on the thin track. */
+/** A drawable arc on one of the two rings. */
 export interface DialArc {
   status: HalfHourSlotStatus;
-  /** Minutes since midnight of the day the arc belongs to */
+  /** Minutes since midnight of the shown day */
   startMinutes: number;
   endMinutes: number;
   /** True when the arc lies entirely before «now» (drawn dimmed) */
@@ -55,21 +59,24 @@ export interface DialHourLabel {
   fraction: number;
 }
 
-export interface DialPlan {
-  /** Which half the main ring shows: 0 = 00–12, 1 = 12–24 */
+export interface DialRing {
+  /** 0 = inner ring (00–12), 1 = outer ring (12–24) */
   half: DialHalf;
-  main: DialArc[];
-  /** null = no data for the track → draw the dashed placeholder */
-  track: DialArc[] | null;
-  /** Hour of the day where the track starts (12 or 0) — for tests / debugging */
-  trackStartMinutes: number;
-  /** Real 24-hour digits for the current half: 00/03/06/09 or 12/15/18/21 */
+  radius: number;
+  strokeWidth: number;
+  /** True for the half that contains «now» */
+  active: boolean;
+  arcs: DialArc[];
+  /** Real 24-hour digits of this half: 00/03/06/09 (inner) or 12/15/18/21 (outer) */
   hourLabels: DialHourLabel[];
-  /** Digits outside the thin track (empty when the track is a placeholder) */
-  trackHourLabels: DialHourLabel[];
-  /** True when the track belongs to the next calendar day (after noon on «today») → tag it «завтра» */
-  trackIsNextDay: boolean;
-  /** «now» hand and marker; null when nowMinutes is null */
+}
+
+export interface DialPlan {
+  /** Half that contains «now»; null when there is no «now» (tomorrow tab) */
+  activeHalf: DialHalf | null;
+  inner: DialRing;
+  outer: DialRing;
+  /** «now» hand and marker position (0..1 of the active half); null when nowMinutes is null */
   nowFraction: number | null;
 }
 
@@ -153,10 +160,13 @@ export function dialPosition(nowMinutes: number): { half: DialHalf; fraction: nu
   return { half, fraction: (clamped % MINUTES_PER_HALF) / MINUTES_PER_HALF };
 }
 
-/** Position of the «now» marker on the main ring (viewBox coordinates). */
+/** Radius of a ring: the inner one is always 00–12, the outer one always 12–24. */
+export const ringRadius = (half: DialHalf): number => (half === 0 ? RING_RADIUS_INNER : RING_RADIUS_OUTER);
+
+/** Position of the «now» marker: on the ring of the current half (viewBox coordinates). */
 export function ringMarkerPosition(nowMinutes: number): { x: number; y: number; half: DialHalf } {
   const { half, fraction } = dialPosition(nowMinutes);
-  return { ...polar(RING_RADIUS_MAIN, fraction), half };
+  return { ...polar(ringRadius(half), fraction), half };
 }
 
 /** 24-hour digits for a half: 00/03/06/09 or 12/15/18/21. */
@@ -169,40 +179,33 @@ export function buildHourLabels(half: DialHalf): DialHourLabel[] {
 
 /**
  * Plans what the dial draws.
- *  - nowMinutes != null (today): the main ring shows the half containing «now», split into dimmed past / bright remainder.
- *  - nowMinutes == null (tomorrow or any day without a «now»): main = 00–12, no dimming.
- *  - Track: first half → the same day's 12–24; second half → nextDaySlots' 00–12, or null when unavailable.
+ *  - Inner ring: the day's 00–12; outer ring: the day's 12–24 (with a small break at 12 o'clock).
+ *  - nowMinutes != null (today): the half containing «now» is thick, the other thin; everything before «now» is dimmed.
+ *  - nowMinutes == null (tomorrow or any day without a «now»): both rings medium width, nothing dimmed.
  */
-export function planDial(input: {
-  slots: HalfHourSlotStatus[];
-  nowMinutes: number | null;
-  nextDaySlots?: HalfHourSlotStatus[];
-}): DialPlan {
-  const { slots, nowMinutes, nextDaySlots } = input;
+export function planDial(input: { slots: HalfHourSlotStatus[]; nowMinutes: number | null }): DialPlan {
+  const { slots, nowMinutes } = input;
   const pos = nowMinutes === null ? null : dialPosition(nowMinutes);
-  const half: DialHalf = pos ? pos.half : 0;
+  const activeHalf: DialHalf | null = pos ? pos.half : null;
   const splitAt = nowMinutes === null ? null : Math.max(0, Math.min(MINUTES_PER_DAY, nowMinutes));
 
-  const main = windowArcs(slots, half * MINUTES_PER_HALF, RING_RADIUS_MAIN, splitAt);
-
-  let track: DialArc[] | null;
-  let trackStartMinutes: number;
-  if (half === 0) {
-    trackStartMinutes = MINUTES_PER_HALF;
-    track = windowArcs(slots, MINUTES_PER_HALF, RING_RADIUS_TRACK, null, TRACK_GAP_MINUTES);
-  } else {
-    trackStartMinutes = 0;
-    track = nextDaySlots && nextDaySlots.length > 0 ? windowArcs(nextDaySlots, 0, RING_RADIUS_TRACK, null, TRACK_GAP_MINUTES) : null;
-  }
+  const ring = (half: DialHalf): DialRing => {
+    const radius = ringRadius(half);
+    const active = activeHalf === half;
+    return {
+      half,
+      radius,
+      strokeWidth: activeHalf === null ? RING_STROKE_EVEN : active ? RING_STROKE_ACTIVE : RING_STROKE_IDLE,
+      active,
+      arcs: windowArcs(slots, half * MINUTES_PER_HALF, radius, splitAt, half === 1 ? OUTER_GAP_MINUTES : 0),
+      hourLabels: buildHourLabels(half),
+    };
+  };
 
   return {
-    half,
-    main,
-    track,
-    trackStartMinutes,
-    hourLabels: buildHourLabels(half),
-    trackHourLabels: track ? buildHourLabels(half === 0 ? 1 : 0) : [],
-    trackIsNextDay: half === 1,
+    activeHalf,
+    inner: ring(0),
+    outer: ring(1),
     nowFraction: pos ? pos.fraction : null,
   };
 }
