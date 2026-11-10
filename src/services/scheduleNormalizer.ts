@@ -918,8 +918,12 @@ export function buildChangeNotification(
     const published =
       c.prev.status === 'WaitingForSchedule' && c.next.status === 'ScheduleApplies';
     return {
-      title: `🗓️ ${published ? `Опубліковано графік на ${dayWord}` : `Графік на ${dayWord} змінено`}`,
-      body: truncateText(`${shortAddr} · ${line(c, null)}`, CHANGE_BODY_MAX),
+      // Short title: the iPhone cuts it at ~14–15 characters when the push is a few minutes old
+      title: published ? `🗓️ Графік на ${dayWord}` : '🗓️ Графік змінено',
+      body: truncateText(
+        `${shortAddr} · ${published ? '' : `${dayWord}: `}${line(c, null)}`,
+        CHANGE_BODY_MAX
+      ),
     };
   }
 
