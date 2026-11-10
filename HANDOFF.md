@@ -3,7 +3,7 @@
 > **App Name**: «Світло»  
 > **Repository**: [UkDC/dtek-svitlo-app](https://github.com/UkDC/dtek-svitlo-app) (branches: `main`, `gh-pages`)  
 > **Production URL**: [https://ukdc.github.io/dtek-svitlo-app/](https://ukdc.github.io/dtek-svitlo-app/)  
-> **Current Version**: `18.5.2` (sw cache `svitlo-pwa-v18-5-2`, build `2026-11-10T11:00:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
+> **Current Version**: `18.5.3` (sw cache `svitlo-pwa-v18-5-3`, build `2026-11-10T12:00:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
 > **Platform**: iPhone PWA (iOS 18.7+ Web Push over Apple APNs) + Desktop / Android responsive web app.
 
 ---
@@ -45,8 +45,8 @@
 - **Body**: `Дім · до 24:00 · 4 год зі світлом` (light period merged across midnight; `Дім · далі можливі відключення` when a «maybe» period follows)
 
 #### 3. 🗓️ Schedule changed (`buildChangeNotification`)
-- **Title**: `🗓️ Графік на сьогодні змінено` / `…на завтра змінено` / `🗓️ Графік змінено` (both days) / `🗓️ Опубліковано графік на завтра` (tomorrow was not published before)
-- **Body**: `Дім · відключення 16:00–20:00 (було 14:00–18:00)`; `Дім · без відключень (було …)`; `Дім · екстрені відключення`; `Дім · графік очікується`; both days → first line `Дім`, then `Сьогодні: …` / `Завтра: …`; ≤110 chars, truncated with «…».
+- **Title**: `🗓️ Графік змінено` (one day or both; the day goes to the body) / `🗓️ Графік на завтра` (tomorrow was not published before). Kept short: on iPhone a title a few minutes old is cut at ~14–15 chars.
+- **Body**: `Дім · сьогодні: відключення 16:00–20:00 (було 14:00–18:00)`; `Дім · завтра: без відключень (було …)`; `… екстрені відключення`; `… графік очікується`; published first time: `Дім · відключення 14:00–18:00`; both days → first line `Дім`, then `Сьогодні: …` / `Завтра: …`; ≤110 chars, truncated with «…».
 
 #### 4. ✅ Test push: `✅ Сповіщення працюють` / `Попередимо за ~30 хв до відключення та увімкнення.` (`TEST_PUSH_TITLE/BODY`).
 
@@ -152,7 +152,7 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
   daily cap, 20–90 s). Manual group grid is an emergency fallback shown only after a failed lookup.
   Kyiv house suggestions carry no group (the group is fetched on selection).
 - **Not verified on a real device**: the oblast lookup flow end-to-end in the installed PWA; the changed iOS status-bar
-  style (`default`). After the SW bump (`v18-5-2`) the installed PWA must be fully closed and reopened.
+  style (`default`). After the SW bump (`v18-5-3`) the installed PWA must be fully closed and reopened.
 - **Owner housekeeping**: revoke the temporary Cloudflare API token; the invite code appeared in a chat transcript
   (rotate `INVITE_CODES` in `svitlo-subs` and `svitlo-lookup` if concerned); the `svitlo-trigger`/`svitlo-lookup` GitHub PATs
   expire after one year; old `refs/pull/*/head` content needs a GitHub Support purge if it must disappear.
