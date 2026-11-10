@@ -18,7 +18,9 @@ export const MINUTES_PER_HALF = 720;
 /** Visible break of the thin track at 12 o'clock (total, split evenly between its start and end) */
 export const TRACK_GAP_MINUTES = 12;
 /** Radius of the digits written outside the thin track */
-export const RING_RADIUS_TRACK_LABEL = 152;
+export const RING_RADIUS_TRACK_LABEL = 158;
+/** Extra room around the dial (viewBox units) so the outer digits are never clipped */
+export const RING_PAD = 12;
 
 export type DialHalf = 0 | 1;
 
