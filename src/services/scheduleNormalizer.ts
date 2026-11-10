@@ -400,6 +400,21 @@ export function formatDurationHours(hours: number): string {
   return hours % 1 === 0 ? `${hours} год` : `${hours.toFixed(1)} год`;
 }
 
+/** Duration for notification texts, Ukrainian decimal comma: «4 год», «3,5 год». */
+export function formatHoursUk(hours: number): string {
+  return formatDurationHours(Math.round(hours * 10) / 10).replace('.', ',');
+}
+
+/** Cuts a text to `max` characters, ending with «…» when something was removed. */
+export function truncateText(text: string, max: number): string {
+  if (text.length <= max) return text;
+  return `${text.slice(0, Math.max(0, max - 1)).trimEnd()}…`;
+}
+
+/** Fixed texts of the «notifications work» test push (server, local and sample script share them). */
+export const TEST_PUSH_TITLE = '✅ Сповіщення працюють';
+export const TEST_PUSH_BODY = 'Попередимо за ~30 хв до відключення та увімкнення.';
+
 /**
  * Name shown in notification titles. It deliberately does NOT contain street or house number:
  * pushes (and the synced subscriber record, which lives in a public repo) must not expose the address.
@@ -700,8 +715,8 @@ export function isWithinQuietHours(
  * Event ids are keyed by the calendar day the event happens on, so the same event gets the same id
  * whether it is first seen from "today's" or from "yesterday's" evaluation.
  *
- * The title states the real lead time (rounded to 5 min) instead of a hard-coded "30 хв":
- * with a 10..42 min window the notification can legitimately arrive 10-42 min ahead.
+ * Texts name the clock time of the event, not a lead time: with a 10..42 min window the
+ * notification can legitimately arrive anywhere in that range, so «за 30 хв» would often be wrong.
  */
 export function evaluateUpcomingAlerts(
   address: SavedAddress,
@@ -745,15 +760,37 @@ export function evaluateUpcomingAlerts(
     }
   });
 
+  // Continuous periods with light, merged across midnight like the outage episodes
+  const lightRuns: Array<{ startAbs: number; endAbs: number }> = [];
+  days.forEach((day, dayIdx) => {
+    for (const it of day.intervals) {
+      if (it.status !== 'on') continue;
+      const startAbs = dayIdx * 1440 + it.startMinutes;
+      const endAbs = dayIdx * 1440 + it.endMinutes;
+      const last = lightRuns[lightRuns.length - 1];
+      if (last && last.endAbs === startAbs) {
+        last.endAbs = endAbs;
+      } else {
+        lightRuns.push({ startAbs, endAbs });
+      }
+    }
+  });
+
+  // «до 20:00» / «до завтра 04:00»: the end is on a later calendar day than the start of the period
+  const untilText = (startAbs: number, endAbs: number): string => {
+    const endDay = Math.ceil(endAbs / 1440) - 1;
+    const startDay = Math.floor(startAbs / 1440);
+    const t = formatMinutesToTime(endAbs - endDay * 1440);
+    return `до ${endDay > startDay ? 'завтра ' : ''}${t}`;
+  };
+
   const shortAddr = getShortAddress(address);
-  const approxLead = (diff: number) => Math.max(5, Math.round(diff / 5) * 5);
 
   for (const ep of episodes) {
     const start = locate(ep.startAbs);
     const end = locate(ep.endAbs);
     const startStr = formatMinutesToTime(start.local);
     const endStr = formatMinutesToTime(end.local);
-    const durStr = formatDurationHours((ep.endAbs - ep.startAbs) / 60);
 
     // 1. Warning before outage starts (an outage already running at 00:00 today has no start to warn about)
     if (address.notifyBeforeOff && ep.startAbs > 0) {
@@ -775,8 +812,10 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: startStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToStart,
-          title: `🔴 Відключення за ${approxLead(diffToStart)} хв • ${shortAddr}`,
-          body: `Період: ${startStr} – ${endStr} (${durStr})`,
+          title: `🔴 Відключення о ${startStr} • ${shortAddr}`,
+          body: `${untilText(ep.startAbs, ep.endAbs)} · ${formatHoursUk(
+            (ep.endAbs - ep.startAbs) / 60
+          )} без світла`,
           icon: './icon-off.svg',
         });
       }
@@ -791,17 +830,13 @@ export function evaluateUpcomingAlerts(
         diffToEnd <= windowMax &&
         !notifiedEvents[eventId]
       ) {
-        // Period with light starting right after this outage ends (capped at the end of its day)
-        const nextOnInterval = end.day.intervals.find(
-          (it) => it.startMinutes === end.local && it.status === 'on'
-        );
-
-        let bodyText = `Очікуємо о ${endStr}`;
-        if (nextOnInterval) {
-          bodyText = `Світло буде: ${nextOnInterval.start} – ${nextOnInterval.end} (${formatDurationHours(
-            nextOnInterval.durationHours
-          )})`;
-        }
+        // The period with light that starts right when this outage ends
+        const run = lightRuns.find((r) => r.startAbs === ep.endAbs);
+        const bodyText = run
+          ? `${untilText(run.startAbs, run.endAbs)} · ${formatHoursUk(
+              (run.endAbs - run.startAbs) / 60
+            )} зі світлом`
+          : 'Далі можливі відключення';
 
         triggers.push({
           eventId,
@@ -814,7 +849,7 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: endStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToEnd,
-          title: `🟢 Увімкнення за ${approxLead(diffToEnd)} хв • ${shortAddr}`,
+          title: `🟢 Світло буде о ${endStr} • ${shortAddr}`,
           body: bodyText,
           icon: './icon-on.svg',
         });
@@ -823,4 +858,75 @@ export function evaluateUpcomingAlerts(
   }
 
   return triggers;
+}
+
+/** One day whose published schedule changed (input of {@link buildChangeNotification}). */
+export interface ScheduleChange {
+  dayLabel: 'Сьогодні' | 'Завтра';
+  prev: DaySchedule;
+  next: DaySchedule;
+}
+
+const intervalRanges = (day: DaySchedule, status: HalfHourSlotStatus): string =>
+  day.intervals
+    .filter((it) => it.status === status)
+    .map((it) => `${it.start}–${it.end}`)
+    .join(', ');
+
+/** What the schedule says now, lower-case start: «відключення 16:00–20:00», «без відключень» … */
+function nowText(day: DaySchedule): string {
+  if (day.status === 'EmergencyShutdowns') return 'екстрені відключення';
+  if (day.status === 'WaitingForSchedule') return 'графік очікується';
+  const off = intervalRanges(day, 'off');
+  const maybe = intervalRanges(day, 'maybe');
+  if (!off && !maybe) return 'без відключень';
+  if (!off) return `можливі відключення ${maybe}`;
+  return `відключення ${off}${maybe ? `, можливі ${maybe}` : ''}`;
+}
+
+/** What it said before («було …»); null when there was no schedule to compare with. */
+function wasText(day: DaySchedule): string | null {
+  if (day.status === 'WaitingForSchedule') return null;
+  if (day.status === 'EmergencyShutdowns') return 'екстрені відключення';
+  const off = intervalRanges(day, 'off');
+  const maybe = intervalRanges(day, 'maybe');
+  if (!off && !maybe) return 'без відключень';
+  return [off, maybe && `можливі ${maybe}`].filter(Boolean).join(', ');
+}
+
+const capitalize = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+const CHANGE_BODY_MAX = 110;
+
+/**
+ * Title and body of the «schedule changed» push. Short and about the schedule only:
+ *  «Відключення 16:00–20:00 (було 14:00–18:00)»; both days → one line per day.
+ * A tomorrow schedule that was simply not published before is announced as published, not as «changed».
+ */
+export function buildChangeNotification(
+  shortAddr: string,
+  changes: ScheduleChange[]
+): { title: string; body: string } {
+  const line = (c: ScheduleChange, prefix: string | null): string => {
+    const was = wasText(c.prev);
+    const now = nowText(c.next);
+    const text = was && was !== now ? `${now} (було ${was})` : now;
+    return prefix ? `${prefix}: ${text}` : capitalize(text);
+  };
+
+  if (changes.length === 1) {
+    const c = changes[0];
+    const dayWord = c.dayLabel === 'Завтра' ? 'завтра' : 'сьогодні';
+    const published =
+      c.prev.status === 'WaitingForSchedule' && c.next.status === 'ScheduleApplies';
+    return {
+      title: `🔄 ${published ? `Опубліковано графік на ${dayWord}` : `Графік на ${dayWord} змінено`} • ${shortAddr}`,
+      body: truncateText(line(c, null), CHANGE_BODY_MAX),
+    };
+  }
+
+  const perLine = Math.floor(CHANGE_BODY_MAX / Math.max(1, changes.length)) - 1;
+  return {
+    title: `🔄 Графік змінено • ${shortAddr}`,
+    body: changes.map((c) => truncateText(line(c, c.dayLabel), perLine)).join('\n'),
+  };
 }

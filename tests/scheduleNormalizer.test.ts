@@ -134,8 +134,8 @@ describe('scheduleNormalizer core engine', () => {
     expect(triggersAt1530).toHaveLength(1);
     expect(triggersAt1530[0].type).toBe('before_off');
     expect(triggersAt1530[0].minutesRemaining).toBe(30);
-    expect(triggersAt1530[0].title).toBe('🔴 Відключення за 30 хв • Моя квартира');
-    expect(triggersAt1530[0].body).toBe('Період: 16:00 – 20:00 (4 год)');
+    expect(triggersAt1530[0].title).toBe('🔴 Відключення о 16:00 • Моя квартира');
+    expect(triggersAt1530[0].body).toBe('до 20:00 · 4 год без світла');
 
     // Record sent event -> next check at 15:38 (938m, 22m before outage) must NOT duplicate
     notifiedEvents[triggersAt1530[0].eventId] = new Date().toISOString();
@@ -157,8 +157,8 @@ describe('scheduleNormalizer core engine', () => {
     expect(triggersAt1930).toHaveLength(1);
     expect(triggersAt1930[0].type).toBe('before_on');
     expect(triggersAt1930[0].minutesRemaining).toBe(30);
-    expect(triggersAt1930[0].title).toBe('🟢 Увімкнення за 30 хв • Моя квартира');
-    expect(triggersAt1930[0].body).toBe('Світло буде: 20:00 – 24:00 (4 год)');
+    expect(triggersAt1930[0].title).toBe('🟢 Світло буде о 20:00 • Моя квартира');
+    expect(triggersAt1930[0].body).toBe('до 24:00 · 4 год зі світлом');
   });
 
   it('evaluates overnight Quiet Hours (23:00 to 07:00) accurately', () => {
