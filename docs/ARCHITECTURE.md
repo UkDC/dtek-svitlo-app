@@ -52,8 +52,8 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
 - `[skip ci]` значит: коммиты бота **не** запускают деплой (иначе деплой каждые 5 мин).
 
 ### 2.3 Определение группы по адресу (`src/components/AddressPage.tsx`)
-- **Киев.** Улицы — из локального справочника `public/state/kyiv-streets.json` (3 406 улиц). Дом и группа — Worker `svitlo-address` (прокси к адресному API YASNO: `/streets`, `/houses`, `/group`; `/diag` — диагностика). Запросы с debounce; номера сравниваются терпимо (`normalizeHouseNumber`, H7). Подсказки домов группы не несут — группа запрашивается при выборе.
-- **Область.** Населённые пункты — `public/state/oblast-settlements.json` (1 038); улицы — живой поиск Nominatim/Overpass (OpenStreetMap, CORS `*`). Группа — кнопка «Визначити групу» → `src/services/oblastLookup.ts` → Worker `svitlo-lookup` `POST /start` (нужен код-приглашения) → Worker запускает `dtek-lookup.yml` с одним `job_id` → раннер (`scripts/dtek-lookup.ts`) берёт адрес `GET /internal/job` (одноразово), ходит на `dtek-krem.com.ua` через `curl` с cookie, отдаёт `POST /internal/result` → клиент опрашивает `GET /result` до 150 с. Обычно 20–90 с. Неоднозначность → кандидаты (чипы) или «не вдалося», затем ручная сетка.
+- **Киев.** Улицы — из локального справочника `public/state/kyiv-streets.json` (~3,4 тыс.). Дом и группа — Worker `svitlo-address` (прокси к адресному API YASNO: `/streets`, `/houses`, `/group`; `/diag` — диагностика). Исходный API: `https://app.yasno.ua/api/blackout-service/public/shutdowns/addresses/v2` — `GET /streets?regionId=25&dsoId=902&query=…` → `[{id, value}]`; `GET /houses?…&streetId=…&query=…` → `[{id, value}]`; `GET /group?…&streetId=…&houseId=…` → `{group, subgroup}` (группа = `group.subgroup`). Точные запросы — `cloudflare/address/src/handler.ts`, серверные — `server/services/multiSourceClient.ts`. Запросы с debounce; номера сравниваются терпимо (`normalizeHouseNumber`, H7). Подсказки домов группы не несут — группа запрашивается при выборе.
+- **Область.** Населённые пункты — `public/state/oblast-settlements.json` (~1 тыс.); улицы — живой поиск Nominatim/Overpass (OpenStreetMap, CORS `*`). Группа — кнопка «Визначити групу» → `src/services/oblastLookup.ts` → Worker `svitlo-lookup` `POST /start` (нужен код-приглашения) → Worker запускает `dtek-lookup.yml` с одним `job_id` → раннер (`scripts/dtek-lookup.ts`) берёт адрес `GET /internal/job` (одноразово), ходит на `dtek-krem.com.ua` через `curl` с cookie, отдаёт `POST /internal/result` → клиент опрашивает `GET /result` до 150 с. Обычно 20–90 с. Неоднозначность → кандидаты (чипы) или «не вдалося», затем ручная сетка.
 - Справочники обновляются вручную скриптом `server/fetch-all-streets.ts`.
 
 ### 2.4 Подписка на пуши (`src/services/pushSyncService.ts`, Worker `svitlo-subs`)
@@ -180,7 +180,12 @@ URL Worker'ов (`*.svitlo-b79d27.workers.dev`) прописаны в `src/servi
 
 **Не определяется группа в Киеве.** `https://svitlo-address.svitlo-b79d27.workers.dev/diag` — доступность YASNO; изменился API YASNO → `cloudflare/address/src/handler.ts`; ID улиц YASNO нестабильны — улица проверяется по имени.
 
-**Не определяется группа в области.** Actions → «DTEK lookup»: запускается ли, что в логе (адреса там нет by design). Нет запусков → PAT `svitlo-lookup` (истёк?) или `DAILY_LIMIT`. Лог «blocked»/пустая страница → ДТЕК (Imperva) блокирует раннеры — деградация в ручной выбор, кода не чинит. Изменилась разметка → `scripts/dtek/lookupCore.ts` + фикстуры в `tests/dtekLookup*.test.ts`. Ответ 401 → нет/неверный код-приглашения.
+**Не определяется группа в области.** Actions → «DTEK lookup»: запускается ли и чем кончается лог (строки `[lookup] …`; адреса там нет by design). Нет запусков → PAT `GITHUB_TOKEN` в `svitlo-lookup` (истёк?) или исчерпан `DAILY_LIMIT`.
+- `[lookup] result: blocked` → ДТЕК (Imperva) не пустил раннер. Кодом не чинится; приложение уходит в ручной выбор. Если стало постоянным — пересмотреть подход (H8).
+- `[lookup] result: parse` → изменилась разметка/протокол сайта → `scripts/dtek/lookupRun.ts`, `lookupCore.ts` + фикстуры в `tests/dtekLookup*.test.ts`.
+- `result: city_not_found` / `street_not_found` / `house_not_found` / `*_ambiguous` / `group_unknown` → проблема адреса, не кода.
+- `worker rejected the secret` / `missing or invalid configuration` → `LOOKUP_SECRET` в GitHub и Worker'е не совпадают или не заданы.
+- В приложении ответ 401 → нет или неверный код-приглашения.
 
 **Сменить код-приглашения.** Cloudflare: `INVITE_CODES` в **обоих** Worker'ах (`svitlo-subs`, `svitlo-lookup`). Уже подписанные устройства продолжают получать пуши; новые регистрации и изменения настроек на устройствах потребуют новый код (ввести в «Додатково»). Код общий для всех, отозвать одного человека нельзя.
 
@@ -199,7 +204,6 @@ URL Worker'ов (`*.svitlo-b79d27.workers.dev`) прописаны в `src/servi
 - Стиль статус-бара iOS (`default`).
 - Игнорирует ли iOS `icon`/`badge` из payload (по сообщениям форумов/WebKit bug 280160 — да; сами не проверяли).
 - Остались ли в KV записи без токена устройства (их может «занять» первый, кто зарегистрируется с кодом и тем же id) — не установлено.
-- В KV есть второй подписчик неизвестного владельцу происхождения (получает образцы пушей) — выяснить у владельца.
 - Сроки PAT в `svitlo-trigger` и `svitlo-lookup` (~1 год с ноября 2026) — поставить напоминание.
 - `scripts/chrome-e2e.ts` устарел; тестов компонентов нет — UI проверяется скриншотами вручную.
 - Страница под полноэкранным оверлеем доступна по Tab (только `aria-modal`).
