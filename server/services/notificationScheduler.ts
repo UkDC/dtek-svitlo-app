@@ -6,8 +6,10 @@ import {
   SavedAddress,
   computeScheduleDiff,
   evaluateUpcomingAlerts,
-  formatDurationHours,
-  getCurrentAddressStatus,
+  buildChangeNotification,
+  ScheduleChange,
+  TEST_PUSH_TITLE,
+  TEST_PUSH_BODY,
   getKyivTimeContext,
   getShortAddress,
   isWithinQuietHours,
@@ -354,8 +356,8 @@ export async function runScheduleAndNotificationCheck(options?: {
     for (const sub of subscribers) {
       if (sub.subscription) {
         const ok = await sendPushPayload(sub.subscription, {
-          title: '⚡ Світло: тестове сповіщення',
-          body: 'Push-сповіщення на вашому iPhone працюють! Ви отримуватимете попередження приблизно за 30 хв до відключення та увімкнення світла.',
+          title: TEST_PUSH_TITLE,
+          body: TEST_PUSH_BODY,
           tag: 'test-push',
         });
         if (ok) alertsSent++;
@@ -388,7 +390,7 @@ export async function runScheduleAndNotificationCheck(options?: {
     });
   }
 
-  const changedGroupMessages = new Map<string, string[]>();
+  const changedGroups = new Map<string, ScheduleChange[]>();
 
   for (const item of allEntries) {
     const snapKey = `${item.region}:${item.group}`;
@@ -402,9 +404,9 @@ export async function runScheduleAndNotificationCheck(options?: {
         'Завтра'
       );
 
-      const diffsForGroup: string[] = [];
+      const changesForGroup: ScheduleChange[] = [];
       if (todayDiff.hasChanged) {
-        diffsForGroup.push(todayDiff.summaryText);
+        changesForGroup.push({ dayLabel: 'Сьогодні', prev: prev.today, next: item.today });
         changesDetected++;
         snapshot.recentChanges.unshift({
           id: `${snapKey}:${Date.now()}:today`,
@@ -417,7 +419,7 @@ export async function runScheduleAndNotificationCheck(options?: {
         });
       }
       if (tomorrowDiff.hasChanged) {
-        diffsForGroup.push(tomorrowDiff.summaryText);
+        changesForGroup.push({ dayLabel: 'Завтра', prev: prev.tomorrow, next: item.tomorrow });
         changesDetected++;
         snapshot.recentChanges.unshift({
           id: `${snapKey}:${Date.now()}:tomorrow`,
@@ -430,8 +432,8 @@ export async function runScheduleAndNotificationCheck(options?: {
         });
       }
 
-      if (diffsForGroup.length > 0) {
-        changedGroupMessages.set(snapKey, diffsForGroup);
+      if (changesForGroup.length > 0) {
+        changedGroups.set(snapKey, changesForGroup);
       }
     }
 
@@ -461,35 +463,12 @@ export async function runScheduleAndNotificationCheck(options?: {
       if (!groupSched) continue;
 
       // A) Intraday schedule change notifications
-      if (addr.notifyOnChange && changedGroupMessages.has(snapKey)) {
-        const shortAddr = getShortAddress(addr);
-        const statusCtx = getCurrentAddressStatus(groupSched, nowMinutes);
-
-        const nextOff = statusCtx.nextOutage;
-        const nextOffStr = nextOff
-          ? `${statusCtx.nextOutageIsTomorrow ? 'завтра ' : ''}${nextOff.start} – ${nextOff.end} (${formatDurationHours(
-              nextOff.durationHours
-            )})`
-          : '';
-
-        let changeBody = '';
-        if (statusCtx.state === 'emergency') {
-          changeBody = 'Екстрені відключення: графіки тимчасово не діють';
-        } else if (statusCtx.state === 'waiting') {
-          changeBody = 'Графік очікується';
-        } else if (statusCtx.state === 'off') {
-          const restoreTime = `${statusCtx.targetIsTomorrow ? 'завтра ' : ''}${
-            statusCtx.targetTime || '—'
-          }`;
-          changeBody = nextOff
-            ? `Включення о ${restoreTime} • Наступне відключення: ${nextOffStr}`
-            : `Включення за графіком о ${restoreTime}`;
-        } else {
-          // Power is currently ON
-          changeBody = nextOff
-            ? `Наступне відключення: ${nextOffStr}`
-            : 'Відключень більше не заплановано';
-        }
+      const groupChanges = changedGroups.get(snapKey);
+      if (addr.notifyOnChange && groupChanges) {
+        const { title: changeTitle, body: changeBody } = buildChangeNotification(
+          getShortAddress(addr),
+          groupChanges
+        );
 
         const changeHash = `${groupSched.today.dateKey}:${groupSched.today.slots.join('')}:${groupSched.tomorrow.slots.join('')}`;
         const changeEventId = ledgerKey(sub.id, `${addr.id}:change:${changeHash}`);
@@ -499,7 +478,7 @@ export async function runScheduleAndNotificationCheck(options?: {
           !snapshot.notifiedEvents[`${addr.id}:change:${changeHash}`]
         ) {
           const sent = await sendPushPayload(sub.subscription, {
-            title: `🔄 Графік змінено • ${shortAddr}`,
+            title: changeTitle,
             body: changeBody,
             tag: `change-${addr.id}`,
             addressId: addr.id,

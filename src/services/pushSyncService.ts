@@ -1,4 +1,4 @@
-import { SavedAddress, toSyncAddress } from './scheduleNormalizer';
+import { SavedAddress, TEST_PUSH_BODY, TEST_PUSH_TITLE, toSyncAddress } from './scheduleNormalizer';
 
 export interface QuietHoursSettings {
   enabled: boolean;
@@ -363,16 +363,11 @@ export async function triggerTestNotification(
     if (Notification.permission === 'granted') {
       try {
         const reg = await navigator.serviceWorker.ready;
-        const cleanStreet = (addressLabel || 'вул. Хрещатик')
-          .replace(/^вул\.\s*/i, '')
-          .trim();
-        const shortAddr = cleanStreet.split(' ')[0] || cleanStreet;
-
-        await reg.showNotification(`🟢 Увімкнення за 30 хв • вул. ${shortAddr}`, {
-          body: 'Світло буде: 16:30 – 20:00 (3.5 год)',
-          icon: './icon-on.svg',
-          badge: './icon-on.svg',
-          tag: 'svitlo-test-on',
+        await reg.showNotification(TEST_PUSH_TITLE, {
+          body: TEST_PUSH_BODY,
+          icon: './icon-192.svg',
+          badge: './icon-192.svg',
+          tag: 'svitlo-test',
         });
         localShown = true;
       } catch {

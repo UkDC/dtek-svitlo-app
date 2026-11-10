@@ -3,7 +3,7 @@
 > **App Name**: «Світло»  
 > **Repository**: [UkDC/dtek-svitlo-app](https://github.com/UkDC/dtek-svitlo-app) (branches: `main`, `gh-pages`)  
 > **Production URL**: [https://ukdc.github.io/dtek-svitlo-app/](https://ukdc.github.io/dtek-svitlo-app/)  
-> **Current Version**: `18.4.0` (sw cache `svitlo-pwa-v18-4`, build `2026-11-10T08:05:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
+> **Current Version**: `18.5.0` (sw cache `svitlo-pwa-v18-5`, build `2026-11-10T09:30:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
 > **Platform**: iPhone PWA (iOS 18.7+ Web Push over Apple APNs) + Desktop / Android responsive web app.
 
 ---
@@ -34,17 +34,24 @@
 
 ### Push Formats:
 
-#### 1. 🔴 Outage Warning (~30 minutes before)
-- **Title**: `🔴 Відключення за 30 хв • ${shortAddr}`  
-  *(e.g., `🔴 Відключення за 30 хв • Дім` or `🔴 Відключення за 30 хв • с. Гатне`; the name is the user's short address alias, else the settlement — never street/house, see `getShortAddress`)*
-- **Body**: `Період: 12:00 – 16:30 (4.5 год)`
-- **Icon**: `public/icon-off.svg` (Dark card, glowing ruby neon bolt with slash)
+#### 1. 🪫 Outage Warning (10–32 min before)
+- **Title**: `🪫 Відключення о 16:00 • ${shortAddr}` — names the clock time, NOT a lead time (the window is 10–32 min).
+  *(`shortAddr` = the user's short alias, else the settlement — never street/house, see `getShortAddress`)*
+- **Body**: `до 20:00 · 4 год без світла` (`до завтра 04:00` when it ends the next day; decimal comma: `4,5 год`)
+- Builder: `evaluateUpcomingAlerts` in `src/services/scheduleNormalizer.ts`.
 
-#### 2. 🟢 Restoration Warning (~30 minutes before)
-- **Title**: `🟢 Увімкнення за 30 хв • ${shortAddr}`
-- **Body**: `Світло буде: 16:30 – 20:00 (3.5 год)`  
-  *(if on until end of day: `Світло буде: 16:30 – 24:00 (7.5 год)`)*
-- **Icon**: `public/icon-on.svg` (Deep card, neon emerald surge with white-hot core)
+#### 2. 🔋 Restoration Warning (10–32 min before)
+- **Title**: `🔋 Світло буде о 20:00 • ${shortAddr}`
+- **Body**: `до 24:00 · 4 год зі світлом` (light period merged across midnight; `Далі можливі відключення` when a «maybe» period follows)
+
+#### 3. 🗓️ Schedule changed (`buildChangeNotification`)
+- **Title**: `🗓️ Графік на сьогодні змінено • Дім` / `…на завтра змінено…` / `🗓️ Графік змінено • Дім` (both days, one body line per day) / `🗓️ Опубліковано графік на завтра • Дім` (tomorrow was not published before)
+- **Body**: `Відключення 16:00–20:00 (було 14:00–18:00)`; `Без відключень (було …)`; `Екстрені відключення`; `Графік очікується`; ≤110 chars, truncated with «…».
+
+#### 4. ✅ Test push: `✅ Сповіщення працюють` / `Попередимо за ~30 хв до відключення та увімкнення.` (`TEST_PUSH_TITLE/BODY`).
+
+> The emoji in titles are the only per-type visual cue on iPhone: iOS most likely ignores the payload `icon`/`badge`
+> (shows the PWA icon; reported by Apple forums / WebKit bug 280160, not verified by us). `icon-*.svg` matter for desktop/Android only.
 
 #### 3. 🔄 Intraday Schedule Change
 - **Title**: `🔄 Графік змінено • ${shortAddr}`
@@ -145,7 +152,7 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
   daily cap, 20–90 s). Manual group grid is an emergency fallback shown only after a failed lookup.
   Kyiv house suggestions carry no group (the group is fetched on selection).
 - **Not verified on a real device**: the oblast lookup flow end-to-end in the installed PWA; the changed iOS status-bar
-  style (`default`). After the SW bump (`v18-4`) the installed PWA must be fully closed and reopened.
+  style (`default`). After the SW bump (`v18-5`) the installed PWA must be fully closed and reopened.
 - **Owner housekeeping**: revoke the temporary Cloudflare API token; the invite code appeared in a chat transcript
   (rotate `INVITE_CODES` in `svitlo-subs` and `svitlo-lookup` if concerned); the `svitlo-trigger`/`svitlo-lookup` GitHub PATs
   expire after one year; old `refs/pull/*/head` content needs a GitHub Support purge if it must disappear.

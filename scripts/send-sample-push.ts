@@ -16,8 +16,8 @@ async function main() {
 
     console.log(`Sending sample restoration push to ${sub.id}...`);
     const ok1 = await sendPushPayload(sub.subscription, {
-      title: '🟢 Увімкнення за 30 хв • вул. Хрещатик',
-      body: 'Світло буде: 16:30 – 20:00 (3.5 год)',
+      title: '🔋 Світло буде о 16:30 • Дім',
+      body: 'до 20:00 · 3,5 год зі світлом',
       tag: `test-on-${Date.now()}`,
       icon: './icon-on.svg',
     });
@@ -25,8 +25,8 @@ async function main() {
 
     console.log(`Sending sample outage push to ${sub.id}...`);
     const ok2 = await sendPushPayload(sub.subscription, {
-      title: '🔴 Відключення за 30 хв • вул. Хрещатик',
-      body: 'Період: 12:00 – 16:30 (4.5 год)',
+      title: '🪫 Відключення о 12:00 • Дім',
+      body: 'до 16:30 · 4,5 год без світла',
       tag: `test-off-${Date.now()}`,
       icon: './icon-off.svg',
     });
