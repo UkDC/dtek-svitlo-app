@@ -233,3 +233,32 @@ describe('subscription store Worker', () => {
     expect(kv.data.size).toBe(0);
   });
 });
+
+describe('purgeStale', () => {
+  it('removes subscriptions not refreshed for 30+ days, keeps fresh ones and unjudgeable ones', async () => {
+    const { purgeStale } = await import('../cloudflare/subs/src/handler');
+    const { env, kv } = setup();
+    await handleRequest(post('/subscribe', profile(), { 'X-Invite': INVITE }), env);
+    await handleRequest(
+      post(
+        '/subscribe',
+        profile({
+          id: 'ios_test_device_2',
+          subscription: { endpoint: 'https://web.push.apple.com/OTHER2', keys: { p256dh: P256DH, auth: AUTH } },
+        }),
+        { 'X-Invite': INVITE }
+      ),
+      env
+    );
+    const old = JSON.parse(kv.data.get('sub:ios_test_device_2')!);
+    old.updatedAt = new Date(Date.now() - 31 * 86_400_000).toISOString();
+    kv.data.set('sub:ios_test_device_2', JSON.stringify(old));
+    kv.data.set('sub:ios_nodate', JSON.stringify({ id: 'ios_nodate' }));
+
+    expect(await purgeStale(env)).toBe(1);
+    expect(kv.data.has('sub:ios_test_device_2')).toBe(false);
+    expect([...kv.data.keys()].filter((k) => k.startsWith('ep:'))).toHaveLength(1);
+    expect(kv.data.has('sub:ios_test_device_1')).toBe(true);
+    expect(kv.data.has('sub:ios_nodate')).toBe(true);
+  });
+});

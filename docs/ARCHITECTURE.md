@@ -58,6 +58,7 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
 
 ### 2.4 Подписка на пуши (`src/services/pushSyncService.ts`, Worker `svitlo-subs`)
 - Публичный VAPID-ключ — из `./state/vapid-public.json` (кладёт деплой из секрета). Подписка Service Worker'а → `POST svitlo-subs/subscribe` с заголовком `X-Invite` (код-приглашения) → Worker выдаёт **токен устройства** (хранится в `svitlo_device_write_token`, в KV — только хеш). Изменения и `/unsubscribe` — с этим токеном.
+- **Свежесть и очистка.** Каждый `POST /subscribe` ставит `updatedAt`. Клиент шлёт его при холодном старте, при смене адресов/тихих часов и при возврате в приложение (не чаще раза в 12 ч, ключ `svitlo_subs_refreshed_at`). Worker раз в сутки (cron `17 3 * * *`, `purgeStale`) удаляет подписки с `updatedAt` старше 30 дней (и их `ep:`-ключи); записи без читаемой даты не трогает. Нужен для следов переустановок PWA (H19). Работает только после `wrangler deploy` `cloudflare/subs`.
 - В KV: `sub:<id>` (endpoint, ключи, группы адресов, имена адресов, тихие часы) и индекс `ep:<sha256(endpoint)>`. Улица и дом не отправляются.
 - Ссылка `…/#invite=КОД` сохраняет код (`loadInviteCode`) и убирает hash; на iOS см. H17.
 
