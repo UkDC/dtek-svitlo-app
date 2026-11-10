@@ -812,8 +812,8 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: startStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToStart,
-          title: `🪫 Відключення о ${startStr} • ${shortAddr}`,
-          body: `${untilText(ep.startAbs, ep.endAbs)} · ${formatHoursUk(
+          title: `🪫 Відключення о ${startStr}`,
+          body: `${shortAddr} · ${untilText(ep.startAbs, ep.endAbs)} · ${formatHoursUk(
             (ep.endAbs - ep.startAbs) / 60
           )} без світла`,
           icon: './icon-off.svg',
@@ -833,10 +833,10 @@ export function evaluateUpcomingAlerts(
         // The period with light that starts right when this outage ends
         const run = lightRuns.find((r) => r.startAbs === ep.endAbs);
         const bodyText = run
-          ? `${untilText(run.startAbs, run.endAbs)} · ${formatHoursUk(
+          ? `${shortAddr} · ${untilText(run.startAbs, run.endAbs)} · ${formatHoursUk(
               (run.endAbs - run.startAbs) / 60
             )} зі світлом`
-          : 'Далі можливі відключення';
+          : `${shortAddr} · далі можливі відключення`;
 
         triggers.push({
           eventId,
@@ -849,7 +849,7 @@ export function evaluateUpcomingAlerts(
           targetTimeStr: endStr,
           intervalStr: `${startStr} – ${endStr}`,
           minutesRemaining: diffToEnd,
-          title: `🔋 Світло буде о ${endStr} • ${shortAddr}`,
+          title: `🔋 Світло буде о ${endStr}`,
           body: bodyText,
           icon: './icon-on.svg',
         });
@@ -894,7 +894,6 @@ function wasText(day: DaySchedule): string | null {
   return [off, maybe && `можливі ${maybe}`].filter(Boolean).join(', ');
 }
 
-const capitalize = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 const CHANGE_BODY_MAX = 110;
 
 /**
@@ -910,7 +909,7 @@ export function buildChangeNotification(
     const was = wasText(c.prev);
     const now = nowText(c.next);
     const text = was && was !== now ? `${now} (було ${was})` : now;
-    return prefix ? `${prefix}: ${text}` : capitalize(text);
+    return prefix ? `${prefix}: ${text}` : text;
   };
 
   if (changes.length === 1) {
@@ -919,14 +918,14 @@ export function buildChangeNotification(
     const published =
       c.prev.status === 'WaitingForSchedule' && c.next.status === 'ScheduleApplies';
     return {
-      title: `🗓️ ${published ? `Опубліковано графік на ${dayWord}` : `Графік на ${dayWord} змінено`} • ${shortAddr}`,
-      body: truncateText(line(c, null), CHANGE_BODY_MAX),
+      title: `🗓️ ${published ? `Опубліковано графік на ${dayWord}` : `Графік на ${dayWord} змінено`}`,
+      body: truncateText(`${shortAddr} · ${line(c, null)}`, CHANGE_BODY_MAX),
     };
   }
 
   const perLine = Math.floor(CHANGE_BODY_MAX / Math.max(1, changes.length)) - 1;
   return {
-    title: `🗓️ Графік змінено • ${shortAddr}`,
-    body: changes.map((c) => truncateText(line(c, c.dayLabel), perLine)).join('\n'),
+    title: '🗓️ Графік змінено',
+    body: [shortAddr, ...changes.map((c) => truncateText(line(c, c.dayLabel), perLine))].join('\n'),
   };
 }

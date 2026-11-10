@@ -176,8 +176,8 @@ describe('push alerts across midnight', () => {
     const t = evaluateUpcomingAlerts(address, todayLightAtEnd, 1410, {}, 10, 42, tomorrow); // 23:30
     expect(t).toHaveLength(1);
     expect(t[0].type).toBe('before_off');
-    expect(t[0].title).toBe('🪫 Відключення о 00:00 • Дім');
-    expect(t[0].body).toBe('до 04:00 · 4 год без світла');
+    expect(t[0].title).toBe('🪫 Відключення о 00:00');
+    expect(t[0].body).toBe('Дім · до 04:00 · 4 год без світла');
     expect(t[0].eventId).toBe('addr_default_kyiv:2026-11-10:before_off:0');
     // without tomorrow's schedule nothing is known -> nothing is sent (old behaviour)
     expect(evaluateUpcomingAlerts(address, todayLightAtEnd, 1410, {})).toHaveLength(0);
@@ -192,7 +192,7 @@ describe('push alerts across midnight', () => {
     const on = near.filter((x) => x.type === 'before_on');
     expect(on).toHaveLength(1);
     expect(on[0].eventId).toBe('addr_default_kyiv:2026-11-10:before_on:30');
-    expect(on[0].title).toBe('🔋 Світло буде о 00:30 • Дім');
+    expect(on[0].title).toBe('🔋 Світло буде о 00:30');
   });
 
   it('the same event gets the same id from yesterday\'s and today\'s evaluation (no double push at midnight)', () => {
@@ -206,15 +206,15 @@ describe('push alerts across midnight', () => {
   it('names the clock time of the event, not a lead time', () => {
     const day = dayWithOutages('2026-11-09', [[960, 1200]]); // 16:00-20:00
     const t = evaluateUpcomingAlerts(address, day, 920, {}); // 15:20 -> 40 min ahead
-    expect(t[0].title).toBe('🪫 Відключення о 16:00 • Дім');
+    expect(t[0].title).toBe('🪫 Відключення о 16:00');
     expect(t[0].title).not.toMatch(/за \d+ хв/);
   });
 
   it('says «до завтра» when the outage ends on the next day and uses a decimal comma', () => {
     const t = evaluateUpcomingAlerts(address, today, 1290, {}, 10, 42, tomorrowContinues); // 21:30 -> outage at 22:00
     expect(t).toHaveLength(1);
-    expect(t[0].title).toBe('🪫 Відключення о 22:00 • Дім');
-    expect(t[0].body).toBe('до завтра 00:30 · 2,5 год без світла');
+    expect(t[0].title).toBe('🪫 Відключення о 22:00');
+    expect(t[0].body).toBe('Дім · до завтра 00:30 · 2,5 год без світла');
   });
 
   it('restoration push: how long the light lasts, merged across midnight', () => {
@@ -223,8 +223,8 @@ describe('push alerts across midnight', () => {
     const tm = dayWithOutages('2026-11-10', [[120, 1440]]);
     const t = evaluateUpcomingAlerts(address, d, 690, {}, 10, 42, tm); // 11:30
     const on = t.find((x) => x.type === 'before_on')!;
-    expect(on.title).toBe('🔋 Світло буде о 12:00 • Дім');
-    expect(on.body).toBe('до завтра 02:00 · 14 год зі світлом');
+    expect(on.title).toBe('🔋 Світло буде о 12:00');
+    expect(on.body).toBe('Дім · до завтра 02:00 · 14 год зі світлом');
   });
 
   it('restoration push when only «maybe» follows does not invent a light period', () => {
@@ -242,7 +242,7 @@ describe('push alerts across midnight', () => {
       '2026-11-09'
     );
     const on = evaluateUpcomingAlerts(address, day, 690, {}).find((x) => x.type === 'before_on')!; // 11:30
-    expect(on.body).toBe('Далі можливі відключення');
+    expect(on.body).toBe('Дім · далі можливі відключення');
   });
 });
 
@@ -302,6 +302,7 @@ describe('push titles and synced records do not expose the address', () => {
     // and the worker still produces a proper title from the stripped record
     const day = dayWithOutages('2026-11-09', [[960, 1200]]);
     const t = evaluateUpcomingAlerts(s, day, 930, {});
-    expect(t[0].title).toBe('🪫 Відключення о 16:00 • Київ');
+    expect(t[0].title).toBe('🪫 Відключення о 16:00');
+    expect(t[0].body).toBe('Київ · до 20:00 · 4 год без світла');
   });
 });
