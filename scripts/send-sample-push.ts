@@ -1,9 +1,24 @@
-import fs from 'node:fs';
-import webpush from 'web-push';
 import { sendPushPayload, loadSubscribers } from '../server/services/notificationScheduler.ts';
 
+/**
+ * Sends one sample of each push type (outage, restoration, schedule change) to every subscriber,
+ * so the real look of the texts and emoji can be checked on the device.
+ * Run in GitHub Actions via the «sample_push» input of push-check.yml (it has the secrets), or locally with
+ * SUBS_API_URL / SUBS_SECRET / VAPID_* set.
+ */
+const SAMPLES = [
+  { kind: 'off', title: '🪫 Відключення о 16:00 • Дім', body: 'до 20:00 · 4 год без світла', icon: './icon-off.svg' },
+  { kind: 'on', title: '🔋 Світло буде о 20:00 • Дім', body: 'до 24:00 · 4 год зі світлом', icon: './icon-on.svg' },
+  {
+    kind: 'change',
+    title: '🗓️ Графік на сьогодні змінено • Дім',
+    body: 'Відключення 16:00–20:00 (було 14:00–18:00)',
+    icon: './icon-change.svg',
+  },
+] as const;
+
 async function main() {
-  const subs = loadSubscribers();
+  const subs = await loadSubscribers();
   console.log(`Found ${subs.length} subscribers.`);
   if (subs.length === 0) {
     console.log('No subscribers.');
@@ -12,26 +27,20 @@ async function main() {
 
   for (const sub of subs) {
     if (!sub.subscription) continue;
-    console.log(`Sending test notification to subscriber ${sub.id}...`);
-
-    console.log(`Sending sample restoration push to ${sub.id}...`);
-    const ok1 = await sendPushPayload(sub.subscription, {
-      title: '🔋 Світло буде о 16:30 • Дім',
-      body: 'до 20:00 · 3,5 год зі світлом',
-      tag: `test-on-${Date.now()}`,
-      icon: './icon-on.svg',
-    });
-    console.log(`Restoration push result: ${ok1}`);
-
-    console.log(`Sending sample outage push to ${sub.id}...`);
-    const ok2 = await sendPushPayload(sub.subscription, {
-      title: '🪫 Відключення о 12:00 • Дім',
-      body: 'до 16:30 · 4,5 год без світла',
-      tag: `test-off-${Date.now()}`,
-      icon: './icon-off.svg',
-    });
-    console.log(`Outage push result: ${ok2}`);
+    for (const s of SAMPLES) {
+      const ok = await sendPushPayload(sub.subscription, {
+        title: s.title,
+        body: s.body,
+        tag: `sample-${s.kind}-${Date.now()}`,
+        icon: s.icon,
+      });
+      console.log(`Sample "${s.kind}" -> subscriber ${sub.id}: ${ok ? 'sent' : 'FAILED'}`);
+      await new Promise((r) => setTimeout(r, 1500));
+    }
   }
 }
 
-main().catch(console.error);
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
