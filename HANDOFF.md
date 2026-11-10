@@ -3,7 +3,7 @@
 > **App Name**: «Світло»  
 > **Repository**: [UkDC/dtek-svitlo-app](https://github.com/UkDC/dtek-svitlo-app) (branches: `main`, `gh-pages`)  
 > **Production URL**: [https://ukdc.github.io/dtek-svitlo-app/](https://ukdc.github.io/dtek-svitlo-app/)  
-> **Current Version**: `18.6.1` (sw cache `svitlo-pwa-v18-6-1`, build `2026-11-10T14:00:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
+> **Current Version**: `18.6.2` (sw cache `svitlo-pwa-v18-6-2`, build `2026-11-10T15:00:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
 > **Platform**: iPhone PWA (iOS 18.7+ Web Push over Apple APNs) + Desktop / Android responsive web app.
 
 ---
@@ -50,7 +50,7 @@
 
 #### 4. ✅ Test push: `✅ Сповіщення працюють` / `Попередимо за ~30 хв до відключення та увімкнення.` (`TEST_PUSH_TITLE/BODY`).
 
-> **App icon (18.6.1)**: the «Кільце доби» ring (yellow = light, grey = no light) with a light bulb with clock hands inside it («light on a schedule») in the centre; same palette as the app. Source of truth: `public/icon-192.svg`; `icon-180/192/512/maskable-512.png` are rendered from it (Playwright screenshot of the SVG). iOS caches the home-screen icon at install time → delete the PWA and add it again to see it.
+> **App icon (18.6.2)**: the «Кільце доби» ring (yellow = light, grey = no light) with a light bulb with clock hands inside it («light on a schedule») in the centre; same palette as the app. Source of truth: `public/icon-192.svg`; `icon-180/192/512/maskable-512-v2.png` are rendered from it (Playwright screenshot of the SVG). iOS kept showing the OLD home-screen icon even after re-adding the PWA while the file name stayed the same (the share sheet already showed the new one) → the PNGs got a `-v2` suffix to force a fresh URL. When the icon changes again, bump the suffix (`-v3`…) instead of overwriting.
 
 > The emoji in titles are the only per-type visual cue on iPhone: iOS most likely ignores the payload `icon`/`badge`
 > (shows the PWA icon; reported by Apple forums / WebKit bug 280160, not verified by us). `icon-*.svg` matter for desktop/Android only.
@@ -154,7 +154,7 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
   daily cap, 20–90 s). Manual group grid is an emergency fallback shown only after a failed lookup.
   Kyiv house suggestions carry no group (the group is fetched on selection).
 - **Not verified on a real device**: the oblast lookup flow end-to-end in the installed PWA; the changed iOS status-bar
-  style (`default`). After the SW bump (`v18-6-1`) the installed PWA must be fully closed and reopened.
+  style (`default`). After the SW bump (`v18-6-2`) the installed PWA must be fully closed and reopened.
 - **Owner housekeeping**: revoke the temporary Cloudflare API token; the invite code appeared in a chat transcript
   (rotate `INVITE_CODES` in `svitlo-subs` and `svitlo-lookup` if concerned); the `svitlo-trigger`/`svitlo-lookup` GitHub PATs
   expire after one year; old `refs/pull/*/head` content needs a GitHub Support purge if it must disappear.
