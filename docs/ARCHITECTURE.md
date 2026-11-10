@@ -152,7 +152,7 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
 | `cloudflare/*/wrangler.toml` | `REPO`, `WORKFLOW`, `REF`, `DAILY_LIMIT` (40), id KV | несекретные настройки (в git) |
 
 URL Worker'ов (`*.svitlo-b79d27.workers.dev`) прописаны в `src/services/*` и workflow — они публичны, это нормально.
-Деплой Worker'а: `cd cloudflare/<имя> && npx wrangler deploy`; секрет: `npx wrangler secret put <ИМЯ>` (или Cloudflare dashboard → Workers → Settings → Variables). Делает владелец.
+Деплой Worker'а: `cd cloudflare/<имя> && npx wrangler deploy`; секрет: `npx wrangler secret put <ИМЯ>` (или Cloudflare dashboard → Workers → Settings → Variables). Деплой и ротацию секретов агент делает только по явному запросу владельца (нужен `wrangler login` на Mac), значения секретов в чат и в файлы не попадают (AGENTS.md §7).
 
 ---
 
