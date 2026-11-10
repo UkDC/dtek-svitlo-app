@@ -15,6 +15,10 @@ export const RING_RADIUS_TRACK = 139;
 export const RING_STROKE_TRACK = 8;
 export const MINUTES_PER_DAY = 1440;
 export const MINUTES_PER_HALF = 720;
+/** Visible break of the thin track at 12 o'clock (total, split evenly between its start and end) */
+export const TRACK_GAP_MINUTES = 12;
+/** Radius of the digits written outside the thin track */
+export const RING_RADIUS_TRACK_LABEL = 152;
 
 export type DialHalf = 0 | 1;
 
@@ -59,6 +63,10 @@ export interface DialPlan {
   trackStartMinutes: number;
   /** Real 24-hour digits for the current half: 00/03/06/09 or 12/15/18/21 */
   hourLabels: DialHourLabel[];
+  /** Digits outside the thin track (empty when the track is a placeholder) */
+  trackHourLabels: DialHourLabel[];
+  /** True when the track belongs to the next calendar day (after noon on «today») → tag it «завтра» */
+  trackIsNextDay: boolean;
   /** «now» hand and marker; null when nowMinutes is null */
   nowFraction: number | null;
 }
@@ -92,10 +100,12 @@ function windowArcs(
   slots: HalfHourSlotStatus[],
   windowStart: number,
   radius: number,
-  splitAt: number | null
+  splitAt: number | null,
+  gapMinutes = 0
 ): DialArc[] {
   const c = circumferenceOf(radius);
-  const windowEnd = windowStart + MINUTES_PER_HALF;
+  const from = windowStart + gapMinutes / 2;
+  const windowEnd = windowStart + MINUTES_PER_HALF - gapMinutes / 2;
   const out: DialArc[] = [];
 
   const push = (status: HalfHourSlotStatus, start: number, end: number, past: boolean) => {
@@ -112,7 +122,7 @@ function windowArcs(
   };
 
   for (const run of buildRingArcs(slots)) {
-    const start = Math.max(run.startMinutes, windowStart);
+    const start = Math.max(run.startMinutes, from);
     const end = Math.min(run.endMinutes, windowEnd);
     if (end <= start) continue;
     if (splitAt !== null && splitAt > start && splitAt < end) {
@@ -177,10 +187,10 @@ export function planDial(input: {
   let trackStartMinutes: number;
   if (half === 0) {
     trackStartMinutes = MINUTES_PER_HALF;
-    track = windowArcs(slots, MINUTES_PER_HALF, RING_RADIUS_TRACK, null);
+    track = windowArcs(slots, MINUTES_PER_HALF, RING_RADIUS_TRACK, null, TRACK_GAP_MINUTES);
   } else {
     trackStartMinutes = 0;
-    track = nextDaySlots && nextDaySlots.length > 0 ? windowArcs(nextDaySlots, 0, RING_RADIUS_TRACK, null) : null;
+    track = nextDaySlots && nextDaySlots.length > 0 ? windowArcs(nextDaySlots, 0, RING_RADIUS_TRACK, null, TRACK_GAP_MINUTES) : null;
   }
 
   return {
@@ -189,6 +199,8 @@ export function planDial(input: {
     track,
     trackStartMinutes,
     hourLabels: buildHourLabels(half),
+    trackHourLabels: track ? buildHourLabels(half === 0 ? 1 : 0) : [],
+    trackIsNextDay: half === 1,
     nowFraction: pos ? pos.fraction : null,
   };
 }

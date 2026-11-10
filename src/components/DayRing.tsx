@@ -5,6 +5,7 @@ import {
   RING_CENTER,
   RING_RADIUS_MAIN,
   RING_RADIUS_TRACK,
+  RING_RADIUS_TRACK_LABEL,
   RING_SIZE,
   RING_STROKE_MAIN,
   RING_STROKE_TRACK,
@@ -141,6 +142,37 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
               </text>
             );
           })}
+
+          {plan && (
+            <g className="ring-track-labels">
+              {plan.trackHourLabels.map((l) => {
+                const p = polar(RING_RADIUS_TRACK_LABEL, l.fraction);
+                const tag = l.fraction === 0 && plan.trackIsNextDay;
+                return (
+                  <text
+                    key={`t-${l.text}`}
+                    x={p.x}
+                    y={p.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={10}
+                    fontWeight={600}
+                    className={tag ? 'ring-track-label ring-track-label-tag' : 'ring-track-label'}
+                  >
+                    {tag ? `завтра · ${l.text}` : l.text}
+                  </text>
+                );
+              })}
+              {plan.track === null && plan.trackIsNextDay && (() => {
+                const p = polar(RING_RADIUS_TRACK_LABEL, 0);
+                return (
+                  <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central" fontSize={10} fontWeight={600} className="ring-track-label ring-track-label-tag">
+                    завтра
+                  </text>
+                );
+              })()}
+            </g>
+          )}
 
           {plan && plan.nowFraction !== null && (
             <>
