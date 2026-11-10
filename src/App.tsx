@@ -33,7 +33,7 @@ const STORAGE_KEY_SELECTED = 'svitlo_selected_address_id_v1';
 const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-09T10:25:00Z';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-10T06:08:00Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
@@ -177,7 +177,7 @@ export const App: React.FC = () => {
                 const diff = computeScheduleDiff(
                   prevSched.today,
                   nextSched.today,
-                  'Сегодня'
+                  'Сьогодні'
                 );
                 if (diff.hasChanged) {
                   nextDiffs[`kem:${grp}`] = diff.summaryText;
@@ -190,7 +190,7 @@ export const App: React.FC = () => {
                 const diff = computeScheduleDiff(
                   prevSched.today,
                   nextSched.today,
-                  'Сегодня'
+                  'Сьогодні'
                 );
                 if (diff.hasChanged) {
                   nextDiffs[`krem:${grp}`] = diff.summaryText;

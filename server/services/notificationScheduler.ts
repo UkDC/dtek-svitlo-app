@@ -43,7 +43,7 @@ export interface ScheduleSnapshotFile {
     groupKey: string;
     region: 'kem' | 'krem';
     group: string;
-    dayLabel: 'Сегодня' | 'Завтра';
+    dayLabel: 'Сьогодні' | 'Завтра';
     summaryText: string;
     detectedAt: string;
   }>;
@@ -395,7 +395,7 @@ export async function runScheduleAndNotificationCheck(options?: {
     const prev = snapshot.groups[snapKey];
 
     if (prev) {
-      const todayDiff = computeScheduleDiff(prev.today, item.today, 'Сегодня');
+      const todayDiff = computeScheduleDiff(prev.today, item.today, 'Сьогодні');
       const tomorrowDiff = computeScheduleDiff(
         prev.tomorrow,
         item.tomorrow,
@@ -411,7 +411,7 @@ export async function runScheduleAndNotificationCheck(options?: {
           groupKey: snapKey,
           region: item.region,
           group: item.group,
-          dayLabel: 'Сегодня',
+          dayLabel: 'Сьогодні',
           summaryText: todayDiff.summaryText,
           detectedAt: new Date().toISOString(),
         });

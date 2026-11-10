@@ -87,7 +87,7 @@ describe('scheduleNormalizer core engine', () => {
       '2026-11-09'
     );
 
-    const diff = computeScheduleDiff(prev, next, 'Сегодня');
+    const diff = computeScheduleDiff(prev, next, 'Сьогодні');
     expect(diff.hasChanged).toBe(true);
     expect(diff.summaryText).toContain('14:00–18:00');
     expect(diff.summaryText).toContain('16:00–20:00');

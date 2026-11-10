@@ -157,8 +157,9 @@ export const AddressPage: React.FC<AddressPageProps> = ({
           setGroupVia('auto');
           setKyivFailure(null);
         } else {
+          // Only record the failure here; whether it is shown is decided below, so a half-typed
+          // house number with a dropdown open does not flash the "failed" banner.
           setKyivFailure(KYIV_FAILURE_TEXT[res.failure ?? 'service']);
-          setManualOpen(true);
         }
       });
     }, 350);
@@ -168,6 +169,15 @@ export const AddressPage: React.FC<AddressPageProps> = ({
       setKyivLooking(false);
     };
   }, [region, city, street, streetId, house]);
+
+  // Show the Kyiv failure + manual grid only once the user is done with the house field:
+  // not while its suggestion dropdown is open (they are still choosing/typing).
+  const houseDropdownOpen = openField === 'house' && houseSuggestions.length > 0;
+  useEffect(() => {
+    if (region === 'kem' && kyivFailure && group === null && !houseDropdownOpen) {
+      setManualOpen(true);
+    }
+  }, [region, kyivFailure, group, houseDropdownOpen]);
 
   const hasAddress =
     !!street.trim() && !!house.trim() && (region === 'kem' || !!city.trim());

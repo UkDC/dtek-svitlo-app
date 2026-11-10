@@ -146,3 +146,35 @@ describe('disablePush', () => {
     expect(unsub).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('disabled push stays disabled', () => {
+  // Stateful stand-in for the browser: once unsubscribe() ran, getSubscription() returns null.
+  function stubBrowserWithLiveSubscription() {
+    let live: any = { ...sub, unsubscribe: async () => ((live = null), true) };
+    vi.stubGlobal('navigator', {
+      serviceWorker: { getRegistration: async () => ({ pushManager: { getSubscription: async () => live } }) },
+    });
+  }
+
+  it.each([
+    ['cloud removed', () => stubFetch(() => new Response('{"ok":true}', { status: 200 }))],
+    [
+      'cloud unreachable',
+      () =>
+        vi.stubGlobal('fetch', async (url: string, init: any) => {
+          calls.push({ url: String(url), init });
+          throw new Error('offline');
+        }),
+    ],
+  ])('syncSubscriberState makes no /subscribe call after disablePush (%s)', async (_n, stub) => {
+    saveInviteCode('AAAA-BBBB-CCCC-DDDD');
+    store.set('svitlo_device_write_token', 'tok');
+    stubBrowserWithLiveSubscription();
+    stub();
+    await disablePush();
+    calls.length = 0;
+    const r = await syncSubscriberState(addresses, quiet);
+    expect(r.syncedCloud).toBe(false);
+    expect(subsCalls()).toHaveLength(0);
+  });
+});

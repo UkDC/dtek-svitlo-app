@@ -122,7 +122,7 @@ export async function registerAndSubscribePush(): Promise<{
     return {
       ok: false,
       subscription: null,
-      error: 'Service Worker не поддерживается в текущем режиме браузера.',
+      error: 'Service Worker не підтримується в цьому режимі браузера.',
     };
   }
 
@@ -131,7 +131,7 @@ export async function registerAndSubscribePush(): Promise<{
       ok: false,
       subscription: null,
       error:
-        'Для включения Push на iPhone добавьте приложение на экран «Домой» (Поделиться → На экран «Домой»).',
+        'Щоб увімкнути сповіщення на iPhone, додайте застосунок на екран «Додому» (Поділитися → На екран «Додому»).',
     };
   }
 
@@ -140,7 +140,7 @@ export async function registerAndSubscribePush(): Promise<{
     return {
       ok: false,
       subscription: null,
-      error: 'Разрешение на уведомления отклонено в настройках iOS.',
+      error: 'Дозвіл на сповіщення відхилено в налаштуваннях iOS.',
     };
   }
 
@@ -399,7 +399,7 @@ export async function triggerTestNotification(
     if (res.ok) {
       return {
         ok: true,
-        message: 'Тестовое Push-уведомление успешно отправлено на ваш iPhone!',
+        message: 'Тестове сповіщення надіслано на ваш iPhone.',
       };
     }
   } catch {
@@ -410,13 +410,13 @@ export async function triggerTestNotification(
     return {
       ok: true,
       message:
-        'Локальное уведомление показано. Доставку через облако отсюда проверить нельзя: реальные пуши приходят по расписанию.',
+        'Локальне сповіщення показано. Доставку через хмару звідси перевірити не можна: справжні сповіщення приходять за розкладом.',
     };
   }
 
   return {
     ok: false,
     message:
-      'Сначала разрешите уведомления (на iPhone приложение должно быть добавлено на экран «Домой»).',
+      'Спочатку дозвольте сповіщення (на iPhone застосунок має бути додано на екран «Додому»).',
   };
 }

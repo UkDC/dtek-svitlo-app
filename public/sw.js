@@ -45,8 +45,8 @@ self.addEventListener('fetch', (event) => {
 // Handle incoming Apple Web Push (iOS 18.7+)
 self.addEventListener('push', (event) => {
   let data = {
-    title: '⚡ Світло • ДТЭК',
-    body: 'Обновление статуса электроэнергии по вашему адресу',
+    title: '⚡ Світло • ДТЕК',
+    body: 'Оновлення статусу електропостачання за вашою адресою',
     tag: 'svitlo-alert',
     url: './',
   };
