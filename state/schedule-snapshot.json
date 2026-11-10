@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T17:10:43.237Z",
+  "updatedAt": "2026-11-10T18:25:46.073Z",
   "groups": {
     "kem:1.1": {
       "today": {
@@ -10451,10 +10451,10 @@
           "off",
           "off",
           "off",
-          "off",
-          "off",
-          "off",
-          "off"
+          "on",
+          "on",
+          "on",
+          "on"
         ],
         "intervals": [
           {
@@ -10491,16 +10491,24 @@
           },
           {
             "startMinutes": 990,
-            "endMinutes": 1440,
+            "endMinutes": 1320,
             "start": "16:30",
-            "end": "24:00",
-            "durationHours": 7.5,
+            "end": "22:00",
+            "durationHours": 5.5,
             "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
+            "end": "24:00",
+            "durationHours": 2,
+            "status": "on"
           }
         ],
-        "totalOnHours": 7,
-        "totalOffHours": 17,
-        "updatedAt": "10.11.2026 18:53"
+        "totalOnHours": 9,
+        "totalOffHours": 15,
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -10568,7 +10576,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:1.2": {
@@ -10621,10 +10629,10 @@
           "off",
           "off",
           "off",
-          "off",
-          "off",
-          "off",
-          "off"
+          "on",
+          "on",
+          "on",
+          "on"
         ],
         "intervals": [
           {
@@ -10661,16 +10669,24 @@
           },
           {
             "startMinutes": 900,
-            "endMinutes": 1440,
+            "endMinutes": 1320,
             "start": "15:00",
-            "end": "24:00",
-            "durationHours": 9,
+            "end": "22:00",
+            "durationHours": 7,
             "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
+            "end": "24:00",
+            "durationHours": 2,
+            "status": "on"
           }
         ],
-        "totalOnHours": 7,
-        "totalOffHours": 17,
-        "updatedAt": "10.11.2026 18:53"
+        "totalOnHours": 9,
+        "totalOffHours": 15,
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -10738,7 +10754,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:2.1": {
@@ -10840,7 +10856,7 @@
         ],
         "totalOnHours": 6,
         "totalOffHours": 18,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -10908,7 +10924,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:2.2": {
@@ -11010,7 +11026,7 @@
         ],
         "totalOnHours": 7,
         "totalOffHours": 17,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -11078,7 +11094,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:3.1": {
@@ -11180,7 +11196,7 @@
         ],
         "totalOnHours": 6.5,
         "totalOffHours": 17.5,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -11248,7 +11264,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:3.2": {
@@ -11366,7 +11382,7 @@
         ],
         "totalOnHours": 8,
         "totalOffHours": 16,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -11434,7 +11450,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:4.1": {
@@ -11536,7 +11552,7 @@
         ],
         "totalOnHours": 8,
         "totalOffHours": 16,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -11604,7 +11620,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:4.2": {
@@ -11706,7 +11722,7 @@
         ],
         "totalOnHours": 8,
         "totalOffHours": 16,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -11774,7 +11790,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:5.1": {
@@ -11884,7 +11900,7 @@
         ],
         "totalOnHours": 7,
         "totalOffHours": 17,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -11952,7 +11968,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:5.2": {
@@ -12078,7 +12094,7 @@
         ],
         "totalOnHours": 8,
         "totalOffHours": 16,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -12146,7 +12162,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:6.1": {
@@ -12248,7 +12264,7 @@
         ],
         "totalOnHours": 9,
         "totalOffHours": 15,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -12316,7 +12332,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     },
     "krem:6.2": {
@@ -12426,7 +12442,7 @@
         ],
         "totalOnHours": 9.5,
         "totalOffHours": 14.5,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       },
       "tomorrow": {
         "dateKey": "2026-11-11",
@@ -12494,7 +12510,7 @@
         ],
         "totalOnHours": 24,
         "totalOffHours": 0,
-        "updatedAt": "10.11.2026 18:53"
+        "updatedAt": "10.11.2026 20:07"
       }
     }
   },
@@ -12526,6 +12542,24 @@
     "ios_29c5ee1ff9ea404d91d20f12463ff7cb|addr_1794329186003:change:2026-11-10:onononononononoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononon:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T17:10:43.236Z"
   },
   "recentChanges": [
+    {
+      "id": "krem:1.2:1794335146073:today",
+      "groupKey": "krem:1.2",
+      "region": "krem",
+      "group": "1.2",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–00:30, 06:00–13:30, 15:00–24:00) → стало (00:00–00:30, 06:00–13:30, 15:00–22:00)",
+      "detectedAt": "2026-11-10T18:25:46.073Z"
+    },
+    {
+      "id": "krem:1.1:1794335146073:today",
+      "groupKey": "krem:1.1",
+      "region": "krem",
+      "group": "1.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–00:30, 06:00–15:00, 16:30–24:00) → стало (00:00–00:30, 06:00–15:00, 16:30–22:00)",
+      "detectedAt": "2026-11-10T18:25:46.073Z"
+    },
     {
       "id": "krem:6.1:1794330643042:today",
       "groupKey": "krem:6.1",
@@ -12776,24 +12810,6 @@
       "group": "49.1",
       "dayLabel": "Сьогодні",
       "summaryText": "Сьогодні: було (Екстрені відключення поза графіком) → стало (02:00–09:00, 11:00–18:30, 20:30–24:00)",
-      "detectedAt": "2026-11-10T13:05:50.170Z"
-    },
-    {
-      "id": "kem:48.1:1794315950170:today",
-      "groupKey": "kem:48.1",
-      "region": "kem",
-      "group": "48.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (Екстрені відключення поза графіком) → стало (00:00–05:30, 10:00–17:30, 19:00–24:00)",
-      "detectedAt": "2026-11-10T13:05:50.170Z"
-    },
-    {
-      "id": "kem:47.1:1794315950170:today",
-      "groupKey": "kem:47.1",
-      "region": "kem",
-      "group": "47.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (Екстрені відключення поза графіком) → стало (00:00–05:00, 09:30–17:00, 18:30–24:00)",
       "detectedAt": "2026-11-10T13:05:50.170Z"
     }
   ]
