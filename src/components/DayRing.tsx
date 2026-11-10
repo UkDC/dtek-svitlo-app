@@ -44,8 +44,8 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
   const plan = slots ? planDial({ slots, nowMinutes, nextDaySlots }) : null;
   const hasMaybe = !!plan && [...plan.inner.arcs, ...plan.outer.arcs].some((a) => a.status === 'maybe');
   const label = ariaLabel ?? buildRingAriaLabel(slots ? buildRingArcs(slots) : []);
-  // A ring is «quiet» when another half is active: thin arcs and dimmed digits
-  const quiet = (ring: DialRing) => plan?.activeHalf != null && !ring.active;
+  // The thin ring also gets dimmed digits
+  const quiet = (ring: DialRing) => !ring.active;
 
   const renderRing = (ring: DialRing) => (
     <g

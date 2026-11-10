@@ -4,11 +4,11 @@ import { HalfHourSlotStatus } from './scheduleNormalizer';
  * Geometry of the «Кільце доби» (variant B): a 12-hour clock dial with two FIXED rings.
  *  - Inner ring = always 00–12, outer ring = always 12–24 of the shown day; 12 at the top, clockwise.
  *  - The half that contains «now» is drawn thick (active), the other one thin; the past is dimmed.
- *  - Without «now» (tomorrow tab) both rings have the same medium width and nothing is dimmed.
+ *  - Without «now» (tomorrow tab) the morning 00–12 — the first period ahead — is thick, the evening thin; nothing is dimmed.
  * The rings never change meaning during the day — only the emphasis moves (H11).
  *  - Today: only the CURRENT interval (from its start) and what is still ahead are drawn; runs that already
  *    ended are left out (an empty track remains), so nothing behind the hand can be mistaken for the future.
- *    If the current interval runs past 24:00, it continues on the inner ring with tomorrow's data until it ends.
+ *    In the evening the inner ring also shows tomorrow's first interval (00:00 → its end), if published.
  */
 export const RING_SIZE = 320;
 export const RING_CENTER = RING_SIZE / 2;
@@ -16,7 +16,7 @@ export const RING_RADIUS_INNER = 100;
 export const RING_RADIUS_OUTER = 134;
 export const RING_STROKE_ACTIVE = 30;
 export const RING_STROKE_IDLE = 10;
-/** Width of both rings when there is no «now» (tomorrow tab) */
+/** Width of the «no data» placeholder ring */
 export const RING_STROKE_EVEN = 20;
 export const MINUTES_PER_DAY = 1440;
 export const MINUTES_PER_HALF = 720;
@@ -53,7 +53,7 @@ export interface DialArc {
   endMinutes: number;
   /** True when the arc lies entirely before «now» (the elapsed part of the current interval, drawn softer) */
   past: boolean;
-  /** True for the continuation of the current interval into tomorrow (inner ring, after 24:00) */
+  /** True for tomorrow's first interval shown on the inner ring in the evening (after 24:00) */
   nextDay?: boolean;
   /** stroke-dasharray first value: arc length for this ring's radius */
   length: number;
@@ -74,7 +74,7 @@ export interface DialRing {
   half: DialHalf;
   radius: number;
   strokeWidth: number;
-  /** True for the half that contains «now» */
+  /** True for the emphasised (thick) half: the one with «now», or 00–12 when there is no «now» */
   active: boolean;
   arcs: DialArc[];
   /** The whole 12-hour window (minus the top break) as one dash: the empty track under the arcs */
@@ -196,13 +196,13 @@ export function buildHourLabels(half: DialHalf): DialHourLabel[] {
  * Plans what the dial draws.
  *  - Inner ring: the day's 00–12; outer ring: the day's 12–24 (each with a small break at the top).
  *  - nowMinutes != null (today): the half containing «now» is thick, the other thin; only the current interval
- *    (its elapsed part softer) and the rest of the day are drawn; the current interval may continue into tomorrow.
- *  - nowMinutes == null (tomorrow or any day without a «now»): both rings medium width, nothing dimmed.
+ *    (its elapsed part softer) and the rest of the day are drawn; in the evening also tomorrow's first interval.
+ *  - nowMinutes == null (tomorrow or any day without a «now»): inner ring thick, outer thin, nothing dimmed.
  */
 export function planDial(input: {
   slots: HalfHourSlotStatus[];
   nowMinutes: number | null;
-  /** Tomorrow's slots: only used to continue the current interval past 24:00 */
+  /** Tomorrow's slots: only used for tomorrow's first interval on the inner ring in the evening */
   nextDaySlots?: HalfHourSlotStatus[];
 }): DialPlan {
   const { slots, nowMinutes, nextDaySlots } = input;
@@ -216,17 +216,20 @@ export function planDial(input: {
   const current = probe === null ? undefined : runs.find((r) => probe >= r.startMinutes && probe < r.endMinutes);
   const hideBefore = current ? current.startMinutes : null;
 
-  // …and if it lasts until 24:00 and tomorrow starts the same way, it continues on the inner ring
+  // In the evening the inner ring is «after 24:00»: it shows tomorrow's FIRST interval (00:00 → its end) —
+  // the continuation of the current one or a new one. Never in the morning: there it would sit behind the hand.
   let continuationEnd = 0;
-  if (current && current.endMinutes >= MINUTES_PER_DAY && nextDaySlots && nextDaySlots.length > 0) {
+  if (activeHalf === 1 && nextDaySlots && nextDaySlots.length > 0) {
     const first = buildRingArcs(nextDaySlots)[0];
-    // never overlap what is drawn of today on the inner ring
-    if (first && first.status === current.status) continuationEnd = Math.min(first.endMinutes, current.startMinutes, MINUTES_PER_HALF);
+    // never overlap today's part of a current interval that started before 12:00
+    const todayFrom = current && current.startMinutes < MINUTES_PER_HALF ? current.startMinutes : MINUTES_PER_HALF;
+    if (first) continuationEnd = Math.min(first.endMinutes, todayFrom);
   }
 
   const ring = (half: DialHalf): DialRing => {
     const radius = ringRadius(half);
-    const active = activeHalf === half;
+    // Without «now» (tomorrow) the first period ahead — the morning — is emphasised
+    const active = (activeHalf ?? 0) === half;
     const gap = half === 1 ? OUTER_GAP_MINUTES : INNER_GAP_MINUTES;
     const c = circumferenceOf(radius);
     const windowStart = half * MINUTES_PER_HALF;
@@ -243,7 +246,7 @@ export function planDial(input: {
     return {
       half,
       radius,
-      strokeWidth: activeHalf === null ? RING_STROKE_EVEN : active ? RING_STROKE_ACTIVE : RING_STROKE_IDLE,
+      strokeWidth: active ? RING_STROKE_ACTIVE : RING_STROKE_IDLE,
       active,
       arcs,
       base: {

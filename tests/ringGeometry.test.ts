@@ -6,7 +6,6 @@ import {
   RING_RADIUS_INNER,
   RING_RADIUS_OUTER,
   RING_STROKE_ACTIVE,
-  RING_STROKE_EVEN,
   RING_STROKE_IDLE,
   buildHourLabels,
   buildRingArcs,
@@ -94,12 +93,12 @@ describe('planDial: which half is emphasised', () => {
     }
   });
 
-  it('without «now» (tomorrow tab) both rings are even and nothing is dimmed', () => {
+  it('without «now» (tomorrow tab) the morning is thick, the evening thin, and nothing is dimmed', () => {
     const plan = planDial({ slots: TOMORROW, nowMinutes: null });
     expect(plan.activeHalf).toBeNull();
     expect(plan.nowFraction).toBeNull();
-    expect(plan.inner).toMatchObject({ active: false, strokeWidth: RING_STROKE_EVEN });
-    expect(plan.outer).toMatchObject({ active: false, strokeWidth: RING_STROKE_EVEN });
+    expect(plan.inner).toMatchObject({ active: true, strokeWidth: RING_STROKE_ACTIVE });
+    expect(plan.outer).toMatchObject({ active: false, strokeWidth: RING_STROKE_IDLE });
     expect([...plan.inner.arcs, ...plan.outer.arcs].every((a) => !a.past)).toBe(true);
   });
 });
@@ -148,12 +147,12 @@ describe('planDial: only the current interval and what is ahead', () => {
   });
 });
 
-describe('planDial: the current interval continues past 24:00', () => {
+describe('planDial: tomorrow’s first interval on the inner ring in the evening', () => {
   // today: off from 22:30 to 24:00; tomorrow: off 00:00–03:30, then light
   const today = slotsFromRanges([[0, 1350]]);
   const tomorrow = slotsFromRanges([[210, 1440]]);
 
-  it('draws tomorrow’s part of the same interval on the inner ring, until it ends', () => {
+  it('continues the current interval past 24:00 until it ends', () => {
     const plan = planDial({ slots: today, nowMinutes: 23 * 60 + 30, nextDaySlots: tomorrow });
     expect(plan.inner.arcs.map((a) => [a.status, a.startMinutes, a.endMinutes, a.past, a.nextDay])).toEqual([
       ['off', INNER_GAP_MINUTES / 2, 210, false, true],
@@ -164,24 +163,43 @@ describe('planDial: the current interval continues past 24:00', () => {
     ]);
   });
 
-  it('does not continue when tomorrow starts differently or is unknown', () => {
-    const lightTomorrow = slotsFromRanges([[0, 1440]]);
-    expect(planDial({ slots: today, nowMinutes: 1410, nextDaySlots: lightTomorrow }).inner.arcs).toEqual([]);
+  it('also shows a NEW first interval of tomorrow (light now, outage after midnight)', () => {
+    // 20:00 — light 19:30–22:00; tomorrow starts with light 00:00–04:30
+    expect(
+      planDial({ slots: TODAY, nowMinutes: 1200, nextDaySlots: TOMORROW }).inner.arcs.map((a) => [a.status, a.startMinutes, a.endMinutes, a.nextDay])
+    ).toEqual([['on', INNER_GAP_MINUTES / 2, 270, true]]);
+    // light until 24:00 today, tomorrow off 00:00–03:30
+    const lightToday = slotsFromRanges([[1320, 1440]]);
+    expect(
+      planDial({ slots: lightToday, nowMinutes: 1410, nextDaySlots: tomorrow }).inner.arcs.map((a) => [a.status, a.startMinutes, a.endMinutes])
+    ).toEqual([['off', INNER_GAP_MINUTES / 2, 210]]);
+  });
+
+  it('shows only the first interval, nothing after it', () => {
+    const plan = planDial({ slots: today, nowMinutes: 1410, nextDaySlots: tomorrow });
+    expect(plan.inner.arcs.every((a) => a.endMinutes <= 210)).toBe(true);
+  });
+
+  it('shows nothing when tomorrow is unknown', () => {
     expect(planDial({ slots: today, nowMinutes: 1410 }).inner.arcs).toEqual([]);
+    expect(planDial({ slots: today, nowMinutes: 1410, nextDaySlots: [] }).inner.arcs).toEqual([]);
   });
 
-  it('does not continue for an interval that ends before 24:00', () => {
-    // 20:00 — light 19:30–22:00 ends before midnight
-    expect(planDial({ slots: TODAY, nowMinutes: 1200, nextDaySlots: TOMORROW }).inner.arcs).toEqual([]);
-  });
-
-  it('never overlaps today’s part on the inner ring', () => {
-    // off all day from 08:00 and tomorrow until 10:00 → continuation is cut at 08:00
+  it('never in the morning: tomorrow would sit behind the hand', () => {
+    // 10:00, off from 08:00 to 24:00 and tomorrow until 10:00
     const slots = slotsFromRanges([[0, 480]]);
     const next = slotsFromRanges([[600, 1440]]);
     const plan = planDial({ slots, nowMinutes: 600, nextDaySlots: next });
-    const cont = plan.inner.arcs.filter((a) => a.nextDay);
-    expect(cont.map((a) => [a.startMinutes, a.endMinutes])).toEqual([[INNER_GAP_MINUTES / 2, 480]]);
+    expect(plan.inner.arcs.some((a) => a.nextDay)).toBe(false);
+  });
+
+  it('never overlaps today’s part of a current interval that started before 12:00', () => {
+    // 13:00, off since 08:00 until 24:00; tomorrow off until 10:00 → tomorrow's part is cut at 08:00
+    const slots = slotsFromRanges([[0, 480]]);
+    const next = slotsFromRanges([[600, 1440]]);
+    const plan = planDial({ slots, nowMinutes: 780, nextDaySlots: next });
+    expect(plan.inner.arcs.filter((a) => a.nextDay).map((a) => [a.startMinutes, a.endMinutes])).toEqual([[INNER_GAP_MINUTES / 2, 480]]);
+    expect(plan.inner.arcs.filter((a) => !a.nextDay).map((a) => [a.startMinutes, a.endMinutes])).toEqual([[480, 720 - INNER_GAP_MINUTES / 2]]);
   });
 });
 
