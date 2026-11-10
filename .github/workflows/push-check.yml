@@ -13,10 +13,6 @@ on:
         description: 'Send one sample of each push type (outage / restoration / change) to subscribed iPhones'
         required: false
         default: 'false'
-      cleanup_stale:
-        description: 'Purge stale duplicate subscriber profiles from Cloudflare KV'
-        required: false
-        default: 'false'
 
 permissions:
   contents: write
@@ -49,13 +45,6 @@ jobs:
           SUBS_API_URL: https://svitlo-subs.svitlo-b79d27.workers.dev
           SUBS_SECRET: ${{ secrets.SUBS_SECRET }}
         run: npx tsx scripts/send-sample-push.ts
-
-      - name: Cleanup stale subscribers (manual run only)
-        if: ${{ github.event.inputs.cleanup_stale == 'true' }}
-        env:
-          SUBS_API_URL: https://svitlo-subs.svitlo-b79d27.workers.dev
-          SUBS_SECRET: ${{ secrets.SUBS_SECRET }}
-        run: npx tsx scripts/cleanup-stale-subs.ts
 
       - name: Run Multi-Source DTEK/YASNO check & send iOS Web Push alerts
         env:
