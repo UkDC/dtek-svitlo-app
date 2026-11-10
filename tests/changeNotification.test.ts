@@ -96,6 +96,43 @@ describe('buildChangeNotification', () => {
     expect(r.body.length).toBeLessThanOrEqual(110);
     expect(r.body.endsWith('…')).toBe(true);
   });
+
+  it('intraday change: omits outages for today that already ended', () => {
+    // 03:30–10:00 (210..600), 13:00–20:30 (780..1230), 23:30–24:00 (1410..1440)
+    const prev = day(D, [[210, 600], [780, 1230], [1410, 1440]]);
+    // 03:30–10:00 (210..600), 13:00–21:30 (780..1290)
+    const next = day(D, [[210, 600], [780, 1290]]);
+    // 19:10 Kyiv time = 19 * 60 + 10 = 1150
+    const r = buildChangeNotification('Дом', [change('Сьогодні', prev, next)], 1150);
+    expect(r.title).toBe('🗓️ Графік змінено');
+    expect(r.body).toBe('Дом · сьогодні: відключення 13:00–21:30 (було 13:00–20:30, 23:30–24:00)');
+    expect(r.body).not.toContain('03:30');
+  });
+
+  it('intraday change: upcoming outage cancelled after morning outage finished', () => {
+    // Morning 08:00–12:00 (480..720), Evening 18:00–22:00 (1080..1320)
+    const prev = day(D, [[480, 720], [1080, 1320]]);
+    // Only morning left
+    const next = day(D, [[480, 720]]);
+    // 14:00 Kyiv time = 840
+    const r = buildChangeNotification('Дом', [change('Сьогодні', prev, next)], 840);
+    expect(r.body).toBe('Дом · сьогодні: без відключень (було 18:00–22:00)');
+  });
+
+  it('intraday fallback: shows full day if change was strictly in the past', () => {
+    const prev = day(D, [[480, 600]]); // 08:00–10:00
+    const next = day(D, [[480, 660]]); // 08:00–11:00
+    // At 15:00 (900 min), both intervals already ended
+    const r = buildChangeNotification('Дом', [change('Сьогодні', prev, next)], 900);
+    expect(r.body).toBe('Дом · сьогодні: відключення 08:00–11:00 (було 08:00–10:00)');
+  });
+
+  it('tomorrow outages are never filtered by nowMinutes', () => {
+    const prev = day(T, [[0, 240]]);
+    const next = day(T, [[360, 600]]);
+    const r = buildChangeNotification('Дім', [change('Завтра', prev, next)], 1150);
+    expect(r.body).toBe('Дім · завтра: відключення 06:00–10:00 (було 00:00–04:00)');
+  });
 });
 
 describe('text helpers', () => {

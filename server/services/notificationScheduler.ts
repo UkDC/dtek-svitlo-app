@@ -467,7 +467,8 @@ export async function runScheduleAndNotificationCheck(options?: {
       if (addr.notifyOnChange && groupChanges) {
         const { title: changeTitle, body: changeBody } = buildChangeNotification(
           getShortAddress(addr),
-          groupChanges
+          groupChanges,
+          nowMinutes
         );
 
         const changeHash = `${groupSched.today.dateKey}:${groupSched.today.slots.join('')}:${groupSched.tomorrow.slots.join('')}`;

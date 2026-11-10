@@ -867,29 +867,33 @@ export interface ScheduleChange {
   next: DaySchedule;
 }
 
-const intervalRanges = (day: DaySchedule, status: HalfHourSlotStatus): string =>
+const intervalRanges = (
+  day: DaySchedule,
+  status: HalfHourSlotStatus,
+  filterMin?: number
+): string =>
   day.intervals
-    .filter((it) => it.status === status)
+    .filter((it) => it.status === status && (filterMin === undefined || it.endMinutes > filterMin))
     .map((it) => `${it.start}–${it.end}`)
     .join(', ');
 
 /** What the schedule says now, lower-case start: «відключення 16:00–20:00», «без відключень» … */
-function nowText(day: DaySchedule): string {
+function nowText(day: DaySchedule, filterMin?: number): string {
   if (day.status === 'EmergencyShutdowns') return 'екстрені відключення';
   if (day.status === 'WaitingForSchedule') return 'графік очікується';
-  const off = intervalRanges(day, 'off');
-  const maybe = intervalRanges(day, 'maybe');
+  const off = intervalRanges(day, 'off', filterMin);
+  const maybe = intervalRanges(day, 'maybe', filterMin);
   if (!off && !maybe) return 'без відключень';
   if (!off) return `можливі відключення ${maybe}`;
   return `відключення ${off}${maybe ? `, можливі ${maybe}` : ''}`;
 }
 
 /** What it said before («було …»); null when there was no schedule to compare with. */
-function wasText(day: DaySchedule): string | null {
+function wasText(day: DaySchedule, filterMin?: number): string | null {
   if (day.status === 'WaitingForSchedule') return null;
   if (day.status === 'EmergencyShutdowns') return 'екстрені відключення';
-  const off = intervalRanges(day, 'off');
-  const maybe = intervalRanges(day, 'maybe');
+  const off = intervalRanges(day, 'off', filterMin);
+  const maybe = intervalRanges(day, 'maybe', filterMin);
   if (!off && !maybe) return 'без відключень';
   return [off, maybe && `можливі ${maybe}`].filter(Boolean).join(', ');
 }
@@ -900,14 +904,26 @@ const CHANGE_BODY_MAX = 110;
  * Title and body of the «schedule changed» push. Short and about the schedule only:
  *  «Відключення 16:00–20:00 (було 14:00–18:00)»; both days → one line per day.
  * A tomorrow schedule that was simply not published before is announced as published, not as «changed».
+ * When nowMinutes is provided, intervals for today that have already ended are omitted from the text,
+ * so the push focuses on the current and upcoming situation rather than past events.
  */
 export function buildChangeNotification(
   shortAddr: string,
-  changes: ScheduleChange[]
+  changes: ScheduleChange[],
+  nowMinutes?: number
 ): { title: string; body: string } {
   const line = (c: ScheduleChange, prefix: string | null): string => {
-    const was = wasText(c.prev);
-    const now = nowText(c.next);
+    const filterMin = c.dayLabel === 'Сьогодні' ? nowMinutes : undefined;
+    let was = wasText(c.prev, filterMin);
+    let now = nowText(c.next, filterMin);
+
+    // If filtering past intervals wiped out the visible difference between prev and next,
+    // fall back to the full day so the user still sees what changed.
+    if (filterMin !== undefined && was === now) {
+      was = wasText(c.prev);
+      now = nowText(c.next);
+    }
+
     // «було екстрені відключення» is ungrammatical and, after a line wrap, reads as if the last
     // interval itself was the emergency one — so that case gets its own wording.
     const wasPhrase =
