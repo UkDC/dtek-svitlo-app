@@ -46,7 +46,7 @@
   --ring-marker-fill: #ffffff;
   --ring-marker-stroke: #1b1d22;
   --ring-tick: #b9b2a2;
-  --ring-past-opacity: 0.3;
+  --ring-past-opacity: 0.45;
 
   --on-text: #8a5a00;
   --cta-bg: #1b1d22;
@@ -378,7 +378,13 @@ button {
   opacity: 0.55;
 }
 
-/* Past part of the current half is dimmed; the remainder stays bright */
+/* Empty track under the arcs: where intervals that already ended used to be */
+.ring-base {
+  stroke: var(--ring-empty);
+  opacity: 0.45;
+}
+
+/* Elapsed part of the current interval: softer than what is ahead */
 .ring-arc-past {
   opacity: var(--ring-past-opacity);
 }

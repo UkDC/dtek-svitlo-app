@@ -6,6 +6,9 @@ import { HalfHourSlotStatus } from './scheduleNormalizer';
  *  - The half that contains «now» is drawn thick (active), the other one thin; the past is dimmed.
  *  - Without «now» (tomorrow tab) both rings have the same medium width and nothing is dimmed.
  * The rings never change meaning during the day — only the emphasis moves (H11).
+ *  - Today: only the CURRENT interval (from its start) and what is still ahead are drawn; runs that already
+ *    ended are left out (an empty track remains), so nothing behind the hand can be mistaken for the future.
+ *    If the current interval runs past 24:00, it continues on the inner ring with tomorrow's data until it ends.
  */
 export const RING_SIZE = 320;
 export const RING_CENTER = RING_SIZE / 2;
@@ -48,8 +51,10 @@ export interface DialArc {
   /** Minutes since midnight of the shown day */
   startMinutes: number;
   endMinutes: number;
-  /** True when the arc lies entirely before «now» (drawn dimmed) */
+  /** True when the arc lies entirely before «now» (the elapsed part of the current interval, drawn softer) */
   past: boolean;
+  /** True for the continuation of the current interval into tomorrow (inner ring, after 24:00) */
+  nextDay?: boolean;
   /** stroke-dasharray first value: arc length for this ring's radius */
   length: number;
   /** stroke-dashoffset (negative: shifts the dash clockwise from 12 o'clock) */
@@ -72,6 +77,8 @@ export interface DialRing {
   /** True for the half that contains «now» */
   active: boolean;
   arcs: DialArc[];
+  /** The whole 12-hour window (minus the top break) as one dash: the empty track under the arcs */
+  base: { length: number; offset: number; circumference: number };
   /** Real 24-hour digits of this half: 00/03/06/09 (inner) or 12/15/18/21 (outer) */
   hourLabels: DialHourLabel[];
 }
@@ -115,7 +122,9 @@ function windowArcs(
   windowStart: number,
   radius: number,
   splitAt: number | null,
-  gapMinutes = 0
+  gapMinutes = 0,
+  hideBefore: number | null = null,
+  nextDay = false
 ): DialArc[] {
   const c = circumferenceOf(radius);
   const from = windowStart + gapMinutes / 2;
@@ -132,11 +141,12 @@ function windowArcs(
       length: round2(((end - start) / MINUTES_PER_HALF) * c),
       offset: -round2(((start - windowStart) / MINUTES_PER_HALF) * c),
       circumference: c,
+      ...(nextDay ? { nextDay: true } : {}),
     });
   };
 
   for (const run of buildRingArcs(slots)) {
-    const start = Math.max(run.startMinutes, from);
+    const start = Math.max(run.startMinutes, from, hideBefore ?? 0);
     const end = Math.min(run.endMinutes, windowEnd);
     if (end <= start) continue;
     if (splitAt !== null && splitAt > start && splitAt < end) {
@@ -185,24 +195,62 @@ export function buildHourLabels(half: DialHalf): DialHourLabel[] {
 /**
  * Plans what the dial draws.
  *  - Inner ring: the day's 00–12; outer ring: the day's 12–24 (each with a small break at the top).
- *  - nowMinutes != null (today): the half containing «now» is thick, the other thin; everything before «now» is dimmed.
+ *  - nowMinutes != null (today): the half containing «now» is thick, the other thin; only the current interval
+ *    (its elapsed part softer) and the rest of the day are drawn; the current interval may continue into tomorrow.
  *  - nowMinutes == null (tomorrow or any day without a «now»): both rings medium width, nothing dimmed.
  */
-export function planDial(input: { slots: HalfHourSlotStatus[]; nowMinutes: number | null }): DialPlan {
-  const { slots, nowMinutes } = input;
+export function planDial(input: {
+  slots: HalfHourSlotStatus[];
+  nowMinutes: number | null;
+  /** Tomorrow's slots: only used to continue the current interval past 24:00 */
+  nextDaySlots?: HalfHourSlotStatus[];
+}): DialPlan {
+  const { slots, nowMinutes, nextDaySlots } = input;
   const pos = nowMinutes === null ? null : dialPosition(nowMinutes);
   const activeHalf: DialHalf | null = pos ? pos.half : null;
   const splitAt = nowMinutes === null ? null : Math.max(0, Math.min(MINUTES_PER_DAY, nowMinutes));
 
+  // The current interval: everything before its start has already ended and is not drawn
+  const runs = buildRingArcs(slots);
+  const probe = splitAt === null ? null : Math.min(splitAt, MINUTES_PER_DAY - 0.01);
+  const current = probe === null ? undefined : runs.find((r) => probe >= r.startMinutes && probe < r.endMinutes);
+  const hideBefore = current ? current.startMinutes : null;
+
+  // …and if it lasts until 24:00 and tomorrow starts the same way, it continues on the inner ring
+  let continuationEnd = 0;
+  if (current && current.endMinutes >= MINUTES_PER_DAY && nextDaySlots && nextDaySlots.length > 0) {
+    const first = buildRingArcs(nextDaySlots)[0];
+    // never overlap what is drawn of today on the inner ring
+    if (first && first.status === current.status) continuationEnd = Math.min(first.endMinutes, current.startMinutes, MINUTES_PER_HALF);
+  }
+
   const ring = (half: DialHalf): DialRing => {
     const radius = ringRadius(half);
     const active = activeHalf === half;
+    const gap = half === 1 ? OUTER_GAP_MINUTES : INNER_GAP_MINUTES;
+    const c = circumferenceOf(radius);
+    const windowStart = half * MINUTES_PER_HALF;
+    let arcs = windowArcs(slots, windowStart, radius, splitAt, gap, hideBefore);
+    if (half === 0 && continuationEnd > 0 && nextDaySlots) {
+      const tomorrow = windowArcs(nextDaySlots, 0, radius, null, gap, null, true).filter((a) => a.startMinutes < continuationEnd);
+      const last = tomorrow[tomorrow.length - 1];
+      if (last && last.endMinutes > continuationEnd) {
+        const len = round2(((continuationEnd - last.startMinutes) / MINUTES_PER_HALF) * c);
+        tomorrow[tomorrow.length - 1] = { ...last, endMinutes: continuationEnd, length: len };
+      }
+      arcs = [...tomorrow, ...arcs];
+    }
     return {
       half,
       radius,
       strokeWidth: activeHalf === null ? RING_STROKE_EVEN : active ? RING_STROKE_ACTIVE : RING_STROKE_IDLE,
       active,
-      arcs: windowArcs(slots, half * MINUTES_PER_HALF, radius, splitAt, half === 1 ? OUTER_GAP_MINUTES : INNER_GAP_MINUTES),
+      arcs,
+      base: {
+        length: round2(((MINUTES_PER_HALF - gap) / MINUTES_PER_HALF) * c),
+        offset: -round2((gap / 2 / MINUTES_PER_HALF) * c),
+        circumference: c,
+      },
       hourLabels: buildHourLabels(half),
     };
   };

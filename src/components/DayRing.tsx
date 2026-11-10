@@ -20,6 +20,8 @@ import {
 interface DayRingProps {
   /** 48 half-hour slots of the shown day; omit for the placeholder (dashed) rings */
   slots?: HalfHourSlotStatus[];
+  /** Tomorrow's slots: lets the current interval continue past 24:00 on the inner ring */
+  nextDaySlots?: HalfHourSlotStatus[];
   /** Minutes since midnight for the «now» hand; null hides it (e.g. tomorrow) */
   nowMinutes: number | null;
   /** Override for the screen-reader label (placeholder ring) */
@@ -36,10 +38,10 @@ const HAND_FROM_INNER = 72;
 const HAND_FROM_OUTER = 108;
 const HAND_PAST_RING = 18;
 
-export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, children }) => {
+export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinutes, ariaLabel, children }) => {
   const rawId = useId();
   const hatchId = `maybe-${rawId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
-  const plan = slots ? planDial({ slots, nowMinutes }) : null;
+  const plan = slots ? planDial({ slots, nowMinutes, nextDaySlots }) : null;
   const hasMaybe = !!plan && [...plan.inner.arcs, ...plan.outer.arcs].some((a) => a.status === 'maybe');
   const label = ariaLabel ?? buildRingAriaLabel(slots ? buildRingArcs(slots) : []);
   // A ring is «quiet» when another half is active: thin arcs and dimmed digits
@@ -52,9 +54,18 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, 
       strokeWidth={ring.strokeWidth}
       className={ring.active ? 'ring-active' : 'ring-idle'}
     >
+      {/* Empty track: shows where already finished intervals were, without any data */}
+      <circle
+        cx={RING_CENTER}
+        cy={RING_CENTER}
+        r={ring.radius}
+        className="ring-base"
+        strokeDasharray={`${ring.base.length} ${ring.base.circumference.toFixed(1)}`}
+        strokeDashoffset={ring.base.offset}
+      />
       {ring.arcs.map((arc) => (
         <circle
-          key={`${arc.startMinutes}-${arc.status}-${arc.past ? 'p' : 'f'}`}
+          key={`${arc.nextDay ? 'n' : 't'}-${arc.startMinutes}-${arc.status}-${arc.past ? 'p' : 'f'}`}
           cx={RING_CENTER}
           cy={RING_CENTER}
           r={ring.radius}

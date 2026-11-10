@@ -135,6 +135,9 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
     <section className="day-overview">
       <DayRing
         slots={hasData ? day.slots : undefined}
+        nextDaySlots={
+          isToday && schedule?.tomorrow.status === 'ScheduleApplies' ? schedule.tomorrow.slots : undefined
+        }
         nowMinutes={hasData && isToday ? nowMinutes : null}
         ariaLabel={
           !schedule
