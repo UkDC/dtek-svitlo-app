@@ -7,7 +7,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -190,7 +190,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -365,7 +365,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -540,7 +540,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -715,7 +715,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -898,7 +898,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1081,7 +1081,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1264,7 +1264,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1439,7 +1439,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1614,7 +1614,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -1797,7 +1797,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -1980,7 +1980,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -2163,7 +2163,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2338,7 +2338,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2513,7 +2513,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2688,7 +2688,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2863,7 +2863,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -3038,7 +3038,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3221,7 +3221,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3404,7 +3404,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3587,7 +3587,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3762,7 +3762,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3937,7 +3937,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -4120,7 +4120,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -4303,7 +4303,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4486,7 +4486,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4661,7 +4661,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4836,7 +4836,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -5011,7 +5011,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -5186,7 +5186,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -5361,7 +5361,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5544,7 +5544,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5727,7 +5727,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5910,7 +5910,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -6085,7 +6085,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -6260,7 +6260,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -6435,7 +6435,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -6618,7 +6618,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -6801,7 +6801,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -6976,7 +6976,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7151,7 +7151,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7326,7 +7326,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7501,7 +7501,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7676,7 +7676,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -7859,7 +7859,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8034,7 +8034,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8217,7 +8217,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8400,7 +8400,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8575,7 +8575,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8750,7 +8750,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -8933,7 +8933,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9116,7 +9116,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9291,7 +9291,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9466,7 +9466,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9641,7 +9641,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9816,7 +9816,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -9999,7 +9999,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -10174,7 +10174,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -10357,7 +10357,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -10532,7 +10532,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -12967,6 +12967,6 @@
     "6.1",
     "6.2"
   ],
-  "fetchedAt": "2026-11-10T07:40:43.283Z",
+  "fetchedAt": "2026-11-10T08:25:41.994Z",
   "sourceLabel": "Outage-Data Киев + YASNO API v2 + Outage-Data Область"
 }

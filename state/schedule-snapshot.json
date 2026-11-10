@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-10T07:40:44.043Z",
+  "updatedAt": "2026-11-10T08:25:42.763Z",
   "groups": {
     "kem:1.1": {
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -183,7 +183,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -353,7 +353,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -523,7 +523,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -693,7 +693,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -871,7 +871,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1049,7 +1049,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1227,7 +1227,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1397,7 +1397,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -1567,7 +1567,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -1745,7 +1745,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -1923,7 +1923,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -2101,7 +2101,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2271,7 +2271,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2441,7 +2441,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2611,7 +2611,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2781,7 +2781,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -2951,7 +2951,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3129,7 +3129,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3307,7 +3307,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3485,7 +3485,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3655,7 +3655,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -3825,7 +3825,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -4003,7 +4003,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -4181,7 +4181,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4359,7 +4359,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4529,7 +4529,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4699,7 +4699,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -4869,7 +4869,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -5039,7 +5039,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -5209,7 +5209,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5387,7 +5387,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5565,7 +5565,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5743,7 +5743,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -5913,7 +5913,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -6083,7 +6083,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -6253,7 +6253,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -6431,7 +6431,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -6609,7 +6609,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -6779,7 +6779,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -6949,7 +6949,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7119,7 +7119,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7289,7 +7289,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -7459,7 +7459,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -7637,7 +7637,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -7807,7 +7807,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -7985,7 +7985,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8163,7 +8163,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8333,7 +8333,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "on",
           "on",
@@ -8503,7 +8503,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -8681,7 +8681,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -8859,7 +8859,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9029,7 +9029,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9199,7 +9199,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9369,7 +9369,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9539,7 +9539,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "on",
@@ -9717,7 +9717,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -9887,7 +9887,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -10065,7 +10065,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -10235,7 +10235,7 @@
       "today": {
         "dateKey": "2026-11-10",
         "timestamp": 1794261600,
-        "status": "ScheduleApplies",
+        "status": "EmergencyShutdowns",
         "slots": [
           "off",
           "off",
@@ -12541,278 +12541,280 @@
     "ios_8919081054764878abec8f4ba446fcf1|addr_1794292749983:change:2026-11-10:onononononononoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffonononoff:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T07:40:43.846Z",
     "ios_8919081054764878abec8f4ba446fcf1|addr_1794292749983:2026-11-10:before_on:600": "2026-11-10T07:40:43.913Z",
     "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794262398169:change:2026-11-10:onononononononoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffonononoff:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T07:40:43.978Z",
-    "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794262398169:2026-11-10:before_on:600": "2026-11-10T07:40:44.043Z"
+    "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794262398169:2026-11-10:before_on:600": "2026-11-10T07:40:44.043Z",
+    "ios_8919081054764878abec8f4ba446fcf1|addr_1794291861202:change:2026-11-10:offoffoffoffoffoffoffononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffonononononoffoffoffoffoffoffoffoffoffoffoffoffoff:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T08:25:42.693Z",
+    "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794255383991:change:2026-11-10:offoffoffoffoffoffoffoffoffoffonononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoff:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T08:25:42.763Z"
   },
   "recentChanges": [
     {
-      "id": "krem:6.2:1794296443658:today",
-      "groupKey": "krem:6.2",
-      "region": "krem",
-      "group": "6.2",
+      "id": "kem:9.1:1794299142471:today",
+      "groupKey": "kem:9.1",
+      "region": "kem",
+      "group": "9.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (03:30–10:30, 13:00–21:30) → стало (03:30–10:00, 13:00–20:30, 22:00–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (00:00–03:30, 07:30–15:00, 17:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:6.1:1794296443658:today",
-      "groupKey": "krem:6.1",
-      "region": "krem",
+      "id": "kem:8.1:1794299142471:today",
+      "groupKey": "kem:8.1",
+      "region": "kem",
+      "group": "8.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–02:30, 06:30–14:30, 17:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:7.1:1794299142471:today",
+      "groupKey": "kem:7.1",
+      "region": "kem",
+      "group": "7.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–02:00, 06:00–13:30, 16:00–23:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:60.1:1794299142471:today",
+      "groupKey": "kem:60.1",
+      "region": "kem",
+      "group": "60.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–05:30, 10:30–17:30, 20:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:6.1:1794299142471:today",
+      "groupKey": "kem:6.1",
+      "region": "kem",
       "group": "6.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (03:30–10:30, 14:00–23:30) → стало (03:30–10:00, 13:00–22:00, 23:30–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (00:00–00:30, 05:30–13:00, 15:00–22:30) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:5.2:1794296443658:today",
-      "groupKey": "krem:5.2",
-      "region": "krem",
-      "group": "5.2",
+      "id": "kem:59.1:1794299142471:today",
+      "groupKey": "kem:59.1",
+      "region": "kem",
+      "group": "59.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (02:30–07:00, 08:00–12:30, 14:00–20:00, 23:30–24:00) → стало (02:30–07:00, 08:00–09:30, 11:00–20:00, 23:30–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (00:00–05:00, 09:30–17:00, 20:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:5.1:1794296443658:today",
-      "groupKey": "krem:5.1",
-      "region": "krem",
+      "id": "kem:58.1:1794299142471:today",
+      "groupKey": "kem:58.1",
+      "region": "kem",
+      "group": "58.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–04:00, 08:30–16:00, 18:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:57.1:1794299142471:today",
+      "groupKey": "kem:57.1",
+      "region": "kem",
+      "group": "57.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–03:30, 07:30–15:00, 17:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:56.1:1794299142471:today",
+      "groupKey": "kem:56.1",
+      "region": "kem",
+      "group": "56.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–02:30, 06:30–14:30, 17:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:55.1:1794299142471:today",
+      "groupKey": "kem:55.1",
+      "region": "kem",
+      "group": "55.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–02:00, 06:00–13:30, 16:00–23:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:54.1:1794299142471:today",
+      "groupKey": "kem:54.1",
+      "region": "kem",
+      "group": "54.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–00:30, 05:30–13:00, 15:00–22:30) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:53.1:1794299142471:today",
+      "groupKey": "kem:53.1",
+      "region": "kem",
+      "group": "53.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (05:00–12:30, 14:30–22:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:52.1:1794299142471:today",
+      "groupKey": "kem:52.1",
+      "region": "kem",
+      "group": "52.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (04:00–11:30, 13:30–21:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:51.1:1794299142471:today",
+      "groupKey": "kem:51.1",
+      "region": "kem",
+      "group": "51.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (03:30–11:00, 13:00–20:30, 22:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:50.1:1794299142471:today",
+      "groupKey": "kem:50.1",
+      "region": "kem",
+      "group": "50.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (02:30–09:30, 12:30–20:00, 22:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:5.1:1794299142471:today",
+      "groupKey": "kem:5.1",
+      "region": "kem",
       "group": "5.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (02:30–10:00, 12:00–20:30, 23:30–24:00) → стало (02:30–11:00, 13:00–20:30, 23:30–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (05:00–12:30, 14:30–22:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:4.2:1794296443658:today",
-      "groupKey": "krem:4.2",
-      "region": "krem",
-      "group": "4.2",
+      "id": "kem:49.1:1794299142471:today",
+      "groupKey": "kem:49.1",
+      "region": "kem",
+      "group": "49.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–03:00, 08:00–17:00, 19:00–24:00) → стало (00:00–03:00, 08:00–17:00, 18:30–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (02:00–09:00, 11:30–18:30, 21:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:4.1:1794296443658:today",
-      "groupKey": "krem:4.1",
-      "region": "krem",
+      "id": "kem:48.1:1794299142471:today",
+      "groupKey": "kem:48.1",
+      "region": "kem",
+      "group": "48.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–05:30, 10:30–17:30, 20:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:47.1:1794299142471:today",
+      "groupKey": "kem:47.1",
+      "region": "kem",
+      "group": "47.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–05:00, 09:30–17:00, 20:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:46.1:1794299142471:today",
+      "groupKey": "kem:46.1",
+      "region": "kem",
+      "group": "46.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–04:00, 08:30–16:00, 18:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:45.1:1794299142471:today",
+      "groupKey": "kem:45.1",
+      "region": "kem",
+      "group": "45.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–03:30, 07:30–15:00, 17:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:44.1:1794299142471:today",
+      "groupKey": "kem:44.1",
+      "region": "kem",
+      "group": "44.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–02:30, 06:30–14:30, 17:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:43.1:1794299142471:today",
+      "groupKey": "kem:43.1",
+      "region": "kem",
+      "group": "43.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–02:00, 06:00–13:30, 16:00–23:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:42.1:1794299142471:today",
+      "groupKey": "kem:42.1",
+      "region": "kem",
+      "group": "42.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (00:00–00:30, 05:30–13:00, 15:00–22:30) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:41.1:1794299142471:today",
+      "groupKey": "kem:41.1",
+      "region": "kem",
+      "group": "41.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (05:00–12:30, 14:30–22:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:40.1:1794299142471:today",
+      "groupKey": "kem:40.1",
+      "region": "kem",
+      "group": "40.1",
+      "dayLabel": "Сьогодні",
+      "summaryText": "Сьогодні: було (04:00–11:30, 13:30–21:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
+    },
+    {
+      "id": "kem:4.1:1794299142471:today",
+      "groupKey": "kem:4.1",
+      "region": "kem",
       "group": "4.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–04:00, 09:30–19:30, 21:00–24:00) → стало (00:00–04:00, 09:30–18:30, 20:00–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (04:00–11:30, 13:30–21:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:3.2:1794296443658:today",
-      "groupKey": "krem:3.2",
-      "region": "krem",
-      "group": "3.2",
+      "id": "kem:39.1:1794299142471:today",
+      "groupKey": "kem:39.1",
+      "region": "kem",
+      "group": "39.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–04:00, 06:00–06:30, 10:00–18:00, 20:00–24:00) → стало (00:00–04:00, 06:00–06:30, 09:30–17:00, 20:00–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (03:30–11:00, 13:00–20:30, 22:30–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:3.1:1794296443658:today",
-      "groupKey": "krem:3.1",
-      "region": "krem",
-      "group": "3.1",
+      "id": "kem:38.1:1794299142471:today",
+      "groupKey": "kem:38.1",
+      "region": "kem",
+      "group": "38.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–06:30, 10:00–17:30, 19:30–24:00) → стало (00:00–06:30, 09:30–16:30, 20:00–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
+      "summaryText": "Сьогодні: було (02:30–09:30, 12:30–20:00, 22:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     },
     {
-      "id": "krem:2.2:1794296443658:today",
-      "groupKey": "krem:2.2",
-      "region": "krem",
-      "group": "2.2",
+      "id": "kem:37.1:1794299142471:today",
+      "groupKey": "kem:37.1",
+      "region": "kem",
+      "group": "37.1",
       "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–02:30, 06:30–14:30, 16:30–24:00) → стало (00:00–02:30, 06:30–13:30, 16:30–23:30)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
-    },
-    {
-      "id": "krem:2.1:1794296443658:today",
-      "groupKey": "krem:2.1",
-      "region": "krem",
-      "group": "2.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–03:00, 06:00–13:30, 15:30–23:30) → стало (00:00–03:00, 06:00–13:00, 16:30–24:00)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
-    },
-    {
-      "id": "krem:1.2:1794296443658:today",
-      "groupKey": "krem:1.2",
-      "region": "krem",
-      "group": "1.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–00:30, 06:00–14:30, 17:00–24:00) → стало (00:00–00:30, 06:00–13:30, 15:00–23:30)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
-    },
-    {
-      "id": "krem:1.1:1794296443658:today",
-      "groupKey": "krem:1.1",
-      "region": "krem",
-      "group": "1.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–00:30, 06:00–16:00, 17:30–24:00) → стало (00:00–00:30, 06:00–15:00, 16:30–23:30)",
-      "detectedAt": "2026-11-10T07:40:43.658Z"
-    },
-    {
-      "id": "krem:6.2:1794294048034:today",
-      "groupKey": "krem:6.2",
-      "region": "krem",
-      "group": "6.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (03:30–10:30, 14:00–23:30) → стало (03:30–10:30, 13:00–21:30)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:6.1:1794294048034:today",
-      "groupKey": "krem:6.1",
-      "region": "krem",
-      "group": "6.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (03:30–11:00, 14:00–21:30, 23:30–24:00) → стало (03:30–10:30, 14:00–23:30)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:5.2:1794294048034:today",
-      "groupKey": "krem:5.2",
-      "region": "krem",
-      "group": "5.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (02:30–07:00, 08:00–10:00, 13:00–21:00, 23:30–24:00) → стало (02:30–07:00, 08:00–12:30, 14:00–20:00, 23:30–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:5.1:1794294048034:today",
-      "groupKey": "krem:5.1",
-      "region": "krem",
-      "group": "5.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (02:30–20:30, 23:30–24:00) → стало (02:30–10:00, 12:00–20:30, 23:30–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:4.2:1794294048034:today",
-      "groupKey": "krem:4.2",
-      "region": "krem",
-      "group": "4.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–03:00, 08:00–17:00, 21:00–24:00) → стало (00:00–03:00, 08:00–17:00, 19:00–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:4.1:1794294048034:today",
-      "groupKey": "krem:4.1",
-      "region": "krem",
-      "group": "4.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–04:00, 09:30–17:30, 21:00–24:00) → стало (00:00–04:00, 09:30–19:30, 21:00–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:3.2:1794294048034:today",
-      "groupKey": "krem:3.2",
-      "region": "krem",
-      "group": "3.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–04:00, 06:00–06:30, 10:30–24:00) → стало (00:00–04:00, 06:00–06:30, 10:00–18:00, 20:00–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:3.1:1794294048034:today",
-      "groupKey": "krem:3.1",
-      "region": "krem",
-      "group": "3.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–06:30, 10:30–18:00, 20:00–24:00) → стало (00:00–06:30, 10:00–17:30, 19:30–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:2.2:1794294048034:today",
-      "groupKey": "krem:2.2",
-      "region": "krem",
-      "group": "2.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–02:30, 06:30–14:00, 16:30–23:30) → стало (00:00–02:30, 06:30–14:30, 16:30–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:2.1:1794294048034:today",
-      "groupKey": "krem:2.1",
-      "region": "krem",
-      "group": "2.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–03:00, 06:00–13:30, 16:30–23:30) → стало (00:00–03:00, 06:00–13:30, 15:30–23:30)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:1.2:1794294048034:today",
-      "groupKey": "krem:1.2",
-      "region": "krem",
-      "group": "1.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–00:30, 06:00–14:30, 17:30–24:00) → стало (00:00–00:30, 06:00–14:30, 17:00–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.034Z"
-    },
-    {
-      "id": "krem:1.1:1794294048033:today",
-      "groupKey": "krem:1.1",
-      "region": "krem",
-      "group": "1.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–00:30, 06:00–16:30, 17:30–24:00) → стало (00:00–00:30, 06:00–16:00, 17:30–24:00)",
-      "detectedAt": "2026-11-10T07:00:48.033Z"
-    },
-    {
-      "id": "krem:6.2:1794292550227:today",
-      "groupKey": "krem:6.2",
-      "region": "krem",
-      "group": "6.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (03:30–11:00, 14:00–21:30) → стало (03:30–10:30, 14:00–23:30)",
-      "detectedAt": "2026-11-10T06:35:50.227Z"
-    },
-    {
-      "id": "krem:6.1:1794292550227:today",
-      "groupKey": "krem:6.1",
-      "region": "krem",
-      "group": "6.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (03:30–11:00, 14:00–21:30) → стало (03:30–11:00, 14:00–21:30, 23:30–24:00)",
-      "detectedAt": "2026-11-10T06:35:50.227Z"
-    },
-    {
-      "id": "krem:5.2:1794292550227:today",
-      "groupKey": "krem:5.2",
-      "region": "krem",
-      "group": "5.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (02:30–07:00, 08:00–10:00, 13:00–20:30, 23:30–24:00) → стало (02:30–07:00, 08:00–10:00, 13:00–21:00, 23:30–24:00)",
-      "detectedAt": "2026-11-10T06:35:50.227Z"
-    },
-    {
-      "id": "krem:5.1:1794292550227:today",
-      "groupKey": "krem:5.1",
-      "region": "krem",
-      "group": "5.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (02:30–10:00, 13:00–20:30, 23:30–24:00) → стало (02:30–20:30, 23:30–24:00)",
-      "detectedAt": "2026-11-10T06:35:50.227Z"
-    },
-    {
-      "id": "krem:4.2:1794292550227:today",
-      "groupKey": "krem:4.2",
-      "region": "krem",
-      "group": "4.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–03:00, 09:30–18:00, 21:00–24:00) → стало (00:00–03:00, 08:00–17:00, 21:00–24:00)",
-      "detectedAt": "2026-11-10T06:35:50.227Z"
-    },
-    {
-      "id": "krem:4.1:1794292550227:today",
-      "groupKey": "krem:4.1",
-      "region": "krem",
-      "group": "4.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (00:00–04:00, 09:30–18:00, 21:00–24:00) → стало (00:00–04:00, 09:30–17:30, 21:00–24:00)",
-      "detectedAt": "2026-11-10T06:35:50.227Z"
+      "summaryText": "Сьогодні: було (02:00–09:00, 11:30–18:30, 21:00–24:00) → стало (Екстрені відключення поза графіком)",
+      "detectedAt": "2026-11-10T08:25:42.471Z"
     }
   ]
 }
