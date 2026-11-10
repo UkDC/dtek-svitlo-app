@@ -3,6 +3,7 @@ import {
   RING_CENTER,
   RING_RADIUS_MAIN,
   RING_RADIUS_TRACK,
+  TRACK_GAP_MINUTES,
   buildHourLabels,
   buildRingArcs,
   buildRingAriaLabel,
@@ -116,7 +117,11 @@ describe('planDial: thin outer track = what comes next', () => {
     expect(plan.trackStartMinutes).toBe(720);
     expect(plan.track).not.toBeNull();
     expect(plan.track!.every((a) => a.startMinutes >= 720 && !a.past)).toBe(true);
-    expect(sum(plan.track!)).toBeCloseTo(circumferenceOf(RING_RADIUS_TRACK), 0);
+    // the track is one 12-hour circle minus a visible break at 12 o'clock
+    const gap = (TRACK_GAP_MINUTES / 720) * circumferenceOf(RING_RADIUS_TRACK);
+    expect(sum(plan.track!)).toBeCloseTo(circumferenceOf(RING_RADIUS_TRACK) - gap, 0);
+    expect(plan.track![0].startMinutes).toBe(720 + TRACK_GAP_MINUTES / 2);
+    expect(plan.track![plan.track!.length - 1].endMinutes).toBe(1440 - TRACK_GAP_MINUTES / 2);
   });
 
   it('after noon the track is TOMORROW’s 00–12, not today’s morning', () => {
@@ -124,10 +129,11 @@ describe('planDial: thin outer track = what comes next', () => {
     expect(plan.trackStartMinutes).toBe(0);
     const on = plan.track!.filter((a) => a.status === 'on').map((a) => [a.startMinutes, a.endMinutes]);
     expect(on).toEqual([
-      [0, 270],
-      [540, 720],
+      [TRACK_GAP_MINUTES / 2, 270],
+      [540, 720 - TRACK_GAP_MINUTES / 2],
     ]);
-    expect(sum(plan.track!)).toBeCloseTo(circumferenceOf(RING_RADIUS_TRACK), 0);
+    const gap = (TRACK_GAP_MINUTES / 720) * circumferenceOf(RING_RADIUS_TRACK);
+    expect(sum(plan.track!)).toBeCloseTo(circumferenceOf(RING_RADIUS_TRACK) - gap, 0);
   });
 
   it('after noon with no tomorrow schedule the track is null (placeholder), never today’s morning', () => {
@@ -137,6 +143,33 @@ describe('planDial: thin outer track = what comes next', () => {
 
   it('before noon a missing tomorrow does not matter', () => {
     expect(planDial({ slots: TODAY, nowMinutes: 300 }).track).not.toBeNull();
+  });
+});
+
+describe('planDial: digits and day tag on the thin track', () => {
+  it('before noon the track is today 12–24 (not tagged as the next day)', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 615, nextDaySlots: TOMORROW });
+    expect(plan.trackHourLabels.map((l) => l.text)).toEqual(['12', '15', '18', '21']);
+    expect(plan.trackIsNextDay).toBe(false);
+  });
+
+  it('after noon the track digits are tomorrow 00/03/06/09 and tagged as the next day', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 900, nextDaySlots: TOMORROW });
+    expect(plan.trackHourLabels.map((l) => l.text)).toEqual(['00', '03', '06', '09']);
+    expect(plan.trackIsNextDay).toBe(true);
+  });
+
+  it('after noon without tomorrow: no digits, but still tagged as the next day', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 900 });
+    expect(plan.track).toBeNull();
+    expect(plan.trackHourLabels).toEqual([]);
+    expect(plan.trackIsNextDay).toBe(true);
+  });
+
+  it('on the tomorrow tab (no «now») the track is the same day 12–24, not tagged', () => {
+    const plan = planDial({ slots: TOMORROW, nowMinutes: null });
+    expect(plan.trackHourLabels.map((l) => l.text)).toEqual(['12', '15', '18', '21']);
+    expect(plan.trackIsNextDay).toBe(false);
   });
 });
 

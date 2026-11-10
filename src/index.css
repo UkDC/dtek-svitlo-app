@@ -393,6 +393,16 @@ button {
   font-family: var(--font-sans);
 }
 
+.ring-track-label {
+  fill: var(--text-muted);
+  font-family: var(--font-sans);
+}
+
+.ring-track-label-tag {
+  fill: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
 .day-ring-center {
   position: absolute;
   inset: 0;
