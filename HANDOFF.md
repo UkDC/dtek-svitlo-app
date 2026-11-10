@@ -3,7 +3,7 @@
 > **App Name**: «Світло»  
 > **Repository**: [UkDC/dtek-svitlo-app](https://github.com/UkDC/dtek-svitlo-app) (branches: `main`, `gh-pages`)  
 > **Production URL**: [https://ukdc.github.io/dtek-svitlo-app/](https://ukdc.github.io/dtek-svitlo-app/)  
-> **Current Version**: `17.1.0` (sw cache `svitlo-pwa-v17-1`, build `2026-11-09T10:25:00Z`)  
+> **Current Version**: `18.0.0` (sw cache `svitlo-pwa-v18-0`, build `2026-11-10T06:08:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
 > **Platform**: iPhone PWA (iOS 18.7+ Web Push over Apple APNs) + Desktop / Android responsive web app.
 
 ---
@@ -17,9 +17,9 @@
 - **Key UX Commitments**:
   - App name strictly **«Світло»** across all manifests, titles, and headers.
   - Exactly two day tabs: **«Сьогодні»** and **«Завтра»**.
-  - **No countdown timer** on the Hero card (scannable status text only, e.g. «світло є до 16:00», «немає світла до 18:30»).
+  - **No countdown timer**: the day ring («Кільце доби», design B) shows status + «до HH:MM» in its centre, a «now» marker, the day's intervals below.
   - Clean alphabetical sorting for Kyiv streets and Kyiv Oblast settlements.
-  - Standalone PWA on iOS does **not** support pull-to-refresh (overscroll disabled by WebKit); auto-update triggers on app resume and manual refresh button.
+  - Standalone PWA on iOS does **not** support pull-to-refresh (overscroll disabled by WebKit); auto-update triggers on mount, every 10 min and on app resume; the «Дані ДТЕК від …» line is also a refresh button.
   - Service worker never auto-reloads the page on `controllerchange` to prevent breaking user modals or copy flows.
 
 ---
@@ -76,11 +76,15 @@
 | `src/services/scheduleNormalizer.ts` | Multi-source parsing (DTEK/YASNO), `getCurrentAddressStatus`, deterministic `evaluateUpcomingAlerts` with interval duration calculation. |
 | `server/services/notificationScheduler.ts` | Apple APNs push sender (`sendPushPayload`), `[10..32]m` sliding window checker (server; the in-app local check keeps 10..42), deduplication via `notifiedEvents`, schedule change calculation. |
 | `src/services/pushSyncService.ts` | Client VAPID subscriber, sync engine (dev Backend + private Cloudflare store), `triggerTestNotification`. |
-| `src/components/NotificationSettingsModal.tsx` | UI for push activation, test push dispatch, and iPhone subscription token management. |
+| `src/components/NotificationsPage.tsx` | Full-screen «Сповіщення» (design B-Notify): status, 3 switches (fixed 30-min lead, stated honestly), test push, «Додатково» (theme, quiet hours, invite code, iOS tip), «Вимкнути сповіщення» (`disablePush`). |
+| `src/components/AddressPage.tsx` | Full-screen «Нова адреса»: Kyiv (debounced YASNO lookup via `svitlo-address`) / oblast (explicit lookup via `svitlo-lookup`, 20–90 s), suggestions, candidates chips, manual group grid as a fallback after a failure. |
+| `src/components/DayRing.tsx`, `src/services/ringGeometry.ts` | Pure-SVG day ring and its tested geometry (arcs, marker, aria-label). |
+| `src/services/oblastLookup.ts` | Client of the `svitlo-lookup` Worker: `/start` + polling `/result` (patient, 150 s). Needs the invite code. |
+| `cloudflare/{address,lookup,subs,trigger}` | Workers: Kyiv address→group proxy; oblast lookup (dispatches `dtek-lookup.yml`, a runner polls dtek-krem.com.ua because DTEK blocks Cloudflare); private subscriber KV; cron trigger. |
 | `public/sw.js` | Service Worker push listener with dynamic icon routing (`icon-off.svg`, `icon-on.svg`, `icon-change.svg`). |
 | `scripts/send-sample-push.ts` | CLI script to test live push delivery directly to all registered subscribers. |
-| `scripts/chrome-e2e.ts` | Chrome headless CDP test suite verifying tabs, addresses, search, modals, and schedule rendering. |
-| `src/index.css` | Neon animations: `pulseGlowOn`, `pulseGlowOff`, `badgeShimmer`, `markerBeacon`, `alertPulseOff`, `alertPulseOn`. |
+| `scripts/chrome-e2e.ts` | **STALE** (pre-design-B selectors); do not rely on it. |
+| `src/index.css` | Single stylesheet. Design B tokens (`--bg-*`, `--text-*`, `--ring-*`, `--cta-*`, `--switch-*`…) defined three times: `:root` (light), `prefers-color-scheme: dark`, `:root[data-theme='dark']`. Theme preference lives in `localStorage` `svitlo_theme_v2` ('system' = no key). |
 
 ---
 
@@ -91,9 +95,9 @@
     `state/vapid-public.json` are git-ignored. No keys may ever be committed.
 - **Verification Commands**:
   - `npm run typecheck`: `tsc --noEmit` (also a gate in the deploy workflow).
-  - `npm test`: Runs Vitest suite (26 tests passing).
+  - `npm test`: Runs Vitest suite (135 tests, services/server only; no component tests).
   - `npm run sync:schedules`: refreshes `state/combined-schedules.json` only (no push, no ledger changes; used by the deploy workflow).
-  - `npm run test:e2e`: Runs headless Chrome CDP test suite.
+  - `npm run test:e2e`: stale (see above).
   - `npx tsx scripts/send-sample-push.ts`: Sends live test pushes to user's device via APNs.
   - `npm run build && mkdir -p dist/state && cp state/*.json dist/state/ && cp public/version.json dist/ && rm -f dist/state/*vapid-keys.json dist/state/subscriptions.json`: Builds production bundle.
 
@@ -128,3 +132,21 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
    subscriber ids and address ids (no endpoints/keys). The legacy owner id `ios_<timestamp>` is guessable, so an invitee
    could overwrite that one record; new devices get random ids. The "test push" button is local-only now.
 
+
+---
+
+## 8. Design B, oblast lookup, what to test on a device (2026-11-10)
+
+- **Design B «Кільце доби»** (light + dark): main screen = ring, legend, Сьогодні/Завтра, interval list; removed hourly grid,
+  stats, bottom nav, header theme toggle. Only what is in the mockups; deviations are listed in PR #8.
+- **Lead time is fixed at 30 min** (server window `[10..32]m`). The 15 min / 1 h chips and a separate «Зміна графіка»
+  lead from the mockup are NOT built on purpose; do not add UI that the backend does not honour.
+- **Group detection**: Kyiv → `svitlo-address` (YASNO). Oblast → `svitlo-lookup` + `dtek-lookup.yml` (needs invite code,
+  daily cap, 20–90 s). Manual group grid is an emergency fallback shown only after a failed lookup.
+  Kyiv house suggestions carry no group (the group is fetched on selection).
+- **Not verified on a real device**: the oblast lookup flow end-to-end in the installed PWA; the changed iOS status-bar
+  style (`default`). After the SW bump (`v18-0`) the installed PWA must be fully closed and reopened.
+- **Owner housekeeping**: revoke the temporary Cloudflare API token; the invite code appeared in a chat transcript
+  (rotate `INVITE_CODES` in `svitlo-subs` and `svitlo-lookup` if concerned); the `svitlo-trigger`/`svitlo-lookup` GitHub PATs
+  expire after one year; old `refs/pull/*/head` content needs a GitHub Support purge if it must disappear.
+- A11y note: the page behind a full-screen overlay stays tabbable (aria-modal covers screen readers only).

@@ -4,6 +4,8 @@
 
 ---
 
+> **Актуально на 2026-11-10 (v18.0.0):** UI переписан по дизайну B «Кільце доби» (светлая + тёмная темы), строки интерфейса — украинские. Описания ниже про «почасовую сетку», `AddressSwitcher`, `HeroStatusCard`, `ScheduleView`, `AddressModal`, `NotificationSettingsModal`, выбор эмодзи и «ручной выбор группы как основной путь» — исторические. Сейчас: `DayRing`/`ScheduleList`, `AddressPage` (автоопределение группы: Киев — `svitlo-address`, область — `svitlo-lookup` + GitHub Actions; ручная сетка — только запас), `NotificationsPage` (фиксированные 30 мин). Подробности — `HANDOFF.md` §4 и §8.
+
 ## 1. Описание задачи и пользовательские требования
 Разработать и поддерживать быстрое, удобное и эстетичное приложение для **iPhone (Progressive Web App для iOS 18.7+)** под названием **«Світло»**, работающее через **GitHub (`https://github.com/UkDC/dtek-svitlo-app`)** и опубликованное на **GitHub Pages (`https://ukdc.github.io/dtek-svitlo-app/`)**, для отслеживания актуальных графиков отключений электроэнергии в Украине:
 - **ДТЭК Киевские электросети (г. Киев)**: `https://www.dtek-kem.com.ua/ua/shutdowns` (сетка `1.1` – `60.2`, 60 подгрупп)
