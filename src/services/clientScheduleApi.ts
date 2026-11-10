@@ -318,7 +318,7 @@ export interface HouseLookupResult {
 
 /**
  * Read-only proxy to the YASNO address API (Kyiv city only). YASNO sends no CORS headers, so the
- * browser cannot call it directly (IMPLEMENTATION_PLAN.md 2.1). Source: cloudflare/address/.
+ * browser cannot call it directly (docs/ARCHITECTURE.md §2). Source: cloudflare/address/.
  */
 export const ADDRESS_API_URL: string =
   (import.meta as any).env?.VITE_ADDRESS_API_URL ||

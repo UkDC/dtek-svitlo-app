@@ -4,9 +4,9 @@ Calls GitHub's `workflow_dispatch` for `push-check.yml` every 5 minutes, because
 `schedule:` cron is unreliable. Free Cloudflare plan is enough.
 
 ## One-time setup
-1. Create a **fine-grained token** on GitHub: only the `svitlo` repository, permission **Actions: Read and write**
+1. Create a **fine-grained token** on GitHub: only the `UkDC/dtek-svitlo-app` repository, permission **Actions: Read and write**
    (nothing else). This token can start workflows, it cannot read or change code or secrets.
-2. Edit `wrangler.toml`: set `REPO = "<owner>/svitlo"`.
+2. `wrangler.toml` already has `REPO = "UkDC/dtek-svitlo-app"` (change it only for a fork).
 3. From this folder:
    ```bash
    npx wrangler login
