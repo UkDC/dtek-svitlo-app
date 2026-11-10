@@ -320,9 +320,9 @@ button {
 
 .day-ring {
   position: relative;
-  width: min(320px, 100%);
+  width: min(344px, 100%);
   aspect-ratio: 1;
-  margin: 20px auto 0;
+  margin: 8px auto 0;
 }
 
 .day-ring svg {
@@ -394,7 +394,7 @@ button {
 }
 
 .ring-track-label {
-  fill: var(--text-muted);
+  fill: var(--text-secondary);
   font-family: var(--font-sans);
 }
 
@@ -411,7 +411,7 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 27%;
+  padding: 0 28.6%;
 }
 
 .ring-center-time {

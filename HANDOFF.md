@@ -3,7 +3,7 @@
 > **App Name**: «Світло»  
 > **Repository**: [UkDC/dtek-svitlo-app](https://github.com/UkDC/dtek-svitlo-app) (branches: `main`, `gh-pages`)  
 > **Production URL**: [https://ukdc.github.io/dtek-svitlo-app/](https://ukdc.github.io/dtek-svitlo-app/)  
-> **Current Version**: `18.3.0` (sw cache `svitlo-pwa-v18-3`, build `2026-11-10T07:48:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
+> **Current Version**: `18.4.0` (sw cache `svitlo-pwa-v18-4`, build `2026-11-10T08:05:00Z`; keep `CURRENT_BUILD_TIMESTAMP` in `src/App.tsx` and `public/version.json` equal on release)  
 > **Platform**: iPhone PWA (iOS 18.7+ Web Push over Apple APNs) + Desktop / Android responsive web app.
 
 ---
@@ -78,7 +78,7 @@
 | `src/services/pushSyncService.ts` | Client VAPID subscriber, sync engine (dev Backend + private Cloudflare store), `triggerTestNotification`. |
 | `src/components/NotificationsPage.tsx` | Full-screen «Сповіщення» (design B-Notify): status, 3 switches (fixed 30-min lead, stated honestly), test push, «Додатково» (theme, quiet hours, invite code, iOS tip), «Вимкнути сповіщення» (`disablePush`). |
 | `src/components/AddressPage.tsx` | Full-screen «Нова адреса»: Kyiv (debounced YASNO lookup via `svitlo-address`) / oblast (explicit lookup via `svitlo-lookup`, 20–90 s), suggestions, candidates chips, manual group grid as a fallback after a failure. |
-| `src/components/DayRing.tsx`, `src/services/ringGeometry.ts` | Pure-SVG clock dial «G+» and its tested geometry. Main thick ring = current 12-hour half (past dimmed, remainder bright; flips at 12:00); thin outer track = what comes next (before noon: today 12–24; after noon: TOMORROW 00–12, dashed placeholder if tomorrow is unpublished); real 24-h digits inside the main ring and real 24-h digits outside the thin track (12/15/18/21, or 00/03/06/09 after noon, where the top label reads «завтра · 00»); the track has a small break at 12 o'clock (`TRACK_GAP_MINUTES`); no next-change mark on the ring (it is only in the centre text «до HH:MM»). `planDial()` is the single entry point (takes `slots`, `nowMinutes`, `nextDaySlots`); aria-label describes the whole day. |
+| `src/components/DayRing.tsx`, `src/services/ringGeometry.ts` | Pure-SVG clock dial «G+» and its tested geometry. Main thick ring = current 12-hour half (past dimmed, remainder bright; flips at 12:00); thin outer track = what comes next (before noon: today 12–24; after noon: TOMORROW 00–12, dashed placeholder if tomorrow is unpublished); real 24-h digits inside the main ring and real 24-h digits outside the thin track (12/15/18/21, or 00/03/06/09 after noon, where the top label reads «завтра · 00»); the track has a small break at 12 o'clock (`TRACK_GAP_MINUTES`); digits are 13 viewBox units (≈13 px at 390 px width; `RING_PAD` adds viewBox room so outer digits are not clipped); no next-change mark on the ring (it is only in the centre text «до HH:MM»). `planDial()` is the single entry point (takes `slots`, `nowMinutes`, `nextDaySlots`); aria-label describes the whole day. |
 | `src/services/oblastLookup.ts` | Client of the `svitlo-lookup` Worker: `/start` + polling `/result` (patient, 150 s). Needs the invite code. |
 | `cloudflare/{address,lookup,subs,trigger}` | Workers: Kyiv address→group proxy; oblast lookup (dispatches `dtek-lookup.yml`, a runner polls dtek-krem.com.ua because DTEK blocks Cloudflare); private subscriber KV; cron trigger. |
 | `public/sw.js` | Service Worker push listener with dynamic icon routing (`icon-off.svg`, `icon-on.svg`, `icon-change.svg`). |
@@ -145,7 +145,7 @@ live fetch; deploy workflow no longer sends pushes; PNG icons for iOS/Android; s
   daily cap, 20–90 s). Manual group grid is an emergency fallback shown only after a failed lookup.
   Kyiv house suggestions carry no group (the group is fetched on selection).
 - **Not verified on a real device**: the oblast lookup flow end-to-end in the installed PWA; the changed iOS status-bar
-  style (`default`). After the SW bump (`v18-3`) the installed PWA must be fully closed and reopened.
+  style (`default`). After the SW bump (`v18-4`) the installed PWA must be fully closed and reopened.
 - **Owner housekeeping**: revoke the temporary Cloudflare API token; the invite code appeared in a chat transcript
   (rotate `INVITE_CODES` in `svitlo-subs` and `svitlo-lookup` if concerned); the `svitlo-trigger`/`svitlo-lookup` GitHub PATs
   expire after one year; old `refs/pull/*/head` content needs a GitHub Support purge if it must disappear.

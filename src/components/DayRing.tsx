@@ -3,6 +3,7 @@ import { HalfHourSlotStatus } from '../services/scheduleNormalizer';
 import {
   DialArc,
   RING_CENTER,
+  RING_PAD,
   RING_RADIUS_MAIN,
   RING_RADIUS_TRACK,
   RING_RADIUS_TRACK_LABEL,
@@ -79,7 +80,11 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
 
   return (
     <div className="day-ring">
-      <svg viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`} role="img" aria-label={label}>
+      <svg
+        viewBox={`${-RING_PAD} ${-RING_PAD} ${RING_SIZE + 2 * RING_PAD} ${RING_SIZE + 2 * RING_PAD}`}
+        role="img"
+        aria-label={label}
+      >
         {hasMaybe && (
           <defs>
             <pattern
@@ -134,7 +139,7 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
                 y={p.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize={10.5}
+                fontSize={13}
                 fontWeight={600}
                 className="ring-hour-label"
               >
@@ -155,8 +160,8 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
                     y={p.y}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    fontSize={10}
-                    fontWeight={600}
+                    fontSize={13}
+                    fontWeight={700}
                     className={tag ? 'ring-track-label ring-track-label-tag' : 'ring-track-label'}
                   >
                     {tag ? `завтра · ${l.text}` : l.text}
@@ -166,7 +171,7 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinute
               {plan.track === null && plan.trackIsNextDay && (() => {
                 const p = polar(RING_RADIUS_TRACK_LABEL, 0);
                 return (
-                  <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central" fontSize={10} fontWeight={600} className="ring-track-label ring-track-label-tag">
+                  <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central" fontSize={13} fontWeight={700} className="ring-track-label ring-track-label-tag">
                     завтра
                   </text>
                 );
