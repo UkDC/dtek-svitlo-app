@@ -7,12 +7,12 @@ import { sendPushPayload, loadSubscribers } from '../server/services/notificatio
  * SUBS_API_URL / SUBS_SECRET / VAPID_* set.
  */
 const SAMPLES = [
-  { kind: 'off', title: '🪫 Відключення о 16:00 • Дім', body: 'до 20:00 · 4 год без світла', icon: './icon-off.svg' },
-  { kind: 'on', title: '🔋 Світло буде о 20:00 • Дім', body: 'до 24:00 · 4 год зі світлом', icon: './icon-on.svg' },
+  { kind: 'off', title: '🪫 Відключення о 16:00', body: 'Дім · до 20:00 · 4 год без світла', icon: './icon-off.svg' },
+  { kind: 'on', title: '🔋 Світло буде о 20:00', body: 'Дім · до 24:00 · 4 год зі світлом', icon: './icon-on.svg' },
   {
     kind: 'change',
-    title: '🗓️ Графік на сьогодні змінено • Дім',
-    body: 'Відключення 16:00–20:00 (було 14:00–18:00)',
+    title: '🗓️ Графік на сьогодні змінено',
+    body: 'Дім · відключення 16:00–20:00 (було 14:00–18:00)',
     icon: './icon-change.svg',
   },
 ] as const;
