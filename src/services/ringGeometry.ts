@@ -19,6 +19,11 @@ export const MINUTES_PER_DAY = 1440;
 export const MINUTES_PER_HALF = 720;
 /** Visible break of the outer ring at 12 o'clock (total, split evenly between its start and end) */
 export const OUTER_GAP_MINUTES = 12;
+/**
+ * Break of the inner ring at 00 so it reads as a bounded 12-hour span, not an endless circle.
+ * Same angle as the outer break (owner's choice over equal on-screen length, ≈16 min).
+ */
+export const INNER_GAP_MINUTES = 12;
 /** Radius of the 00/03/06/09 digits (inside the inner ring) */
 export const RING_RADIUS_INNER_LABEL = 61;
 /** Radius of the 12/15/18/21 digits (outside the outer ring) */
@@ -179,7 +184,7 @@ export function buildHourLabels(half: DialHalf): DialHourLabel[] {
 
 /**
  * Plans what the dial draws.
- *  - Inner ring: the day's 00–12; outer ring: the day's 12–24 (with a small break at 12 o'clock).
+ *  - Inner ring: the day's 00–12; outer ring: the day's 12–24 (each with a small break at the top).
  *  - nowMinutes != null (today): the half containing «now» is thick, the other thin; everything before «now» is dimmed.
  *  - nowMinutes == null (tomorrow or any day without a «now»): both rings medium width, nothing dimmed.
  */
@@ -197,7 +202,7 @@ export function planDial(input: { slots: HalfHourSlotStatus[]; nowMinutes: numbe
       radius,
       strokeWidth: activeHalf === null ? RING_STROKE_EVEN : active ? RING_STROKE_ACTIVE : RING_STROKE_IDLE,
       active,
-      arcs: windowArcs(slots, half * MINUTES_PER_HALF, radius, splitAt, half === 1 ? OUTER_GAP_MINUTES : 0),
+      arcs: windowArcs(slots, half * MINUTES_PER_HALF, radius, splitAt, half === 1 ? OUTER_GAP_MINUTES : INNER_GAP_MINUTES),
       hourLabels: buildHourLabels(half),
     };
   };

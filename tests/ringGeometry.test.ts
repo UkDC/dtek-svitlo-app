@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  INNER_GAP_MINUTES,
   OUTER_GAP_MINUTES,
   RING_CENTER,
   RING_RADIUS_INNER,
@@ -38,6 +39,7 @@ const TOMORROW = slotsFromRanges([
 
 const sum = (arcs: { length: number }[]) => arcs.reduce((s, a) => s + a.length, 0);
 const outerFull = () => circumferenceOf(RING_RADIUS_OUTER) * (1 - OUTER_GAP_MINUTES / 720);
+const innerFull = () => circumferenceOf(RING_RADIUS_INNER) * (1 - INNER_GAP_MINUTES / 720);
 
 describe('planDial: the rings never change meaning', () => {
   it('inner ring is always 00–12 and outer ring always 12–24, at any time and without «now»', () => {
@@ -52,17 +54,23 @@ describe('planDial: the rings never change meaning', () => {
     }
   });
 
-  it('inner ring tiles its circle exactly; the outer one minus a small break at 12 o’clock', () => {
+  it('both rings tile their circle minus a small break at the top', () => {
     for (const now of [100, 615, 720, 900, null]) {
       const plan = planDial({ slots: TODAY, nowMinutes: now });
-      expect(sum(plan.inner.arcs)).toBeCloseTo(circumferenceOf(RING_RADIUS_INNER), 0);
+      expect(sum(plan.inner.arcs)).toBeCloseTo(innerFull(), 0);
       expect(sum(plan.outer.arcs)).toBeCloseTo(outerFull(), 0);
     }
     const plan = planDial({ slots: TODAY, nowMinutes: 615 });
     expect(plan.outer.arcs[0].startMinutes).toBe(720 + OUTER_GAP_MINUTES / 2);
     expect(plan.outer.arcs[plan.outer.arcs.length - 1].endMinutes).toBe(1440 - OUTER_GAP_MINUTES / 2);
+    expect(plan.inner.arcs[0].startMinutes).toBe(INNER_GAP_MINUTES / 2);
+    expect(plan.inner.arcs[plan.inner.arcs.length - 1].endMinutes).toBe(720 - INNER_GAP_MINUTES / 2);
     // dasharray offsets are relative to the start of each half (12 o'clock at the top)
-    expect(plan.inner.arcs[0].offset).toBeCloseTo(0, 5);
+    expect(plan.inner.arcs[0].offset).toBeCloseTo(-(INNER_GAP_MINUTES / 2 / 720) * circumferenceOf(RING_RADIUS_INNER), 1);
+  });
+
+  it('both breaks have the same angle at the top', () => {
+    expect(INNER_GAP_MINUTES).toBe(OUTER_GAP_MINUTES);
   });
 });
 
@@ -100,12 +108,12 @@ describe('planDial: past / remainder split', () => {
     // 10:15 — inside the 09:30–12:30 light run
     const plan = planDial({ slots: TODAY, nowMinutes: 615 });
     expect(plan.inner.arcs.filter((a) => a.past).map((a) => [a.status, a.startMinutes, a.endMinutes])).toEqual([
-      ['on', 0, 210],
+      ['on', INNER_GAP_MINUTES / 2, 210],
       ['off', 210, 570],
       ['on', 570, 615],
     ]);
     expect(plan.inner.arcs.filter((a) => !a.past).map((a) => [a.status, a.startMinutes, a.endMinutes])).toEqual([
-      ['on', 615, 720],
+      ['on', 615, 720 - INNER_GAP_MINUTES / 2],
     ]);
     expect(plan.outer.arcs.some((a) => a.past)).toBe(false);
   });
@@ -128,7 +136,7 @@ describe('planDial: past / remainder split', () => {
     const slots = slotsFromRanges([[600, 840]]); // 10:00–14:00
     const plan = planDial({ slots, nowMinutes: 780 });
     expect(plan.inner.arcs.filter((a) => a.status === 'on').map((a) => [a.startMinutes, a.endMinutes])).toEqual([
-      [600, 720],
+      [600, 720 - INNER_GAP_MINUTES / 2],
     ]);
     expect(plan.outer.arcs.filter((a) => a.status === 'on').map((a) => [a.startMinutes, a.endMinutes])).toEqual([
       [720 + OUTER_GAP_MINUTES / 2, 780],
@@ -173,7 +181,7 @@ describe('planDial: edge cases', () => {
   it('handles a full day of light, a full day of outage and an empty list', () => {
     const allOn = planDial({ slots: Array(48).fill('on'), nowMinutes: null });
     expect(allOn.inner.arcs).toHaveLength(1);
-    expect(allOn.inner.arcs[0].length).toBeCloseTo(circumferenceOf(RING_RADIUS_INNER), 1);
+    expect(allOn.inner.arcs[0].length).toBeCloseTo(innerFull(), 1);
     expect(allOn.outer.arcs).toHaveLength(1);
     expect(planDial({ slots: Array(48).fill('off'), nowMinutes: null }).inner.arcs).toHaveLength(1);
     const empty = planDial({ slots: [], nowMinutes: null });
