@@ -122,7 +122,7 @@ export async function registerAndSubscribePush(): Promise<{
     return {
       ok: false,
       subscription: null,
-      error: 'Service Worker не поддерживается в текущем режиме браузера.',
+      error: 'Service Worker не підтримується в цьому режимі браузера.',
     };
   }
 
@@ -131,7 +131,7 @@ export async function registerAndSubscribePush(): Promise<{
       ok: false,
       subscription: null,
       error:
-        'Для включения Push на iPhone добавьте приложение на экран «Домой» (Поделиться → На экран «Домой»).',
+        'Щоб увімкнути сповіщення на iPhone, додайте застосунок на екран «Додому» (Поділитися → На екран «Додому»).',
     };
   }
 
@@ -140,7 +140,7 @@ export async function registerAndSubscribePush(): Promise<{
     return {
       ok: false,
       subscription: null,
-      error: 'Разрешение на уведомления отклонено в настройках iOS.',
+      error: 'Дозвіл на сповіщення відхилено в налаштуваннях iOS.',
     };
   }
 
@@ -298,6 +298,59 @@ export async function renewPushSubscription(): Promise<{
   return registerAndSubscribePush();
 }
 
+/** True when this device currently holds a Web Push subscription (permission alone is not enough). */
+export async function hasPushSubscription(): Promise<boolean> {
+  try {
+    if (!('serviceWorker' in navigator)) return false;
+    const reg = await navigator.serviceWorker.getRegistration();
+    return !!(await reg?.pushManager?.getSubscription());
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Turns notifications off for this device: removes the record from the private store (when the
+ * device is registered there) and drops the local push subscription. The OS permission stays
+ * granted, so enabling again later needs no new prompt.
+ */
+export async function disablePush(): Promise<{ ok: boolean; cloudRemoved: boolean }> {
+  const invite = loadInviteCode();
+  const token = storageGet(DEVICE_TOKEN_KEY);
+  let cloudRemoved = false;
+  if (invite && token) {
+    try {
+      const res = await fetch(`${SUBS_API_URL}/unsubscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Invite': invite,
+          'X-Device-Token': token,
+        },
+        body: JSON.stringify({ id: getDeviceSubscriberId() }),
+        signal: AbortSignal.timeout(8000),
+      });
+      cloudRemoved = res.ok;
+    } catch {
+      // the local subscription is dropped below anyway; a dead endpoint is pruned server-side
+    }
+  }
+
+  let localRemoved = true;
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration();
+    const sub = await reg?.pushManager?.getSubscription();
+    if (sub) localRemoved = await sub.unsubscribe();
+  } catch {
+    localRemoved = false;
+  }
+  if (cloudRemoved) {
+    storageSet(DEVICE_TOKEN_KEY, null);
+    storageSet(DEVICE_ID_KEY, null);
+  }
+  return { ok: localRemoved, cloudRemoved };
+}
+
 /**
  * Triggers an immediate test notification (both via local Service Worker & remote Web Push / GitHub Actions)
  */
@@ -346,7 +399,7 @@ export async function triggerTestNotification(
     if (res.ok) {
       return {
         ok: true,
-        message: 'Тестовое Push-уведомление успешно отправлено на ваш iPhone!',
+        message: 'Тестове сповіщення надіслано на ваш iPhone.',
       };
     }
   } catch {
@@ -357,13 +410,13 @@ export async function triggerTestNotification(
     return {
       ok: true,
       message:
-        'Локальное уведомление показано. Доставку через облако отсюда проверить нельзя: реальные пуши приходят по расписанию.',
+        'Локальне сповіщення показано. Доставку через хмару звідси перевірити не можна: справжні сповіщення приходять за розкладом.',
     };
   }
 
   return {
     ok: false,
     message:
-      'Сначала разрешите уведомления (на iPhone приложение должно быть добавлено на экран «Домой»).',
+      'Спочатку дозвольте сповіщення (на iPhone застосунок має бути додано на екран «Додому»).',
   };
 }

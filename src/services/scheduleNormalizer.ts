@@ -40,7 +40,7 @@ export interface GroupSchedule {
 
 export interface SavedAddress {
   id: string;
-  label: string; // Custom user-entered name, e.g., "Моя квартира", "Родители", "Офис"
+  label: string; // Custom user-entered name, e.g., "Дім", "Батьки", "Робота"
   icon: string; // Emoji or icon identifier
   region: RegionId;
   city: string;
@@ -57,7 +57,7 @@ export interface SavedAddress {
 
 export interface ScheduleDiffResult {
   hasChanged: boolean;
-  dayLabel: 'Сегодня' | 'Завтра';
+  dayLabel: 'Сьогодні' | 'Завтра';
   dateKey: string;
   previousSummary: string;
   currentSummary: string;
@@ -151,14 +151,14 @@ export function buildIntervalsFromSlots(slots: HalfHourSlotStatus[]): TimeInterv
  */
 export function summarizeOffIntervals(day: DaySchedule): string {
   if (day.status === 'EmergencyShutdowns') {
-    return 'Экстренные отключения вне графика';
+    return 'Екстрені відключення поза графіком';
   }
   if (day.status === 'WaitingForSchedule') {
-    return 'Ожидается публикация графика';
+    return 'Очікується публікація графіка';
   }
   const offIntervals = day.intervals.filter((it) => it.status === 'off');
   if (offIntervals.length === 0) {
-    return 'Без отключений (свет весь день)';
+    return 'Без відключень (світло весь день)';
   }
   return offIntervals.map((it) => `${it.start}–${it.end}`).join(', ');
 }
@@ -626,7 +626,7 @@ export function getCurrentAddressStatus(
 export function computeScheduleDiff(
   prevDay: DaySchedule | undefined,
   nextDay: DaySchedule,
-  dayLabel: 'Сегодня' | 'Завтра'
+  dayLabel: 'Сьогодні' | 'Завтра'
 ): ScheduleDiffResult {
   const previousSummary = prevDay ? summarizeOffIntervals(prevDay) : '';
   const currentSummary = summarizeOffIntervals(nextDay);
@@ -662,7 +662,7 @@ export function computeScheduleDiff(
     dateKey: nextDay.dateKey,
     previousSummary,
     currentSummary,
-    summaryText: `${dayLabel}: было (${previousSummary}) → стало (${currentSummary})`,
+    summaryText: `${dayLabel}: було (${previousSummary}) → стало (${currentSummary})`,
   };
 }
 

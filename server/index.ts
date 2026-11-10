@@ -107,10 +107,10 @@ app.post('/api/push/test', async (req, res) => {
   const { subscription, addressLabel } = req.body || {};
   if (subscription && subscription.endpoint) {
     const sent = await sendPushPayload(subscription, {
-      title: '⚡ Світло: Проверка связи',
+      title: '⚡ Світло: Перевірка зв’язку',
       body: addressLabel
         ? `Push-сповіщення для «${addressLabel}» активні! Ви отримаєте сигнал приблизно за 30 хв до відключення та увімкнення світла.`
-        : 'Push-уведомления на iPhone настроены и работают!',
+        : 'Push-сповіщення на iPhone налаштовано й працюють.',
       tag: 'test-push',
     });
     res.json({ ok: sent });

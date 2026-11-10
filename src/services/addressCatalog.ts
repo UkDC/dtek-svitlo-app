@@ -120,30 +120,3 @@ export const OBLAST_STREETS_FALLBACK: string[] = [
   'вул. Польова',
   'вул. Шкільна',
 ];
-
-export const ADDRESS_ICONS: Array<{ emoji: string; label: string }> = [
-  { emoji: '🏠', label: 'Дом' },
-  { emoji: '🏢', label: 'Офис' },
-  { emoji: '❤️', label: 'Родители' },
-  { emoji: '🏡', label: 'Дача' },
-  { emoji: '⚡', label: 'Объект' },
-  { emoji: '📍', label: 'Локация' },
-  { emoji: '☕', label: 'Коворкинг' },
-  { emoji: '🔑', label: 'Квартира' },
-];
-
-export function getRegionTitle(region: RegionId): string {
-  return region === 'kem'
-    ? 'ДТЕК Київські електромережі (м. Київ)'
-    : 'ДТЕК Київські регіональні електромережі (Область)';
-}
-
-export function getRegionShortTitle(region: RegionId): string {
-  return region === 'kem' ? 'ДТЭК Киев' : 'ДТЭК Киевская область';
-}
-
-export function getDtekOfficialUrl(region: RegionId): string {
-  return region === 'kem'
-    ? 'https://www.dtek-kem.com.ua/ua/shutdowns'
-    : 'https://www.dtek-krem.com.ua/ua/shutdowns';
-}

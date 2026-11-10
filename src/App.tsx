@@ -1,17 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  Bell,
-  Calendar,
-  CheckCircle2,
-  MapPin,
-  Moon,
-  RefreshCw,
-  Sparkles,
-  Sun,
-  X,
-  Zap,
-  ZapOff,
-} from 'lucide-react';
+import { Bell, CheckCircle2, ChevronDown, Sparkles, X, ZapOff } from 'lucide-react';
 import {
   GroupSchedule,
   SavedAddress,
@@ -29,27 +17,25 @@ import {
 } from './services/clientScheduleApi';
 import {
   QuietHoursSettings,
+  hasPushSubscription,
   loadInviteCode,
   purgeLegacyGitHubToken,
   syncSubscriberState,
 } from './services/pushSyncService';
-import { AddressSwitcher } from './components/AddressSwitcher';
-import { HeroStatusCard } from './components/HeroStatusCard';
-import { ScheduleView } from './components/ScheduleView';
-import { AddressModal } from './components/AddressModal';
-import { NotificationSettingsModal } from './components/NotificationSettingsModal';
+import { AddressSheet, addressTitle, regionName } from './components/AddressSheet';
+import { DayOverview } from './components/DayOverview';
+import { EmptyState } from './components/EmptyState';
+import { AddressPage } from './components/AddressPage';
+import { NotificationsPage, ThemePreference } from './components/NotificationsPage';
 
 const STORAGE_KEY_ADDRESSES = 'svitlo_saved_addresses_v1';
 const STORAGE_KEY_SELECTED = 'svitlo_selected_address_id_v1';
 const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
-const STORAGE_KEY_THEME = 'svitlo_theme_v1';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-09T10:25:00Z';
+// v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
+const STORAGE_KEY_THEME = 'svitlo_theme_v2';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-10T06:08:00Z';
 
 export const App: React.FC = () => {
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    return (localStorage.getItem(STORAGE_KEY_THEME) as 'dark' | 'light') || 'dark';
-  });
-
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_ADDRESSES);
@@ -91,11 +77,17 @@ export const App: React.FC = () => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(() => addresses.length === 0);
   const [editingAddress, setEditingAddress] = useState<SavedAddress | null>(null);
   const [isNotificationsModalOpen, setIsNotificationsModalOpen] = useState(false);
-  const [pushEnabled, setPushEnabled] = useState<boolean>(() => {
-    return (
-      typeof Notification !== 'undefined' &&
-      Notification.permission === 'granted'
-    );
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  // «On» means: the OS permission is granted AND this device holds a push subscription.
+  // (Turning notifications off keeps the OS permission granted, so permission alone is not enough.)
+  const [pushEnabled, setPushEnabled] = useState<boolean>(false);
+  const [themePref, setThemePref] = useState<ThemePreference>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_THEME);
+      return saved === 'light' || saved === 'dark' ? saved : 'system';
+    } catch {
+      return 'system';
+    }
   });
 
   const [notifiedEvents, setNotifiedEvents] = useState<Record<string, string>>(() => {
@@ -109,11 +101,37 @@ export const App: React.FC = () => {
 
   const [activeAlertBanner, setActiveAlertBanner] = useState<UpcomingAlertTrigger | null>(null);
 
-  // Apply theme
+  // Theme follows the system (prefers-color-scheme); an explicit 'light' | 'dark' override is optional
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(STORAGE_KEY_THEME, theme);
-  }, [theme]);
+    try {
+      if (themePref === 'system') {
+        localStorage.removeItem(STORAGE_KEY_THEME);
+      } else {
+        localStorage.setItem(STORAGE_KEY_THEME, themePref);
+      }
+    } catch {
+      // storage unavailable: the attribute below still applies for this session
+    }
+    if (themePref === 'system') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', themePref);
+    }
+  }, [themePref]);
+
+  // Reflect the real push state (permission + subscription) on mount
+  useEffect(() => {
+    let cancelled = false;
+    if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
+    hasPushSubscription()
+      .then((has) => {
+        if (!cancelled) setPushEnabled(has);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Older builds kept a repo-write GitHub token on the phone; it is unused now, so drop it
   useEffect(() => {
@@ -159,7 +177,7 @@ export const App: React.FC = () => {
                 const diff = computeScheduleDiff(
                   prevSched.today,
                   nextSched.today,
-                  'Сегодня'
+                  'Сьогодні'
                 );
                 if (diff.hasChanged) {
                   nextDiffs[`kem:${grp}`] = diff.summaryText;
@@ -172,7 +190,7 @@ export const App: React.FC = () => {
                 const diff = computeScheduleDiff(
                   prevSched.today,
                   nextSched.today,
-                  'Сегодня'
+                  'Сьогодні'
                 );
                 if (diff.hasChanged) {
                   nextDiffs[`krem:${grp}`] = diff.summaryText;
@@ -367,6 +385,10 @@ export const App: React.FC = () => {
     setEditingAddress(null);
   };
 
+  const handleUpdateAddress = (id: string, patch: Partial<SavedAddress>) => {
+    setAddresses((prev) => prev.map((a) => (a.id === id ? { ...a, ...patch } : a)));
+  };
+
   const handleDeleteAddress = (id: string) => {
     setAddresses((prev) => {
       const next = prev.filter((a) => a.id !== id);
@@ -418,62 +440,54 @@ export const App: React.FC = () => {
     [bundle]
   );
 
+  const openAddAddress = () => {
+    setIsSheetOpen(false);
+    setEditingAddress(null);
+    setIsAddressModalOpen(true);
+  };
+
+  const openEditAddress = (addr: SavedAddress) => {
+    setIsSheetOpen(false);
+    setEditingAddress(addr);
+    setIsAddressModalOpen(true);
+  };
+
   return (
     <div className="app-shell">
-      {/* Top Bar */}
-      <header className="top-header">
-        <div className="brand-group">
-          <div className="brand-icon">
-            <Zap size={20} />
-          </div>
-          <div>
-            <div className="brand-title">Світло</div>
-            <div className="brand-subtitle">
-              <span>Киев:</span>
-              <span className="kyiv-clock">{kyivClock.currentTimeStr}</span>
-              <span>• ДТЭК + YASNO</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="header-actions">
+      {activeAddress && (
+        <header className="top-header">
           <button
             type="button"
-            className="icon-btn"
-            title="Оновити графіки зараз"
-            onClick={() => refreshSchedules(true)}
-            disabled={isRefreshing}
+            className="address-trigger"
+            aria-haspopup="dialog"
+            onClick={() => setIsSheetOpen(true)}
           >
-            <RefreshCw size={17} className={isRefreshing ? 'spin' : ''} />
+            <span className="address-trigger-text">
+              <span className="address-trigger-name">{addressTitle(activeAddress)}</span>
+              <span className="address-trigger-meta">
+                ДТЕК {regionName(activeAddress)} · Група {activeAddress.group}
+              </span>
+            </span>
+            <ChevronDown size={18} strokeWidth={2.2} aria-hidden="true" />
           </button>
-
           <button
             type="button"
-            className="icon-btn"
-            title="Переключить тему"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-
-          <button
-            type="button"
-            className="icon-btn"
-            title="Настройки уведомлений за 30 минут"
+            className="round-btn"
+            aria-label="Сповіщення"
             onClick={() => setIsNotificationsModalOpen(true)}
           >
-            <Bell size={18} />
+            <Bell size={20} aria-hidden="true" />
           </button>
-        </div>
-      </header>
+        </header>
+      )}
 
       {hasUpdateAvailable && (
-        <div className="version-update-banner">
-          <Sparkles size={16} />
+        <div className="note-banner note-banner-action" role="status">
+          <Sparkles size={18} aria-hidden="true" />
           <span>Доступне оновлення застосунку</span>
           <button
             type="button"
-            className="version-update-btn"
+            className="note-banner-btn"
             onClick={() => {
               if ('caches' in window) {
                 caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))));
@@ -486,141 +500,62 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Upcoming 30-Minute Outage/Restoration In-App Alert Banner */}
+      {/* In-app reminder shown when the 10..42 min window before an outage/restoration opens */}
       {activeAlertBanner && (
-        <div className={`upcoming-alert-banner ${activeAlertBanner.type}`}>
-          <div className="upcoming-alert-icon">
-            {activeAlertBanner.type === 'before_off' ? (
-              <ZapOff size={18} />
-            ) : (
-              <CheckCircle2 size={18} />
-            )}
-          </div>
-          <div className="upcoming-alert-content">
-            <div className="upcoming-alert-title">{activeAlertBanner.title}</div>
-            <div className="upcoming-alert-body">{activeAlertBanner.body}</div>
-          </div>
+        <div className={`note-banner note-banner-alert ${activeAlertBanner.type}`} role="alert">
+          {activeAlertBanner.type === 'before_off' ? (
+            <ZapOff size={18} aria-hidden="true" />
+          ) : (
+            <CheckCircle2 size={18} aria-hidden="true" />
+          )}
+          <span className="note-banner-text">
+            <b>{activeAlertBanner.title}</b>
+            <span>{activeAlertBanner.body}</span>
+          </span>
           <button
             type="button"
-            className="upcoming-alert-close"
+            className="note-banner-close"
             onClick={() => setActiveAlertBanner(null)}
             aria-label="Закрити сповіщення"
           >
-            <X size={16} />
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
       )}
-
-      {/* Saved Addresses Horizontal Switcher */}
-      <AddressSwitcher
-        addresses={addresses}
-        selectedId={activeAddress?.id ?? ''}
-        schedulesByAddressId={schedulesByAddressId}
-        nowMinutes={kyivClock.nowMinutes}
-        onSelect={setSelectedId}
-        onEdit={(addr) => {
-          setEditingAddress(addr);
-          setIsAddressModalOpen(true);
-        }}
-        onAdd={() => {
-          setEditingAddress(null);
-          setIsAddressModalOpen(true);
-        }}
-      />
 
       {activeAddress ? (
-        <>
-          {/* Current Power Status Card (Without countdown timer) */}
-          <HeroStatusCard
-            address={activeAddress}
-            schedule={activeSchedule}
-            nowMinutes={kyivClock.nowMinutes}
-            isRefreshing={isRefreshing}
-            onRefresh={() => refreshSchedules(true)}
-            onEditAddress={(addr) => {
-              setEditingAddress(addr);
-              setIsAddressModalOpen(true);
-            }}
-          />
-
-          {/* Schedule View: ONLY Today and Tomorrow */}
-          <ScheduleView
-            schedule={activeSchedule}
-            nowMinutes={kyivClock.nowMinutes}
-            currentTimeStr={kyivClock.currentTimeStr}
-            intradayChangeNote={activeIntradayNote}
-          />
-        </>
+        <DayOverview
+          key={activeAddress.id}
+          schedule={activeSchedule}
+          nowMinutes={kyivClock.nowMinutes}
+          currentTimeStr={kyivClock.currentTimeStr}
+          remindersOn={pushEnabled && activeAddress.notifyBeforeOff}
+          intradayChangeNote={activeIntradayNote}
+          isRefreshing={isRefreshing}
+          onRefresh={() => refreshSchedules(true)}
+        />
       ) : (
-        <section className="hero-card state-waiting">
-          <div className="hero-status-main">
-            <div className="hero-status-text">
-              <div className="hero-headline waiting">Додайте адресу</div>
-              <div className="hero-subline">
-                Вкажіть вулицю та будинок — і ми покажемо графік відключень і
-                надішлемо сповіщення. Адреси зберігаються лише на вашому пристрої.
-              </div>
-            </div>
-          </div>
-          <div className="hero-footer-row">
-            <button
-              type="button"
-              className="refresh-inline-btn"
-              onClick={() => {
-                setEditingAddress(null);
-                setIsAddressModalOpen(true);
-              }}
-            >
-              <MapPin size={12} />
-              <span>Додати адресу</span>
-            </button>
-          </div>
-        </section>
+        <EmptyState onAdd={openAddAddress} />
       )}
 
-      {/* iOS Bottom Tab Navigation */}
-      <nav className="bottom-nav">
-        <div className="bottom-nav-inner">
-          <button
-            type="button"
-            className={`nav-tab-btn ${
-              !isAddressModalOpen && !isNotificationsModalOpen ? 'active' : ''
-            }`}
-            onClick={() => {
-              setIsAddressModalOpen(false);
-              setIsNotificationsModalOpen(false);
-            }}
-          >
-            <Calendar size={20} />
-            <span>График</span>
-          </button>
+      {isSheetOpen && (
+        <AddressSheet
+          addresses={addresses}
+          selectedId={activeAddress?.id ?? ''}
+          schedulesByAddressId={schedulesByAddressId}
+          nowMinutes={kyivClock.nowMinutes}
+          onSelect={(id) => {
+            setSelectedId(id);
+            setIsSheetOpen(false);
+          }}
+          onEdit={openEditAddress}
+          onAdd={openAddAddress}
+          onClose={() => setIsSheetOpen(false)}
+        />
+      )}
 
-          <button
-            type="button"
-            className={`nav-tab-btn ${isAddressModalOpen ? 'active' : ''}`}
-            onClick={() => {
-              setEditingAddress(null);
-              setIsAddressModalOpen(true);
-            }}
-          >
-            <MapPin size={20} />
-            <span>+ Адрес</span>
-          </button>
-
-          <button
-            type="button"
-            className={`nav-tab-btn ${isNotificationsModalOpen ? 'active' : ''}`}
-            onClick={() => setIsNotificationsModalOpen(true)}
-          >
-            <Bell size={20} />
-            <span>Уведомления</span>
-          </button>
-        </div>
-      </nav>
-
-      {/* Address Add/Edit Modal */}
       {isAddressModalOpen && (
-        <AddressModal
+        <AddressPage
           initialAddress={editingAddress}
           kemGroups={kemGroups}
           kremGroups={kremGroups}
@@ -633,12 +568,15 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Notification Settings Modal */}
       {isNotificationsModalOpen && (
-        <NotificationSettingsModal
+        <NotificationsPage
+          address={activeAddress ?? undefined}
           addresses={addresses}
           quietHours={quietHours}
           pushEnabled={pushEnabled}
+          themePref={themePref}
+          onUpdateAddress={handleUpdateAddress}
+          onThemeChange={setThemePref}
           onUpdateQuietHours={setQuietHours}
           onPushStatusChange={setPushEnabled}
           onClose={() => setIsNotificationsModalOpen(false)}

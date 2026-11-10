@@ -1,13 +1,13 @@
 {
-  "name": "Світло • Графики ДТЭК",
+  "name": "Світло • Графіки ДТЕК",
   "short_name": "Світло",
-  "description": "Оперативные графики отключения света ДТЭК Киев и Киевская область с уведомлениями за 30 минут",
+  "description": "Оперативні графіки відключення світла ДТЕК Київ і Київська область зі сповіщеннями за 30 хвилин",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0B0F17",
-  "theme_color": "#0B0F17",
+  "background_color": "#F6F3EC",
+  "theme_color": "#F6F3EC",
   "icons": [
     {
       "src": "./icon-192.png",
