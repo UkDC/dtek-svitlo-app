@@ -46,6 +46,7 @@
   --ring-marker-fill: #ffffff;
   --ring-marker-stroke: #1b1d22;
   --ring-tick: #b9b2a2;
+  --ring-past-opacity: 0.3;
 
   --on-text: #8a5a00;
   --cta-bg: #1b1d22;
@@ -114,6 +115,7 @@
     --ring-marker-fill: #f2efe8;
     --ring-marker-stroke: #14161a;
     --ring-tick: #4a505c;
+    --ring-past-opacity: 0.5;
 
     --on-text: #ffc21a;
     --cta-bg: #f2efe8;
@@ -171,6 +173,7 @@
   --ring-marker-fill: #f2efe8;
   --ring-marker-stroke: #14161a;
   --ring-tick: #4a505c;
+  --ring-past-opacity: 0.5;
 
   --on-text: #ffc21a;
   --cta-bg: #f2efe8;
@@ -371,21 +374,14 @@ button {
   opacity: 0.55;
 }
 
-.ring-glyph {
-  fill: var(--ring-tick);
+/* Past part of the current half is dimmed; the remainder stays bright */
+.ring-arc-past {
+  opacity: var(--ring-past-opacity);
 }
 
-.ring-glyph-ring {
-  stroke: var(--ring-tick);
-  stroke-width: 2.5;
-}
-
-.ring-glyph.ring-glyph-active {
-  fill: var(--text-primary);
-}
-
-.ring-glyph-ring.ring-glyph-active {
-  stroke: var(--text-primary);
+/* Thin outer track = what comes next */
+.ring-track {
+  opacity: 0.75;
 }
 
 .ring-hour-label {
@@ -401,7 +397,7 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 24%;
+  padding: 0 27%;
 }
 
 .ring-center-time {
@@ -411,8 +407,8 @@ button {
 }
 
 .ring-center-title {
-  margin-top: 4px;
-  font-size: 26px;
+  margin-top: 2px;
+  font-size: 22px;
   line-height: 1.1;
   font-weight: 700;
   letter-spacing: -0.01em;

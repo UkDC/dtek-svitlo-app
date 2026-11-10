@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
   RING_CENTER,
-  RING_RADIUS_INNER,
-  RING_RADIUS_OUTER,
-  buildLapArcs,
+  RING_RADIUS_MAIN,
+  RING_RADIUS_TRACK,
+  buildHourLabels,
   buildRingArcs,
   buildRingAriaLabel,
-  ringCircumference,
+  circumferenceOf,
+  planDial,
   ringMarkerPosition,
 } from '../src/services/ringGeometry';
 import type { HalfHourSlotStatus } from '../src/services/scheduleNormalizer';
@@ -20,80 +21,166 @@ function slotsFromRanges(on: Array<[number, number]>): HalfHourSlotStatus[] {
 }
 
 // light 00:00–03:30, 09:30–12:30, 19:30–22:00
-const MOCK = slotsFromRanges([
+const TODAY = slotsFromRanges([
   [0, 210],
   [570, 750],
   [1170, 1320],
 ]);
+// tomorrow: light 00:00–04:30, 09:00–12:00
+const TOMORROW = slotsFromRanges([
+  [0, 270],
+  [540, 720],
+]);
 
-describe('ringGeometry (two-lap dial)', () => {
-  it('inner ring is 00–12, outer ring is 12–24', () => {
-    expect(RING_RADIUS_INNER).toBeLessThan(RING_RADIUS_OUTER);
-    const arcs = buildLapArcs(MOCK);
-    expect(arcs.filter((a) => a.lap === 0).every((a) => a.endMinutes <= 720)).toBe(true);
-    expect(arcs.filter((a) => a.lap === 1).every((a) => a.startMinutes >= 720)).toBe(true);
+const sum = (arcs: { length: number }[]) => arcs.reduce((s, a) => s + a.length, 0);
+
+describe('planDial: which half the main ring shows', () => {
+  it('before noon the main ring is 00–12 and 11:59 is still the first half', () => {
+    expect(planDial({ slots: TODAY, nowMinutes: 0 }).half).toBe(0);
+    expect(planDial({ slots: TODAY, nowMinutes: 615 }).half).toBe(0);
+    expect(planDial({ slots: TODAY, nowMinutes: 719 }).half).toBe(0);
   });
 
-  it('arcs of each ring tile that ring exactly', () => {
-    const arcs = buildLapArcs(MOCK);
-    for (const lap of [0, 1] as const) {
-      const total = arcs.filter((a) => a.lap === lap).reduce((s, a) => s + a.length, 0);
-      expect(total).toBeCloseTo(ringCircumference(lap), 0);
+  it('flips to 12–24 exactly at 12:00 and stays there through 23:59 and 24:00', () => {
+    expect(planDial({ slots: TODAY, nowMinutes: 720 }).half).toBe(1);
+    expect(planDial({ slots: TODAY, nowMinutes: 1439 }).half).toBe(1);
+    expect(planDial({ slots: TODAY, nowMinutes: 1440 }).half).toBe(1);
+  });
+
+  it('without «now» (tomorrow tab) shows 00–12 and does not dim anything', () => {
+    const plan = planDial({ slots: TOMORROW, nowMinutes: null });
+    expect(plan.half).toBe(0);
+    expect(plan.nowFraction).toBeNull();
+    expect(plan.main.every((a) => !a.past)).toBe(true);
+    expect(plan.main.every((a) => a.endMinutes <= 720)).toBe(true);
+    // track = the same day's 12–24
+    expect(plan.track).not.toBeNull();
+    expect(plan.track!.every((a) => a.startMinutes >= 720)).toBe(true);
+  });
+});
+
+describe('planDial: past / remainder split', () => {
+  it('dims the past, keeps the remainder bright, and cuts a run at «now»', () => {
+    // 10:15 — inside the 09:30–12:30 light run
+    const plan = planDial({ slots: TODAY, nowMinutes: 615 });
+    const past = plan.main.filter((a) => a.past);
+    const rest = plan.main.filter((a) => !a.past);
+    expect(past.map((a) => [a.status, a.startMinutes, a.endMinutes])).toEqual([
+      ['on', 0, 210],
+      ['off', 210, 570],
+      ['on', 570, 615],
+    ]);
+    expect(rest.map((a) => [a.status, a.startMinutes, a.endMinutes])).toEqual([['on', 615, 720]]);
+  });
+
+  it('arcs of the main ring tile the ring exactly, for both halves', () => {
+    for (const now of [100, 615, 719, 720, 900, 1439]) {
+      const plan = planDial({ slots: TODAY, nowMinutes: now });
+      expect(sum(plan.main)).toBeCloseTo(circumferenceOf(RING_RADIUS_MAIN), 0);
     }
   });
 
-  it('splits a run that crosses 12:00 into two arcs, one per ring', () => {
+  it('after noon the morning arcs disappear and 12–24 is split at «now»', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 14 * 60 + 20 }); // 14:20
+    expect(plan.main.every((a) => a.startMinutes >= 720)).toBe(true);
+    const rest = plan.main.filter((a) => !a.past);
+    expect(rest[0].startMinutes).toBe(860);
+    expect(rest[rest.length - 1].endMinutes).toBe(1440);
+    // dasharray offsets are relative to the start of the half (12:00 at the top)
+    const first = plan.main[0];
+    expect(first.offset).toBeCloseTo(0, 5);
+  });
+
+  it('at 12:00 sharp nothing of the new half is in the past yet', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 720 });
+    expect(plan.main.some((a) => a.past)).toBe(false);
+  });
+
+  it('keeps the run that crosses 12:00 as a separate arc in each half', () => {
     const slots = slotsFromRanges([[600, 840]]); // 10:00–14:00
-    const on = buildLapArcs(slots).filter((a) => a.status === 'on');
-    expect(on).toHaveLength(2);
-    expect(on[0]).toMatchObject({ lap: 0, startMinutes: 600, endMinutes: 720 });
-    expect(on[1]).toMatchObject({ lap: 1, startMinutes: 720, endMinutes: 840 });
-    // 120 min of a 720-min lap on the inner ring; 120 min on the outer ring
-    expect(on[0].length).toBeCloseTo((120 / 720) * ringCircumference(0), 1);
-    expect(on[0].offset).toBeCloseTo(-(600 / 720) * ringCircumference(0), 1);
-    expect(on[1].length).toBeCloseTo((120 / 720) * ringCircumference(1), 1);
-    expect(on[1].offset).toBeCloseTo(0, 5);
+    const before = planDial({ slots, nowMinutes: 0 });
+    expect(before.main.filter((a) => a.status === 'on').map((a) => [a.startMinutes, a.endMinutes])).toEqual([
+      [600, 720],
+    ]);
+    const after = planDial({ slots, nowMinutes: 780 });
+    expect(after.main.filter((a) => a.status === 'on').map((a) => [a.startMinutes, a.endMinutes])).toEqual([
+      [720, 780],
+      [780, 840],
+    ]);
+  });
+});
+
+describe('planDial: thin outer track = what comes next', () => {
+  it('before noon the track is today’s 12–24', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 615, nextDaySlots: TOMORROW });
+    expect(plan.trackStartMinutes).toBe(720);
+    expect(plan.track).not.toBeNull();
+    expect(plan.track!.every((a) => a.startMinutes >= 720 && !a.past)).toBe(true);
+    expect(sum(plan.track!)).toBeCloseTo(circumferenceOf(RING_RADIUS_TRACK), 0);
   });
 
-  it('marker: 00:00 top of inner ring, 12:00 top of outer ring', () => {
-    const start = ringMarkerPosition(0);
-    expect(start.lap).toBe(0);
-    expect(start.x).toBeCloseTo(RING_CENTER, 5);
-    expect(start.y).toBeCloseTo(RING_CENTER - RING_RADIUS_INNER, 5);
-    const noon = ringMarkerPosition(720);
-    expect(noon.lap).toBe(1);
-    expect(noon.x).toBeCloseTo(RING_CENTER, 5);
-    expect(noon.y).toBeCloseTo(RING_CENTER - RING_RADIUS_OUTER, 5);
+  it('after noon the track is TOMORROW’s 00–12, not today’s morning', () => {
+    const plan = planDial({ slots: TODAY, nowMinutes: 14 * 60 + 20, nextDaySlots: TOMORROW });
+    expect(plan.trackStartMinutes).toBe(0);
+    const on = plan.track!.filter((a) => a.status === 'on').map((a) => [a.startMinutes, a.endMinutes]);
+    expect(on).toEqual([
+      [0, 270],
+      [540, 720],
+    ]);
+    expect(sum(plan.track!)).toBeCloseTo(circumferenceOf(RING_RADIUS_TRACK), 0);
   });
 
-  it('marker follows the analog clock angle', () => {
-    const three = ringMarkerPosition(3 * 60); // 03:00 → 3 o'clock, inner
-    expect(three.lap).toBe(0);
-    expect(three.x).toBeCloseTo(RING_CENTER + RING_RADIUS_INNER, 5);
+  it('after noon with no tomorrow schedule the track is null (placeholder), never today’s morning', () => {
+    expect(planDial({ slots: TODAY, nowMinutes: 900 }).track).toBeNull();
+    expect(planDial({ slots: TODAY, nowMinutes: 900, nextDaySlots: [] }).track).toBeNull();
+  });
+
+  it('before noon a missing tomorrow does not matter', () => {
+    expect(planDial({ slots: TODAY, nowMinutes: 300 }).track).not.toBeNull();
+  });
+});
+
+describe('planDial: hour digits and «now» position', () => {
+  it('uses real 24-hour digits for each half', () => {
+    expect(buildHourLabels(0).map((l) => l.text)).toEqual(['00', '03', '06', '09']);
+    expect(buildHourLabels(1).map((l) => l.text)).toEqual(['12', '15', '18', '21']);
+    expect(buildHourLabels(1).map((l) => l.fraction)).toEqual([0, 0.25, 0.5, 0.75]);
+    expect(planDial({ slots: TODAY, nowMinutes: 100 }).hourLabels[0].text).toBe('00');
+    expect(planDial({ slots: TODAY, nowMinutes: 800 }).hourLabels[0].text).toBe('12');
+  });
+
+  it('now fraction follows the analog clock', () => {
+    expect(planDial({ slots: TODAY, nowMinutes: 180 }).nowFraction).toBeCloseTo(0.25, 5);
+    expect(planDial({ slots: TODAY, nowMinutes: 15 * 60 }).nowFraction).toBeCloseTo(0.25, 5);
+    expect(planDial({ slots: TODAY, nowMinutes: 720 }).nowFraction).toBeCloseTo(0, 5);
+  });
+
+  it('marker sits on the main ring at the analog position', () => {
+    const top = ringMarkerPosition(0);
+    expect(top.half).toBe(0);
+    expect(top.x).toBeCloseTo(RING_CENTER, 5);
+    expect(top.y).toBeCloseTo(RING_CENTER - RING_RADIUS_MAIN, 5);
+    const three = ringMarkerPosition(15 * 60);
+    expect(three.half).toBe(1);
+    expect(three.x).toBeCloseTo(RING_CENTER + RING_RADIUS_MAIN, 5);
     expect(three.y).toBeCloseTo(RING_CENTER, 5);
-    const fifteen = ringMarkerPosition(15 * 60); // 15:00 → 3 o'clock, outer
-    expect(fifteen.lap).toBe(1);
-    expect(fifteen.x).toBeCloseTo(RING_CENTER + RING_RADIUS_OUTER, 5);
-    expect(fifteen.y).toBeCloseTo(RING_CENTER, 5);
-    expect(ringMarkerPosition(6 * 60).y).toBeCloseTo(RING_CENTER + RING_RADIUS_INNER, 5);
-    expect(ringMarkerPosition(18 * 60).y).toBeCloseTo(RING_CENTER + RING_RADIUS_OUTER, 5);
+    expect(ringMarkerPosition(6 * 60).y).toBeCloseTo(RING_CENTER + RING_RADIUS_MAIN, 5);
   });
 
-  it('boundaries: 11:59 is still the inner ring, 23:59 and 24:00 stay on the outer ring', () => {
-    expect(ringMarkerPosition(719).lap).toBe(0);
-    expect(ringMarkerPosition(1439).lap).toBe(1);
+  it('24:00 stays at the end of the second half instead of wrapping to the start', () => {
     const end = ringMarkerPosition(1440);
-    expect(end.lap).toBe(1);
-    expect(end.x).toBeCloseTo(RING_CENTER, 0); // just before the top, not wrapped to the inner ring
+    expect(end.half).toBe(1);
+    expect(end.x).toBeCloseTo(RING_CENTER, 0);
   });
+});
 
+describe('planDial: edge cases', () => {
   it('handles a full day of light, a full day of outage and an empty list', () => {
-    const allOn = buildLapArcs(Array(48).fill('on'));
-    expect(allOn).toHaveLength(2);
-    expect(allOn.map((a) => a.lap)).toEqual([0, 1]);
-    allOn.forEach((a) => expect(a.length).toBeCloseTo(a.circumference, 1));
-    expect(buildLapArcs(Array(48).fill('off'))).toHaveLength(2);
-    expect(buildLapArcs([])).toEqual([]);
+    const allOn = planDial({ slots: Array(48).fill('on'), nowMinutes: null });
+    expect(allOn.main).toHaveLength(1);
+    expect(allOn.main[0].length).toBeCloseTo(circumferenceOf(RING_RADIUS_MAIN), 1);
+    expect(planDial({ slots: Array(48).fill('off'), nowMinutes: null }).main).toHaveLength(1);
+    expect(planDial({ slots: [], nowMinutes: null }).main).toEqual([]);
   });
 
   it('keeps maybe slots as their own arcs', () => {
@@ -104,11 +191,13 @@ describe('ringGeometry (two-lap dial)', () => {
     expect(arcs.map((a) => a.status)).toEqual(['on', 'maybe', 'on']);
     expect(arcs[1].startMinutes).toBe(300);
     expect(arcs[1].endMinutes).toBe(360);
-    expect(buildLapArcs(slots).some((a) => a.status === 'maybe' && a.lap === 0)).toBe(true);
+    expect(planDial({ slots, nowMinutes: null }).main.some((a) => a.status === 'maybe')).toBe(true);
   });
+});
 
-  it('builds the aria label for the whole day (not split by lap)', () => {
-    expect(buildRingAriaLabel(buildRingArcs(MOCK))).toBe(
+describe('buildRingAriaLabel', () => {
+  it('describes the whole day (not split by half)', () => {
+    expect(buildRingAriaLabel(buildRingArcs(TODAY))).toBe(
       'Доба: зі світлом 00:00–03:30, 09:30–12:30, 19:30–22:00; без світла решту часу'
     );
     expect(buildRingAriaLabel(buildRingArcs(slotsFromRanges([[600, 840]])))).toBe(
