@@ -78,6 +78,7 @@ npm run bump           # автообновление версии (version.json
    - Проверяем тестом: `npm test tests/versionConsistency.test.ts`.
    - `docs/ARCHITECTURE.md` обновляем, если изменилась архитектура; `docs/HISTORY.md` — только если столкнулись с неочевидной проблемой и вывели новое правило.
 4. **Push на GitHub:**
+   - Бот (`svitlo-bot`) коммитит снимок графиков в `main` каждые несколько минут, поэтому перед пушем всегда `git pull --rebase origin main`, иначе push будет отклонён.
    - После пуша в `main` workflow `deploy-pages.yml` собирает и публикует `gh-pages` (~1–2 мин).
    - Владельцу на iPhone: полностью закрыть (смахнуть) и открыть PWA (активация нового SW).
 
