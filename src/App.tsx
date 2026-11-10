@@ -4,7 +4,6 @@ import {
   GroupSchedule,
   SavedAddress,
   UpcomingAlertTrigger,
-  computeScheduleDiff,
   evaluateUpcomingAlerts,
   getKyivTimeContext,
   isWithinQuietHours,
@@ -34,7 +33,7 @@ const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
 const SUBS_REFRESH_KEY = 'svitlo_subs_refreshed_at';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-10T21:56:27.150Z';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-10T22:05:50.573Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
@@ -69,9 +68,6 @@ export const App: React.FC = () => {
   );
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [kyivClock, setKyivClock] = useState(() => getKyivTimeContext());
-  const [intradayDiffByGroup, setIntradayDiffByGroup] = useState<
-    Record<string, string>
-  >({});
   const [hasUpdateAvailable, setHasUpdateAvailable] = useState<boolean>(false);
 
   // Modals state
@@ -174,41 +170,7 @@ export const App: React.FC = () => {
       setIsRefreshing(true);
       try {
         const nextBundle = await fetchAllSchedules(force);
-        setBundle((prevBundle) => {
-          if (prevBundle) {
-            const nextDiffs: Record<string, string> = {};
-            for (const [grp, nextSched] of Object.entries(nextBundle.kem)) {
-              const prevSched = prevBundle.kem[grp];
-              if (prevSched) {
-                const diff = computeScheduleDiff(
-                  prevSched.today,
-                  nextSched.today,
-                  'Сьогодні'
-                );
-                if (diff.hasChanged) {
-                  nextDiffs[`kem:${grp}`] = diff.summaryText;
-                }
-              }
-            }
-            for (const [grp, nextSched] of Object.entries(nextBundle.krem)) {
-              const prevSched = prevBundle.krem[grp];
-              if (prevSched) {
-                const diff = computeScheduleDiff(
-                  prevSched.today,
-                  nextSched.today,
-                  'Сьогодні'
-                );
-                if (diff.hasChanged) {
-                  nextDiffs[`krem:${grp}`] = diff.summaryText;
-                }
-              }
-            }
-            if (Object.keys(nextDiffs).length > 0) {
-              setIntradayDiffByGroup((old) => ({ ...old, ...nextDiffs }));
-            }
-          }
-          return nextBundle;
-        });
+        setBundle(nextBundle);
       } finally {
         setIsRefreshing(false);
       }
@@ -387,8 +349,6 @@ export const App: React.FC = () => {
   }, [bundle, addresses, kyivClock.todayDateKey, kyivClock.tomorrowDateKey]);
 
   const activeSchedule = activeAddress ? schedulesByAddressId[activeAddress.id] : undefined;
-  const activeDiffKey = activeAddress ? `${activeAddress.region}:${activeAddress.group}` : '';
-  const activeIntradayNote = intradayDiffByGroup[activeDiffKey];
 
   const handleSaveAddress = (saved: SavedAddress) => {
     setAddresses((prev) => {
@@ -547,8 +507,6 @@ export const App: React.FC = () => {
           schedule={activeSchedule}
           nowMinutes={kyivClock.nowMinutes}
           currentTimeStr={kyivClock.currentTimeStr}
-          remindersOn={pushEnabled && activeAddress.notifyBeforeOff}
-          intradayChangeNote={activeIntradayNote}
           isRefreshing={isRefreshing}
           onRefresh={() => refreshSchedules(true)}
         />

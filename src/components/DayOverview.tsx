@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Bell, RefreshCw, Sparkles } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import {
   DaySchedule,
   GroupSchedule,
   formatDurationHours,
-  formatMinutesToTime,
   getCurrentAddressStatus,
 } from '../services/scheduleNormalizer';
 import { DayRing } from './DayRing';
@@ -14,9 +13,6 @@ interface DayOverviewProps {
   schedule: GroupSchedule | undefined;
   nowMinutes: number;
   currentTimeStr: string;
-  /** In-app reminder («за 30 хв») is active for this address */
-  remindersOn: boolean;
-  intradayChangeNote?: string;
   isRefreshing: boolean;
   onRefresh: () => void;
 }
@@ -24,7 +20,6 @@ interface DayOverviewProps {
 type DayKey = 'today' | 'tomorrow';
 
 const WEEKDAYS = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота'];
-const REMINDER_LEAD_MIN = 30;
 
 const hoursText = (h: number) => formatDurationHours(h).replace('.', ',');
 
@@ -43,8 +38,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
   schedule,
   nowMinutes,
   currentTimeStr,
-  remindersOn,
-  intradayChangeNote,
   isRefreshing,
   onRefresh,
 }) => {
@@ -59,21 +52,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
 
   const hasData = day?.status === 'ScheduleApplies';
   const onHours = hasData ? sumHours(day, 'on') : 0;
-
-  // Reminder shown only while light is on and the reminder moment is still ahead
-  let reminderTime: string | null = null;
-  if (
-    isToday &&
-    remindersOn &&
-    status.state === 'on' &&
-    status.nextOutage
-  ) {
-    const outageAbs = (status.nextOutageIsTomorrow ? 1440 : 0) + status.nextOutage.startMinutes;
-    const remindAbs = outageAbs - REMINDER_LEAD_MIN;
-    if (remindAbs > nowMinutes) {
-      reminderTime = `${remindAbs >= 1440 ? 'завтра о ' : ''}${formatMinutesToTime(remindAbs % 1440)}`;
-    }
-  }
 
   const renderCenter = () => {
     if (!schedule || !day) {
@@ -151,24 +129,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
       >
         {renderCenter()}
       </DayRing>
-
-      {intradayChangeNote && (
-        <div className="note-banner" role="status">
-          <Sparkles size={18} aria-hidden="true" />
-          <span>
-            <b>Графік оновлено протягом дня.</b> {intradayChangeNote}
-          </span>
-        </div>
-      )}
-
-      {reminderTime && (
-        <div className="note-banner note-banner-reminder">
-          <Bell size={18} aria-hidden="true" />
-          <span>
-            Нагадаємо близько <b>{reminderTime}</b>, за {REMINDER_LEAD_MIN} хв до відключення
-          </span>
-        </div>
-      )}
 
       <div className="day-tabs" role="tablist" aria-label="День">
         <button

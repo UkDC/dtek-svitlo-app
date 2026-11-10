@@ -544,10 +544,6 @@ button {
   background: var(--bg-subtle);
 }
 
-.note-banner + .day-tabs {
-  margin-top: 16px;
-}
-
 .day-tab {
   flex: 1;
   height: 40px;
