@@ -17,6 +17,7 @@ import {
 } from './services/clientScheduleApi';
 import {
   QuietHoursSettings,
+  hasPushSubscription,
   loadInviteCode,
   purgeLegacyGitHubToken,
   syncSubscriberState,
@@ -24,8 +25,8 @@ import {
 import { AddressSheet, addressTitle, regionName } from './components/AddressSheet';
 import { DayOverview } from './components/DayOverview';
 import { EmptyState } from './components/EmptyState';
-import { AddressModal } from './components/AddressModal';
-import { NotificationSettingsModal } from './components/NotificationSettingsModal';
+import { AddressPage } from './components/AddressPage';
+import { NotificationsPage, ThemePreference } from './components/NotificationsPage';
 
 const STORAGE_KEY_ADDRESSES = 'svitlo_saved_addresses_v1';
 const STORAGE_KEY_SELECTED = 'svitlo_selected_address_id_v1';
@@ -77,11 +78,16 @@ export const App: React.FC = () => {
   const [editingAddress, setEditingAddress] = useState<SavedAddress | null>(null);
   const [isNotificationsModalOpen, setIsNotificationsModalOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [pushEnabled, setPushEnabled] = useState<boolean>(() => {
-    return (
-      typeof Notification !== 'undefined' &&
-      Notification.permission === 'granted'
-    );
+  // «On» means: the OS permission is granted AND this device holds a push subscription.
+  // (Turning notifications off keeps the OS permission granted, so permission alone is not enough.)
+  const [pushEnabled, setPushEnabled] = useState<boolean>(false);
+  const [themePref, setThemePref] = useState<ThemePreference>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_THEME);
+      return saved === 'light' || saved === 'dark' ? saved : 'system';
+    } catch {
+      return 'system';
+    }
   });
 
   const [notifiedEvents, setNotifiedEvents] = useState<Record<string, string>>(() => {
@@ -98,15 +104,33 @@ export const App: React.FC = () => {
   // Theme follows the system (prefers-color-scheme); an explicit 'light' | 'dark' override is optional
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_THEME);
-      if (saved === 'light' || saved === 'dark') {
-        document.documentElement.setAttribute('data-theme', saved);
+      if (themePref === 'system') {
+        localStorage.removeItem(STORAGE_KEY_THEME);
       } else {
-        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem(STORAGE_KEY_THEME, themePref);
       }
     } catch {
-      document.documentElement.removeAttribute('data-theme');
+      // storage unavailable: the attribute below still applies for this session
     }
+    if (themePref === 'system') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', themePref);
+    }
+  }, [themePref]);
+
+  // Reflect the real push state (permission + subscription) on mount
+  useEffect(() => {
+    let cancelled = false;
+    if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
+    hasPushSubscription()
+      .then((has) => {
+        if (!cancelled) setPushEnabled(has);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Older builds kept a repo-write GitHub token on the phone; it is unused now, so drop it
@@ -361,6 +385,10 @@ export const App: React.FC = () => {
     setEditingAddress(null);
   };
 
+  const handleUpdateAddress = (id: string, patch: Partial<SavedAddress>) => {
+    setAddresses((prev) => prev.map((a) => (a.id === id ? { ...a, ...patch } : a)));
+  };
+
   const handleDeleteAddress = (id: string) => {
     setAddresses((prev) => {
       const next = prev.filter((a) => a.id !== id);
@@ -526,9 +554,8 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Address Add/Edit Modal */}
       {isAddressModalOpen && (
-        <AddressModal
+        <AddressPage
           initialAddress={editingAddress}
           kemGroups={kemGroups}
           kremGroups={kremGroups}
@@ -541,12 +568,15 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Notification Settings Modal */}
       {isNotificationsModalOpen && (
-        <NotificationSettingsModal
+        <NotificationsPage
+          address={activeAddress ?? undefined}
           addresses={addresses}
           quietHours={quietHours}
           pushEnabled={pushEnabled}
+          themePref={themePref}
+          onUpdateAddress={handleUpdateAddress}
+          onThemeChange={setThemePref}
           onUpdateQuietHours={setQuietHours}
           onPushStatusChange={setPushEnabled}
           onClose={() => setIsNotificationsModalOpen(false)}

@@ -1,3 +1,5 @@
+// STALE: written for the pre-design-B UI (old modals, bottom nav). Its selectors no longer exist;
+// rewrite against AddressPage / NotificationsPage before relying on it.
 import { spawn, ChildProcess } from 'node:child_process';
 import http from 'node:http';
 import fs from 'node:fs';

@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  disablePush,
+  getDeviceSubscriberId,
   purgeLegacyGitHubToken,
   saveInviteCode,
   syncSubscriberState,
@@ -95,5 +97,52 @@ describe('push subscription sync (private store)', () => {
     store.set('svitlo_gh_cloud_config_v1', '{"token":"github_pat_x"}');
     expect(purgeLegacyGitHubToken()).toBe(true);
     expect(store.has('svitlo_gh_cloud_config_v1')).toBe(false);
+  });
+});
+
+
+describe('disablePush', () => {
+  const unsub = vi.fn(async () => true);
+  beforeEach(() => {
+    unsub.mockClear();
+    vi.stubGlobal('navigator', {
+      serviceWorker: {
+        getRegistration: async () => ({ pushManager: { getSubscription: async () => ({ unsubscribe: unsub }) } }),
+      },
+    });
+  });
+
+  it('removes the cloud record with the device token, then the local subscription', async () => {
+    saveInviteCode('AAAA-BBBB-CCCC-DDDD');
+    store.set('svitlo_device_write_token', 'tok');
+    const id = getDeviceSubscriberId();
+    stubFetch(() => new Response('{"ok":true}', { status: 200 }));
+    const r = await disablePush();
+    expect(r).toEqual({ ok: true, cloudRemoved: true });
+    const call = calls.find((c) => c.url.endsWith('/unsubscribe'))!;
+    expect(call.init.headers['X-Device-Token']).toBe('tok');
+    expect(JSON.parse(call.init.body)).toEqual({ id });
+    expect(unsub).toHaveBeenCalledTimes(1);
+    expect(store.has('svitlo_device_write_token')).toBe(false);
+  });
+
+  it('still drops the local subscription when the cloud is unreachable, keeping the token', async () => {
+    saveInviteCode('AAAA-BBBB-CCCC-DDDD');
+    store.set('svitlo_device_write_token', 'tok');
+    vi.stubGlobal('fetch', async () => {
+      throw new Error('offline');
+    });
+    const r = await disablePush();
+    expect(r).toEqual({ ok: true, cloudRemoved: false });
+    expect(unsub).toHaveBeenCalledTimes(1);
+    expect(store.get('svitlo_device_write_token')).toBe('tok');
+  });
+
+  it('skips the cloud call for a device that never registered', async () => {
+    stubFetch(() => new Response('{}', { status: 200 }));
+    const r = await disablePush();
+    expect(r.cloudRemoved).toBe(false);
+    expect(calls).toHaveLength(0);
+    expect(unsub).toHaveBeenCalledTimes(1);
   });
 });

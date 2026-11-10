@@ -298,6 +298,59 @@ export async function renewPushSubscription(): Promise<{
   return registerAndSubscribePush();
 }
 
+/** True when this device currently holds a Web Push subscription (permission alone is not enough). */
+export async function hasPushSubscription(): Promise<boolean> {
+  try {
+    if (!('serviceWorker' in navigator)) return false;
+    const reg = await navigator.serviceWorker.getRegistration();
+    return !!(await reg?.pushManager?.getSubscription());
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Turns notifications off for this device: removes the record from the private store (when the
+ * device is registered there) and drops the local push subscription. The OS permission stays
+ * granted, so enabling again later needs no new prompt.
+ */
+export async function disablePush(): Promise<{ ok: boolean; cloudRemoved: boolean }> {
+  const invite = loadInviteCode();
+  const token = storageGet(DEVICE_TOKEN_KEY);
+  let cloudRemoved = false;
+  if (invite && token) {
+    try {
+      const res = await fetch(`${SUBS_API_URL}/unsubscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Invite': invite,
+          'X-Device-Token': token,
+        },
+        body: JSON.stringify({ id: getDeviceSubscriberId() }),
+        signal: AbortSignal.timeout(8000),
+      });
+      cloudRemoved = res.ok;
+    } catch {
+      // the local subscription is dropped below anyway; a dead endpoint is pruned server-side
+    }
+  }
+
+  let localRemoved = true;
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration();
+    const sub = await reg?.pushManager?.getSubscription();
+    if (sub) localRemoved = await sub.unsubscribe();
+  } catch {
+    localRemoved = false;
+  }
+  if (cloudRemoved) {
+    storageSet(DEVICE_TOKEN_KEY, null);
+    storageSet(DEVICE_ID_KEY, null);
+  }
+  return { ok: localRemoved, cloudRemoved };
+}
+
 /**
  * Triggers an immediate test notification (both via local Service Worker & remote Web Push / GitHub Actions)
  */
