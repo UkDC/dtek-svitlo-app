@@ -1,23 +1,24 @@
 import React, { useId } from 'react';
 import { HalfHourSlotStatus } from '../services/scheduleNormalizer';
 import {
+  DialArc,
   RING_CENTER,
-  RING_RADIUS_INNER,
-  RING_RADIUS_OUTER,
+  RING_RADIUS_MAIN,
+  RING_RADIUS_TRACK,
   RING_SIZE,
-  RING_STROKE,
-  buildLapArcs,
+  RING_STROKE_MAIN,
+  RING_STROKE_TRACK,
   buildRingArcs,
   buildRingAriaLabel,
-  dialPosition,
+  planDial,
   polar,
-  ringMarkerPosition,
-  ringRadius,
 } from '../services/ringGeometry';
 
 interface DayRingProps {
-  /** 48 half-hour slots; omit for the placeholder (dashed) rings */
+  /** 48 half-hour slots of the shown day; omit for the placeholder (dashed) rings */
   slots?: HalfHourSlotStatus[];
+  /** 48 slots of the following day: feeds the thin outer track after 12:00. Omit → dashed track */
+  nextDaySlots?: HalfHourSlotStatus[];
   /** Minutes since midnight for the «now» hand; null hides it (e.g. tomorrow) */
   nowMinutes: number | null;
   /** Override for the screen-reader label (placeholder ring) */
@@ -26,34 +27,58 @@ interface DayRingProps {
   children?: React.ReactNode;
 }
 
-const TICK_INNER = 136; // ticks sit just outside the outer ring (outer edge = 132)
-const TICK_OUTER = 140;
-const TICK_OUTER_MAJOR = 144;
-const LABEL_RADIUS = 153;
+const TICK_START = 87; // ticks sit just inside the main ring (inner edge = 91)
+const TICK_END = 84;
+const TICK_END_MAJOR = 80;
+const DIGIT_RADIUS = 68;
+const HAND_FROM = 82;
+const HAND_TO = 126;
 
-const HOUR_LABELS = [
-  { text: '12', hour: 0 },
-  { text: '3', hour: 3 },
-  { text: '6', hour: 6 },
-  { text: '9', hour: 9 },
-];
-
-export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, children }) => {
+export const DayRing: React.FC<DayRingProps> = ({ slots, nextDaySlots, nowMinutes, ariaLabel, children }) => {
   const rawId = useId();
   const hatchId = `maybe-${rawId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
-  const arcs = slots ? buildLapArcs(slots) : [];
-  const hasMaybe = arcs.some((a) => a.status === 'maybe');
-  const marker = nowMinutes === null ? null : ringMarkerPosition(nowMinutes);
-  const handFraction = nowMinutes === null ? 0 : dialPosition(nowMinutes).fraction;
+  const plan = slots ? planDial({ slots, nowMinutes, nextDaySlots }) : null;
+  const hasMaybe = !!plan && (plan.main.some((a) => a.status === 'maybe') || !!plan.track?.some((a) => a.status === 'maybe'));
   const label = ariaLabel ?? buildRingAriaLabel(slots ? buildRingArcs(slots) : []);
+
+  const renderArcs = (arcs: DialArc[], radius: number, strokeWidth: number, className: string) => (
+    <g transform={`rotate(-90 ${RING_CENTER} ${RING_CENTER})`} fill="none" strokeWidth={strokeWidth}>
+      {arcs.map((arc) => (
+        <circle
+          key={`${arc.startMinutes}-${arc.status}-${arc.past ? 'p' : 'f'}`}
+          cx={RING_CENTER}
+          cy={RING_CENTER}
+          r={radius}
+          className={`${className} ring-arc-${arc.status}${arc.past ? ' ring-arc-past' : ''}`}
+          style={arc.status === 'maybe' ? { stroke: `url(#${hatchId})` } : undefined}
+          strokeDasharray={`${arc.length} ${arc.circumference.toFixed(1)}`}
+          strokeDashoffset={arc.offset}
+        />
+      ))}
+    </g>
+  );
+
+  // «No data» placeholders: a plain faint ring (main) and a thin dotted line (track),
+  // deliberately unlike the thick coloured arcs and unlike clock ticks.
+  const emptyMain = (
+    <circle cx={RING_CENTER} cy={RING_CENTER} r={RING_RADIUS_MAIN} fill="none" className="ring-empty ring-empty-main" strokeWidth={RING_STROKE_MAIN} />
+  );
+  const emptyTrack = (
+    <circle
+      cx={RING_CENTER}
+      cy={RING_CENTER}
+      r={RING_RADIUS_TRACK}
+      fill="none"
+      className="ring-empty"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeDasharray="0.1 7"
+    />
+  );
 
   return (
     <div className="day-ring">
-      <svg
-        viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`}
-        role="img"
-        aria-label={label}
-      >
+      <svg viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`} role="img" aria-label={label}>
         {hasMaybe && (
           <defs>
             <pattern
@@ -69,44 +94,28 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, 
           </defs>
         )}
 
-        {slots ? (
-          <g transform={`rotate(-90 ${RING_CENTER} ${RING_CENTER})`} fill="none" strokeWidth={RING_STROKE}>
-            {arcs.map((arc) => (
-              <circle
-                key={`${arc.lap}-${arc.startMinutes}-${arc.status}`}
-                cx={RING_CENTER}
-                cy={RING_CENTER}
-                r={ringRadius(arc.lap)}
-                className={`ring-arc ring-arc-${arc.status}`}
-                style={arc.status === 'maybe' ? { stroke: `url(#${hatchId})` } : undefined}
-                strokeDasharray={`${arc.length} ${arc.circumference.toFixed(1)}`}
-                strokeDashoffset={arc.offset}
-              />
-            ))}
-          </g>
+        {plan ? (
+          <>
+            {plan.track
+              ? renderArcs(plan.track, RING_RADIUS_TRACK, RING_STROKE_TRACK, 'ring-arc ring-track')
+              : emptyTrack}
+            {renderArcs(plan.main, RING_RADIUS_MAIN, RING_STROKE_MAIN, 'ring-arc')}
+          </>
         ) : (
-          [RING_RADIUS_INNER, RING_RADIUS_OUTER].map((r) => (
-            <circle
-              key={r}
-              cx={RING_CENTER}
-              cy={RING_CENTER}
-              r={r}
-              fill="none"
-              className="ring-empty"
-              strokeWidth={RING_STROKE}
-              strokeDasharray="3 9"
-            />
-          ))
+          <>
+            {emptyTrack}
+            {emptyMain}
+          </>
         )}
 
         <g aria-hidden="true">
-          {Array.from({ length: 12 }, (_, h) => {
-            const major = h % 3 === 0;
-            const a = polar(TICK_INNER, h / 12);
-            const b = polar(major ? TICK_OUTER_MAJOR : TICK_OUTER, h / 12);
+          {Array.from({ length: 12 }, (_, k) => {
+            const major = k % 3 === 0;
+            const a = polar(TICK_START, k / 12);
+            const b = polar(major ? TICK_END_MAJOR : TICK_END, k / 12);
             return (
               <line
-                key={h}
+                key={k}
                 x1={a.x}
                 y1={a.y}
                 x2={b.x}
@@ -115,8 +124,8 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, 
               />
             );
           })}
-          {HOUR_LABELS.map((l) => {
-            const p = polar(LABEL_RADIUS, l.hour / 12);
+          {(plan ? plan.hourLabels : []).map((l) => {
+            const p = polar(DIGIT_RADIUS, l.fraction);
             return (
               <text
                 key={l.text}
@@ -124,7 +133,7 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, 
                 y={p.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize={12}
+                fontSize={10.5}
                 fontWeight={600}
                 className="ring-hour-label"
               >
@@ -133,46 +142,22 @@ export const DayRing: React.FC<DayRingProps> = ({ slots, nowMinutes, ariaLabel, 
             );
           })}
 
-          {slots && (
-            <>
-              <LapTag x={6} anchor="start" lap={0} text="00–12" />
-              <LapTag x={RING_SIZE - 6} anchor="end" lap={1} text="12–24" />
-            </>
-          )}
-
-          {marker && (
+          {plan && plan.nowFraction !== null && (
             <>
               {(() => {
-                const a = polar(RING_RADIUS_INNER - RING_STROKE / 2 - 2, handFraction);
-                const b = polar(RING_RADIUS_OUTER + RING_STROKE / 2 + 2, handFraction);
+                const a = polar(HAND_FROM, plan.nowFraction);
+                const b = polar(HAND_TO, plan.nowFraction);
                 return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} className="ring-hand" />;
               })()}
-              <circle cx={marker.x} cy={marker.y} r={8} className="ring-marker" strokeWidth={3} />
+              {(() => {
+                const m = polar(RING_RADIUS_MAIN, plan.nowFraction);
+                return <circle cx={m.x} cy={m.y} r={8} className="ring-marker" strokeWidth={3} />;
+              })()}
             </>
           )}
         </g>
       </svg>
       <div className="day-ring-center">{children}</div>
     </div>
-  );
-};
-
-/** Corner legend explaining which ring is which half of the day: a mini two-ring glyph + hours. */
-const LapTag: React.FC<{ x: number; anchor: 'start' | 'end'; lap: 0 | 1; text: string }> = ({
-  x,
-  anchor,
-  lap,
-  text,
-}) => {
-  const gx = anchor === 'start' ? x + 7 : x - 7;
-  const tx = anchor === 'start' ? x + 20 : x - 20;
-  return (
-    <g>
-      <circle cx={gx} cy={12} r={3} className={lap === 0 ? 'ring-glyph ring-glyph-active' : 'ring-glyph'} />
-      <circle cx={gx} cy={12} r={6.5} fill="none" className={lap === 1 ? 'ring-glyph-ring ring-glyph-active' : 'ring-glyph-ring'} />
-      <text x={tx} y={12} textAnchor={anchor} dominantBaseline="central" fontSize={12} fontWeight={600} className="ring-hour-label">
-        {text}
-      </text>
-    </g>
   );
 };
