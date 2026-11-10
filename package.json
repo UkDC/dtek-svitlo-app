@@ -10,6 +10,7 @@
     "start": "NODE_ENV=production tsx server/index.ts",
     "push:check": "tsx server/cli-push-check.ts",
     "sync:schedules": "tsx server/cli-sync-schedules.ts",
+    "bump": "tsx scripts/bump-version.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "tsx scripts/chrome-e2e.ts"
