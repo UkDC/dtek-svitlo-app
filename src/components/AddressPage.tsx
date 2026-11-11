@@ -57,6 +57,10 @@ export const AddressPage: React.FC<AddressPageProps> = ({
   const [groupVia, setGroupVia] = useState<GroupVia>('saved');
   const [manualOpen, setManualOpen] = useState(false);
   const [groupFilter, setGroupFilter] = useState('');
+  // Mirrors `group` for the async Kyiv lookup: it must never overwrite a group that is already set
+  // (saved earlier or chosen manually) — only fill in a group that is still unknown.
+  const groupRef = useRef<string | null>(group);
+  groupRef.current = group;
 
   const [citySuggestions, setCitySuggestions] = useState<string[]>([]);
   const [streetSuggestions, setStreetSuggestions] = useState<StreetSearchItem[]>([]);
@@ -153,8 +157,10 @@ export const AddressPage: React.FC<AddressPageProps> = ({
         setHouseSuggestions(res.houses || []);
         if (!wantsGroup) return;
         if (res.detectedGroup) {
-          setGroup(res.detectedGroup);
-          setGroupVia('auto');
+          if (groupRef.current === null) {
+            setGroup(res.detectedGroup);
+            setGroupVia('auto');
+          }
           setKyivFailure(null);
         } else {
           // Only record the failure here; whether it is shown is decided below, so a half-typed
