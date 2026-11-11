@@ -488,8 +488,135 @@ body {
   color: var(--text-secondary);
 }
 
+/* ───────── Лампочка в центрі кільця (замість «Світло є / Світла немає») ───────── */
+/* Selector beats `.day-ring svg { width: 100% }`. Width is relative to the centre column
+   (42.8% of the ring), so the bulb scales with the ring. Time + bulb + «до …» must fit between the
+   00 and 06 labels of the inner dial (~100 px on a 375 px phone), exactly like the old two-line
+   «Світла / немає» did: ~53 px on a 375 px phone, ~54 px at the 344 px ring maximum. */
+.day-ring-center .light-bulb {
+  width: 37%;
+  height: auto;
+  aspect-ratio: 1;
+  margin: 2px 0 0;
+}
+
+.day-ring-center .light-bulb + .ring-center-target {
+  margin-top: 4px;
+}
+
+.light-bulb {
+  --bulb-off: #c9c2b3;
+  --bulb-off-line: var(--text-secondary);
+  overflow: visible;
+}
+
+.light-bulb * {
+  transition: fill 0.6s ease, stroke 0.6s ease, opacity 0.6s ease;
+}
+
+.light-bulb-rays {
+  stroke: var(--ring-on);
+  stroke-width: 5;
+  stroke-linecap: round;
+  transform-origin: 50px 42px;
+}
+
+.light-bulb-glass {
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.light-bulb-inner {
+  fill: #ffffff;
+  opacity: 0;
+}
+
+.light-bulb-filament {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.light-bulb.is-on .light-bulb-glass {
+  fill: var(--ring-on);
+  stroke: var(--text-primary);
+}
+.light-bulb.is-on .light-bulb-filament {
+  stroke: var(--text-primary);
+}
+.light-bulb.is-on .light-bulb-base {
+  fill: var(--text-primary);
+}
+
+.light-bulb.is-off .light-bulb-rays {
+  opacity: 0;
+}
+.light-bulb.is-off .light-bulb-glass {
+  fill: var(--bulb-off);
+  stroke: var(--bulb-off-line);
+}
+.light-bulb.is-off .light-bulb-filament {
+  stroke: var(--bulb-off-line);
+  opacity: 0.6;
+}
+.light-bulb.is-off .light-bulb-base {
+  fill: var(--bulb-off-line);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .light-bulb {
+    --bulb-off: #4a5160;
+  }
+}
+:root[data-theme='dark'] .light-bulb {
+  --bulb-off: #4a5160;
+}
+
+@keyframes bulb-rays {
+  0%, 100% { opacity: 0.35; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1); }
+}
+@keyframes bulb-inner {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.55; }
+}
+@keyframes bulb-ignite {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  18% { opacity: 0.2; }
+  30% { opacity: 1; }
+  38% { opacity: 0.5; }
+  55%, 100% { opacity: 1; }
+}
+@keyframes bulb-cool {
+  0% { stroke: #ff9f0a; opacity: 1; }
+  100% { stroke: var(--bulb-off-line); opacity: 0.6; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .light-bulb.is-on .light-bulb-rays {
+    animation: bulb-rays 3s ease-in-out infinite;
+  }
+  .light-bulb.is-on .light-bulb-inner {
+    animation: bulb-inner 3s ease-in-out infinite;
+  }
+  .light-bulb.is-igniting .light-bulb-lit {
+    animation: bulb-ignite 0.9s ease-out 1;
+  }
+  .light-bulb.is-cooling .light-bulb-filament {
+    animation: bulb-cool 1.4s ease-out 1 forwards;
+  }
+}
+
 /* Narrow phones: the 00/06 digits sit closer to the centre, so the centre text shrinks a little */
 @media (max-width: 360px) {
+  .day-ring-center .light-bulb {
+    width: 34%;
+  }
+  .day-ring-center .light-bulb + .ring-center-target {
+    margin-top: 2px;
+  }
   .ring-center-time {
     font-size: 12px;
   }

@@ -7,6 +7,7 @@ import {
   getCurrentAddressStatus,
 } from '../services/scheduleNormalizer';
 import { DayRing } from './DayRing';
+import { LightBulb } from './LightBulb';
 import { ScheduleList } from './ScheduleList';
 
 interface DayOverviewProps {
@@ -90,20 +91,7 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
     return (
       <>
         <span className="ring-center-time">{currentTimeStr}</span>
-        <span className="ring-center-title">
-          {isOn ? (
-            <>
-              Світло
-              <br />є
-            </>
-          ) : (
-            <>
-              Світла
-              <br />
-              немає
-            </>
-          )}
-        </span>
+        <LightBulb isOn={isOn} />
         <span className="ring-center-target">{tail}</span>
       </>
     );
