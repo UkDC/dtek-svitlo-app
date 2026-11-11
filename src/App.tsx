@@ -34,7 +34,7 @@ const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
 const SUBS_REFRESH_KEY = 'svitlo_subs_refreshed_at';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-11T10:59:59.741Z';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-11T11:29:14.178Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
@@ -453,14 +453,20 @@ export const App: React.FC = () => {
             </span>
             <ChevronDown size={18} strokeWidth={2.2} aria-hidden="true" />
           </button>
-          <button
-            type="button"
-            className="round-btn"
-            aria-label="Сповіщення"
-            onClick={() => setIsNotificationsModalOpen(true)}
-          >
-            <Bell size={20} aria-hidden="true" />
-          </button>
+          <div className="top-header-side">
+            {/* Kyiv time (the schedule's clock), not the phone's: they differ abroad */}
+            <time className="top-header-time" aria-label={`Київський час ${kyivClock.currentTimeStr}`}>
+              {kyivClock.currentTimeStr}
+            </time>
+            <button
+              type="button"
+              className="round-btn"
+              aria-label="Сповіщення"
+              onClick={() => setIsNotificationsModalOpen(true)}
+            >
+              <Bell size={20} aria-hidden="true" />
+            </button>
+          </div>
         </header>
       )}
 
@@ -511,7 +517,6 @@ export const App: React.FC = () => {
           key={activeAddress.id}
           schedule={activeSchedule}
           nowMinutes={kyivClock.nowMinutes}
-          currentTimeStr={kyivClock.currentTimeStr}
           isRefreshing={isRefreshing}
           onRefresh={() => refreshSchedules(true)}
         />

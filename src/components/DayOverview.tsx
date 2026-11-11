@@ -13,7 +13,6 @@ import { ScheduleList } from './ScheduleList';
 interface DayOverviewProps {
   schedule: GroupSchedule | undefined;
   nowMinutes: number;
-  currentTimeStr: string;
   isRefreshing: boolean;
   onRefresh: () => void;
 }
@@ -38,7 +37,6 @@ function sumHours(day: DaySchedule, status: 'on' | 'off' | 'maybe'): number {
 export const DayOverview: React.FC<DayOverviewProps> = ({
   schedule,
   nowMinutes,
-  currentTimeStr,
   isRefreshing,
   onRefresh,
 }) => {
@@ -90,7 +88,6 @@ export const DayOverview: React.FC<DayOverviewProps> = ({
       : 'більше без відключень';
     return (
       <>
-        <span className="ring-center-time">{currentTimeStr}</span>
         <LightBulb isOn={isOn} />
         <span className="ring-center-target">{tail}</span>
       </>

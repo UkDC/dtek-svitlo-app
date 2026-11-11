@@ -305,6 +305,21 @@ body {
   gap: 12px;
 }
 
+.top-header-side {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-header-time {
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
 .address-trigger {
   display: flex;
   align-items: center;
@@ -494,12 +509,13 @@ body {
    Never `height: auto` / percentage width here: WebKit (iPhone) sizes an SVG flex item with
    height:auto by its intrinsic 150 px, which stretched the centre column past the inner dial (H21).
    Selector beats `.day-ring svg { width: 100%; height: auto }`.
-   Budget: time + bulb + «до …» must fit between the 00 and 06 labels (~31% of the ring height). */
+   Budget: bulb + «до …» must fit between the 00 and 06 labels (~31% of the ring height);
+   the current time lives in the header (.top-header-time), not here. */
 .day-ring-center .light-bulb {
   flex: none;
-  width: 18.5cqw;
-  height: 17cqw;
-  margin: 2px 0 0;
+  width: 25cqw;
+  height: 23cqw;
+  margin: 0;
 }
 
 .day-ring-center .light-bulb + .ring-center-target {
@@ -613,10 +629,6 @@ body {
 
 /* Narrow phones: the 00/06 digits sit closer to the centre, so the centre text shrinks a little */
 @media (max-width: 360px) {
-  .day-ring-center .light-bulb {
-    width: 17.4cqw;
-    height: 16cqw;
-  }
   .day-ring-center .light-bulb + .ring-center-target {
     margin-top: 2px;
   }
