@@ -505,7 +505,24 @@ export const AddressPage: React.FC<AddressPageProps> = ({
               <span className="group-banner-title">Група {group}</span>
               <span className="group-banner-sub">{bannerSub}</span>
             </span>
+            <button
+              type="button"
+              className="outline-btn group-banner-edit"
+              onClick={() => setManualOpen(true)}
+            >
+              Змінити
+            </button>
           </div>
+        )}
+
+        {!showBanner && !showSearching && !manualOpen && (
+          <button
+            type="button"
+            className="manual-toggle-btn"
+            onClick={() => setManualOpen(true)}
+          >
+            Обрати групу вручну
+          </button>
         )}
 
         {region === 'krem' && oblastFailure && !manualOpen && (
@@ -550,20 +567,22 @@ export const AddressPage: React.FC<AddressPageProps> = ({
 
         {manualOpen && (
           <section className="manual" aria-labelledby="manual-title">
-            <div className="result-card result-card-warn" role="alert">
-              <Info size={20} aria-hidden="true" />
-              <span className="result-card-text">
-                <span className="result-card-title">Не вдалося визначити групу</span>
-                <span className="result-card-sub">
-                  {region === 'kem'
-                    ? kyivFailure
-                    : oblastFailure
-                    ? oblastFailureText(oblastFailure.reason)
-                    : 'Сайт ДТЕК зараз недоступний або не знайшов адресу. Спробуйте ще раз пізніше.'}
+            {(kyivFailure || oblastFailure) && (
+              <div className="result-card result-card-warn" role="alert">
+                <Info size={20} aria-hidden="true" />
+                <span className="result-card-text">
+                  <span className="result-card-title">Не вдалося визначити групу</span>
+                  <span className="result-card-sub">
+                    {region === 'kem'
+                      ? kyivFailure
+                      : oblastFailure
+                      ? oblastFailureText(oblastFailure.reason)
+                      : 'Сайт ДТЕК зараз недоступний або не знайшов адресу. Спробуйте ще раз пізніше.'}
+                  </span>
                 </span>
-              </span>
-            </div>
-            {region === 'krem' && (
+              </div>
+            )}
+            {region === 'krem' && (kyivFailure || oblastFailure) && (
               <button
                 type="button"
                 className="outline-btn"
@@ -575,7 +594,7 @@ export const AddressPage: React.FC<AddressPageProps> = ({
             )}
 
             <h2 id="manual-title" className="field-label manual-title">
-              Або виберіть групу вручну
+              {kyivFailure || oblastFailure ? 'Або виберіть групу вручну' : 'Виберіть групу вручну'}
             </h2>
             <p className="manual-text">
               Номер групи вказано в платіжці за світло або на сайті ДТЕК. Якщо вибрати неправильно,

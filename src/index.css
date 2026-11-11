@@ -1147,6 +1147,38 @@ body {
   color: var(--text-body);
 }
 
+.group-banner-edit {
+  margin-left: auto;
+  flex-shrink: 0;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.manual-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-top: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.manual-toggle-btn:hover {
+  color: var(--text-primary);
+}
+
 .chip-row {
   display: flex;
   flex-wrap: wrap;
