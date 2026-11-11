@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T18:35:46.205Z",
+  "updatedAt": "2026-11-11T18:40:46.895Z",
   "groups": {
     "kem:1.1": {
       "today": {
@@ -13203,7 +13203,6 @@
     }
   },
   "notifiedEvents": {
-    "ios_legacy|addr_default_oblast:change:2026-11-09:offoffoffoffoffoffoffonononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoff:offoffoffoffoffoffonononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoffoffoffoffonononon": "2026-11-09T18:37:45.385Z",
     "ios_legacy|addr_default_kyiv:change:2026-11-09:ononononoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononoffoffoffoffoffoffoffoff:offoffoffoffoffoffoffononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffonononononoffoffoffoffoffoffoffoffoffoffoffoffoff": "2026-11-09T19:15:45.123Z",
     "ios_e0e07afb544a45e389f99814ed33dc09|addr_1794262398169:change:2026-11-10:onononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononoff:onononononononononononononononononononononononononononononononononononononononononononononononon": "2026-11-10T06:35:50.488Z",
     "ios_8919081054764878abec8f4ba446fcf1|addr_1794291861202:2026-11-10:before_off:570": "2026-11-10T07:00:48.297Z",
