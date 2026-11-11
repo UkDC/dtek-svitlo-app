@@ -1130,6 +1130,7 @@ body {
 }
 
 .group-banner-text {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1147,7 +1148,9 @@ body {
   color: var(--text-body);
 }
 
-.group-banner-edit {
+.group-banner .group-banner-edit {
+  /* .outline-btn (defined later) sets width:100%; beat it by specificity, not by order */
+  width: auto;
   margin-left: auto;
   flex-shrink: 0;
   height: 36px;
