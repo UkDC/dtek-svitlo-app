@@ -366,6 +366,7 @@ body {
 
 .day-ring {
   position: relative;
+  container-type: inline-size;
   width: min(344px, 100%);
   aspect-ratio: 1;
   margin: 8px auto 0;
@@ -489,14 +490,15 @@ body {
 }
 
 /* ───────── Лампочка в центрі кільця (замість «Світло є / Світла немає») ───────── */
-/* Selector beats `.day-ring svg { width: 100% }`. Width is relative to the centre column
-   (42.8% of the ring), so the bulb scales with the ring. Time + bulb + «до …» must fit between the
-   00 and 06 labels of the inner dial (~100 px on a 375 px phone), exactly like the old two-line
-   «Світла / немає» did: ~53 px on a 375 px phone, ~54 px at the 344 px ring maximum. */
+/* Explicit width AND height in container units of the ring (`.day-ring` is the container).
+   Never `height: auto` / percentage width here: WebKit (iPhone) sizes an SVG flex item with
+   height:auto by its intrinsic 150 px, which stretched the centre column past the inner dial (H21).
+   Selector beats `.day-ring svg { width: 100%; height: auto }`.
+   Budget: time + bulb + «до …» must fit between the 00 and 06 labels (~31% of the ring height). */
 .day-ring-center .light-bulb {
-  width: 37%;
-  height: auto;
-  aspect-ratio: 1;
+  flex: none;
+  width: 18.5cqw;
+  height: 17cqw;
   margin: 2px 0 0;
 }
 
@@ -612,7 +614,8 @@ body {
 /* Narrow phones: the 00/06 digits sit closer to the centre, so the centre text shrinks a little */
 @media (max-width: 360px) {
   .day-ring-center .light-bulb {
-    width: 34%;
+    width: 17.4cqw;
+    height: 16cqw;
   }
   .day-ring-center .light-bulb + .ring-center-target {
     margin-top: 2px;

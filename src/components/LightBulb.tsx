@@ -31,7 +31,7 @@ export const LightBulb: React.FC<LightBulbProps> = ({ isOn }) => {
   return (
     <svg
       className={`light-bulb ${isOn ? 'is-on' : 'is-off'} ${transition}`.trim()}
-      viewBox="0 0 100 100"
+      viewBox="2 0 96 88"
       role="img"
       aria-label={label}
     >
