@@ -23,6 +23,7 @@ import {
 } from './services/pushSyncService';
 import { AddressSheet, addressTitle, regionName } from './components/AddressSheet';
 import { DayOverview } from './components/DayOverview';
+import { PullToRefresh } from './components/PullToRefresh';
 import { EmptyState } from './components/EmptyState';
 import { AddressPage } from './components/AddressPage';
 import { NotificationsPage, ThemePreference } from './components/NotificationsPage';
@@ -33,7 +34,7 @@ const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
 const SUBS_REFRESH_KEY = 'svitlo_subs_refreshed_at';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-10T22:05:50.573Z';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-11T05:07:40.859Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
@@ -432,6 +433,10 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-shell">
+      <PullToRefresh
+        enabled={!isSheetOpen && !isAddressModalOpen && !isNotificationsModalOpen}
+        onRefresh={() => refreshSchedules(true)}
+      >
       {activeAddress && (
         <header className="top-header">
           <button
@@ -513,6 +518,7 @@ export const App: React.FC = () => {
       ) : (
         <EmptyState onAdd={openAddAddress} />
       )}
+      </PullToRefresh>
 
       {isSheetOpen && (
         <AddressSheet

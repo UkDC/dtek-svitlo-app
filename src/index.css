@@ -241,6 +241,52 @@ button {
   }
 }
 
+/* ───────── Свайп вниз для оновлення ───────── */
+html,
+body {
+  /* Без «резинки» iOS: індикатор малюємо самі (PullToRefresh). */
+  overscroll-behavior-y: none;
+}
+
+.ptr {
+  position: fixed;
+  top: var(--safe-top);
+  left: 50%;
+  z-index: 40;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.ptr-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transition: transform 0.25s ease;
+}
+
+.ptr-dragging {
+  transition: none;
+}
+
+.ptr-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ───────── Каркас ───────── */
 .app-shell {
   max-width: 480px;
