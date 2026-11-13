@@ -123,18 +123,39 @@ function remoteStore(): { url: string; secret: string } | null {
   return url && secret ? { url: url.replace(/\/+$/, ''), secret } : null;
 }
 
+const SUBS_FETCH_ATTEMPTS = 3;
+const SUBS_RETRY_BASE_MS = 1000;
+
 export async function loadSubscribers(): Promise<SubscriberProfile[]> {
   const remote = remoteStore();
   if (remote) {
     // Fail loudly: silently treating an outage as "no subscribers" would stop all alerts unnoticed.
-    const res = await fetch(`${remote.url}/internal/subscribers`, {
-      headers: { Authorization: `Bearer ${remote.secret}` },
-      signal: AbortSignal.timeout(15000),
-    });
-    if (!res.ok) throw new Error(`Subscription store answered HTTP ${res.status}`);
-    const data = (await res.json()) as { subscribers?: unknown };
-    if (!Array.isArray(data.subscribers)) throw new Error('Subscription store: bad response');
-    return data.subscribers as SubscriberProfile[];
+    for (let attempt = 1; attempt <= SUBS_FETCH_ATTEMPTS; attempt++) {
+      let retryable = true;
+      try {
+        const res = await fetch(`${remote.url}/internal/subscribers`, {
+          headers: { Authorization: `Bearer ${remote.secret}` },
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!res.ok) {
+          retryable = res.status >= 500;
+          throw new Error(`Subscription store answered HTTP ${res.status}`);
+        }
+        const data = (await res.json()) as { subscribers?: unknown };
+        if (!Array.isArray(data.subscribers)) {
+          retryable = false;
+          throw new Error('Subscription store: bad response');
+        }
+        return data.subscribers as SubscriberProfile[];
+      } catch (err) {
+        if (!retryable || attempt === SUBS_FETCH_ATTEMPTS) throw err;
+        console.warn(
+          `[Push] Subscriber store fetch failed (attempt ${attempt}/${SUBS_FETCH_ATTEMPTS}), retrying:`,
+          err instanceof Error ? err.message : String(err)
+        );
+        await new Promise((r) => setTimeout(r, SUBS_RETRY_BASE_MS * attempt));
+      }
+    }
   }
   if (process.env.GITHUB_ACTIONS === 'true') {
     throw new Error(

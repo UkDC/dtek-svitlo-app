@@ -5,6 +5,7 @@ import {
 } from '../server/services/notificationScheduler';
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
 });
@@ -24,11 +25,45 @@ describe('server subscriber store', () => {
     expect(seen[0].auth).toBe(`Bearer ${'s'.repeat(40)}`);
   });
 
+  it('retries transient timeouts/5xx and succeeds if a subsequent attempt works', async () => {
+    vi.useFakeTimers();
+    vi.stubEnv('SUBS_API_URL', 'https://subs.example');
+    vi.stubEnv('SUBS_SECRET', 's'.repeat(40));
+    let calls = 0;
+    vi.stubGlobal('fetch', async () => {
+      calls++;
+      if (calls === 1) throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
+      if (calls === 2) return new Response('{}', { status: 503 });
+      return new Response(JSON.stringify({ subscribers: [{ id: 'ok', addresses: [] }] }), { status: 200 });
+    });
+    const p = loadSubscribers();
+    await vi.runAllTimersAsync();
+    const list = await p;
+    expect(calls).toBe(3);
+    expect(list).toHaveLength(1);
+    expect(list[0].id).toBe('ok');
+  });
+
+  it('fails fast on 4xx without retrying', async () => {
+    vi.stubEnv('SUBS_API_URL', 'https://subs.example');
+    vi.stubEnv('SUBS_SECRET', 's'.repeat(40));
+    let calls = 0;
+    vi.stubGlobal('fetch', async () => {
+      calls++;
+      return new Response('{}', { status: 401 });
+    });
+    await expect(loadSubscribers()).rejects.toThrow(/HTTP 401/);
+    expect(calls).toBe(1);
+  });
+
   it('fails loudly when the store is down (an outage must not look like "no subscribers")', async () => {
+    vi.useFakeTimers();
     vi.stubEnv('SUBS_API_URL', 'https://subs.example');
     vi.stubEnv('SUBS_SECRET', 's'.repeat(40));
     vi.stubGlobal('fetch', async () => new Response('{}', { status: 500 }));
-    await expect(loadSubscribers()).rejects.toThrow(/HTTP 500/);
+    const assertion = expect(loadSubscribers()).rejects.toThrow(/HTTP 500/);
+    await vi.runAllTimersAsync();
+    await assertion;
   });
 
   it('refuses to run on GitHub Actions without the store configured', async () => {
