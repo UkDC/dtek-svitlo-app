@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Bell, CheckCircle2, ChevronDown, Sparkles, X, ZapOff } from 'lucide-react';
+import { Bell, ChevronDown, Sparkles } from 'lucide-react';
 import {
   GroupSchedule,
   SavedAddress,
-  UpcomingAlertTrigger,
-  evaluateUpcomingAlerts,
   getKyivTimeContext,
-  isWithinQuietHours,
   rolloverGroupSchedule,
 } from './services/scheduleNormalizer';
 import {
@@ -34,7 +31,7 @@ const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
 const SUBS_REFRESH_KEY = 'svitlo_subs_refreshed_at';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-11T11:29:14.178Z';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-13T09:00:31.786Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {
@@ -87,17 +84,6 @@ export const App: React.FC = () => {
       return 'system';
     }
   });
-
-  const [notifiedEvents, setNotifiedEvents] = useState<Record<string, string>>(() => {
-    try {
-      const raw = localStorage.getItem('svitlo_notified_events');
-      return raw ? JSON.parse(raw) : {};
-    } catch {
-      return {};
-    }
-  });
-
-  const [activeAlertBanner, setActiveAlertBanner] = useState<UpcomingAlertTrigger | null>(null);
 
   // Theme follows the system (prefers-color-scheme); an explicit 'light' | 'dark' override is optional
   useEffect(() => {
@@ -179,99 +165,11 @@ export const App: React.FC = () => {
     []
   );
 
-  // Check for upcoming 30-minute outage and power restoration alerts
-  const checkUpcomingAlerts = useCallback(() => {
-    if (!bundle) return;
-    const nowMin = kyivClock.nowMinutes;
-    const inQuiet = isWithinQuietHours(
-      nowMin,
-      quietHours.enabled,
-      quietHours.start,
-      quietHours.end
-    );
-
-    for (const addr of addresses) {
-      const scheduleMap = addr.region === 'kem' ? bundle.kem : bundle.krem;
-      const rawGroupSched = scheduleMap[addr.group];
-      if (!rawGroupSched?.today) continue;
-      const groupSched = rolloverGroupSchedule(
-        rawGroupSched,
-        kyivClock.todayDateKey,
-        kyivClock.tomorrowDateKey
-      );
-
-      const triggers = evaluateUpcomingAlerts(
-        addr,
-        groupSched.today,
-        nowMin,
-        notifiedEvents,
-        10,
-        42,
-        groupSched.tomorrow
-      );
-
-      if (triggers.length > 0) {
-        const trigger = triggers[0];
-        const nextNotified = {
-          ...notifiedEvents,
-          [trigger.eventId]: new Date().toISOString(),
-        };
-        setNotifiedEvents(nextNotified);
-        try {
-          localStorage.setItem(
-            'svitlo_notified_events',
-            JSON.stringify(nextNotified)
-          );
-        } catch {}
-
-        if (!inQuiet) {
-          setActiveAlertBanner(trigger);
-
-          // Native Web Notification via Service Worker
-          if (
-            typeof Notification !== 'undefined' &&
-            Notification.permission === 'granted' &&
-            'serviceWorker' in navigator
-          ) {
-            navigator.serviceWorker.ready
-              .then((reg) => {
-                // `renotify` is valid at runtime but missing from lib.dom's NotificationOptions
-                const options: NotificationOptions & { renotify?: boolean } = {
-                  body: trigger.body,
-                  icon: './icon-192.svg',
-                  badge: './icon-192.svg',
-                  tag: trigger.eventId,
-                  renotify: true,
-                  data: { url: './', addressId: trigger.addressId },
-                };
-                reg.showNotification(trigger.title, options);
-              })
-              .catch(() => {});
-          }
-
-          // Haptic feedback
-          if ('vibrate' in navigator) {
-            try {
-              navigator.vibrate([200, 100, 200]);
-            } catch {}
-          }
-        }
-        break;
-      }
-    }
-  }, [bundle, kyivClock.nowMinutes, kyivClock.todayDateKey, kyivClock.tomorrowDateKey, addresses, quietHours, notifiedEvents]);
-
-  // Run alert check on clock change or bundle update
-  useEffect(() => {
-    checkUpcomingAlerts();
-  }, [checkUpcomingAlerts]);
-
   // Auto-refresh when user opens, resumes, or returns to the app (e.g. iPhone PWA waking up from sleep)
   useEffect(() => {
     const handleResume = () => {
       setKyivClock(getKyivTimeContext());
       refreshSchedules(true);
-      checkUpcomingAlerts();
 
       // Keep the server-side subscription fresh (it is purged after 30 days without updates);
       // at most once per 12 h, so a long-lived PWA that is never cold-started is not dropped.
@@ -485,29 +383,6 @@ export const App: React.FC = () => {
             }}
           >
             Оновити
-          </button>
-        </div>
-      )}
-
-      {/* In-app reminder shown when the 10..42 min window before an outage/restoration opens */}
-      {activeAlertBanner && (
-        <div className={`note-banner note-banner-alert ${activeAlertBanner.type}`} role="alert">
-          {activeAlertBanner.type === 'before_off' ? (
-            <ZapOff size={18} aria-hidden="true" />
-          ) : (
-            <CheckCircle2 size={18} aria-hidden="true" />
-          )}
-          <span className="note-banner-text">
-            <b>{activeAlertBanner.title}</b>
-            <span>{activeAlertBanner.body}</span>
-          </span>
-          <button
-            type="button"
-            className="note-banner-close"
-            onClick={() => setActiveAlertBanner(null)}
-            aria-label="Закрити сповіщення"
-          >
-            <X size={18} aria-hidden="true" />
           </button>
         </div>
       )}

@@ -47,7 +47,7 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
      4. web-push (VAPID) → APNs; 404/410 → POST /internal/remove (мёртвый endpoint)
    коммит state/*.json public/state/ «chore(schedules): … [skip ci]», 4 попытки, иначе ошибка
 ```
-- Окно **10..32 мин** на сервере: при шаге триггера 5 мин каждое событие попадает в окно ≥ 4 раз, журнал оставляет один пуш. В приложении локальная проверка (`App.tsx`, пока PWA открыта) использует **10..42** (обновление раз в 10 мин) и свой журнал `svitlo_notified_events`.
+- Окно **10..32 мин** на сервере: при шаге триггера 5 мин каждое событие попадает в окно ≥ 4 раз, журнал оставляет один пуш. Локальной проверки/рассылки в открытом приложении (`App.tsx`) нет — все уведомления идут только через серверный Web Push (H22).
 - Отключения/включения через полночь учитываются (передаётся завтрашний день).
 - `[skip ci]` значит: коммиты бота **не** запускают деплой (иначе деплой каждые 5 мин).
 
@@ -87,7 +87,7 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
 
 | Путь | Роль |
 | :--- | :--- |
-| `src/main.tsx`, `src/App.tsx` | Вход; состояние адресов/темы/тихих часов, автообновление, локальная проверка пушей, `CURRENT_BUILD_TIMESTAMP` |
+| `src/main.tsx`, `src/App.tsx` | Вход; состояние адресов/темы/тихих часов, автообновление, `CURRENT_BUILD_TIMESTAMP` |
 | `src/components/DayOverview.tsx` | Главный экран: шапка с адресом, кольцо, легенда, вкладки, список |
 | `src/components/DayRing.tsx`, `src/services/ringGeometry.ts` | SVG-циферблат и его чистая геометрия (`planDial`, `RING_PAD`, радиусы) |
 | `src/components/ScheduleList.tsx` | Список интервалов, текущая строка «зараз» |
@@ -129,7 +129,7 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
 
 | Где | Что | Кто пишет |
 | :--- | :--- | :--- |
-| `localStorage` телефона | `svitlo_saved_addresses_v1` (адреса с улицей/домом), `svitlo_selected_address_id_v1`, `svitlo_quiet_hours_v1`, `svitlo_theme_v2` (нет ключа = как в системе), `svitlo_cached_schedules_v1`, `svitlo_notified_events`, `svitlo_device_subscriber_id`, `svitlo_device_write_token`, `svitlo_invite_code`; `svitlo_gh_cloud_config_v1` — устаревший, приложение его чистит | приложение |
+| `localStorage` телефона | `svitlo_saved_addresses_v1` (адреса с улицей/домом), `svitlo_selected_address_id_v1`, `svitlo_quiet_hours_v1`, `svitlo_theme_v2` (нет ключа = как в системе), `svitlo_cached_schedules_v1`, `svitlo_device_subscriber_id`, `svitlo_device_write_token`, `svitlo_invite_code`; `svitlo_gh_cloud_config_v1` — устаревший, приложение его чистит | приложение |
 | Cloudflare KV `SUBS` (`svitlo-subs`) | подписки: `sub:<id>`, `ep:<hash>` | `svitlo-subs` |
 | Cloudflare KV `LOOKUPS` (`svitlo-lookup`) | задания и результаты области (TTL 10 мин), суточный счётчик | `svitlo-lookup` |
 | git `main`: `state/` | снимок графиков, журнал дублей (**публично**: видны случайные id устройств и адресов, не адреса) | бот push-check |
