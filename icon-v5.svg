@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="v5-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F7F8FA"/>
+    </linearGradient>
+    <linearGradient id="v5-on" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE055"/>
+      <stop offset="55%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#EA8500"/>
+    </linearGradient>
+    <linearGradient id="v5-off" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#353B48"/>
+      <stop offset="100%" stop-color="#1E222A"/>
+    </linearGradient>
+    <radialGradient id="v5-core" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFF09C"/>
+      <stop offset="60%" stop-color="#FFC21A"/>
+      <stop offset="100%" stop-color="#F59300"/>
+    </radialGradient>
+  </defs>
+  <!-- v5: Solar Chronometer — crisp white tile, 12 radial hour rays (amber = light, graphite = outage), glowing sun core. Full-bleed: iOS applies its own squircle mask. -->
+  <rect width="512" height="512" fill="url(#v5-bg)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(0 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(30 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(60 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(90 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(120 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(150 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-off)" transform="rotate(180 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-off)" transform="rotate(210 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-off)" transform="rotate(240 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-off)" transform="rotate(270 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(300 256 256)"/>
+  <rect x="241" y="76" width="30" height="82" rx="15" fill="url(#v5-on)" transform="rotate(330 256 256)"/>
+  <circle cx="256" cy="256" r="56" fill="url(#v5-core)"/>
+</svg>
