@@ -117,7 +117,7 @@ svitlo-trigger (Cloudflare cron */5) ──workflow_dispatch──► push-check
 | `.github/workflows/deploy-pages.yml` | Проверки → сборка → `gh-pages` |
 | `.github/workflows/dtek-lookup.yml` | Раннер области (запускает только Worker) |
 | `public/sw.js`, `public/manifest.webmanifest`, `public/version.json` | SW, манифест, версия |
-| `public/icon-v4.svg` + `icon-*-v4.png` | Иконка: SVG — источник, PNG рендерятся из него скриншотом Playwright (H15); старые версии не удаляем |
+| `public/icon-v5.svg` + `icon-*-v5.png` | Иконка: SVG — источник, PNG рендерятся из него скриншотом Playwright (H15); старые версии не удаляем |
 | `state/combined-schedules.json`, `public/state/combined-schedules.json` | Снимок графиков (пишет бот; в Pages попадает копия из `state/` на момент деплоя) |
 | `state/schedule-snapshot.json` | Журнал дублей `notifiedEvents` (хранится 48 ч) и последние изменения |
 | `state/` и `public/state/` `kyiv-streets.json`, `oblast-settlements.json` | Справочники |

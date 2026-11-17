@@ -31,7 +31,7 @@ const STORAGE_KEY_QUIET = 'svitlo_quiet_hours_v1';
 // v2: the old key stored 'dark' for everyone (it was the default); the new default follows the system
 const STORAGE_KEY_THEME = 'svitlo_theme_v2';
 const SUBS_REFRESH_KEY = 'svitlo_subs_refreshed_at';
-const CURRENT_BUILD_TIMESTAMP = '2026-11-17T05:44:44.084Z';
+const CURRENT_BUILD_TIMESTAMP = '2026-11-17T05:51:38.974Z';
 
 export const App: React.FC = () => {
   const [addresses, setAddresses] = useState<SavedAddress[]>(() => {

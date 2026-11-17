@@ -1,4 +1,4 @@
-const CACHE_NAME = 'svitlo-pwa-v18-7-17';
+const CACHE_NAME = 'svitlo-pwa-v18-7-18';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -60,7 +60,7 @@ self.addEventListener('push', (event) => {
     }
   }
 
-  let icon = data.icon || './icon-v4.svg';
+  let icon = data.icon || './icon-v5.svg';
   if (!data.icon && data.tag) {
     if (data.tag.includes('off')) {
       icon = './icon-off.svg';
