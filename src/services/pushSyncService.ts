@@ -365,8 +365,8 @@ export async function triggerTestNotification(
         const reg = await navigator.serviceWorker.ready;
         await reg.showNotification(TEST_PUSH_TITLE, {
           body: TEST_PUSH_BODY,
-          icon: './icon-192.svg',
-          badge: './icon-192.svg',
+          icon: './icon-v4.svg',
+          badge: './icon-v4.svg',
           tag: 'svitlo-test',
         });
         localShown = true;

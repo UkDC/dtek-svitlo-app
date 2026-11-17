@@ -532,7 +532,7 @@ export async function runScheduleAndNotificationCheck(options?: {
           body: trig.body,
           tag: trig.eventId,
           addressId: addr.id,
-          icon: trig.icon || './icon-192.svg',
+          icon: trig.icon || './icon-v4.svg',
         });
         if (sent) {
           snapshot.notifiedEvents[ledgerKey(sub.id, trig.eventId)] =
