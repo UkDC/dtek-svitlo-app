@@ -102,12 +102,12 @@
         ],
         "totalOnHours": 12,
         "totalOffHours": 12,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -124,6 +124,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -134,25 +144,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -161,19 +161,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 450,
             "start": "00:00",
+            "end": "07:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 450,
+            "endMinutes": 750,
+            "start": "07:30",
+            "end": "12:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1320,
+            "start": "17:30",
+            "end": "22:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "10.1": {
       "groupKey": "GPV10.1",
@@ -277,12 +309,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -294,6 +326,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -304,24 +344,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -336,19 +368,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 300,
             "start": "00:00",
+            "end": "05:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 540,
+            "start": "05:00",
+            "end": "09:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1440,
+            "start": "19:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "11.1": {
       "groupKey": "GPV11.1",
@@ -460,12 +524,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -479,6 +543,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -490,23 +561,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -519,19 +583,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 570,
+            "start": "06:00",
+            "end": "09:30",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "12.1": {
       "groupKey": "GPV12.1",
@@ -643,12 +739,12 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -663,6 +759,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -674,23 +777,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -702,19 +798,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 390,
             "start": "00:00",
+            "end": "06:30",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 390,
+            "endMinutes": 600,
+            "start": "06:30",
+            "end": "10:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "13.1": {
       "groupKey": "GPV13.1",
@@ -818,12 +946,12 @@
         ],
         "totalOnHours": 12,
         "totalOffHours": 12,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -840,6 +968,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -850,25 +988,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -877,19 +1005,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 450,
             "start": "00:00",
+            "end": "07:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 450,
+            "endMinutes": 750,
+            "start": "07:30",
+            "end": "12:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1320,
+            "start": "17:30",
+            "end": "22:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "14.1": {
       "groupKey": "GPV14.1",
@@ -985,12 +1145,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1008,6 +1168,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1018,25 +1188,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -1044,19 +1204,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 780,
+            "start": "08:00",
+            "end": "13:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1350,
+            "start": "18:00",
+            "end": "22:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "15.1": {
       "groupKey": "GPV15.1",
@@ -1168,13 +1360,16 @@
         ],
         "totalOnHours": 13.5,
         "totalOffHours": 10.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1189,6 +1384,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1199,47 +1404,74 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 510,
+            "start": "01:30",
+            "end": "08:30",
+            "durationHours": 7,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1380,
+            "start": "18:30",
+            "end": "23:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 13,
+        "totalOffHours": 11,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "16.1": {
       "groupKey": "GPV16.1",
@@ -1335,13 +1567,18 @@
         ],
         "totalOnHours": 17.5,
         "totalOffHours": 6.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1355,6 +1592,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1365,48 +1612,73 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 540,
+            "start": "02:30",
+            "end": "09:00",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1410,
+            "start": "19:00",
+            "end": "23:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1410,
+            "endMinutes": 1440,
+            "start": "23:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 0.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 12,
+        "totalOffHours": 12,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "17.1": {
       "groupKey": "GPV17.1",
@@ -1510,12 +1782,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1536,6 +1808,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1546,42 +1829,55 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 570,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "09:30",
+            "durationHours": 9.5,
             "status": "on"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
+            "end": "24:00",
+            "durationHours": 4,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "18.1": {
       "groupKey": "GPV18.1",
@@ -1685,12 +1981,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1712,6 +2008,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1722,41 +2029,54 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "10:00",
+            "durationHours": 10,
             "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
+            "end": "24:00",
+            "durationHours": 3.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "19.1": {
       "groupKey": "GPV19.1",
@@ -1860,12 +2180,12 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1892,16 +2212,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1919,19 +2239,35 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 750,
             "start": "00:00",
+            "end": "12:30",
+            "durationHours": 12.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1440,
+            "start": "17:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 19,
+        "totalOffHours": 5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "2.1": {
       "groupKey": "GPV2.1",
@@ -2027,12 +2363,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2050,6 +2386,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2060,25 +2406,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -2086,19 +2422,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 780,
+            "start": "08:00",
+            "end": "13:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1350,
+            "start": "18:00",
+            "end": "22:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "20.1": {
       "groupKey": "GPV20.1",
@@ -2202,16 +2570,23 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2228,23 +2603,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2261,19 +2629,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 300,
+            "start": "01:30",
+            "end": "05:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 780,
+            "start": "05:00",
+            "end": "13:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "21.1": {
       "groupKey": "GPV21.1",
@@ -2377,18 +2777,25 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2404,23 +2811,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2436,19 +2836,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 360,
+            "start": "02:30",
+            "end": "06:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 810,
+            "start": "06:00",
+            "end": "13:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "22.1": {
       "groupKey": "GPV22.1",
@@ -2552,12 +2984,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2569,6 +3001,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2579,24 +3019,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2611,19 +3043,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 300,
             "start": "00:00",
+            "end": "05:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 540,
+            "start": "05:00",
+            "end": "09:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1440,
+            "start": "19:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "23.1": {
       "groupKey": "GPV23.1",
@@ -2735,12 +3199,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2754,6 +3218,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2765,23 +3236,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2794,19 +3258,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 570,
+            "start": "06:00",
+            "end": "09:30",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "24.1": {
       "groupKey": "GPV24.1",
@@ -2918,12 +3414,12 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2938,6 +3434,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2949,23 +3452,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2977,19 +3473,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 390,
             "start": "00:00",
+            "end": "06:30",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 390,
+            "endMinutes": 600,
+            "start": "06:30",
+            "end": "10:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "25.1": {
       "groupKey": "GPV25.1",
@@ -3093,12 +3621,12 @@
         ],
         "totalOnHours": 12,
         "totalOffHours": 12,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3115,6 +3643,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3125,25 +3663,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3152,19 +3680,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 450,
             "start": "00:00",
+            "end": "07:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 450,
+            "endMinutes": 750,
+            "start": "07:30",
+            "end": "12:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1320,
+            "start": "17:30",
+            "end": "22:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "26.1": {
       "groupKey": "GPV26.1",
@@ -3260,12 +3820,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3283,6 +3843,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3293,25 +3863,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -3319,19 +3879,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 780,
+            "start": "08:00",
+            "end": "13:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1350,
+            "start": "18:00",
+            "end": "22:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "27.1": {
       "groupKey": "GPV27.1",
@@ -3443,13 +4035,16 @@
         ],
         "totalOnHours": 13.5,
         "totalOffHours": 10.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3464,6 +4059,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3474,47 +4079,74 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 510,
+            "start": "01:30",
+            "end": "08:30",
+            "durationHours": 7,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1380,
+            "start": "18:30",
+            "end": "23:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 13,
+        "totalOffHours": 11,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "28.1": {
       "groupKey": "GPV28.1",
@@ -3610,13 +4242,18 @@
         ],
         "totalOnHours": 17.5,
         "totalOffHours": 6.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3630,6 +4267,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3640,48 +4287,73 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 540,
+            "start": "02:30",
+            "end": "09:00",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1410,
+            "start": "19:00",
+            "end": "23:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1410,
+            "endMinutes": 1440,
+            "start": "23:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 0.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 12,
+        "totalOffHours": 12,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "29.1": {
       "groupKey": "GPV29.1",
@@ -3785,12 +4457,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3811,6 +4483,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3821,42 +4504,55 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 570,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "09:30",
+            "durationHours": 9.5,
             "status": "on"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
+            "end": "24:00",
+            "durationHours": 4,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "3.1": {
       "groupKey": "GPV3.1",
@@ -3968,13 +4664,16 @@
         ],
         "totalOnHours": 13.5,
         "totalOffHours": 10.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3989,6 +4688,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3999,47 +4708,74 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 510,
+            "start": "01:30",
+            "end": "08:30",
+            "durationHours": 7,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1380,
+            "start": "18:30",
+            "end": "23:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 13,
+        "totalOffHours": 11,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "30.1": {
       "groupKey": "GPV30.1",
@@ -4143,12 +4879,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4170,6 +4906,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4180,41 +4927,54 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "10:00",
+            "durationHours": 10,
             "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
+            "end": "24:00",
+            "durationHours": 3.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "31.1": {
       "groupKey": "GPV31.1",
@@ -4318,12 +5078,12 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4350,16 +5110,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4377,19 +5137,35 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 750,
             "start": "00:00",
+            "end": "12:30",
+            "durationHours": 12.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1440,
+            "start": "17:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 19,
+        "totalOffHours": 5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "32.1": {
       "groupKey": "GPV32.1",
@@ -4493,16 +5269,23 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4519,23 +5302,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4552,19 +5328,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 300,
+            "start": "01:30",
+            "end": "05:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 780,
+            "start": "05:00",
+            "end": "13:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "33.1": {
       "groupKey": "GPV33.1",
@@ -4668,18 +5476,25 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4695,23 +5510,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4727,19 +5535,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 360,
+            "start": "02:30",
+            "end": "06:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 810,
+            "start": "06:00",
+            "end": "13:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "34.1": {
       "groupKey": "GPV34.1",
@@ -4843,12 +5683,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4860,6 +5700,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4870,24 +5718,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4902,19 +5742,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 300,
             "start": "00:00",
+            "end": "05:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 540,
+            "start": "05:00",
+            "end": "09:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1440,
+            "start": "19:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "35.1": {
       "groupKey": "GPV35.1",
@@ -5026,12 +5898,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5045,6 +5917,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5056,23 +5935,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5085,19 +5957,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 570,
+            "start": "06:00",
+            "end": "09:30",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "36.1": {
       "groupKey": "GPV36.1",
@@ -5209,12 +6113,12 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5229,6 +6133,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5240,23 +6151,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5268,19 +6172,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 390,
             "start": "00:00",
+            "end": "06:30",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 390,
+            "endMinutes": 600,
+            "start": "06:30",
+            "end": "10:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "37.1": {
       "groupKey": "GPV37.1",
@@ -5384,12 +6320,12 @@
         ],
         "totalOnHours": 12,
         "totalOffHours": 12,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5406,6 +6342,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5416,25 +6362,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5443,19 +6379,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 450,
             "start": "00:00",
+            "end": "07:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 450,
+            "endMinutes": 750,
+            "start": "07:30",
+            "end": "12:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1320,
+            "start": "17:30",
+            "end": "22:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "38.1": {
       "groupKey": "GPV38.1",
@@ -5551,12 +6519,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5574,6 +6542,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5584,25 +6562,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -5610,19 +6578,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 780,
+            "start": "08:00",
+            "end": "13:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1350,
+            "start": "18:00",
+            "end": "22:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "39.1": {
       "groupKey": "GPV39.1",
@@ -5734,13 +6734,16 @@
         ],
         "totalOnHours": 13.5,
         "totalOffHours": 10.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5755,6 +6758,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5765,47 +6778,74 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 510,
+            "start": "01:30",
+            "end": "08:30",
+            "durationHours": 7,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1380,
+            "start": "18:30",
+            "end": "23:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 13,
+        "totalOffHours": 11,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "4.1": {
       "groupKey": "GPV4.1",
@@ -5901,13 +6941,18 @@
         ],
         "totalOnHours": 17.5,
         "totalOffHours": 6.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5921,6 +6966,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5931,48 +6986,73 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 540,
+            "start": "02:30",
+            "end": "09:00",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1410,
+            "start": "19:00",
+            "end": "23:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1410,
+            "endMinutes": 1440,
+            "start": "23:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 0.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 12,
+        "totalOffHours": 12,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "40.1": {
       "groupKey": "GPV40.1",
@@ -6068,13 +7148,18 @@
         ],
         "totalOnHours": 17.5,
         "totalOffHours": 6.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6088,6 +7173,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6098,48 +7193,73 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 540,
+            "start": "02:30",
+            "end": "09:00",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1410,
+            "start": "19:00",
+            "end": "23:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1410,
+            "endMinutes": 1440,
+            "start": "23:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 0.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 12,
+        "totalOffHours": 12,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "41.1": {
       "groupKey": "GPV41.1",
@@ -6243,12 +7363,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6269,6 +7389,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6279,42 +7410,55 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 570,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "09:30",
+            "durationHours": 9.5,
             "status": "on"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
+            "end": "24:00",
+            "durationHours": 4,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "42.1": {
       "groupKey": "GPV42.1",
@@ -6418,12 +7562,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6445,6 +7589,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6455,41 +7610,54 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "10:00",
+            "durationHours": 10,
             "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
+            "end": "24:00",
+            "durationHours": 3.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "43.1": {
       "groupKey": "GPV43.1",
@@ -6593,12 +7761,12 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6625,16 +7793,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6652,19 +7820,35 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 750,
             "start": "00:00",
+            "end": "12:30",
+            "durationHours": 12.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1440,
+            "start": "17:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 19,
+        "totalOffHours": 5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "44.1": {
       "groupKey": "GPV44.1",
@@ -6768,16 +7952,23 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6794,23 +7985,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6827,19 +8011,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 300,
+            "start": "01:30",
+            "end": "05:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 780,
+            "start": "05:00",
+            "end": "13:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "45.1": {
       "groupKey": "GPV45.1",
@@ -6943,18 +8159,25 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6970,23 +8193,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7002,19 +8218,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 360,
+            "start": "02:30",
+            "end": "06:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 810,
+            "start": "06:00",
+            "end": "13:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "46.1": {
       "groupKey": "GPV46.1",
@@ -7118,12 +8366,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7135,6 +8383,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7145,24 +8401,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7177,19 +8425,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 300,
             "start": "00:00",
+            "end": "05:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 540,
+            "start": "05:00",
+            "end": "09:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1440,
+            "start": "19:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "47.1": {
       "groupKey": "GPV47.1",
@@ -7301,12 +8581,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7320,6 +8600,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7331,23 +8618,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7360,19 +8640,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 570,
+            "start": "06:00",
+            "end": "09:30",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "48.1": {
       "groupKey": "GPV48.1",
@@ -7484,12 +8796,12 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7504,6 +8816,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7515,23 +8834,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7543,19 +8855,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 390,
             "start": "00:00",
+            "end": "06:30",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 390,
+            "endMinutes": 600,
+            "start": "06:30",
+            "end": "10:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "49.1": {
       "groupKey": "GPV49.1",
@@ -7659,12 +9003,12 @@
         ],
         "totalOnHours": 12,
         "totalOffHours": 12,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7681,6 +9025,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7691,25 +9045,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7718,19 +9062,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 450,
             "start": "00:00",
+            "end": "07:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 450,
+            "endMinutes": 750,
+            "start": "07:30",
+            "end": "12:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1320,
+            "start": "17:30",
+            "end": "22:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "5.1": {
       "groupKey": "GPV5.1",
@@ -7834,12 +9210,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7860,6 +9236,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7870,42 +9257,55 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 570,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "09:30",
+            "durationHours": 9.5,
             "status": "on"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
+            "end": "24:00",
+            "durationHours": 4,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "50.1": {
       "groupKey": "GPV50.1",
@@ -8001,12 +9401,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8024,6 +9424,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8034,25 +9444,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -8060,19 +9460,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 780,
+            "start": "08:00",
+            "end": "13:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1350,
+            "start": "18:00",
+            "end": "22:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "51.1": {
       "groupKey": "GPV51.1",
@@ -8184,13 +9616,16 @@
         ],
         "totalOnHours": 13.5,
         "totalOffHours": 10.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8205,6 +9640,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8215,47 +9660,74 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 510,
+            "start": "01:30",
+            "end": "08:30",
+            "durationHours": 7,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1380,
+            "start": "18:30",
+            "end": "23:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 13,
+        "totalOffHours": 11,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "52.1": {
       "groupKey": "GPV52.1",
@@ -8351,13 +9823,18 @@
         ],
         "totalOnHours": 17.5,
         "totalOffHours": 6.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8371,6 +9848,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8381,48 +9868,73 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 540,
+            "start": "02:30",
+            "end": "09:00",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1410,
+            "start": "19:00",
+            "end": "23:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1410,
+            "endMinutes": 1440,
+            "start": "23:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 0.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 12,
+        "totalOffHours": 12,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "53.1": {
       "groupKey": "GPV53.1",
@@ -8526,12 +10038,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8552,6 +10064,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8562,42 +10085,55 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 570,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "09:30",
+            "durationHours": 9.5,
             "status": "on"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
+            "end": "24:00",
+            "durationHours": 4,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 14.5,
+        "totalOffHours": 9.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "54.1": {
       "groupKey": "GPV54.1",
@@ -8701,12 +10237,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8728,6 +10264,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8738,41 +10285,54 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "10:00",
+            "durationHours": 10,
             "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
+            "end": "24:00",
+            "durationHours": 3.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "55.1": {
       "groupKey": "GPV55.1",
@@ -8876,12 +10436,12 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8908,16 +10468,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8935,19 +10495,35 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 750,
             "start": "00:00",
+            "end": "12:30",
+            "durationHours": 12.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1440,
+            "start": "17:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 19,
+        "totalOffHours": 5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "56.1": {
       "groupKey": "GPV56.1",
@@ -9051,16 +10627,23 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9077,23 +10660,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9110,19 +10686,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 300,
+            "start": "01:30",
+            "end": "05:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 780,
+            "start": "05:00",
+            "end": "13:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "57.1": {
       "groupKey": "GPV57.1",
@@ -9226,18 +10834,25 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9253,23 +10868,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9285,19 +10893,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 360,
+            "start": "02:30",
+            "end": "06:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 810,
+            "start": "06:00",
+            "end": "13:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "58.1": {
       "groupKey": "GPV58.1",
@@ -9401,12 +11041,12 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9418,6 +11058,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9428,24 +11076,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9460,19 +11100,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 300,
             "start": "00:00",
+            "end": "05:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 540,
+            "start": "05:00",
+            "end": "09:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1140,
+            "start": "14:00",
+            "end": "19:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1140,
+            "endMinutes": 1440,
+            "start": "19:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "59.1": {
       "groupKey": "GPV59.1",
@@ -9584,12 +11256,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9603,6 +11275,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9614,23 +11293,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9643,19 +11315,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 570,
+            "start": "06:00",
+            "end": "09:30",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 570,
+            "endMinutes": 900,
+            "start": "09:30",
+            "end": "15:00",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "6.1": {
       "groupKey": "GPV6.1",
@@ -9759,12 +11463,12 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9786,6 +11490,17 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9796,41 +11511,54 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "10:00",
+            "durationHours": 10,
             "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
+            "end": "24:00",
+            "durationHours": 3.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "60.1": {
       "groupKey": "GPV60.1",
@@ -9942,12 +11670,12 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9962,6 +11690,13 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9973,23 +11708,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -10001,19 +11729,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 390,
             "start": "00:00",
+            "end": "06:30",
+            "durationHours": 6.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 390,
+            "endMinutes": 600,
+            "start": "06:30",
+            "end": "10:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 930,
+            "start": "10:00",
+            "end": "15:30",
+            "durationHours": 5.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1230,
+            "start": "15:30",
+            "end": "20:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "7.1": {
       "groupKey": "GPV7.1",
@@ -10117,12 +11877,12 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -10149,16 +11909,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -10176,19 +11936,35 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 750,
             "start": "00:00",
+            "end": "12:30",
+            "durationHours": 12.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 750,
+            "endMinutes": 1050,
+            "start": "12:30",
+            "end": "17:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1440,
+            "start": "17:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 19,
+        "totalOffHours": 5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "8.1": {
       "groupKey": "GPV8.1",
@@ -10292,16 +12068,23 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -10318,23 +12101,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -10351,19 +12127,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 90,
             "start": "00:00",
+            "end": "01:30",
+            "durationHours": 1.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 90,
+            "endMinutes": 300,
+            "start": "01:30",
+            "end": "05:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 300,
+            "endMinutes": 780,
+            "start": "05:00",
+            "end": "13:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1080,
+            "start": "13:00",
+            "end": "18:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     },
     "9.1": {
       "groupKey": "GPV9.1",
@@ -10467,18 +12275,25 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "17.11.2026 21:28"
+        "updatedAt": "18.11.2026 22:15"
       },
       "tomorrow": {
         "dateKey": "2026-11-19",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795039200,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -10494,23 +12309,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -10526,19 +12334,51 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 150,
             "start": "00:00",
+            "end": "02:30",
+            "durationHours": 2.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 150,
+            "endMinutes": 360,
+            "start": "02:30",
+            "end": "06:00",
+            "durationHours": 3.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 810,
+            "start": "06:00",
+            "end": "13:30",
+            "durationHours": 7.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1110,
+            "start": "13:30",
+            "end": "18:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "17.11.2026 21:28"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "18.11.2026 22:15"
       },
       "source": "ДТЭК Киев + YASNO API v2",
-      "updatedAt": "17.11.2026 21:28"
+      "updatedAt": "18.11.2026 22:15"
     }
   },
   "krem": {
@@ -13031,6 +14871,6 @@
     "6.1",
     "6.2"
   ],
-  "fetchedAt": "2026-11-18T19:35:43.762Z",
+  "fetchedAt": "2026-11-18T20:30:45.487Z",
   "sourceLabel": "Outage-Data Киев + YASNO API v2 + Outage-Data Область"
 }
