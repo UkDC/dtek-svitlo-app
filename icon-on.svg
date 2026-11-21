@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <radialGradient id="bgGlowGreen" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#062E22" />
+      <stop offset="85%" stop-color="#061A14" />
+      <stop offset="100%" stop-color="#030C09" />
+    </radialGradient>
+    <linearGradient id="greenNeon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6EE7B7" />
+      <stop offset="50%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#10B981" flood-opacity="0.85" />
+    </filter>
+  </defs>
+
+  <!-- Background base rounded card -->
+  <rect width="192" height="192" rx="46" fill="url(#bgGlowGreen)" />
+  <rect width="188" height="188" x="2" y="2" rx="44" fill="none" stroke="#10B981" stroke-opacity="0.35" stroke-width="2" />
+
+  <!-- Powerful Glowing Lightning Surge -->
+  <g filter="url(#glowGreen)">
+    <path d="M112 26L48 108h42l-12 58 64-82h-44l14-58z" fill="url(#greenNeon)" />
+    <!-- White hot inner lightning core -->
+    <path d="M110 32L54 104h36l-8 46 50-66H98l12-52z" fill="#FFFFFF" opacity="0.75" />
+  </g>
+</svg>
