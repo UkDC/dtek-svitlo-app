@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T20:35:47.333Z",
+  "updatedAt": "2026-11-22T21:05:49.979Z",
   "groups": {
     "kem:1.1": {
       "today": {
@@ -96,8 +96,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -111,6 +111,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -121,24 +129,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -151,16 +151,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 600,
+            "start": "06:00",
+            "end": "10:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:10.1": {
@@ -266,8 +298,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -295,6 +327,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -305,32 +346,47 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1050,
+            "start": "13:00",
+            "end": "17:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1350,
+            "start": "17:30",
+            "end": "22:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
+            "end": "24:00",
+            "durationHours": 1.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 18,
+        "totalOffHours": 6,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:11.1": {
@@ -436,8 +492,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -451,6 +507,11 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -461,20 +522,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -491,16 +547,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 510,
+            "start": "06:00",
+            "end": "08:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1080,
+            "start": "13:30",
+            "end": "18:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:12.1": {
@@ -606,8 +694,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -621,6 +709,12 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -631,21 +725,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -661,16 +749,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 540,
+            "start": "06:00",
+            "end": "09:00",
+            "durationHours": 3,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1110,
+            "start": "14:00",
+            "end": "18:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:13.1": {
@@ -768,8 +888,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -783,6 +903,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -793,24 +921,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -823,16 +943,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 600,
+            "start": "06:00",
+            "end": "10:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:14.1": {
@@ -930,8 +1082,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -945,6 +1097,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -955,24 +1116,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -985,16 +1137,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 630,
+            "start": "06:00",
+            "end": "10:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1200,
+            "start": "15:30",
+            "end": "20:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:15.1": {
@@ -1092,8 +1276,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1111,6 +1295,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1120,22 +1312,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1147,16 +1331,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 720,
+            "start": "08:00",
+            "end": "12:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1230,
+            "start": "16:30",
+            "end": "20:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16,
+        "totalOffHours": 8,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:16.1": {
@@ -1246,8 +1462,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1266,6 +1482,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1273,24 +1499,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1301,16 +1517,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 510,
             "start": "00:00",
+            "end": "08:30",
+            "durationHours": 8.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1020,
+            "start": "13:30",
+            "end": "17:00",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1260,
+            "start": "17:00",
+            "end": "21:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:17.1": {
@@ -1400,8 +1648,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1421,6 +1669,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1428,24 +1686,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1455,16 +1703,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 540,
             "start": "00:00",
+            "end": "09:00",
+            "durationHours": 9,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1050,
+            "start": "14:00",
+            "end": "17:30",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1290,
+            "start": "17:30",
+            "end": "21:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:18.1": {
@@ -1554,8 +1834,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1577,30 +1857,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1609,16 +1889,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
+            "end": "10:00",
+            "durationHours": 10,
+            "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1080,
+            "start": "15:00",
+            "end": "18:00",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1320,
+            "start": "18:00",
+            "end": "22:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:19.1": {
@@ -1708,8 +2020,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1732,30 +2044,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -1763,16 +2075,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 630,
             "start": "00:00",
+            "end": "10:30",
+            "durationHours": 10.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1110,
+            "start": "15:30",
+            "end": "18:30",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1350,
+            "start": "18:30",
+            "end": "22:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:2.1": {
@@ -1870,8 +2214,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -1885,6 +2229,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1895,24 +2248,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -1925,16 +2269,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 630,
+            "start": "06:00",
+            "end": "10:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1200,
+            "start": "15:30",
+            "end": "20:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:20.1": {
@@ -2040,8 +2416,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2067,6 +2443,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2076,35 +2461,50 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 720,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "12:00",
+            "durationHours": 12,
             "status": "on"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1260,
+            "start": "16:30",
+            "end": "21:00",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
+            "end": "24:00",
+            "durationHours": 3,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:21.1": {
@@ -2210,8 +2610,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2239,6 +2639,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2248,33 +2656,49 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1020,
+            "start": "13:00",
+            "end": "17:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1290,
+            "start": "17:00",
+            "end": "21:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
+            "end": "24:00",
+            "durationHours": 2.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17.5,
+        "totalOffHours": 6.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:22.1": {
@@ -2380,8 +2804,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2409,6 +2833,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2419,32 +2852,47 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1050,
+            "start": "13:00",
+            "end": "17:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1350,
+            "start": "17:30",
+            "end": "22:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
+            "end": "24:00",
+            "durationHours": 1.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 18,
+        "totalOffHours": 6,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:23.1": {
@@ -2550,8 +2998,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2565,6 +3013,11 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2575,20 +3028,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2605,16 +3053,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 510,
+            "start": "06:00",
+            "end": "08:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1080,
+            "start": "13:30",
+            "end": "18:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:24.1": {
@@ -2720,8 +3200,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2735,6 +3215,12 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2745,21 +3231,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2775,16 +3255,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 540,
+            "start": "06:00",
+            "end": "09:00",
+            "durationHours": 3,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1110,
+            "start": "14:00",
+            "end": "18:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:25.1": {
@@ -2882,8 +3394,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -2897,6 +3409,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2907,24 +3427,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -2937,16 +3449,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 600,
+            "start": "06:00",
+            "end": "10:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:26.1": {
@@ -3044,8 +3588,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3059,6 +3603,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3069,24 +3622,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3099,16 +3643,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 630,
+            "start": "06:00",
+            "end": "10:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1200,
+            "start": "15:30",
+            "end": "20:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:27.1": {
@@ -3206,8 +3782,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3225,6 +3801,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3234,22 +3818,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3261,16 +3837,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 720,
+            "start": "08:00",
+            "end": "12:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1230,
+            "start": "16:30",
+            "end": "20:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16,
+        "totalOffHours": 8,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:28.1": {
@@ -3360,8 +3968,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3380,6 +3988,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3387,24 +4005,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3415,16 +4023,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 510,
             "start": "00:00",
+            "end": "08:30",
+            "durationHours": 8.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1020,
+            "start": "13:30",
+            "end": "17:00",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1260,
+            "start": "17:00",
+            "end": "21:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:29.1": {
@@ -3514,8 +4154,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3535,6 +4175,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3542,24 +4192,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3569,16 +4209,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 540,
             "start": "00:00",
+            "end": "09:00",
+            "durationHours": 9,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1050,
+            "start": "14:00",
+            "end": "17:30",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1290,
+            "start": "17:30",
+            "end": "21:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:3.1": {
@@ -3676,8 +4348,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3695,6 +4367,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3704,22 +4384,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3731,16 +4403,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 720,
+            "start": "08:00",
+            "end": "12:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1230,
+            "start": "16:30",
+            "end": "20:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16,
+        "totalOffHours": 8,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:30.1": {
@@ -3830,8 +4534,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -3853,30 +4557,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -3885,16 +4589,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
+            "end": "10:00",
+            "durationHours": 10,
+            "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1080,
+            "start": "15:00",
+            "end": "18:00",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1320,
+            "start": "18:00",
+            "end": "22:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:31.1": {
@@ -3984,8 +4720,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4008,30 +4744,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -4039,16 +4775,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 630,
             "start": "00:00",
+            "end": "10:30",
+            "durationHours": 10.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1110,
+            "start": "15:30",
+            "end": "18:30",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1350,
+            "start": "18:30",
+            "end": "22:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:32.1": {
@@ -4154,8 +4922,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4181,6 +4949,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4190,35 +4967,50 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 720,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "12:00",
+            "durationHours": 12,
             "status": "on"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1260,
+            "start": "16:30",
+            "end": "21:00",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
+            "end": "24:00",
+            "durationHours": 3,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:33.1": {
@@ -4324,8 +5116,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4353,6 +5145,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4362,33 +5162,49 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1020,
+            "start": "13:00",
+            "end": "17:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1290,
+            "start": "17:00",
+            "end": "21:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
+            "end": "24:00",
+            "durationHours": 2.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17.5,
+        "totalOffHours": 6.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:34.1": {
@@ -4494,8 +5310,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4523,6 +5339,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4533,32 +5358,47 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1050,
+            "start": "13:00",
+            "end": "17:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1350,
+            "start": "17:30",
+            "end": "22:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
+            "end": "24:00",
+            "durationHours": 1.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 18,
+        "totalOffHours": 6,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:35.1": {
@@ -4664,8 +5504,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4679,6 +5519,11 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4689,20 +5534,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4719,16 +5559,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 510,
+            "start": "06:00",
+            "end": "08:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1080,
+            "start": "13:30",
+            "end": "18:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:36.1": {
@@ -4834,8 +5706,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -4849,6 +5721,12 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4859,21 +5737,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -4889,16 +5761,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 540,
+            "start": "06:00",
+            "end": "09:00",
+            "durationHours": 3,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1110,
+            "start": "14:00",
+            "end": "18:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:37.1": {
@@ -4996,8 +5900,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5011,6 +5915,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5021,24 +5933,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5051,16 +5955,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 600,
+            "start": "06:00",
+            "end": "10:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:38.1": {
@@ -5158,8 +6094,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5173,6 +6109,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5183,24 +6128,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5213,16 +6149,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 630,
+            "start": "06:00",
+            "end": "10:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1200,
+            "start": "15:30",
+            "end": "20:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:39.1": {
@@ -5320,8 +6288,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5339,6 +6307,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5348,22 +6324,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5375,16 +6343,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 720,
+            "start": "08:00",
+            "end": "12:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1230,
+            "start": "16:30",
+            "end": "20:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16,
+        "totalOffHours": 8,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:4.1": {
@@ -5474,8 +6474,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5494,6 +6494,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5501,24 +6511,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5529,16 +6529,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 510,
             "start": "00:00",
+            "end": "08:30",
+            "durationHours": 8.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1020,
+            "start": "13:30",
+            "end": "17:00",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1260,
+            "start": "17:00",
+            "end": "21:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:40.1": {
@@ -5628,8 +6660,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5648,6 +6680,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5655,24 +6697,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5683,16 +6715,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 510,
             "start": "00:00",
+            "end": "08:30",
+            "durationHours": 8.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1020,
+            "start": "13:30",
+            "end": "17:00",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1260,
+            "start": "17:00",
+            "end": "21:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:41.1": {
@@ -5782,8 +6846,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5803,6 +6867,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5810,24 +6884,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5837,16 +6901,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 540,
             "start": "00:00",
+            "end": "09:00",
+            "durationHours": 9,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1050,
+            "start": "14:00",
+            "end": "17:30",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1290,
+            "start": "17:30",
+            "end": "21:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:42.1": {
@@ -5936,8 +7032,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -5959,30 +7055,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -5991,16 +7087,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
+            "end": "10:00",
+            "durationHours": 10,
+            "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1080,
+            "start": "15:00",
+            "end": "18:00",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1320,
+            "start": "18:00",
+            "end": "22:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:43.1": {
@@ -6090,8 +7218,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6114,30 +7242,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -6145,16 +7273,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 630,
             "start": "00:00",
+            "end": "10:30",
+            "durationHours": 10.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1110,
+            "start": "15:30",
+            "end": "18:30",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1350,
+            "start": "18:30",
+            "end": "22:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:44.1": {
@@ -6260,8 +7420,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6287,6 +7447,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6296,35 +7465,50 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 720,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "12:00",
+            "durationHours": 12,
             "status": "on"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1260,
+            "start": "16:30",
+            "end": "21:00",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
+            "end": "24:00",
+            "durationHours": 3,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:45.1": {
@@ -6430,8 +7614,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6459,6 +7643,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6468,33 +7660,49 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1020,
+            "start": "13:00",
+            "end": "17:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1290,
+            "start": "17:00",
+            "end": "21:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
+            "end": "24:00",
+            "durationHours": 2.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17.5,
+        "totalOffHours": 6.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:46.1": {
@@ -6600,8 +7808,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6629,6 +7837,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6639,32 +7856,47 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1050,
+            "start": "13:00",
+            "end": "17:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1350,
+            "start": "17:30",
+            "end": "22:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
+            "end": "24:00",
+            "durationHours": 1.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 18,
+        "totalOffHours": 6,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:47.1": {
@@ -6770,8 +8002,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6785,6 +8017,11 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6795,20 +8032,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6825,16 +8057,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 510,
+            "start": "06:00",
+            "end": "08:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1080,
+            "start": "13:30",
+            "end": "18:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:48.1": {
@@ -6940,8 +8204,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -6955,6 +8219,12 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6965,21 +8235,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -6995,16 +8259,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 540,
+            "start": "06:00",
+            "end": "09:00",
+            "durationHours": 3,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1110,
+            "start": "14:00",
+            "end": "18:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:49.1": {
@@ -7102,8 +8398,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7117,6 +8413,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7127,24 +8431,16 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7157,16 +8453,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 600,
+            "start": "06:00",
+            "end": "10:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1200,
+            "start": "15:00",
+            "end": "20:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:5.1": {
@@ -7256,8 +8584,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7277,6 +8605,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7284,24 +8622,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7311,16 +8639,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 540,
             "start": "00:00",
+            "end": "09:00",
+            "durationHours": 9,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1050,
+            "start": "14:00",
+            "end": "17:30",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1290,
+            "start": "17:30",
+            "end": "21:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:50.1": {
@@ -7418,8 +8778,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7433,6 +8793,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7443,24 +8812,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7473,16 +8833,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 630,
+            "start": "06:00",
+            "end": "10:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1200,
+            "start": "15:30",
+            "end": "20:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1200,
+            "endMinutes": 1440,
+            "start": "20:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 4,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:51.1": {
@@ -7580,8 +8972,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7599,6 +8991,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7608,22 +9008,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7635,16 +9027,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 480,
             "start": "00:00",
+            "end": "08:00",
+            "durationHours": 8,
+            "status": "on"
+          },
+          {
+            "startMinutes": 480,
+            "endMinutes": 720,
+            "start": "08:00",
+            "end": "12:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1230,
+            "start": "16:30",
+            "end": "20:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1230,
+            "endMinutes": 1440,
+            "start": "20:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16,
+        "totalOffHours": 8,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:52.1": {
@@ -7734,8 +9158,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7754,6 +9178,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7761,24 +9195,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7789,16 +9213,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 510,
             "start": "00:00",
+            "end": "08:30",
+            "durationHours": 8.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1020,
+            "start": "13:30",
+            "end": "17:00",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1260,
+            "start": "17:00",
+            "end": "21:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 3,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:53.1": {
@@ -7888,8 +9344,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -7909,6 +9365,16 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7916,24 +9382,14 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -7943,16 +9399,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 540,
             "start": "00:00",
+            "end": "09:00",
+            "durationHours": 9,
+            "status": "on"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1050,
+            "start": "14:00",
+            "end": "17:30",
+            "durationHours": 3.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1290,
+            "start": "17:30",
+            "end": "21:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:54.1": {
@@ -8042,8 +9530,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8065,30 +9553,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8097,16 +9585,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
+            "end": "10:00",
+            "durationHours": 10,
+            "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1080,
+            "start": "15:00",
+            "end": "18:00",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1320,
+            "start": "18:00",
+            "end": "22:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:55.1": {
@@ -8196,8 +9716,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8220,30 +9740,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -8251,16 +9771,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 630,
             "start": "00:00",
+            "end": "10:30",
+            "durationHours": 10.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1110,
+            "start": "15:30",
+            "end": "18:30",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1350,
+            "start": "18:30",
+            "end": "22:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:56.1": {
@@ -8366,8 +9918,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8393,6 +9945,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8402,35 +9963,50 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 720,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "12:00",
+            "durationHours": 12,
             "status": "on"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1260,
+            "start": "16:30",
+            "end": "21:00",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
+            "end": "24:00",
+            "durationHours": 3,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:57.1": {
@@ -8536,8 +10112,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8565,6 +10141,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8574,33 +10158,49 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1020,
+            "start": "13:00",
+            "end": "17:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1290,
+            "start": "17:00",
+            "end": "21:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
+            "end": "24:00",
+            "durationHours": 2.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17.5,
+        "totalOffHours": 6.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:58.1": {
@@ -8706,8 +10306,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8735,6 +10335,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8745,32 +10354,47 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1050,
+            "start": "13:00",
+            "end": "17:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1050,
+            "endMinutes": 1350,
+            "start": "17:30",
+            "end": "22:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
+            "end": "24:00",
+            "durationHours": 1.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 18,
+        "totalOffHours": 6,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:59.1": {
@@ -8876,8 +10500,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -8891,6 +10515,11 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8901,20 +10530,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -8931,16 +10555,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 510,
+            "start": "06:00",
+            "end": "08:30",
+            "durationHours": 2.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 510,
+            "endMinutes": 810,
+            "start": "08:30",
+            "end": "13:30",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 810,
+            "endMinutes": 1080,
+            "start": "13:30",
+            "end": "18:00",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1440,
+            "start": "18:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 6,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:6.1": {
@@ -9030,8 +10686,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9053,30 +10709,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9085,16 +10741,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 600,
             "start": "00:00",
+            "end": "10:00",
+            "durationHours": 10,
+            "status": "on"
+          },
+          {
+            "startMinutes": 600,
+            "endMinutes": 900,
+            "start": "10:00",
+            "end": "15:00",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 900,
+            "endMinutes": 1080,
+            "start": "15:00",
+            "end": "18:00",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1080,
+            "endMinutes": 1320,
+            "start": "18:00",
+            "end": "22:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1320,
+            "endMinutes": 1440,
+            "start": "22:00",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 2,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:60.1": {
@@ -9200,8 +10888,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9215,6 +10903,12 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9225,21 +10919,15 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9255,16 +10943,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 360,
             "start": "00:00",
+            "end": "06:00",
+            "durationHours": 6,
+            "status": "on"
+          },
+          {
+            "startMinutes": 360,
+            "endMinutes": 540,
+            "start": "06:00",
+            "end": "09:00",
+            "durationHours": 3,
+            "status": "off"
+          },
+          {
+            "startMinutes": 540,
+            "endMinutes": 840,
+            "start": "09:00",
+            "end": "14:00",
+            "durationHours": 5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 840,
+            "endMinutes": 1110,
+            "start": "14:00",
+            "end": "18:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1440,
+            "start": "18:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 5.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:7.1": {
@@ -9354,8 +11074,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9378,30 +11098,30 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on"
@@ -9409,16 +11129,48 @@
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 630,
             "start": "00:00",
+            "end": "10:30",
+            "durationHours": 10.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 630,
+            "endMinutes": 930,
+            "start": "10:30",
+            "end": "15:30",
+            "durationHours": 5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 930,
+            "endMinutes": 1110,
+            "start": "15:30",
+            "end": "18:30",
+            "durationHours": 3,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1110,
+            "endMinutes": 1350,
+            "start": "18:30",
+            "end": "22:30",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1350,
+            "endMinutes": 1440,
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 24,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:8.1": {
@@ -9524,8 +11276,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9551,6 +11303,15 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9560,35 +11321,50 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 720,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "12:00",
+            "durationHours": 12,
             "status": "on"
+          },
+          {
+            "startMinutes": 720,
+            "endMinutes": 990,
+            "start": "12:00",
+            "end": "16:30",
+            "durationHours": 4.5,
+            "status": "off"
+          },
+          {
+            "startMinutes": 990,
+            "endMinutes": 1260,
+            "start": "16:30",
+            "end": "21:00",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1260,
+            "endMinutes": 1440,
+            "start": "21:00",
+            "end": "24:00",
+            "durationHours": 3,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 16.5,
+        "totalOffHours": 7.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "kem:9.1": {
@@ -9694,8 +11470,8 @@
       },
       "tomorrow": {
         "dateKey": "2026-11-23",
-        "timestamp": 0,
-        "status": "WaitingForSchedule",
+        "timestamp": 1795384800,
+        "status": "ScheduleApplies",
         "slots": [
           "on",
           "on",
@@ -9723,6 +11499,14 @@
           "on",
           "on",
           "on",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
+          "off",
           "on",
           "on",
           "on",
@@ -9732,33 +11516,49 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on",
-          "on"
+          "off",
+          "off",
+          "off",
+          "off",
+          "off"
         ],
         "intervals": [
           {
             "startMinutes": 0,
-            "endMinutes": 1440,
+            "endMinutes": 780,
             "start": "00:00",
-            "end": "24:00",
-            "durationHours": 24,
+            "end": "13:00",
+            "durationHours": 13,
             "status": "on"
+          },
+          {
+            "startMinutes": 780,
+            "endMinutes": 1020,
+            "start": "13:00",
+            "end": "17:00",
+            "durationHours": 4,
+            "status": "off"
+          },
+          {
+            "startMinutes": 1020,
+            "endMinutes": 1290,
+            "start": "17:00",
+            "end": "21:30",
+            "durationHours": 4.5,
+            "status": "on"
+          },
+          {
+            "startMinutes": 1290,
+            "endMinutes": 1440,
+            "start": "21:30",
+            "end": "24:00",
+            "durationHours": 2.5,
+            "status": "off"
           }
         ],
-        "totalOnHours": 24,
-        "totalOffHours": 0,
-        "updatedAt": "21.11.2026 23:08"
+        "totalOnHours": 17.5,
+        "totalOffHours": 6.5,
+        "updatedAt": "22.11.2026, 23:00"
       }
     },
     "krem:1.1": {
@@ -12046,278 +13846,280 @@
     "ios_abdd5bf3856b45d1bbadd9d9e30ed626|addr_1794899519370:2026-11-22:before_off:1350": "2026-11-22T20:00:49.262Z",
     "ios_294f4a74bc564a81b671c903ce3ec788|addr_1794562864733:change:2026-11-22:ononononononononononononononononononononononononoffononononononononononononononononononononoffoffoff:ononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononononononoffoffoffoffoffoff": "2026-11-22T20:35:47.282Z",
     "ios_29c5ee1ff9ea404d91d20f12463ff7cb|addr_1794329186003:change:2026-11-22:ononononononononononononononononononononononononoffononononononononononononononononononononoffoffoff:ononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononononononoffoffoffoffoffoff": "2026-11-22T20:35:47.308Z",
-    "ios_abdd5bf3856b45d1bbadd9d9e30ed626|addr_1794899519370:change:2026-11-22:ononononononononononononononononononononononononoffononononononononononononononononononononoffoffoff:ononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononononononoffoffoffoffoffoff": "2026-11-22T20:35:47.333Z"
+    "ios_abdd5bf3856b45d1bbadd9d9e30ed626|addr_1794899519370:change:2026-11-22:ononononononononononononononononononononononononoffononononononononononononononononononononoffoffoff:ononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffoffononononononononononoffoffoffoffoffoff": "2026-11-22T20:35:47.333Z",
+    "ios_29c5ee1ff9ea404d91d20f12463ff7cb|addr_1794322007293:change:2026-11-22:ononononononononononononoffoffoffoffoffononononononononononononononononoffoffoffoffoffoffoffoffononononononon:ononononononononononononononononononononononononononoffoffoffoffoffoffoffoffonononononononononoffoffoffoffoff": "2026-11-22T21:05:49.939Z",
+    "ios_60950706ed7d44758161c1f13997f794|addr_1794385025783:change:2026-11-22:ononononononononononononoffoffoffoffoffononononononononononononononononoffoffoffoffoffoffoffoffononononononon:ononononononononononononononononononononononononononoffoffoffoffoffoffoffoffonononononononononoffoffoffoffoff": "2026-11-22T21:05:49.979Z"
   },
   "recentChanges": [
     {
-      "id": "krem:6.2:1795379747151:tomorrow",
-      "groupKey": "krem:6.2",
-      "region": "krem",
-      "group": "6.2",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–11:30, 16:30–21:30)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:6.1:1795379747151:tomorrow",
-      "groupKey": "krem:6.1",
-      "region": "krem",
-      "group": "6.1",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–09:30, 16:30–21:30)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:5.2:1795379747151:tomorrow",
-      "groupKey": "krem:5.2",
-      "region": "krem",
-      "group": "5.2",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–10:00, 15:30–20:30)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:5.1:1795379747151:tomorrow",
-      "groupKey": "krem:5.1",
-      "region": "krem",
-      "group": "5.1",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–10:00, 15:30–20:30)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:4.2:1795379747151:tomorrow",
-      "groupKey": "krem:4.2",
-      "region": "krem",
-      "group": "4.2",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–20:00)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:4.1:1795379747151:tomorrow",
-      "groupKey": "krem:4.1",
-      "region": "krem",
-      "group": "4.1",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–20:00)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:3.2:1795379747151:tomorrow",
-      "groupKey": "krem:3.2",
-      "region": "krem",
-      "group": "3.2",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–20:00)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:3.1:1795379747151:tomorrow",
-      "groupKey": "krem:3.1",
-      "region": "krem",
-      "group": "3.1",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (11:00–17:00, 22:30–24:00)",
-      "detectedAt": "2026-11-22T20:35:47.151Z"
-    },
-    {
-      "id": "krem:2.2:1795379747150:tomorrow",
-      "groupKey": "krem:2.2",
-      "region": "krem",
-      "group": "2.2",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (09:30–17:00, 21:00–23:00)",
-      "detectedAt": "2026-11-22T20:35:47.150Z"
-    },
-    {
-      "id": "krem:2.1:1795379747150:tomorrow",
-      "groupKey": "krem:2.1",
-      "region": "krem",
-      "group": "2.1",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:00–16:00, 21:00–24:00)",
-      "detectedAt": "2026-11-22T20:35:47.150Z"
-    },
-    {
-      "id": "krem:1.2:1795379747150:tomorrow",
-      "groupKey": "krem:1.2",
-      "region": "krem",
-      "group": "1.2",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (09:00–13:30, 20:00–24:00)",
-      "detectedAt": "2026-11-22T20:35:47.150Z"
-    },
-    {
-      "id": "krem:1.1:1795379747150:tomorrow",
-      "groupKey": "krem:1.1",
-      "region": "krem",
-      "group": "1.1",
-      "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (09:30–16:00, 20:00–22:00)",
-      "detectedAt": "2026-11-22T20:35:47.150Z"
-    },
-    {
-      "id": "krem:5.2:1795353945267:today",
-      "groupKey": "krem:5.2",
-      "region": "krem",
-      "group": "5.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (08:30–12:30) → стало (08:30–12:30, 19:00–23:00)",
-      "detectedAt": "2026-11-22T13:25:45.267Z"
-    },
-    {
-      "id": "krem:3.1:1795353945267:today",
-      "groupKey": "krem:3.1",
-      "region": "krem",
-      "group": "3.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (Без відключень (світло весь день)) → стало (15:30–19:30)",
-      "detectedAt": "2026-11-22T13:25:45.267Z"
-    },
-    {
-      "id": "krem:2.2:1795353945267:today",
-      "groupKey": "krem:2.2",
-      "region": "krem",
-      "group": "2.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (Без відключень (світло весь день)) → стало (22:30–24:00)",
-      "detectedAt": "2026-11-22T13:25:45.267Z"
-    },
-    {
-      "id": "krem:1.1:1795353945267:today",
-      "groupKey": "krem:1.1",
-      "region": "krem",
-      "group": "1.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (12:00–12:30) → стало (12:00–12:30, 15:00–16:00)",
-      "detectedAt": "2026-11-22T13:25:45.267Z"
-    },
-    {
-      "id": "krem:6.2:1795345547579:today",
-      "groupKey": "krem:6.2",
-      "region": "krem",
-      "group": "6.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (08:30–12:30, 19:00–23:00) → стало (08:30–12:30)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:6.1:1795345547579:today",
-      "groupKey": "krem:6.1",
-      "region": "krem",
-      "group": "6.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (08:30–12:30, 19:00–22:00) → стало (08:30–12:30)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:5.2:1795345547579:today",
-      "groupKey": "krem:5.2",
-      "region": "krem",
-      "group": "5.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (08:30–12:30, 19:00–23:00) → стало (08:30–12:30)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:4.2:1795345547579:today",
-      "groupKey": "krem:4.2",
-      "region": "krem",
-      "group": "4.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (06:00–09:00, 15:30–19:30) → стало (06:00–09:00)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:3.2:1795345547579:today",
-      "groupKey": "krem:3.2",
-      "region": "krem",
-      "group": "3.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (06:00–09:00, 16:00–19:30) → стало (06:00–09:00)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:3.1:1795345547579:today",
-      "groupKey": "krem:3.1",
-      "region": "krem",
-      "group": "3.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (15:30–22:00) → стало (Без відключень (світло весь день))",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:2.1:1795345547579:today",
-      "groupKey": "krem:2.1",
-      "region": "krem",
-      "group": "2.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (12:00–19:30, 22:30–24:00) → стало (12:00–12:30, 22:30–24:00)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:1.2:1795345547579:today",
-      "groupKey": "krem:1.2",
-      "region": "krem",
-      "group": "1.2",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (12:00–16:00, 22:30–24:00) → стало (12:00–16:00)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "krem:1.1:1795345547579:today",
-      "groupKey": "krem:1.1",
-      "region": "krem",
-      "group": "1.1",
-      "dayLabel": "Сьогодні",
-      "summaryText": "Сьогодні: було (12:00–16:00, 22:30–24:00) → стало (12:00–12:30)",
-      "detectedAt": "2026-11-22T11:05:47.579Z"
-    },
-    {
-      "id": "kem:9.1:1795296045914:tomorrow",
+      "id": "kem:9.1:1795381549786:tomorrow",
       "groupKey": "kem:9.1",
       "region": "kem",
       "group": "9.1",
       "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–08:30, 16:30–20:30)",
-      "detectedAt": "2026-11-21T21:20:45.914Z"
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–17:00, 21:30–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
     },
     {
-      "id": "kem:8.1:1795296045914:tomorrow",
+      "id": "kem:8.1:1795381549786:tomorrow",
       "groupKey": "kem:8.1",
       "region": "kem",
       "group": "8.1",
       "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–07:30, 16:00–20:00)",
-      "detectedAt": "2026-11-21T21:20:45.914Z"
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (12:00–16:30, 21:00–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
     },
     {
-      "id": "kem:7.1:1795296045914:tomorrow",
+      "id": "kem:7.1:1795381549786:tomorrow",
       "groupKey": "kem:7.1",
       "region": "kem",
       "group": "7.1",
       "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (16:00–19:30)",
-      "detectedAt": "2026-11-21T21:20:45.914Z"
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (10:30–15:30, 18:30–22:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
     },
     {
-      "id": "kem:60.1:1795296045914:tomorrow",
+      "id": "kem:60.1:1795381549786:tomorrow",
       "groupKey": "kem:60.1",
       "region": "kem",
       "group": "60.1",
       "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:30–12:00, 19:30–23:00)",
-      "detectedAt": "2026-11-21T21:20:45.914Z"
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–09:00, 14:00–18:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
     },
     {
-      "id": "kem:6.1:1795296045914:tomorrow",
+      "id": "kem:6.1:1795381549786:tomorrow",
       "groupKey": "kem:6.1",
       "region": "kem",
       "group": "6.1",
       "dayLabel": "Завтра",
-      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (15:30–19:00)",
-      "detectedAt": "2026-11-21T21:20:45.914Z"
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (10:00–15:00, 18:00–22:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:59.1:1795381549786:tomorrow",
+      "groupKey": "kem:59.1",
+      "region": "kem",
+      "group": "59.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–08:30, 13:30–18:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:58.1:1795381549786:tomorrow",
+      "groupKey": "kem:58.1",
+      "region": "kem",
+      "group": "58.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–17:30, 22:30–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:57.1:1795381549786:tomorrow",
+      "groupKey": "kem:57.1",
+      "region": "kem",
+      "group": "57.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–17:00, 21:30–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:56.1:1795381549786:tomorrow",
+      "groupKey": "kem:56.1",
+      "region": "kem",
+      "group": "56.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (12:00–16:30, 21:00–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:55.1:1795381549786:tomorrow",
+      "groupKey": "kem:55.1",
+      "region": "kem",
+      "group": "55.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (10:30–15:30, 18:30–22:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:54.1:1795381549786:tomorrow",
+      "groupKey": "kem:54.1",
+      "region": "kem",
+      "group": "54.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (10:00–15:00, 18:00–22:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:53.1:1795381549786:tomorrow",
+      "groupKey": "kem:53.1",
+      "region": "kem",
+      "group": "53.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (09:00–14:00, 17:30–21:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:52.1:1795381549786:tomorrow",
+      "groupKey": "kem:52.1",
+      "region": "kem",
+      "group": "52.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:30–13:30, 17:00–21:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:51.1:1795381549786:tomorrow",
+      "groupKey": "kem:51.1",
+      "region": "kem",
+      "group": "51.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:00–12:00, 16:30–20:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:50.1:1795381549786:tomorrow",
+      "groupKey": "kem:50.1",
+      "region": "kem",
+      "group": "50.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–10:30, 15:30–20:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:5.1:1795381549786:tomorrow",
+      "groupKey": "kem:5.1",
+      "region": "kem",
+      "group": "5.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (09:00–14:00, 17:30–21:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:49.1:1795381549786:tomorrow",
+      "groupKey": "kem:49.1",
+      "region": "kem",
+      "group": "49.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–10:00, 15:00–20:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:48.1:1795381549786:tomorrow",
+      "groupKey": "kem:48.1",
+      "region": "kem",
+      "group": "48.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–09:00, 14:00–18:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:47.1:1795381549786:tomorrow",
+      "groupKey": "kem:47.1",
+      "region": "kem",
+      "group": "47.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–08:30, 13:30–18:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:46.1:1795381549786:tomorrow",
+      "groupKey": "kem:46.1",
+      "region": "kem",
+      "group": "46.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–17:30, 22:30–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:45.1:1795381549786:tomorrow",
+      "groupKey": "kem:45.1",
+      "region": "kem",
+      "group": "45.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (13:00–17:00, 21:30–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:44.1:1795381549786:tomorrow",
+      "groupKey": "kem:44.1",
+      "region": "kem",
+      "group": "44.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (12:00–16:30, 21:00–24:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:43.1:1795381549786:tomorrow",
+      "groupKey": "kem:43.1",
+      "region": "kem",
+      "group": "43.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (10:30–15:30, 18:30–22:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:42.1:1795381549786:tomorrow",
+      "groupKey": "kem:42.1",
+      "region": "kem",
+      "group": "42.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (10:00–15:00, 18:00–22:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:41.1:1795381549786:tomorrow",
+      "groupKey": "kem:41.1",
+      "region": "kem",
+      "group": "41.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (09:00–14:00, 17:30–21:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:40.1:1795381549786:tomorrow",
+      "groupKey": "kem:40.1",
+      "region": "kem",
+      "group": "40.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:30–13:30, 17:00–21:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:4.1:1795381549786:tomorrow",
+      "groupKey": "kem:4.1",
+      "region": "kem",
+      "group": "4.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:30–13:30, 17:00–21:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:39.1:1795381549786:tomorrow",
+      "groupKey": "kem:39.1",
+      "region": "kem",
+      "group": "39.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (08:00–12:00, 16:30–20:30)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:38.1:1795381549786:tomorrow",
+      "groupKey": "kem:38.1",
+      "region": "kem",
+      "group": "38.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–10:30, 15:30–20:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
+    },
+    {
+      "id": "kem:37.1:1795381549786:tomorrow",
+      "groupKey": "kem:37.1",
+      "region": "kem",
+      "group": "37.1",
+      "dayLabel": "Завтра",
+      "summaryText": "Завтра: було (Очікується публікація графіка) → стало (06:00–10:00, 15:00–20:00)",
+      "detectedAt": "2026-11-22T21:05:49.786Z"
     }
   ]
 }
