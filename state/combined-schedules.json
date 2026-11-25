@@ -11836,7 +11836,7 @@
           "on",
           "on",
           "on",
-          "off",
+          "on",
           "off",
           "off"
         ],
@@ -11859,24 +11859,24 @@
           },
           {
             "startMinutes": 1080,
-            "endMinutes": 1350,
+            "endMinutes": 1380,
             "start": "18:00",
-            "end": "22:30",
-            "durationHours": 4.5,
+            "end": "23:00",
+            "durationHours": 5,
             "status": "on"
           },
           {
-            "startMinutes": 1350,
+            "startMinutes": 1380,
             "endMinutes": 1440,
-            "start": "22:30",
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 1.5,
+            "durationHours": 1,
             "status": "off"
           }
         ],
-        "totalOnHours": 16.5,
-        "totalOffHours": 7.5,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -11968,10 +11968,10 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "1.2": {
       "groupKey": "GPV1.2",
@@ -12067,7 +12067,7 @@
         ],
         "totalOnHours": 16.5,
         "totalOffHours": 7.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -12159,10 +12159,10 @@
         ],
         "totalOnHours": 16,
         "totalOffHours": 8,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "2.1": {
       "groupKey": "GPV2.1",
@@ -12218,8 +12218,8 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
+          "off",
+          "off",
           "off"
         ],
         "intervals": [
@@ -12241,24 +12241,24 @@
           },
           {
             "startMinutes": 1200,
-            "endMinutes": 1410,
+            "endMinutes": 1350,
             "start": "20:00",
-            "end": "23:30",
-            "durationHours": 3.5,
+            "end": "22:30",
+            "durationHours": 2.5,
             "status": "on"
           },
           {
-            "startMinutes": 1410,
+            "startMinutes": 1350,
             "endMinutes": 1440,
-            "start": "23:30",
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 0.5,
+            "durationHours": 1.5,
             "status": "off"
           }
         ],
-        "totalOnHours": 18,
-        "totalOffHours": 6,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -12350,10 +12350,10 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "2.2": {
       "groupKey": "GPV2.2",
@@ -12409,8 +12409,8 @@
           "on",
           "on",
           "on",
-          "on",
-          "on",
+          "off",
+          "off",
           "off"
         ],
         "intervals": [
@@ -12432,24 +12432,24 @@
           },
           {
             "startMinutes": 1200,
-            "endMinutes": 1410,
+            "endMinutes": 1350,
             "start": "20:00",
-            "end": "23:30",
-            "durationHours": 3.5,
+            "end": "22:30",
+            "durationHours": 2.5,
             "status": "on"
           },
           {
-            "startMinutes": 1410,
+            "startMinutes": 1350,
             "endMinutes": 1440,
-            "start": "23:30",
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 0.5,
+            "durationHours": 1.5,
             "status": "off"
           }
         ],
-        "totalOnHours": 18,
-        "totalOffHours": 6,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 17,
+        "totalOffHours": 7,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -12533,10 +12533,10 @@
         ],
         "totalOnHours": 17.5,
         "totalOffHours": 6.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "3.1": {
       "groupKey": "GPV3.1",
@@ -12640,7 +12640,7 @@
         ],
         "totalOnHours": 16.5,
         "totalOffHours": 7.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -12740,10 +12740,10 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "3.2": {
       "groupKey": "GPV3.2",
@@ -12847,7 +12847,7 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -12947,10 +12947,10 @@
         ],
         "totalOnHours": 15,
         "totalOffHours": 9,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "4.1": {
       "groupKey": "GPV4.1",
@@ -13006,7 +13006,7 @@
           "off",
           "off",
           "off",
-          "off",
+          "on",
           "on",
           "on"
         ],
@@ -13037,24 +13037,24 @@
           },
           {
             "startMinutes": 990,
-            "endMinutes": 1380,
+            "endMinutes": 1350,
             "start": "16:30",
-            "end": "23:00",
-            "durationHours": 6.5,
+            "end": "22:30",
+            "durationHours": 6,
             "status": "off"
           },
           {
-            "startMinutes": 1380,
+            "startMinutes": 1350,
             "endMinutes": 1440,
-            "start": "23:00",
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 1,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 13.5,
-        "totalOffHours": 10.5,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 14,
+        "totalOffHours": 10,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -13154,10 +13154,10 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "4.2": {
       "groupKey": "GPV4.2",
@@ -13213,7 +13213,7 @@
           "off",
           "off",
           "off",
-          "off",
+          "on",
           "on",
           "on"
         ],
@@ -13244,24 +13244,24 @@
           },
           {
             "startMinutes": 990,
-            "endMinutes": 1380,
+            "endMinutes": 1350,
             "start": "16:30",
-            "end": "23:00",
-            "durationHours": 6.5,
+            "end": "22:30",
+            "durationHours": 6,
             "status": "off"
           },
           {
-            "startMinutes": 1380,
+            "startMinutes": 1350,
             "endMinutes": 1440,
-            "start": "23:00",
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 1,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 13.5,
-        "totalOffHours": 10.5,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 14,
+        "totalOffHours": 10,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -13361,10 +13361,10 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "5.1": {
       "groupKey": "GPV5.1",
@@ -13421,7 +13421,7 @@
           "off",
           "off",
           "off",
-          "off",
+          "on",
           "on"
         ],
         "intervals": [
@@ -13451,24 +13451,24 @@
           },
           {
             "startMinutes": 1200,
-            "endMinutes": 1410,
+            "endMinutes": 1380,
             "start": "20:00",
-            "end": "23:30",
-            "durationHours": 3.5,
+            "end": "23:00",
+            "durationHours": 3,
             "status": "off"
           },
           {
-            "startMinutes": 1410,
+            "startMinutes": 1380,
             "endMinutes": 1440,
-            "start": "23:30",
+            "start": "23:00",
             "end": "24:00",
-            "durationHours": 0.5,
+            "durationHours": 1,
             "status": "on"
           }
         ],
-        "totalOnHours": 15,
-        "totalOffHours": 9,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 15.5,
+        "totalOffHours": 8.5,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -13568,10 +13568,10 @@
         ],
         "totalOnHours": 14.5,
         "totalOffHours": 9.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "5.2": {
       "groupKey": "GPV5.2",
@@ -13627,8 +13627,8 @@
           "off",
           "off",
           "off",
-          "off",
-          "off",
+          "on",
+          "on",
           "on"
         ],
         "intervals": [
@@ -13674,24 +13674,24 @@
           },
           {
             "startMinutes": 1200,
-            "endMinutes": 1410,
+            "endMinutes": 1350,
             "start": "20:00",
-            "end": "23:30",
-            "durationHours": 3.5,
+            "end": "22:30",
+            "durationHours": 2.5,
             "status": "off"
           },
           {
-            "startMinutes": 1410,
+            "startMinutes": 1350,
             "endMinutes": 1440,
-            "start": "23:30",
+            "start": "22:30",
             "end": "24:00",
-            "durationHours": 0.5,
+            "durationHours": 1.5,
             "status": "on"
           }
         ],
-        "totalOnHours": 14,
-        "totalOffHours": 10,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 15,
+        "totalOffHours": 9,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -13791,10 +13791,10 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "6.1": {
       "groupKey": "GPV6.1",
@@ -13851,8 +13851,8 @@
           "off",
           "off",
           "off",
-          "off",
-          "off"
+          "on",
+          "on"
         ],
         "intervals": [
           {
@@ -13889,16 +13889,24 @@
           },
           {
             "startMinutes": 1260,
-            "endMinutes": 1440,
+            "endMinutes": 1380,
             "start": "21:00",
-            "end": "24:00",
-            "durationHours": 3,
+            "end": "23:00",
+            "durationHours": 2,
             "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
+            "end": "24:00",
+            "durationHours": 1,
+            "status": "on"
           }
         ],
-        "totalOnHours": 11.5,
-        "totalOffHours": 12.5,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 12.5,
+        "totalOffHours": 11.5,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -13998,10 +14006,10 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     },
     "6.2": {
       "groupKey": "GPV6.2",
@@ -14058,8 +14066,8 @@
           "off",
           "off",
           "off",
-          "off",
-          "off"
+          "on",
+          "on"
         ],
         "intervals": [
           {
@@ -14096,16 +14104,24 @@
           },
           {
             "startMinutes": 1260,
-            "endMinutes": 1440,
+            "endMinutes": 1380,
             "start": "21:00",
-            "end": "24:00",
-            "durationHours": 3,
+            "end": "23:00",
+            "durationHours": 2,
             "status": "off"
+          },
+          {
+            "startMinutes": 1380,
+            "endMinutes": 1440,
+            "start": "23:00",
+            "end": "24:00",
+            "durationHours": 1,
+            "status": "on"
           }
         ],
-        "totalOnHours": 12.5,
-        "totalOffHours": 11.5,
-        "updatedAt": "25.11.2026 22:16"
+        "totalOnHours": 13.5,
+        "totalOffHours": 10.5,
+        "updatedAt": "25.11.2026 22:47"
       },
       "tomorrow": {
         "dateKey": "2026-11-26",
@@ -14205,10 +14221,10 @@
         ],
         "totalOnHours": 15.5,
         "totalOffHours": 8.5,
-        "updatedAt": "25.11.2026 22:16"
+        "updatedAt": "25.11.2026 22:47"
       },
       "source": "ДТЭК Киевская обл.",
-      "updatedAt": "25.11.2026 22:16"
+      "updatedAt": "25.11.2026 22:47"
     }
   },
   "kemGroups": [
@@ -14287,6 +14303,6 @@
     "6.1",
     "6.2"
   ],
-  "fetchedAt": "2026-11-25T20:30:42.274Z",
+  "fetchedAt": "2026-11-25T21:00:53.715Z",
   "sourceLabel": "Outage-Data Киев + YASNO API v2 + Outage-Data Область"
 }
