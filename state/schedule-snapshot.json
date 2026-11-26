@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T03:30:45.540Z",
+  "updatedAt": "2026-11-26T06:30:55.894Z",
   "groups": {
     "kem:1.1": {
       "today": {
@@ -12027,7 +12027,6 @@
     }
   },
   "notifiedEvents": {
-    "ios_60950706ed7d44758161c1f13997f794|addr_1794385025783:2026-11-24:before_off:540": "2026-11-24T06:30:46.354Z",
     "ios_294f4a74bc564a81b671c903ce3ec788|addr_1794562756173:2026-11-24:before_off:600": "2026-11-24T07:30:46.375Z",
     "ios_a9623b27b2074725ae85fb584cc48c07|addr_1794385935317:2026-11-24:before_off:600": "2026-11-24T07:30:46.439Z",
     "ios_abdd5bf3856b45d1bbadd9d9e30ed626|addr_1794899324245:2026-11-24:before_off:600": "2026-11-24T07:30:46.504Z",
@@ -12082,7 +12081,8 @@
     "ios_abdd5bf3856b45d1bbadd9d9e30ed626|addr_1794899324245:change:2026-11-25:ononononononononononononononononononononoffoffoffoffoffoffoffoffoffonononononononononoffoffoffoffoffoffoffoffoffoff:ononononononononononononoffoffoffoffoffoffoffoffononononononononononoffoffoffoffoffoffoffoffoffoffonononononononon": "2026-11-25T20:15:47.310Z",
     "ios_294f4a74bc564a81b671c903ce3ec788|addr_1794562864733:change:2026-11-25:onononononononononononononononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffonononononononoff:ononononononononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffononononononononoffoffoffoffoff": "2026-11-25T20:30:42.945Z",
     "ios_abdd5bf3856b45d1bbadd9d9e30ed626|addr_1794899519370:change:2026-11-25:onononononononononononononononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffonononononononoff:ononononononononononononononononononononononoffoffoffoffoffoffoffoffoffoffoffoffoffononononononononoffoffoffoffoff": "2026-11-25T20:30:42.980Z",
-    "ios_60950706ed7d44758161c1f13997f794|addr_1794385025783:2026-11-26:before_off:360": "2026-11-26T03:30:45.540Z"
+    "ios_60950706ed7d44758161c1f13997f794|addr_1794385025783:2026-11-26:before_off:360": "2026-11-26T03:30:45.540Z",
+    "ios_60950706ed7d44758161c1f13997f794|addr_1794385025783:2026-11-26:before_on:540": "2026-11-26T06:30:55.894Z"
   },
   "recentChanges": [
     {
